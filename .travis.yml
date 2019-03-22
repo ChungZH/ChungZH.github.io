@@ -1,0 +1,31 @@
+language: node_js
+
+sudo: required
+
+node_js: '10'
+
+branches:
+  only:
+    - vuepress
+
+before_install:
+  - export TZ='Asia/Shanghai'
+
+install:
+  - yarn install
+
+script:
+  - yarn blog:build
+  - echo "chungzh.cn" > docs/.vuepress/dist/CNAME
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: docs/.vuepress/dist
+  name: $GIT_NAME
+  email: $GIT_EMAIL
+  keep-history: true
+  target-branch: master
+  on:
+      branch: vuepress
