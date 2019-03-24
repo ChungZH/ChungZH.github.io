@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>创建 Vuepress 博客并使用 Git 管理 | ChungZH&#39;s blog</title>
+    <meta name="description" content="Woo~ 你竟然发现了我的博客！">
+    <link rel="icon" href="/BlogFavicon16.png">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="preload" href="/assets/css/0.styles.4047398f.css" as="style"><link rel="preload" href="/assets/js/app.1f117814.js" as="script"><link rel="preload" href="/assets/js/6.2cc37a9e.js" as="script"><link rel="preload" href="/assets/js/17.18de1360.js" as="script"><link rel="prefetch" href="/assets/js/1.b488de2d.js"><link rel="prefetch" href="/assets/js/10.d4618476.js"><link rel="prefetch" href="/assets/js/11.bc0403dd.js"><link rel="prefetch" href="/assets/js/12.4a5818d0.js"><link rel="prefetch" href="/assets/js/13.0c7e7089.js"><link rel="prefetch" href="/assets/js/14.84ebeb20.js"><link rel="prefetch" href="/assets/js/15.a64d3b27.js"><link rel="prefetch" href="/assets/js/16.64b5de0d.js"><link rel="prefetch" href="/assets/js/18.a3b7afb3.js"><link rel="prefetch" href="/assets/js/19.45984ec1.js"><link rel="prefetch" href="/assets/js/20.082c8d03.js"><link rel="prefetch" href="/assets/js/21.23ede014.js"><link rel="prefetch" href="/assets/js/22.3b4e4bf0.js"><link rel="prefetch" href="/assets/js/23.54776ff8.js"><link rel="prefetch" href="/assets/js/24.9ffea93f.js"><link rel="prefetch" href="/assets/js/25.3939e71c.js"><link rel="prefetch" href="/assets/js/3.8bd1c9d2.js"><link rel="prefetch" href="/assets/js/4.31cad889.js"><link rel="prefetch" href="/assets/js/5.dd6d6683.js"><link rel="prefetch" href="/assets/js/7.3dcb9d17.js"><link rel="prefetch" href="/assets/js/8.893d689f.js"><link rel="prefetch" href="/assets/js/9.f0318adf.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4047398f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-c6d26598><div data-v-5c35c722 data-v-c6d26598><nav class="navbar" data-v-5c35c722><div class="container" data-v-5c35c722><a href="/" class="router-link-active" data-v-5c35c722><span class="navbar-site-name" data-v-5c35c722>
+          ChungZH's blog
+        </span></a> <div class="navbar-toggler" data-v-5c35c722><svg class="icon" style="font-size:1.2em;" data-v-5c35c722 data-v-5c35c722><title data-v-5c35c722 data-v-5c35c722>menu</title><use xlink:href="#icon-menu" data-v-5c35c722 data-v-5c35c722></use></svg></div> <div class="navbar-links" data-v-5c35c722><a href="/" class="navbar-link router-link-active" data-v-5c35c722>
+            🏠 首页
+          </a><a href="/posts/" class="navbar-link router-link-active" data-v-5c35c722>
+            📰 文章
+          </a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-5c35c722></div></div> <div class="banner" data-v-5ad5ee22 data-v-c6d26598 data-v-c6d26598><div class="container" data-v-5ad5ee22><div class="center" data-v-5ad5ee22><h1 data-v-5ad5ee22 data-v-c6d26598>
+          创建 Vuepress 博客并使用 Git 管理
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-f80fadc2 data-v-f80fadc2><main class="main" data-v-f80fadc2><div class="post" data-v-f80fadc2 data-v-f80fadc2><section class="post-meta main-div" data-v-1a01be4a><section class="post-date clearfix" data-v-1a01be4a><span class="create-date" data-v-1a01be4a>
+      Created : 2019-03-02
+    </span> <span class="update-date" data-v-1a01be4a>
+      Updated : 2019-03-22
+    </span></section> <section class="post-links" data-v-1a01be4a><a href="/posts/2019/02/23/chaos-everything-is-fine.html" class="post-link" data-v-1a01be4a>
+      Previous Post : 杂谈 | 诸事大吉
+    </a> <!----></section></section> <article class="main-div"><div class="post-content content default"><blockquote><p>Vuepress 是 Evan You 编写的一个 Vue 驱动的静态网站生成器，一般用于创建文档网站、博客网站。</p></blockquote> <p><a href="https://vuepress.vuejs.org/" target="_blank" rel="noopener noreferrer">Vuepress 官方文档网站<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> · <a href="https://github.com/vuejs/vuepress" target="_blank" rel="noopener noreferrer">Vuepress GitHub 仓库地址<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> · <a href="https://github.com/ulivz/awesome-vuepress" target="_blank" rel="noopener noreferrer">awesome-vuepress 关于 Vuepress 的一些好东西<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>本文将主要介绍创建 Vuepress 网站、使用 Git 管理、使用 CI 等方面的内容。</p> <blockquote><p>提示：我使用的是 Windows 系统，在其他平台上终端命令可能略有不同，请自行变通！</p></blockquote> <h2 id="前期准备"><a href="#前期准备" aria-hidden="true" class="header-anchor">#</a> 前期准备</h2> <p>请事先安装好 yarn、Git 等软件。本文不介绍安装这些前期准备的方法，请自行查阅文档，锻炼阅读文档能力。</p> <h2 id="下载-vuepress"><a href="#下载-vuepress" aria-hidden="true" class="header-anchor">#</a> 下载 Vuepress</h2> <p>首先我们创建一个文件夹，用于存放 Vuepress。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">mkdir</span> vuepress-blog
+<span class="token function">cd</span> vuepress-blog
+</code></pre></div><p>然后往里面安装 Vuepress：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>yarn add vuepress@next <span class="token comment"># 安装 Vuepress 1.x 版本</span>
+</code></pre></div><p>再修改一下 <code>package.json</code>，添加以下内容：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;blog:dev&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vuepress dev docs&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;blog:build&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vuepress build docs&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="安装主题"><a href="#安装主题" aria-hidden="true" class="header-anchor">#</a> 安装主题</h2> <p>Vuepress 的主题有很多，可以在 <a href="https://github.com/ulivz/awesome-vuepress" target="_blank" rel="noopener noreferrer">awesome-vuepress 关于 Vuepress 的一些好东西<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 挑选一个你喜欢的主题，或者直接在 GitHub 搜索也可以。这里我使用 <a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy" target="_blank" rel="noopener noreferrer">vuepress-theme-meteorlxy<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 作为例子。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>yarn add vuepress-theme-meteorlxy@next
+</code></pre></div><p>ok，现在你已经安装好主题了。</p> <h2 id="熟悉-vuepress-目录结构"><a href="#熟悉-vuepress-目录结构" aria-hidden="true" class="header-anchor">#</a> 熟悉 Vuepress 目录结构</h2> <div class="language- extra-class"><pre class="language-text"><code>.
+├── docs
+│   ├── .vuepress (可选的)
+│   │   ├── components (可选的)
+│   │   ├── theme (可选的)
+│   │   │   └── Layout.vue
+│   │   ├── public (可选的)
+│   │   ├── styles (可选的)
+│   │   │   ├── index.styl
+│   │   │   └── palette.styl
+│   │   ├── config.js (可选的)
+│   │   └── enhanceApp.js (可选的)
+│   │ 
+│   ├── README.md
+│   ├── guide
+│   │   └── README.md
+│   └── config.md
+│ 
+└── package.json
+</code></pre></div><ul><li><code>docs/.vuepress</code>: 用于存放全局的配置、组件、静态资源等。</li> <li><code>docs/.vuepress/components</code>: 该目录中的 Vue 组件将会被自动注册为全局组件。</li> <li><code>docs/.vuepress/theme</code>: 用于存放本地主题。</li> <li><code>docs/.vuepress/styles</code>: 用于存放样式相关的文件。</li> <li><code>docs/.vuepress/styles/index.styl</code>: 将会被自动应用的全局样式文件，会生成在最终的 CSS 文件结尾，具有比默认样式更高的优先级。</li> <li><code>docs/.vuepress/styles/palette.styl</code>: 用于重写默认颜色常量，或者设置新的 stylus 颜色常量。</li> <li><code>docs/.vuepress/public</code>: 静态资源目录。</li> <li><code>docs/.vuepress/config.js</code>: 配置文件的入口文件，也可以是 <code>YML</code> 或 <code>toml</code>。</li></ul> <p>大概就是这些，还有一些更高级的配置这里就没写了。相信有兴趣做更高级自定义的话都会自己去看 <a href="https://vuepress.vuejs.org/" target="_blank" rel="noopener noreferrer">Vuepress 官方文档网站<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 了~</p> <h2 id="配置-vuepress"><a href="#配置-vuepress" aria-hidden="true" class="header-anchor">#</a> 配置 Vuepress</h2> <p>首先创建 <code>docs</code> 目录、<code>docs/.vuepress</code> 目录：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">mkdir</span> docs
+<span class="token function">mkdir</span> docs/.vuepress
+</code></pre></div><p>然后进入 <code>.vuepress</code> 文件夹，创建一个 <code>config.js</code> 配置文件。</p> <p>在 <code>config.js</code> 中粘贴一下内容：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// .vuepress/config.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 网站 Title</span>
+  title<span class="token punctuation">:</span> <span class="token string">'My Blog'</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 网站描述</span>
+  description<span class="token punctuation">:</span> <span class="token string">'This is my blog'</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 网站语言</span>
+  locales<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'/'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      lang<span class="token punctuation">:</span> <span class="token string">'zh-CN'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 使用的主题</span>
+  theme<span class="token punctuation">:</span> <span class="token string">'vuepress-theme-meteorlxy'</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 主题配置</span>
+  themeConfig<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 个人信息（没有或不想设置的，删掉对应字段即可）</span>
+    personalInfo<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 昵称</span>
+      nickname<span class="token punctuation">:</span> <span class="token string">'meteorlxy'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 个人简介</span>
+      description<span class="token punctuation">:</span> <span class="token string">'Happy Coding&lt;br/&gt;Happy Life'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 电子邮箱</span>
+      email<span class="token punctuation">:</span> <span class="token string">'meteor.lxy@foxmail.com'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 所在地</span>
+      location<span class="token punctuation">:</span> <span class="token string">'Xi\'an City, China'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 组织</span>
+      organization<span class="token punctuation">:</span> <span class="token string">'Xi\'an Jiao Tong University'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 头像</span>
+      avatar<span class="token punctuation">:</span> <span class="token string">'https://www.meteorlxy.cn/assets/img/avatar.jpg'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 社交平台帐号信息</span>
+      sns<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Github 帐号和链接</span>
+        github<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'meteorlxy'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'https://github.com/meteorlxy'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Facebook 帐号和链接</span>
+        facebook<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'meteorlxy.cn'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'https://www.facebook.com/meteorlxy.cn'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// LinkedIn 帐号和链接</span>
+        linkedin<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'meteorlxy'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'http://www.linkedin.com/in/meteorlxy'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Twitter 帐号和链接</span>
+        twitter<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'meteorlxy_cn'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'https://twitter.com/meteorlxy_cn'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// 新浪微博 帐号和链接</span>
+        weibo<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'@焦炭君_Meteor'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'https://weibo.com/u/2039655434'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// 知乎 帐号和链接</span>
+        zhihu<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'meteorlxy.cn'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'https://www.zhihu.com/people/meteorlxy.cn'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// 豆瓣 帐号和链接</span>
+        douban<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          account<span class="token punctuation">:</span> <span class="token string">'159342708'</span><span class="token punctuation">,</span>
+          link<span class="token punctuation">:</span> <span class="token string">'https://www.douban.com/people/159342708'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 上方 header 的背景，可以使用图片，或者随机变化的图案</span>
+    headerBackground<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 使用图片的 URL，如果设置了图片 URL，则不会生成随机变化的图案，下面的 useGeo 将失效</span>
+      url<span class="token punctuation">:</span> <span class="token string">'/assets/img/bg.jpg'</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// 使用随机变化的图案，如果设置为 false，且没有设置图片 URL，将显示为纯色背景</span>
+      useGeo<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 是否显示文章的最近更新时间</span>
+    lastUpdated<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 顶部导航栏内容</span>
+    nav<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> text<span class="token punctuation">:</span> <span class="token string">'Home'</span><span class="token punctuation">,</span> link<span class="token punctuation">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span> exact<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> text<span class="token punctuation">:</span> <span class="token string">'Posts'</span><span class="token punctuation">,</span> link<span class="token punctuation">:</span> <span class="token string">'/posts/'</span><span class="token punctuation">,</span> exact<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// 评论配置，参考下方 [页面评论] 章节</span>
+    comments<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      owner<span class="token punctuation">:</span> <span class="token string">'meteorlxy'</span><span class="token punctuation">,</span>
+      repo<span class="token punctuation">:</span> <span class="token string">'vuepress-theme-meteorlxy'</span><span class="token punctuation">,</span>
+      clientId<span class="token punctuation">:</span> <span class="token string">'MY_CLIENT_ID'</span><span class="token punctuation">,</span>
+      clientSecret<span class="token punctuation">:</span> <span class="token string">'MY_CLIENT_SECRET'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><blockquote><p>注意：这是 <code>meteorlxy</code> 主题的默认配置，其他主题请查看主题文档。</p></blockquote> <p>然后直接按照 <a href="https://vuepress-theme-meteorlxy.meteorlxy.cn/" target="_blank" rel="noopener noreferrer">meteorlxy 主题文档<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>进行配置即可。</p> <h2 id="配置-ci-和-git"><a href="#配置-ci-和-git" aria-hidden="true" class="header-anchor">#</a> 配置 CI 和 Git</h2> <blockquote><p>持续集成（英语：Continuous integration，缩写 CI）是一种软件工程流程，是将所有软件工程师对于软件的工作副本持续集成到共享主线（mainline）的一种举措。</p></blockquote> <p><strong>👷 这里我们所使用的持续集成平台是 Travis CI.</strong></p> <h3 id="开启-ci"><a href="#开启-ci" aria-hidden="true" class="header-anchor">#</a> 开启 CI</h3> <p>首先，在 <a href="https://github.com/new" target="_blank" rel="noopener noreferrer">Create a new repository<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 里创建一个项目，项目名是 <code>GitHub 用户名.github.io</code>，然后到 <a href="https://travis-ci.org" target="_blank" rel="noopener noreferrer">Travis CI<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 官网，用 GitHub 账户直接关联登录，并允许 Travis CI 查看自己的公有仓库。</p> <p>然后我们到 <a href="https://travis-ci.org/account/repositories" target="_blank" rel="noopener noreferrer">Travis CI 账户页面<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>开启博客仓库的 CI，如图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png" alt="OpenCI"></p> <h3 id="添加变量"><a href="#添加变量" aria-hidden="true" class="header-anchor">#</a> 添加变量</h3> <p>我们要设置三个变量：<code>GIT_NAME</code>、<code>GIT_EMAIL</code>、<code>GITHUB_TOKEN</code>，分别是 <code>git</code> 用户名、<code>git</code> 用户邮箱和 GitHub token。</p> <p>其中前两项的值可以在本地查看：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> config --global user.name <span class="token comment"># 对应 GIT_NAME</span>
+<span class="token function">git</span> config --global user.email <span class="token comment"># 对应 GIT_EMAIL</span>
+</code></pre></div><p>第三项 GitHub token 要在 GitHub 申请：</p> <ul><li>访问 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer">GitHub 账户设置 &gt; Tokens<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>生成新 Token: Generate new token</li> <li>填入 Token 描述，并给予 Token 第一项 <code>repo</code> 的全部权限</li> <li>将生成的 Token 复制，保存（生成 Token 的页面只有一次机会看见，请保存妥当。）</li></ul> <p>在 Travis CI 仓库配置中，将三个变量填入设置（位于 <code>Settings &gt; Environment Variables</code> 处并保存：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci2.png" alt=""></p> <p>然后在博客根目录里创建一个 <code>.travis.yml</code>，并粘贴一下内容进去：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">language</span><span class="token punctuation">:</span> node_js
+
+<span class="token key atrule">sudo</span><span class="token punctuation">:</span> required
+
+<span class="token key atrule">node_js</span><span class="token punctuation">:</span> <span class="token string">'10'</span>
+
+<span class="token key atrule">branches</span><span class="token punctuation">:</span>
+  <span class="token key atrule">only</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> vuepress
+
+<span class="token key atrule">before_install</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> export TZ='Asia/Shanghai'
+
+<span class="token key atrule">install</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> yarn install
+
+<span class="token key atrule">script</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> yarn blog<span class="token punctuation">:</span>build
+  <span class="token punctuation">-</span> echo &quot;chungzh.cn&quot; <span class="token punctuation">&gt;</span> docs/.vuepress/dist/CNAME <span class="token comment"># 这里 &quot;chungzh.cn&quot; 改成你自己的域名，如果没有，删掉这行就行了</span>
+
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> pages
+  <span class="token key atrule">skip_cleanup</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">github_token</span><span class="token punctuation">:</span> $GITHUB_TOKEN
+  <span class="token key atrule">local_dir</span><span class="token punctuation">:</span> docs/.vuepress/dist
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> $GIT_NAME
+  <span class="token key atrule">email</span><span class="token punctuation">:</span> $GIT_EMAIL
+  <span class="token key atrule">keep-history</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">target-branch</span><span class="token punctuation">:</span> master
+  <span class="token key atrule">on</span><span class="token punctuation">:</span>
+      <span class="token key atrule">branch</span><span class="token punctuation">:</span> vuepress
+</code></pre></div><p>然后我们新建一个 <code>.gititnore</code> 文件，粘贴以下内容：</p> <div class="language- extra-class"><pre class="language-text"><code>.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+docs/.vuepress/dist/
+</code></pre></div><p>好，现在输入以下命令，创建一个 Git 项目：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> init
+<span class="token function">git</span> checkout -b vuepress
+<span class="token function">git</span> add <span class="token keyword">.</span>
+<span class="token function">git</span> commit -m <span class="token string">&quot;:tada: Init repo&quot;</span>
+<span class="token function">git</span> remote add origin git@github.com:ChungZH/ChungZH.github.io.git <span class="token comment"># 这里改成你自己的项目地址</span>
+<span class="token function">git</span> push -u origin vuepress
+</code></pre></div><p>push 上去后，CI 应该就会开始了。静待片刻即可。</p> <hr> <p>OK，本文就到此为止了。谢谢！</p> <p>如有问题，请在评论区留言，我将尽力解答。</p> <hr> <p>ChungZH</p> <p>2019 - 3 - 2 / 广东 - 佛山</p> <p>#EOF 😘</p></div></article> <section class="post-meta main-div" data-v-1a01be4a><section class="post-date clearfix" data-v-1a01be4a><span class="create-date" data-v-1a01be4a>
+      Created : 2019-03-02
+    </span> <span class="update-date" data-v-1a01be4a>
+      Updated : 2019-03-22
+    </span></section> <section class="post-links" data-v-1a01be4a><a href="/posts/2019/02/23/chaos-everything-is-fine.html" class="post-link" data-v-1a01be4a>
+      Previous Post : 杂谈 | 诸事大吉
+    </a> <!----></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-f80fadc2><div class="info-card main-div" data-v-f56f68fe data-v-f80fadc2><div class="info-card-header" data-v-f56f68fe><img src="/newavatar.jpg" alt="ChungZH" class="info-avatar" data-v-f56f68fe></div> <div class="info-card-body" data-v-f56f68fe><section class="info-nickname" data-v-f56f68fe>
+      ChungZH
+    </section> <section class="info-desc" data-v-f56f68fe>路漫漫其修远兮，吾将上下而求索。</section> <section class="info-contact" data-v-f56f68fe><section data-v-f56f68fe><span title="Fo'shan City, China" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>Fo'shan City, China</title><use xlink:href="#icon-location" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          Fo'shan City, China
+        </span></span></section> <section data-v-f56f68fe><span title="@EasyHexo" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>@EasyHexo</title><use xlink:href="#icon-team" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          @EasyHexo
+        </span></span></section> <section data-v-f56f68fe><a href="mailto:chung.zh@qq.com" title="chung.zh@qq.com" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>chung.zh@qq.com</title><use xlink:href="#icon-mail" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          chung.zh@qq.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-f56f68fe><section class="info-sns clearfix" data-v-f56f68fe><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-f56f68fe><span title="GitHub: ChungZH" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-f56f68fe><span title="知乎: chung-zh" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-f56f68fe><span title="豆瓣: 190281889" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-f80fadc2><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>Table of Contents</span> <TOC class="post-nav-toc"></TOC></div> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/posts/2019/03/02/create-vuepress-blog-and-use-git-manger-it.html#post-comments">
+      Comments
+    </a></div></div></aside></div> <footer class="footer" data-v-19f1d8f9><p class="sns-links" data-v-19f1d8f9><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-19f1d8f9><span title="GitHub: ChungZH" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-19f1d8f9><span title="知乎: chung-zh" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-19f1d8f9><span title="豆瓣: 190281889" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a></p> <p data-v-19f1d8f9>
+    Copyright © 2019 ChungZH
+    <br data-v-19f1d8f9> <i aria-hidden="true" class="fa fa-space-shuttle" data-v-19f1d8f9></i> Powered by
+    <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank" data-v-19f1d8f9>VuePress</a><br data-v-19f1d8f9>
+    Made with 
+    <i aria-hidden="true" class="fa fa-heartbeat" data-v-19f1d8f9></i> love<br data-v-19f1d8f9></p></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.1f117814.js" defer></script><script src="/assets/js/6.2cc37a9e.js" defer></script><script src="/assets/js/17.18de1360.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>单链表浅析 - 数据结构笔记 | ChungZH&#39;s blog</title>
+    <meta name="description" content="Woo~ 你竟然发现了我的博客！">
+    <link rel="icon" href="/BlogFavicon16.png">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="preload" href="/assets/css/0.styles.4047398f.css" as="style"><link rel="preload" href="/assets/js/app.1f117814.js" as="script"><link rel="preload" href="/assets/js/6.2cc37a9e.js" as="script"><link rel="preload" href="/assets/js/19.45984ec1.js" as="script"><link rel="prefetch" href="/assets/js/1.b488de2d.js"><link rel="prefetch" href="/assets/js/10.d4618476.js"><link rel="prefetch" href="/assets/js/11.bc0403dd.js"><link rel="prefetch" href="/assets/js/12.4a5818d0.js"><link rel="prefetch" href="/assets/js/13.0c7e7089.js"><link rel="prefetch" href="/assets/js/14.84ebeb20.js"><link rel="prefetch" href="/assets/js/15.a64d3b27.js"><link rel="prefetch" href="/assets/js/16.64b5de0d.js"><link rel="prefetch" href="/assets/js/17.18de1360.js"><link rel="prefetch" href="/assets/js/18.a3b7afb3.js"><link rel="prefetch" href="/assets/js/20.082c8d03.js"><link rel="prefetch" href="/assets/js/21.23ede014.js"><link rel="prefetch" href="/assets/js/22.3b4e4bf0.js"><link rel="prefetch" href="/assets/js/23.54776ff8.js"><link rel="prefetch" href="/assets/js/24.9ffea93f.js"><link rel="prefetch" href="/assets/js/25.3939e71c.js"><link rel="prefetch" href="/assets/js/3.8bd1c9d2.js"><link rel="prefetch" href="/assets/js/4.31cad889.js"><link rel="prefetch" href="/assets/js/5.dd6d6683.js"><link rel="prefetch" href="/assets/js/7.3dcb9d17.js"><link rel="prefetch" href="/assets/js/8.893d689f.js"><link rel="prefetch" href="/assets/js/9.f0318adf.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4047398f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-c6d26598><div data-v-5c35c722 data-v-c6d26598><nav class="navbar" data-v-5c35c722><div class="container" data-v-5c35c722><a href="/" class="router-link-active" data-v-5c35c722><span class="navbar-site-name" data-v-5c35c722>
+          ChungZH's blog
+        </span></a> <div class="navbar-toggler" data-v-5c35c722><svg class="icon" style="font-size:1.2em;" data-v-5c35c722 data-v-5c35c722><title data-v-5c35c722 data-v-5c35c722>menu</title><use xlink:href="#icon-menu" data-v-5c35c722 data-v-5c35c722></use></svg></div> <div class="navbar-links" data-v-5c35c722><a href="/" class="navbar-link router-link-active" data-v-5c35c722>
+            🏠 首页
+          </a><a href="/posts/" class="navbar-link router-link-active" data-v-5c35c722>
+            📰 文章
+          </a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-5c35c722></div></div> <div class="banner" data-v-5ad5ee22 data-v-c6d26598 data-v-c6d26598><div class="container" data-v-5ad5ee22><div class="center" data-v-5ad5ee22><h1 data-v-5ad5ee22 data-v-c6d26598>
+          单链表浅析 - 数据结构笔记
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-f80fadc2 data-v-f80fadc2><main class="main" data-v-f80fadc2><div class="post" data-v-f80fadc2 data-v-f80fadc2><section class="post-meta main-div" data-v-1a01be4a><section class="post-date clearfix" data-v-1a01be4a><span class="create-date" data-v-1a01be4a>
+      Created : 2019-02-23
+    </span> <span class="update-date" data-v-1a01be4a>
+      Updated : 2019-03-22
+    </span></section> <section class="post-links" data-v-1a01be4a><a href="/posts/2019/02/23/stack-data-structure-note.html" class="post-link" data-v-1a01be4a>
+      Previous Post : 栈浅析 - 数据结构笔记
+    </a> <a href="/posts/2019/02/23/dfs-algorithm-note.html" class="post-link" data-v-1a01be4a>
+      Next Post : 深度优先搜索浅析 - 算法笔记
+    </a></section></section> <article class="main-div"><div class="post-content content default"><h2 id="这篇文章我们来学习-单链表。"><a href="#这篇文章我们来学习-单链表。" aria-hidden="true" class="header-anchor">#</a> 这篇文章我们来学习 <code>单链表</code>。
+</h2> <h2 id="单链表概念"><a href="#单链表概念" aria-hidden="true" class="header-anchor">#</a> 单链表概念</h2> <p>链表是使用 <code>链式存储结构</code> 的一种数据结构。<code>链式存储结构</code> 存储密度比顺序存储结构小，是一种物理存储单元上非连续、非顺序的存储结构。相较于 <code>顺序表</code> ，有 <code>存储的元素个数不受限制</code> 、 <code>插入和删除元素时，不用移动其他元素</code> 等优点。链表有 <code>单链表</code> 、 <code>双向链表</code> 、还有 <code>循环链表</code> 。对于链表中的 <code>数据元素</code> 来说，除了存储其本身的信息之外，还需要存储一个指示其后继（也可以是前继）结点的地址。这两个部分组成一个 <code>结点</code> 。</p> <h2 id="单链表实现"><a href="#单链表实现" aria-hidden="true" class="header-anchor">#</a> 单链表实现</h2> <p>首先，我们来定义一个单链表中的结点。先上一个图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/node.png" alt="Node" title="结点示意图"></p> <p>相应的，代码实现如下：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> Node <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>      <span class="token comment">// 结点中的数据域</span>
+    Node <span class="token operator">*</span> next<span class="token punctuation">;</span>   <span class="token comment">// 指针域</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p><strong>注意：在单链表中，一个结点中有数据域和指针域，即其本身存储的信息和它的后继的地址</strong></p> <p>先上一个链表的图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/LinkedList.png" alt="LinkedList" title="链表示意图"></p> <p>下面我们开始实现一个单链表，包括删除、插入等基本操作。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">struct</span> Node <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>                 <span class="token comment">// 结点中的数据域</span>
+    Node <span class="token operator">*</span> next<span class="token punctuation">;</span>              <span class="token comment">// 指针域</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+Node <span class="token operator">*</span> head <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>       <span class="token comment">// 头结点</span>
+
+<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                  <span class="token comment">// 链表的初始化</span>
+<span class="token keyword">void</span> <span class="token function">Delete</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 删除链表的第 index 个元素</span>
+<span class="token keyword">void</span> <span class="token function">Insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> pos<span class="token punctuation">,</span> <span class="token keyword">int</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 向链表的第 pos 位置插入 data</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>	
+	Node <span class="token operator">*</span> node <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+	<span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token function">Insert</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// 向链表插入 1 - 10 这10个数</span>
+	<span class="token punctuation">}</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;向链表插入了 1 - 10 这十个数&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token function">Insert</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// 向链表的第 5 个位置插入 11</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;向链表的第 5 个位置插入了 11 这个数&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;链表当前情况：&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token keyword">while</span><span class="token punctuation">(</span>node<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>data <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token function">Delete</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment">// 删除第 1 个数</span>
+	<span class="token function">Delete</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment">// 删除第 3 个数</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;删除了第一个数后，又删除了第三个数。&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+ 
+	node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;链表当前情况：&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token keyword">while</span><span class="token punctuation">(</span>node<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>data <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span> 
+	head<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">// 直接把头指针的 next 设为空</span>
+	head<span class="token operator">-</span><span class="token operator">&gt;</span>data <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>      <span class="token comment">// 这里用头指针的数据域存储链表的长度</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Delete</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	Node <span class="token operator">*</span> node<span class="token punctuation">,</span> <span class="token operator">*</span> currNode<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	currNode <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	currNode <span class="token operator">=</span> head<span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> index <span class="token operator">&amp;&amp;</span> currNode<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>   <span class="token comment">// 找到要删除的结点和它的前一个节点</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> currNode<span class="token punctuation">;</span>
+		currNode <span class="token operator">=</span> currNode<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">||</span> currNode <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	
+	node<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> currNode<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>      <span class="token comment">// 将要删除的前一个节点</span>
+	<span class="token keyword">delete</span> currNode<span class="token punctuation">;</span>                  <span class="token comment">// 释放空间</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> pos<span class="token punctuation">,</span> <span class="token keyword">int</span> data<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	Node <span class="token operator">*</span> node<span class="token punctuation">,</span> <span class="token operator">*</span> insertData<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+	insertData <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	insertData<span class="token operator">-</span><span class="token operator">&gt;</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+	insertData<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> head<span class="token operator">-</span><span class="token operator">&gt;</span>data <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>         <span class="token comment">// 如果插入的位置是第一个位置并且链表为空</span>
+	<span class="token punctuation">{</span>
+		head<span class="token operator">-</span><span class="token operator">&gt;</span>data<span class="token operator">++</span><span class="token punctuation">;</span>
+		head<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> insertData<span class="token punctuation">;</span>             
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> head<span class="token operator">-</span><span class="token operator">&gt;</span>data <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		insertData<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>       
+		head<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> insertData<span class="token punctuation">;</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;</span> pos <span class="token operator">&amp;&amp;</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+		
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	insertData<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> node<span class="token operator">-</span><span class="token operator">&gt;</span>next<span class="token punctuation">;</span>
+	node<span class="token operator">-</span><span class="token operator">&gt;</span>next <span class="token operator">=</span> insertData<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>向链表插入了 1 - 10 这十个数
+向链表的第 5 个位置插入了 11 这个数
+链表当前情况：
+1 2 3 4 11 5 6 7 8 9 10
+删除了第一个数后，又删除了第三个数。
+链表当前情况：
+2 3 11 5 6 7 8 9 10
+</code></pre></div><p>大家可以买一本数据结构的书自己看一下，可能比较难理解。</p> <p>（这篇文章可能是暑假的最后一篇了。）</p> <hr> <p>如果你想学习数据结构和算法，却苦于没有简单易学的教程，那么我给你推荐下面这个课程：</p> <p><a href="https://study.163.com/course/introduction/1004943019.htm?share=1&amp;shareId=1033054447" target="_blank" rel="noopener noreferrer">AI前奏必备-数据结构与算法课 - 老九学堂<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>（此课程中还有Cocos2dx和前端入门课赠送。）</p> <hr> <p>作者：ChungZH</p></div></article> <section class="post-meta main-div" data-v-1a01be4a><section class="post-date clearfix" data-v-1a01be4a><span class="create-date" data-v-1a01be4a>
+      Created : 2019-02-23
+    </span> <span class="update-date" data-v-1a01be4a>
+      Updated : 2019-03-22
+    </span></section> <section class="post-links" data-v-1a01be4a><a href="/posts/2019/02/23/stack-data-structure-note.html" class="post-link" data-v-1a01be4a>
+      Previous Post : 栈浅析 - 数据结构笔记
+    </a> <a href="/posts/2019/02/23/dfs-algorithm-note.html" class="post-link" data-v-1a01be4a>
+      Next Post : 深度优先搜索浅析 - 算法笔记
+    </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-f80fadc2><div class="info-card main-div" data-v-f56f68fe data-v-f80fadc2><div class="info-card-header" data-v-f56f68fe><img src="/newavatar.jpg" alt="ChungZH" class="info-avatar" data-v-f56f68fe></div> <div class="info-card-body" data-v-f56f68fe><section class="info-nickname" data-v-f56f68fe>
+      ChungZH
+    </section> <section class="info-desc" data-v-f56f68fe>路漫漫其修远兮，吾将上下而求索。</section> <section class="info-contact" data-v-f56f68fe><section data-v-f56f68fe><span title="Fo'shan City, China" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>Fo'shan City, China</title><use xlink:href="#icon-location" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          Fo'shan City, China
+        </span></span></section> <section data-v-f56f68fe><span title="@EasyHexo" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>@EasyHexo</title><use xlink:href="#icon-team" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          @EasyHexo
+        </span></span></section> <section data-v-f56f68fe><a href="mailto:chung.zh@qq.com" title="chung.zh@qq.com" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>chung.zh@qq.com</title><use xlink:href="#icon-mail" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          chung.zh@qq.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-f56f68fe><section class="info-sns clearfix" data-v-f56f68fe><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-f56f68fe><span title="GitHub: ChungZH" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-f56f68fe><span title="知乎: chung-zh" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-f56f68fe><span title="豆瓣: 190281889" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-f80fadc2><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>Table of Contents</span> <TOC class="post-nav-toc"></TOC></div> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/posts/2019/02/23/linklist-data-structure-note.html#post-comments">
+      Comments
+    </a></div></div></aside></div> <footer class="footer" data-v-19f1d8f9><p class="sns-links" data-v-19f1d8f9><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-19f1d8f9><span title="GitHub: ChungZH" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-19f1d8f9><span title="知乎: chung-zh" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-19f1d8f9><span title="豆瓣: 190281889" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a></p> <p data-v-19f1d8f9>
+    Copyright © 2019 ChungZH
+    <br data-v-19f1d8f9> <i aria-hidden="true" class="fa fa-space-shuttle" data-v-19f1d8f9></i> Powered by
+    <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank" data-v-19f1d8f9>VuePress</a><br data-v-19f1d8f9>
+    Made with 
+    <i aria-hidden="true" class="fa fa-heartbeat" data-v-19f1d8f9></i> love<br data-v-19f1d8f9></p></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.1f117814.js" defer></script><script src="/assets/js/6.2cc37a9e.js" defer></script><script src="/assets/js/19.45984ec1.js" defer></script>
+  </body>
+</html>

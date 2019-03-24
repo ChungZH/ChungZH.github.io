@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>快速排序（Quick Sort） - 算法笔记 | ChungZH&#39;s blog</title>
+    <meta name="description" content="Woo~ 你竟然发现了我的博客！">
+    <link rel="icon" href="/BlogFavicon16.png">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="preload" href="/assets/css/0.styles.4047398f.css" as="style"><link rel="preload" href="/assets/js/app.1f117814.js" as="script"><link rel="preload" href="/assets/js/6.2cc37a9e.js" as="script"><link rel="preload" href="/assets/js/21.23ede014.js" as="script"><link rel="prefetch" href="/assets/js/1.b488de2d.js"><link rel="prefetch" href="/assets/js/10.d4618476.js"><link rel="prefetch" href="/assets/js/11.bc0403dd.js"><link rel="prefetch" href="/assets/js/12.4a5818d0.js"><link rel="prefetch" href="/assets/js/13.0c7e7089.js"><link rel="prefetch" href="/assets/js/14.84ebeb20.js"><link rel="prefetch" href="/assets/js/15.a64d3b27.js"><link rel="prefetch" href="/assets/js/16.64b5de0d.js"><link rel="prefetch" href="/assets/js/17.18de1360.js"><link rel="prefetch" href="/assets/js/18.a3b7afb3.js"><link rel="prefetch" href="/assets/js/19.45984ec1.js"><link rel="prefetch" href="/assets/js/20.082c8d03.js"><link rel="prefetch" href="/assets/js/22.3b4e4bf0.js"><link rel="prefetch" href="/assets/js/23.54776ff8.js"><link rel="prefetch" href="/assets/js/24.9ffea93f.js"><link rel="prefetch" href="/assets/js/25.3939e71c.js"><link rel="prefetch" href="/assets/js/3.8bd1c9d2.js"><link rel="prefetch" href="/assets/js/4.31cad889.js"><link rel="prefetch" href="/assets/js/5.dd6d6683.js"><link rel="prefetch" href="/assets/js/7.3dcb9d17.js"><link rel="prefetch" href="/assets/js/8.893d689f.js"><link rel="prefetch" href="/assets/js/9.f0318adf.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4047398f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-c6d26598><div data-v-5c35c722 data-v-c6d26598><nav class="navbar" data-v-5c35c722><div class="container" data-v-5c35c722><a href="/" class="router-link-active" data-v-5c35c722><span class="navbar-site-name" data-v-5c35c722>
+          ChungZH's blog
+        </span></a> <div class="navbar-toggler" data-v-5c35c722><svg class="icon" style="font-size:1.2em;" data-v-5c35c722 data-v-5c35c722><title data-v-5c35c722 data-v-5c35c722>menu</title><use xlink:href="#icon-menu" data-v-5c35c722 data-v-5c35c722></use></svg></div> <div class="navbar-links" data-v-5c35c722><a href="/" class="navbar-link router-link-active" data-v-5c35c722>
+            🏠 首页
+          </a><a href="/posts/" class="navbar-link router-link-active" data-v-5c35c722>
+            📰 文章
+          </a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-5c35c722></div></div> <div class="banner" data-v-5ad5ee22 data-v-c6d26598 data-v-c6d26598><div class="container" data-v-5ad5ee22><div class="center" data-v-5ad5ee22><h1 data-v-5ad5ee22 data-v-c6d26598>
+          快速排序（Quick Sort） - 算法笔记
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-f80fadc2 data-v-f80fadc2><main class="main" data-v-f80fadc2><div class="post" data-v-f80fadc2 data-v-f80fadc2><section class="post-meta main-div" data-v-1a01be4a><section class="post-date clearfix" data-v-1a01be4a><span class="create-date" data-v-1a01be4a>
+      Created : 2019-02-23
+    </span> <span class="update-date" data-v-1a01be4a>
+      Updated : 2019-03-22
+    </span></section> <section class="post-links" data-v-1a01be4a><a href="/posts/2019/02/23/bucket-sort-note.html" class="post-link" data-v-1a01be4a>
+      Previous Post : 桶排序（Bucket Sort） - 算法笔记
+    </a> <a href="/posts/2019/02/23/sort-algorithm-practice.html" class="post-link" data-v-1a01be4a>
+      Next Post : 排序练手 - 算法笔记
+    </a></section></section> <article class="main-div"><div class="post-content content default"><p>这篇文章我们来学习<code>快速排序（Quick Sort)</code>。</p> <p>快速排序（Quicksort）是对冒泡排序的一种改进。</p> <p>快速排序由 <code>C. A. R. Hoare</code> 在 <code>1960</code> 年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p> <p>下面我们用 <code>6 1 2 7 9 3 4 5 10 8</code> 这十个数字来举例说明快速排序的排序过程。</p> <p>首先，我们需要在这个序列中找到一个<code>基准数</code>。为了方便，我们用 <code>6</code> 作为基准数。接下来，我们要将这个序列中所有比 <code>6</code> 小的数全部放在 <code>6</code> 的左边，把比 <code>6</code> 大的数全部放在它的右边。即成为这个序列：<code>3 1 2 5 4 6 9 7 10 8</code>。</p> <p>然后，我们分别从序列的两端开始“探测”。先从<strong>右</strong>往<strong>左</strong>找到一个小于基准数 <code>6</code> 的数，然后再从<strong>左</strong>往<strong>右</strong>找到一个大于基准数的数，然后把他们交换即可。这里我们用变量 <code>i</code> 和 <code>j</code> 表示序列的最左边和最右边。我们可以把它们叫做“哨兵i”和“哨兵j”。开始的时候把哨兵i指向序列的第一个数(i=1)，即指向 <code>6</code>（注意这里是<strong>指向</strong>第一个数，不是i等于第一个数） ，然后把哨兵j指向序列的最后一个数(j=n)，即指向 <code>8</code> ，如下图。</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/10/QuickSort.png" alt="QuickSort"></p> <p>首先，哨兵j开始寻找比基准数小的数。哨兵j一步一步向左移动（j--)，直到找到了一个小于基准数的数字才停下来。哨兵j移动完后，哨兵i就开始向右移动了，直到找到一个比基准数大的数字。最后，哨兵i停在了数字 <code>7</code> 的位置，哨兵j停在了数字 <code>5</code> 的位置。</p> <p>然后交换哨兵i和哨兵j指向的元素的值。交换后，序列变成了这样：<code>6 1 2 5 9 3 4 7 10 8</code>。然后哨兵j继续向左移动（每次都是哨兵j先移动），移动到 <code>4</code>（比基准数要小）的时候就停了下来。哨兵i也开始移动了，移动到 <code>9</code> （比基准数大）的时候，就停了下来。然后再次进行交换，即 <code>4</code> 和 <code>9</code> 进行交换。交换后序列就变成这样：<code>6 1 2 5 4 3 9 7 10 8</code>。</p> <p>好了，继续探测。哨兵j继续向左移动，于是它找到了 <code>3</code> （比基准数小），就停下来了。哨兵i就开始向右移动了。此时，两个哨兵相遇了。两个哨兵都在 <code>3</code> 的位置上，说明探测结束了。把基准数 <code>6</code> 和 <code>3</code> 交换就可以了。</p> <p>交换后的序列如下：<code>3 1 2 5 4 6 9 7 10 8</code>，我们可以发现：在 <code>6</code> 左边的数都小于 <code>6</code> ，在 <code>6</code> 右边的数全都大于 <code>6</code> ，至此，我们就完成了第一轮探测。</p> <p>虽然已经完成了第一轮探测，但是我们可以发现左右两边的数还是凌乱的，并没有按顺序排列。</p> <p>我们先回顾一下刚才排序的过程：哨兵j找到比基准数小的数，哨兵i找到比基准数大的数，然后进行交换。直到i和j碰头，才和基准数交换。</p> <p>接下来，我们只需要重复刚才排序的过程，把 <code>6</code> 左边的序列 <code>3 1 2 5 4</code> 和 <code>6</code> 右边的序列 <code>9 7 10 8</code> 分别进行快速排序，直到不可拆分出新的子序列为止。最后会得出这个序列：<code>1 2 3 4 5 6 7 8 9 10</code> 。下面上代码。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">;</span>                             <span class="token comment">// 由于这个数组需要在函数中使用，所以定义为全局变量</span>
+<span class="token keyword">void</span> <span class="token function">quicksort</span><span class="token punctuation">(</span><span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 定义快速排序函数</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">int</span> n<span class="token punctuation">;</span>
+	cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cin <span class="token operator">&gt;&gt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token function">quicksort</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">quicksort</span><span class="token punctuation">(</span><span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> temp<span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">&gt;</span> right<span class="token punctuation">)</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	
+	temp <span class="token operator">=</span> a<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">;</span>                     <span class="token comment">// 基准数</span>
+	i <span class="token operator">=</span> left<span class="token punctuation">;</span> j <span class="token operator">=</span> right<span class="token punctuation">;</span>                <span class="token comment">// 两个哨兵</span>
+	
+	<span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">!=</span> j<span class="token punctuation">)</span>                      <span class="token comment">// 两个哨兵一碰面就退出循环</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">while</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&gt;=</span> temp <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span>   <span class="token comment">// 哨兵j 向左寻找比基准数小的数</span>
+		<span class="token punctuation">{</span>
+			j<span class="token operator">--</span><span class="token punctuation">;</span>  
+		<span class="token punctuation">}</span>
+		<span class="token keyword">while</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> temp <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span>   <span class="token comment">// 哨兵i 向右寻找比基准数大的数</span>
+		<span class="token punctuation">{</span>
+			i<span class="token operator">++</span><span class="token punctuation">;</span>  
+		<span class="token punctuation">}</span>
+		
+		<span class="token comment">// 如果哨兵i和哨兵j还没碰面，就把两个哨兵指向的元素交换。</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token function">swap</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">// 最后将哨兵i和基准数交换</span>
+	a<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token operator">=</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+	
+	<span class="token function">quicksort</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 继续处理左边的（递归）</span>
+	<span class="token function">quicksort</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 继续处理右边的（递归）</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+	
+<span class="token punctuation">}</span>
+</code></pre></div><p>（代码比桶排序的长多了。。。）</p> <p>下面我们看运行结果。</p> <p>输入：</p> <div class="language- extra-class"><pre class="language-text"><code>10
+6 1 2 7 9 3 4 5 10 8
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>1 2 3 4 5 6 7 8 9 10
+</code></pre></div><p>为了方便理解，我写出程序执行过程中数组a的变化过程给大家看一下。</p> <div class="language- extra-class"><pre class="language-text"><code>6 1 2 7 9 3 4 5 10 8
+3 1 2 5 4 6 9 7 10 8
+2 1 3 5 4 6 9 7 10 8
+1 2 3 5 4 6 9 7 10 8
+1 2 3 5 4 6 9 7 10 8
+1 2 3 4 5 6 9 7 10 8
+1 2 3 4 5 6 9 7 10 8
+1 2 3 4 5 6 8 7 9 10
+1 2 3 4 5 6 7 8 9 10
+1 2 3 4 5 6 7 8 9 10
+1 2 3 4 5 6 7 8 9 10
+</code></pre></div><p>不难发现，其实快速排序是基于一种叫做“二分”的思想的。大家可以自行了解。</p> <p>下篇文章我们讲一个需要用到排序的题目。</p> <hr> <p>如果你想学习数据结构和算法，却苦于没有简单易学的教程，那么我给你推荐下面这个课程：</p> <p><a href="https://study.163.com/course/introduction/1004943019.htm?share=1&amp;shareId=1033054447" target="_blank" rel="noopener noreferrer">AI前奏必备-数据结构与算法课 - 老九学堂<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>（此课程中还有Cocos2dx和前端入门课赠送。）</p> <hr> <p>作者：ChungZH</p> <p>本文大量参考 啊哈磊 所著 《啊哈！算法》。</p></div></article> <section class="post-meta main-div" data-v-1a01be4a><section class="post-date clearfix" data-v-1a01be4a><span class="create-date" data-v-1a01be4a>
+      Created : 2019-02-23
+    </span> <span class="update-date" data-v-1a01be4a>
+      Updated : 2019-03-22
+    </span></section> <section class="post-links" data-v-1a01be4a><a href="/posts/2019/02/23/bucket-sort-note.html" class="post-link" data-v-1a01be4a>
+      Previous Post : 桶排序（Bucket Sort） - 算法笔记
+    </a> <a href="/posts/2019/02/23/sort-algorithm-practice.html" class="post-link" data-v-1a01be4a>
+      Next Post : 排序练手 - 算法笔记
+    </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-f80fadc2><div class="info-card main-div" data-v-f56f68fe data-v-f80fadc2><div class="info-card-header" data-v-f56f68fe><img src="/newavatar.jpg" alt="ChungZH" class="info-avatar" data-v-f56f68fe></div> <div class="info-card-body" data-v-f56f68fe><section class="info-nickname" data-v-f56f68fe>
+      ChungZH
+    </section> <section class="info-desc" data-v-f56f68fe>路漫漫其修远兮，吾将上下而求索。</section> <section class="info-contact" data-v-f56f68fe><section data-v-f56f68fe><span title="Fo'shan City, China" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>Fo'shan City, China</title><use xlink:href="#icon-location" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          Fo'shan City, China
+        </span></span></section> <section data-v-f56f68fe><span title="@EasyHexo" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>@EasyHexo</title><use xlink:href="#icon-team" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          @EasyHexo
+        </span></span></section> <section data-v-f56f68fe><a href="mailto:chung.zh@qq.com" title="chung.zh@qq.com" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>chung.zh@qq.com</title><use xlink:href="#icon-mail" data-v-f56f68fe data-v-f56f68fe></use></svg><span class="info-text" data-v-f56f68fe data-v-f56f68fe>
+          chung.zh@qq.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-f56f68fe><section class="info-sns clearfix" data-v-f56f68fe><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-f56f68fe><span title="GitHub: ChungZH" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-f56f68fe><span title="知乎: chung-zh" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-f56f68fe><span title="豆瓣: 190281889" class="sns-icon" data-v-f56f68fe data-v-f56f68fe><svg class="icon" style="font-size:1.5em;" data-v-f56f68fe data-v-f56f68fe><title data-v-f56f68fe data-v-f56f68fe>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-f56f68fe data-v-f56f68fe></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-f80fadc2><!----> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/posts/2019/02/23/quick-sort-note.html#post-comments">
+      Comments
+    </a></div></div></aside></div> <footer class="footer" data-v-19f1d8f9><p class="sns-links" data-v-19f1d8f9><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-19f1d8f9><span title="GitHub: ChungZH" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-19f1d8f9><span title="知乎: chung-zh" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-19f1d8f9><span title="豆瓣: 190281889" class="sns-icon" data-v-19f1d8f9 data-v-19f1d8f9><svg class="icon" style="font-size:25px;" data-v-19f1d8f9 data-v-19f1d8f9><title data-v-19f1d8f9 data-v-19f1d8f9>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-19f1d8f9 data-v-19f1d8f9></use></svg></span></a></p> <p data-v-19f1d8f9>
+    Copyright © 2019 ChungZH
+    <br data-v-19f1d8f9> <i aria-hidden="true" class="fa fa-space-shuttle" data-v-19f1d8f9></i> Powered by
+    <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank" data-v-19f1d8f9>VuePress</a><br data-v-19f1d8f9>
+    Made with 
+    <i aria-hidden="true" class="fa fa-heartbeat" data-v-19f1d8f9></i> love<br data-v-19f1d8f9></p></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.1f117814.js" defer></script><script src="/assets/js/6.2cc37a9e.js" defer></script><script src="/assets/js/21.23ede014.js" defer></script>
+  </body>
+</html>
