@@ -16,13 +16,13 @@ install:
 
 script:
   - yarn build
-  - echo "chungzh.cn" > src/.vuepress/dist/CNAME
+  - echo "chungzh.cn" > dist/CNAME
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: docs/.vuepress/dist
+  local_dir: dist
   name: $GIT_NAME
   email: $GIT_EMAIL
   keep-history: true
