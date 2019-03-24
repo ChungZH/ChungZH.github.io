@@ -16,7 +16,7 @@ install:
 
 script:
   - yarn build
-  - echo "chungzh.cn" > docs/.vuepress/dist/CNAME
+  - echo "chungzh.cn" > src/.vuepress/dist/CNAME
 
 deploy:
   provider: pages
