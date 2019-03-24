@@ -38,7 +38,7 @@ module.exports = {
         nickname: 'ChungZH',
   
         // 个人简介
-        description: '💯 新时代斜杠小学生~ <br /> ⌨️ 爱编程 / 🐷 小猪蹄 / <br /> 🌚 大蒟蒻 <br /> 🍭',
+        description: '路漫漫其修远兮，吾将上下而求索。',
   
         // 电子邮箱
         email: 'chung.zh@qq.com',
@@ -114,7 +114,7 @@ module.exports = {
       nav: [
         { text: '🏠 首页', link: '/', exact: false },
         { text: '📰 文章', link: '/posts/', exact: false },
-        { text: '🤝 友链', link: '/friends/', exact: false },
+        //{ text: '🤝 友链', link: '/friends/', exact: false },
       ],
   
       // 评论配置，参考下方 [页面评论] 章节
