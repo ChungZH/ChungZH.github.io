@@ -27,7 +27,7 @@ module.exports = {
     },
   
     // 使用的主题
-    // theme: 'vuepress-theme-meteorlxy',
+    theme: 'meteorlxy',
   
     // 主题配置
     themeConfig: {

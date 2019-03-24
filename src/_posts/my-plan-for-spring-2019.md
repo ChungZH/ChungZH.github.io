@@ -52,7 +52,7 @@ vssue-title: my-plan-for-spring-2019
 - 🔲 [P2907 [USACO08OPEN] 农场周围的道路Roads Around The Farm](https://www.luogu.org/problemnew/show/P2907)
 - 🔲 [P4702 取石子](https://www.luogu.org/problemnew/show/P4702)
 - ✅ [P2525 Uim的情人节礼物·其之壱](https://www.luogu.org/problemnew/show/P2525)
-- 🔲 [P2524 Uim的情人节礼物·其之弐](https://www.luogu.org/problemnew/show/P2524)
+- ✅ [P2524 Uim的情人节礼物·其之弐](https://www.luogu.org/problemnew/show/P2524)
 - 🔲 [P2666 Bessie的秘密牧场](https://www.luogu.org/problemnew/show/P2666)
 - 🔲 [P2689 东南西北](https://www.luogu.org/problemnew/show/P2689)
 - 🔲 [P1296 奶牛的耳语](https://www.luogu.org/problemnew/show/P1296)

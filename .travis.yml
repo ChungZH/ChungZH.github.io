@@ -15,7 +15,7 @@ install:
   - yarn install
 
 script:
-  - yarn blog:build
+  - yarn build
   - echo "chungzh.cn" > docs/.vuepress/dist/CNAME
 
 deploy:
