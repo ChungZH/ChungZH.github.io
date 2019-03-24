@@ -6,8 +6,6 @@ date: 2019/03/24 11:31:00
 vssue-title: my-plan-for-spring-2019
 ---
 
-
-
 > 2019 春季 CS 学习计划（也就是 TODO）
 
 以前没给自己做过计划，导致在那段时间做了什么题、学了什么知识都不很清楚。这次尝试一下做计划，让自己的学习更清晰明了~
@@ -50,31 +48,30 @@ vssue-title: my-plan-for-spring-2019
 
 ~~无论做多少题，都无法掩盖只会做水题的事实~~
 
-- [ ] [P5082 成绩](https://www.luogu.org/problemnew/show/P5082)
-- [ ] [P2907 [USACO08OPEN] 农场周围的道路Roads Around The Farm](https://www.luogu.org/problemnew/show/P2907)
-- [ ] [P4702 取石子](https://www.luogu.org/problemnew/show/P4702)
-- [x] [P2525 Uim的情人节礼物·其之壱](https://www.luogu.org/problemnew/show/P2525)
-- [ ] [P2524 Uim的情人节礼物·其之弐](https://www.luogu.org/problemnew/show/P2524)
-- [ ] [P2666 Bessie的秘密牧场](https://www.luogu.org/problemnew/show/P2666)
-- [ ] [P2689 东南西北](https://www.luogu.org/problemnew/show/P2689)
-- [ ] [P1296 奶牛的耳语](https://www.luogu.org/problemnew/show/P1296)
-- [ ] [P1469 找筷子](https://www.luogu.org/problemnew/show/P1469)
-- [ ] [P1897 电梯里的爱情](https://www.luogu.org/problemnew/show/P1897)
-- [ ] [P1317 低洼地](https://www.luogu.org/problemnew/show/P1317)
-- [ ] [P4613 [COCI2017-2018#5] Olivander](https://www.luogu.org/problemnew/show/P4613)
-- [ ] [P4136 谁能赢呢？](https://www.luogu.org/problemnew/show/P4136)
-- [ ] [P1866 编号](https://www.luogu.org/problemnew/show/P1866)
-- [ ] [P3984 高兴的津津](https://www.luogu.org/problemnew/show/P3984)
-- [ ] [P2639 [USACO09OCT]Bessie的体重问题Bessie's We…](https://www.luogu.org/problemnew/show/P2639)
-- [ ] [P1626 象棋比赛](https://www.luogu.org/problemnew/show/P1626)
-- [ ] [P4057 [Code+#1]晨跑](https://www.luogu.org/problemnew/show/P4057)
-- [ ] [P1724 东风谷早苗](https://www.luogu.org/problemnew/show/P1724)
-- [ ] [P3009 [USACO11JAN]利润Profits](https://www.luogu.org/problemnew/show/P3009)
-- [ ] [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
+- 🔲 [P5082 成绩](https://www.luogu.org/problemnew/show/P5082)
+- 🔲 [P2907 [USACO08OPEN] 农场周围的道路Roads Around The Farm](https://www.luogu.org/problemnew/show/P2907)
+- 🔲 [P4702 取石子](https://www.luogu.org/problemnew/show/P4702)
+- ✅ [P2525 Uim的情人节礼物·其之壱](https://www.luogu.org/problemnew/show/P2525)
+- 🔲 [P2524 Uim的情人节礼物·其之弐](https://www.luogu.org/problemnew/show/P2524)
+- 🔲 [P2666 Bessie的秘密牧场](https://www.luogu.org/problemnew/show/P2666)
+- 🔲 [P2689 东南西北](https://www.luogu.org/problemnew/show/P2689)
+- 🔲 [P1296 奶牛的耳语](https://www.luogu.org/problemnew/show/P1296)
+- 🔲 [P1469 找筷子](https://www.luogu.org/problemnew/show/P1469)
+- 🔲 [P1897 电梯里的爱情](https://www.luogu.org/problemnew/show/P1897)
+- 🔲 [P1317 低洼地](https://www.luogu.org/problemnew/show/P1317)
+- 🔲 [P4613 [COCI2017-2018#5] Olivander](https://www.luogu.org/problemnew/show/P4613)
+- 🔲 [P4136 谁能赢呢？](https://www.luogu.org/problemnew/show/P4136)
+- 🔲 [P1866 编号](https://www.luogu.org/problemnew/show/P1866)
+- 🔲 [P3984 高兴的津津](https://www.luogu.org/problemnew/show/P3984)
+- 🔲 [P2639 [USACO09OCT]Bessie的体重问题Bessie's We…](https://www.luogu.org/problemnew/show/P2639)
+- 🔲 [P1626 象棋比赛](https://www.luogu.org/problemnew/show/P1626)
+- 🔲 [P4057 [Code+#1]晨跑](https://www.luogu.org/problemnew/show/P4057)
+- 🔲 [P1724 东风谷早苗](https://www.luogu.org/problemnew/show/P1724)
+- 🔲 [P3009 [USACO11JAN]利润Profits](https://www.luogu.org/problemnew/show/P3009)
+- 🔲 [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
 
 
-
-本文会不停地更下去，直到 2019 春季结束。
+> 本文将会不停地更下去，直到 2019 春季结束。
 
 ------
 
