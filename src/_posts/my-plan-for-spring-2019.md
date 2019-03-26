@@ -6,32 +6,34 @@ date: 2019/03/24 11:31:00
 vssue-title: my-plan-for-spring-2019
 ---
 
+[GitHub 项目地址](https://github.com/ChungZH/My-Plan)
+
 > 2019 春季 CS 学习计划（也就是 TODO）
 
 以前没给自己做过计划，导致在那段时间做了什么题、学了什么知识都不很清楚。这次尝试一下做计划，让自己的学习更清晰明了~
 
-~~作为一个鸽子，我敢打包票这里列出的内容肯定不会全都能在 2019 年春季做完。。。~~
+如果有没有做完的目标，直接顺延至下一季度。~~作为一个鸽子，我敢打包票这里列出的内容肯定不会全都能在 2019 年春季做完。。。~~
 
 ## 准备学习的语言
 
 | 语言       | 状态   | 使用教程                                                     |
 | ---------- | ------ | ------------------------------------------------------------ |
 | JavaScript | 入门中 | [现代 Javascript 教程](https://zh.javascript.info/)          |
-| Go         | 未开始 | [Go入门指南](https://github.com/Unknwon/the-way-to-go_ZH_CN) |
+| Go         | 未开始 | [Go 入门指南](https://github.com/Unknwon/the-way-to-go_ZH_CN) |
 | Python     | 未开始 | [廖雪峰 Python 教程](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000) |
 
 ## 准备学习/巩固的算法
 
 | 算法             | 状态     |
 | ---------------- | -------- |
-| 深度优先搜索 DFS | 需要复习 |
-| 广度优先搜索 BFS | 需要复习 |
+| 深度优先搜索 DFS 复习 | 未开始 |
+| 广度优先搜索 BFS 复习 | 未开始 |
 | 贪心算法         | 学习中   |
 | 递推             | 学习中   |
-| 分治             | 未学习   |
-| 二分             | 未学习   |
-| 高精度           | 未学习   |
-| 动态规划初步     | 未学习   |
+| 分治             | 未开始   |
+| 二分             | 未开始   |
+| 高精度           | 未开始   |
+| 动态规划初步     | 未开始   |
 
 对了，还有一个很重要的算法：~~骗分算法~~！
 
@@ -39,8 +41,8 @@ vssue-title: my-plan-for-spring-2019
 
 | 数据结构 | 状态   |
 | -------- | ------ |
-| 树       | 未学习 |
-| 图       | 未学习 |
+| 树       | 未开始 |
+| 图       | 未开始 |
 
 ## 要做的题目
 
@@ -69,6 +71,7 @@ vssue-title: my-plan-for-spring-2019
 - 🔲 [P1724 东风谷早苗](https://www.luogu.org/problemnew/show/P1724)
 - 🔲 [P3009 [USACO11JAN]利润Profits](https://www.luogu.org/problemnew/show/P3009)
 - 🔲 [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
+- 🔲 [P2615 神奇的幻方](https://www.luogu.org/problemnew/show/P2615)
 
 
 > 本文将会不停地更下去，直到 2019 春季结束。
