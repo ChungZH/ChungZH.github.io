@@ -50,7 +50,10 @@ vssue-title: my-plan-for-spring-2019
 
 ~~无论做多少题，都无法掩盖只会做水题的事实~~
 
-- 🔲 [P5082 成绩](https://www.luogu.org/problemnew/show/P5082)
+<!--<details>
+  <summary>题目目录</summary>-->
+  
+- ✅ [P5082 成绩](https://www.luogu.org/problemnew/show/P5082)
 - 🔲 [P2907 [USACO08OPEN] 农场周围的道路Roads Around The Farm](https://www.luogu.org/problemnew/show/P2907)
 - 🔲 [P4702 取石子](https://www.luogu.org/problemnew/show/P4702)
 - ✅ [P2525 Uim的情人节礼物·其之壱](https://www.luogu.org/problemnew/show/P2525)
@@ -71,8 +74,8 @@ vssue-title: my-plan-for-spring-2019
 - 🔲 [P1724 东风谷早苗](https://www.luogu.org/problemnew/show/P1724)
 - 🔲 [P3009 [USACO11JAN]利润Profits](https://www.luogu.org/problemnew/show/P3009)
 - 🔲 [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
-- 🔲 [P2615 神奇的幻方](https://www.luogu.org/problemnew/show/P2615)
-
+- ✅ [P2615 神奇的幻方](https://www.luogu.org/problemnew/show/P2615)
+<!--</details>-->
 
 > 本文将会不停地更下去，直到 2019 春季结束。
 
