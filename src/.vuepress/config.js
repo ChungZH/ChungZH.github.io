@@ -114,7 +114,7 @@ module.exports = {
       nav: [
         { text: '🏠 首页', link: '/', exact: false },
         { text: '📰 文章', link: '/posts/', exact: false },
-        //{ text: '🤝 友链', link: '/friends/', exact: false },
+        { text: '🤝 友链', link: '/friends/', exact: false },
       ],
   
       // 评论配置，参考下方 [页面评论] 章节
