@@ -75,6 +75,7 @@ vssue-title: my-plan-for-spring-2019
 - 🔲 [P3009 [USACO11JAN]利润Profits](https://www.luogu.org/problemnew/show/P3009)
 - 🔲 [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
 - ✅ [P2615 神奇的幻方](https://www.luogu.org/problemnew/show/P2615)
+- ✅ [P2957 [USACO09OCT]谷仓里的回声Barn Echoes](https://www.luogu.org/problemnew/show/P2957)
 - ✅ [P1917 三子棋II](https://www.luogu.org/problemnew/show/P1917)
 <!--</details>-->
 
