@@ -5,7 +5,7 @@ title: (￣▽￣)／ 朋友们
 
 **Hello! 由于我的博客刚刚（＊／ω＼＊ 事实上最少也有半个月了）从 Hexo 迁移到 Vuepress，很多功能还没补上。请耐心等待，我会努力补上的！**
 
-**注意：本站暂时不接受友链申请~**
+**注意：本站暂时不接受新友链申请~**
 
 [keithxodoy](https://www.edmath.cn/)
 
@@ -53,6 +53,6 @@ title: (￣▽￣)／ 朋友们
 
 [Markjuruo - 静下心来，记录知识。](https://markjuruo.coding.me/)
 
-[Alpha1022](ttps://www.alpha1022.me/)
+[Alpha1022](https://www.alpha1022.me/)
 
 [HUI BLOG](https://www.aclihui.com)
