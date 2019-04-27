@@ -2,10 +2,10 @@
 
 module.exports = {
     // 网站 Title
-    title: 'ChungZH\'s blog',
+    title: 'ChungZH',
   
     // 网站描述
-    description: 'Woo~ 你竟然发现了我的博客！',
+    description: 'ChungZH 的小站',
 
     // HTML <head> 部分
     head: [
@@ -16,7 +16,10 @@ module.exports = {
       ['link', {
         rel: 'stylesheet',
         href: 'https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css'
-      }]
+      }],
+      ['script', {
+        src: '/script/func.js'
+      }],
   ],
   
     // 网站语言
