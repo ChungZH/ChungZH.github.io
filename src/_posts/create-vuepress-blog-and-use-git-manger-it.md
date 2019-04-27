@@ -100,7 +100,7 @@ mkdir docs/.vuepress
 
 然后进入 `.vuepress` 文件夹，创建一个 `config.js` 配置文件。
 
-在 `config.js` 中粘贴一下内容：
+在 `config.js` 中粘贴以下内容：
 
 ```js
 // .vuepress/config.js
