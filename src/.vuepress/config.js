@@ -17,9 +17,13 @@ module.exports = {
         rel: 'stylesheet',
         href: 'https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css'
       }],
-      ['script', {
-        src: '/script/func.js'
+      ['link', {
+        rel: 'stylesheet',
+        href: 'https://fonts.loli.net/css?family=Noto+Serif+SC'
       }],
+      //['script', {
+        //src: '/script/func.js'
+      //}],
   ],
   
     // 网站语言
