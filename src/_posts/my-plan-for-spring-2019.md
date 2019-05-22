@@ -10,43 +10,42 @@ vssue-title: my-plan-for-spring-2019
 
 > 2019 春季 CS 学习计划（也就是 TODO）
 
-以前没给自己做过计划，导致在那段时间做了什么题、学了什么知识都不很清楚。这次尝试一下做计划，让自己的学习更清晰明了~
 
-如果有没有做完的目标，直接顺延至下一季度。~~作为一个鸽子，我敢打包票这里列出的内容肯定不会全都能在 2019 年春季做完。。。~~
+[GitHub 项目地址](https://github.com/ChungZH/My-Plan)
+
+> 2019 春季 CS 学习计划（也就是 TODO）
+
+如果有没有做完的目标，直接顺延至下一季度。
 
 ## 准备学习的语言
 
 | 语言       | 状态   | 使用教程                                                     |
 | ---------- | ------ | ------------------------------------------------------------ |
-| JavaScript | 入门中 | [现代 Javascript 教程](https://zh.javascript.info/)          |
-| Go         | 未开始 | [Go 入门指南](https://github.com/Unknwon/the-way-to-go_ZH_CN) |
-| Python     | 未开始 | [廖雪峰 Python 教程](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000) |
+| JavaScript | 入门中 | [现代 Javascript 教程](https://zh.javascript.info/)          ||
 
 ## 准备学习/巩固的算法
 
 | 算法             | 状态     |
 | ---------------- | -------- |
-| 深度优先搜索 DFS 复习 | 未开始 |
-| 广度优先搜索 BFS 复习 | 未开始 |
+| 深度优先搜索 DFS 复习 | 复习中 |
+| 广度优先搜索 BFS 复习 | 复习中 |
 | 贪心算法         | 学习中   |
 | 递推             | 学习中   |
 | 分治             | 未开始   |
 | 二分             | 未开始   |
 | 高精度           | 未开始   |
-| 动态规划初步     | 未开始   |
-
-对了，还有一个很重要的算法：~~骗分算法~~！
+| 动态规划初步     | 学习中   |
 
 ## 准备学习/巩固的数据结构
 
 | 数据结构 | 状态   |
 | -------- | ------ |
-| 树       | 未开始 |
+| 树       | 学习中 |
 | 图       | 未开始 |
 
 ## 要做的题目
 
-这段时间主要做 `USACO`、`NOIP 普及组` 的题目。
+这段时间主要做 `NOIP 普及组` 难度的题目。
 
 ~~无论做多少题，都无法掩盖只会做水题的事实~~
 
@@ -66,7 +65,7 @@ vssue-title: my-plan-for-spring-2019
 - 🔲 [P1317 低洼地](https://www.luogu.org/problemnew/show/P1317)
 - 🔲 [P4613 [COCI2017-2018#5] Olivander](https://www.luogu.org/problemnew/show/P4613)
 - 🔲 [P4136 谁能赢呢？](https://www.luogu.org/problemnew/show/P4136)
-- 🔲 [P3984 高兴的津津](https://www.luogu.org/problemnew/show/P3984)
+- ✅ [P3984 高兴的津津](https://www.luogu.org/problemnew/show/P3984)
 - 🔲 [P2639 [USACO09OCT]Bessie的体重问题Bessie's We…](https://www.luogu.org/problemnew/show/P2639)
 - 🔲 [P1626 象棋比赛](https://www.luogu.org/problemnew/show/P1626)
 - 🔲 [P4057 [Code+#1]晨跑](https://www.luogu.org/problemnew/show/P4057)
@@ -104,9 +103,23 @@ vssue-title: my-plan-for-spring-2019
 - ✅ [P4431 [COCI2017-2018#2] ​Košnja](https://www.luogu.org/problemnew/show/P4431) *`模拟`*
 - ✅ [P4136 谁能赢呢？](https://www.luogu.org/problemnew/show/P4136) *`博弈论`*
 - ✅ [CF961A Tetris](https://www.luogu.org/problemnew/show/CF961A) *`模拟`*
+- ✅ [P1443 马的遍历](https://www.luogu.org/problemnew/show/P1443) *`队列`* *`BFS`* *`搜索`*
+- ✅ [P1765 手机_NOI导刊2010普及（10）](https://www.luogu.org/problemnew/show/P1765) *`模拟`* *`打表`*
+- ✅ [P1644 跳马问题](https://www.luogu.org/problemnew/show/P1644) *`DFS`*
+- ✅ [P1657 选书](https://www.luogu.org/problemnew/show/P1657) *`DFS`*
+- ✅ [P1162 填涂颜色](https://www.luogu.org/problemnew/show/P1162) *`DFS`*
+- ✅ [P1464 Function](https://www.luogu.org/problemnew/show/P1464) *`记忆化搜索`* *`递归`*
+- ✅ [P1014 Cantor表](https://www.luogu.org/problemnew/show/P1162) *`模拟`*
+- ✅ [P1605 迷宫](https://www.luogu.org/problemnew/show/P1605) *`DFS`*
+- ✅ [AT46 リモコン](https://www.luogu.org/problemnew/show/AT46) *`DFS`*
+- ✅ [P1506 拯救oibh总部](https://www.luogu.org/problemnew/show/P1506) *`DFS`*
+- ✅ [[USACO10OCT]湖计数Lake Counting](https://www.luogu.org/problemnew/show/P1596) *`DFS`*
+- ✅ [P5315 头像上传](https://www.luogu.org/problemnew/show/P5315) *`模拟`*
+- ✅ [P1451 求细胞数量](https://www.luogu.org/problemnew/show/P1451) *`DFS`*
+- ✅ [CF545D Queue](https://www.luogu.org/problemnew/show/CF545D) *`贪心`* *`队列`*
+- ✅ [CF78A Haiku](https://www.luogu.org/problemnew/show/CF78A) *`模拟`*
+- ✅ [AT2412 最大の和](https://www.luogu.org/problemnew/show/AT2412) *`前缀和`*
 <!--</details>-->
-
-> 本文将会不停地更下去，直到 2019 春季结束。
 
 ------
 
