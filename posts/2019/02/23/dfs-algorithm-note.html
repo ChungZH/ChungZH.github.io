@@ -7,9 +7,9 @@
     <meta name="description" content="ChungZH 的小站">
     <link rel="icon" href="/BlogFavicon16.png">
   <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Serif+SC">
+  <script src="/script/func.js"></script>
     
-    <link rel="preload" href="/assets/css/0.styles.c4260d00.css" as="style"><link rel="preload" href="/assets/js/app.4b5951f9.js" as="script"><link rel="preload" href="/assets/js/6.110d1571.js" as="script"><link rel="preload" href="/assets/js/18.306c853f.js" as="script"><link rel="prefetch" href="/assets/js/1.bc005e15.js"><link rel="prefetch" href="/assets/js/10.eae1ad09.js"><link rel="prefetch" href="/assets/js/11.4dd4cddc.js"><link rel="prefetch" href="/assets/js/12.1c4137fa.js"><link rel="prefetch" href="/assets/js/13.e2a61fd0.js"><link rel="prefetch" href="/assets/js/14.a93ff7de.js"><link rel="prefetch" href="/assets/js/15.98486dd2.js"><link rel="prefetch" href="/assets/js/16.febe5940.js"><link rel="prefetch" href="/assets/js/17.b12b2d12.js"><link rel="prefetch" href="/assets/js/19.466bbb87.js"><link rel="prefetch" href="/assets/js/20.e7d35f1f.js"><link rel="prefetch" href="/assets/js/21.eab9a8bb.js"><link rel="prefetch" href="/assets/js/22.5a7672e3.js"><link rel="prefetch" href="/assets/js/23.4d27f64a.js"><link rel="prefetch" href="/assets/js/24.15907a0c.js"><link rel="prefetch" href="/assets/js/25.5d25f9dd.js"><link rel="prefetch" href="/assets/js/26.322b7f9e.js"><link rel="prefetch" href="/assets/js/27.2926a3fb.js"><link rel="prefetch" href="/assets/js/28.abf9b51c.js"><link rel="prefetch" href="/assets/js/3.c685bf97.js"><link rel="prefetch" href="/assets/js/4.eba35a8e.js"><link rel="prefetch" href="/assets/js/5.f88a6a87.js"><link rel="prefetch" href="/assets/js/7.e4ca750e.js"><link rel="prefetch" href="/assets/js/8.061ce726.js"><link rel="prefetch" href="/assets/js/9.f7e4beba.js">
+    <link rel="preload" href="/assets/css/0.styles.c4260d00.css" as="style"><link rel="preload" href="/assets/js/app.0cf360e1.js" as="script"><link rel="preload" href="/assets/js/6.110d1571.js" as="script"><link rel="preload" href="/assets/js/18.371ece3d.js" as="script"><link rel="prefetch" href="/assets/js/1.bc005e15.js"><link rel="prefetch" href="/assets/js/10.eae1ad09.js"><link rel="prefetch" href="/assets/js/11.4dd4cddc.js"><link rel="prefetch" href="/assets/js/12.df63f1fb.js"><link rel="prefetch" href="/assets/js/13.e2a61fd0.js"><link rel="prefetch" href="/assets/js/14.83355f4d.js"><link rel="prefetch" href="/assets/js/15.98486dd2.js"><link rel="prefetch" href="/assets/js/16.febe5940.js"><link rel="prefetch" href="/assets/js/17.e95b6959.js"><link rel="prefetch" href="/assets/js/19.f54dcff2.js"><link rel="prefetch" href="/assets/js/20.e0226227.js"><link rel="prefetch" href="/assets/js/21.59576afc.js"><link rel="prefetch" href="/assets/js/22.288cbd10.js"><link rel="prefetch" href="/assets/js/23.f04303aa.js"><link rel="prefetch" href="/assets/js/24.3636b4d6.js"><link rel="prefetch" href="/assets/js/25.5585891a.js"><link rel="prefetch" href="/assets/js/26.d8440aef.js"><link rel="prefetch" href="/assets/js/27.3d6f49d9.js"><link rel="prefetch" href="/assets/js/3.1fc17d2b.js"><link rel="prefetch" href="/assets/js/4.eba35a8e.js"><link rel="prefetch" href="/assets/js/5.f88a6a87.js"><link rel="prefetch" href="/assets/js/7.e4ca750e.js"><link rel="prefetch" href="/assets/js/8.ee90fbd3.js"><link rel="prefetch" href="/assets/js/9.f7e4beba.js">
     <link rel="stylesheet" href="/assets/css/0.styles.c4260d00.css">
   </head>
   <body>
@@ -28,12 +28,12 @@
         </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-6cd81e6a data-v-6cd81e6a><main class="main" data-v-6cd81e6a><div class="post" data-v-6cd81e6a data-v-6cd81e6a><section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
       Created : 2019-02-23
     </span> <span class="update-date" data-v-4e23451f>
-      Updated : 2019-03-24
+      Updated : 2019-05-22
     </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/02/23/linklist-data-structure-note.html" class="post-link" data-v-4e23451f>
       Previous Post : 单链表浅析 - 数据结构笔记
-    </a> <a href="/posts/2019/02/23/chaos-everything-is-fine.html" class="post-link" data-v-4e23451f>
-      Next Post : 杂谈 | 诸事大吉
-    </a></section></section> <article class="main-div"><div class="content default"><p>大家好，今天我们来学习<code>深度优先搜索（DFS）</code> 。</p> <hr> <h2 id="前言"><a href="#前言" aria-hidden="true" class="header-anchor">#</a> 前言</h2> <p>深度优先搜索（Depth first search, DFS）算法是一种搜索算法。理解这个算法的关键在于解决”当下该怎么做“。至于”下一步该怎么做“则与”当下该怎么做“是一样的。</p> <h2 id="深度优先搜索"><a href="#深度优先搜索" aria-hidden="true" class="header-anchor">#</a> 深度优先搜索</h2> <p>首先，我们做一道小学奥数题。</p> <p><strong>Q：用 1、2、3 三个数 能组成多少个三位数？请把组成的三位数写出来。（不能重复使用同一个数）</strong></p> <p>**A：
+    </a> <a href="/posts/2019/02/23/chaos-jike.html" class="post-link" data-v-4e23451f>
+      Next Post : 杂谈 | Jike
+    </a></section></section> <article class="main-div"><div class="content default"><p>这篇文章讲解一下 <code>深度优先搜索（DFS）</code> 。</p> <hr> <h2 id="前言"><a href="#前言" aria-hidden="true" class="header-anchor">#</a> 前言</h2> <p>深度优先搜索（Depth first search, DFS）算法是一种搜索算法。</p> <h2 id="深度优先搜索"><a href="#深度优先搜索" aria-hidden="true" class="header-anchor">#</a> 深度优先搜索</h2> <p>首先，我们做一道小学奥数题。</p> <p><strong>Q：用 1、2、3 三个数 能组成多少个三位数？请把组成的三位数写出来。（不能重复使用同一个数）</strong></p> <p>**A：
 ​	答：能组成6个三位数，分别是：
 ​	123
 ​	132
@@ -41,7 +41,7 @@
 ​	231
 ​	312
 ​	321
-**</p> <p>现在，就让我用深度优先搜索的思想来解决这个小学奥数题吧！（呕吐）</p> <p>简化后的问题是：<strong>我们把每一位数看成一个盒子，把 1、2、3 看成三张卡片。现在把这三张卡片分别放进三个盒子里面，而且每个盒子里只能放一个扑克牌。问有多少种放法？</strong></p> <p>好了，现在轮到我出马。首先在A盒子面前，放进了1号卡片。然后走到B个盒子面前，放进了2号卡片。然后走到C盒子面前，放进了3号卡片。这时，就形成了一种放法：123。</p> <p>卡片都放完了，但是放法可不止这种。怎么办呢？这时我就要收回第三张卡片，往回走到B盒子面前。但是，我手里还是只有3号卡片，还是只能放3号卡片到C盒子里。所以，现在我就要收回在B盒子里的2号卡片，再往回走到A盒子。好了，现在我手里有2号卡片和3号卡片。现在我们走到B盒子，由于上次在B盒子里放了2号卡片。这次我要放3号卡片进B盒子。然后，就把2号卡片放进C盒子，这样又形成了一种方法：132。</p> <p>好了，这次我们就要一直后退到A盒子，把三张卡片都收回，然后往A盒子放进2号卡片。以此类推下去，相信大家已经看懂了。</p> <p>下面我们代码实现！</p> <hr> <p>下面的代码可以解决不超过10个数的全排列的问题。（当然你可以改变数组大小）</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+**</p> <p>现在，就让我用深度优先搜索的思想来解决这个小学奥数题吧！（呕吐）</p> <p>简化后的问题是：<strong>我们把每一位数看成一个盒子，把 1、2、3 看成三张卡片。现在把这三张卡片分别放进三个盒子里面，而且每个盒子里只能放一个扑克牌。问有多少种放法？</strong></p> <p>首先在 A 盒子面前，放进了 1 号卡片。然后走到 B 个盒子面前，放进了 2 号卡片。然后走到 C 盒子面前，放进了 3 号卡片。这时，就形成了一种放法：123。</p> <p>卡片都放完了，但是放法可不止这种。怎么办呢？这时我就要收回第三张卡片，往回走到 B 盒子面前。但是，我手里还是只有 3 号卡片，还是只能放 3 号卡片到 C 盒子里。所以，现在我就要收回在 B 盒子里的 2 号卡片，再往回走到A盒子。好了，现在我手里有 2 号卡片和 3 号卡片。现在我们走到B盒子，由于上次在 B 盒子里放了 2 号卡片。这次我要放 3 号卡片进 B 盒子。然后，就把 2 号卡片放进 C 盒子，这样又形成了一种方法：132。</p> <p>好了，这次我们就要一直后退到 A 盒子，把三张卡片都收回，然后往 A 盒子放进 2 号卡片。以此类推下去。</p> <hr> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
 <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> book<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> n<span class="token punctuation">;</span>
@@ -93,14 +93,14 @@
 231
 312
 321
-</code></pre></div><p>成功~</p> <hr> <p>作者：ChungZH</p> <p>审稿：未央</p></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+</code></pre></div></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
       Created : 2019-02-23
     </span> <span class="update-date" data-v-4e23451f>
-      Updated : 2019-03-24
+      Updated : 2019-05-22
     </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/02/23/linklist-data-structure-note.html" class="post-link" data-v-4e23451f>
       Previous Post : 单链表浅析 - 数据结构笔记
-    </a> <a href="/posts/2019/02/23/chaos-everything-is-fine.html" class="post-link" data-v-4e23451f>
-      Next Post : 杂谈 | 诸事大吉
+    </a> <a href="/posts/2019/02/23/chaos-jike.html" class="post-link" data-v-4e23451f>
+      Next Post : 杂谈 | Jike
     </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-6cd81e6a><div class="info-card main-div" data-v-383e4a4c data-v-6cd81e6a><div class="info-card-header" data-v-383e4a4c><img src="/newavatar.jpg" alt="ChungZH" class="info-avatar" data-v-383e4a4c></div> <div class="info-card-body" data-v-383e4a4c><section class="info-nickname" data-v-383e4a4c>
       ChungZH
     </section> <section class="info-desc" data-v-383e4a4c>路漫漫其修远兮，吾将上下而求索。</section> <section class="info-contact" data-v-383e4a4c><section data-v-383e4a4c><span title="Fo'shan City, China" data-v-383e4a4c data-v-383e4a4c><svg class="icon" style="font-size:1em;" data-v-383e4a4c data-v-383e4a4c><title data-v-383e4a4c data-v-383e4a4c>Fo'shan City, China</title><use xlink:href="#icon-location" data-v-383e4a4c data-v-383e4a4c></use></svg><span class="info-text" data-v-383e4a4c data-v-383e4a4c>
@@ -114,6 +114,6 @@
     </a></div></div></aside></div> <footer class="footer" data-v-692a5519><p class="sns-links" data-v-692a5519><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-692a5519><span title="GitHub: ChungZH" class="sns-icon" data-v-692a5519 data-v-692a5519><svg class="icon" style="font-size:25px;" data-v-692a5519 data-v-692a5519><title data-v-692a5519 data-v-692a5519>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-692a5519 data-v-692a5519></use></svg></span></a><a href="https://www.zhihu.com/people/chung-zh" target="_blank" class="sns-link" data-v-692a5519><span title="知乎: chung-zh" class="sns-icon" data-v-692a5519 data-v-692a5519><svg class="icon" style="font-size:25px;" data-v-692a5519 data-v-692a5519><title data-v-692a5519 data-v-692a5519>知乎: chung-zh</title><use xlink:href="#icon-zhihu" data-v-692a5519 data-v-692a5519></use></svg></span></a><a href="https://www.douban.com/people/190281889/" target="_blank" class="sns-link" data-v-692a5519><span title="豆瓣: 190281889" class="sns-icon" data-v-692a5519 data-v-692a5519><svg class="icon" style="font-size:25px;" data-v-692a5519 data-v-692a5519><title data-v-692a5519 data-v-692a5519>豆瓣: 190281889</title><use xlink:href="#icon-douban" data-v-692a5519 data-v-692a5519></use></svg></span></a></p> <p data-v-692a5519><span data-v-692a5519>Powered by </span> <a href="https://vuepress.vuejs.org" target="_blank" data-v-692a5519>
       Vuepress
     </a></p></footer></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/assets/js/app.4b5951f9.js" defer></script><script src="/assets/js/6.110d1571.js" defer></script><script src="/assets/js/18.306c853f.js" defer></script>
+    <script src="/assets/js/app.0cf360e1.js" defer></script><script src="/assets/js/6.110d1571.js" defer></script><script src="/assets/js/18.371ece3d.js" defer></script>
   </body>
 </html>
