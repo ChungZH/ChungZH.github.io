@@ -94,12 +94,4 @@ Import-Module posh-git
 
 就可以每次打开 Powershell 都自动用上 oh-my-posh 了。
 
-## 福利
-
-我还写了一个脚本[在这里](https://github.com/ChungZH/MyScript/blob/master/installOhMyPosh.bat)，使用这个脚本就能能帮你从安装 oh-my-posh 直到输入 `New-Item $profile` 了。安装字体和修改 `Microsoft.Powershell_profile.ps1` 的任务留给大家。
-
-之所以最后才放福利，是因为希望让大家都能自己动手，享受过程。
-
-所以，
-
 Enjoy it ☕~

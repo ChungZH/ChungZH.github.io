@@ -1,5 +1,5 @@
 ---
-title: Ubuntu 换国内源
+title: Ubuntu 更换国内源
 date: 2019-05-28 17:04:00
 tags:
 - Ubuntu
@@ -113,3 +113,12 @@ sudo apt-get update
 ------
 
 就酱，三个源自己选一个就好啦。
+
+------
+
+ChungZH
+
+2019 - 5 - 28 @ 广东 - 佛山 
+
+#EOF
+
