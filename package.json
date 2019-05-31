@@ -5,8 +5,8 @@
   "license": "MIT",
   "version": "5.0.0",
   "scripts": {
-    "dev": "vuepress dev src",
-    "build": "vuepress build src --dest dist"
+    "dev": "cross-env NODE_ENV=development vuepress dev src --temp ./.temp",
+    "build": "cross-env NODE_ENV=production vuepress build src -d ./dist --temp ./.temp"
   },
   "dependencies": {
     "@vssue/vuepress-plugin-vssue": "^0.5.1",
@@ -19,14 +19,15 @@
     "geopattern": "^1.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "vuepress": "^1.0.0-alpha.44",
+    "vuepress": "^1.0.0-alpha.48",
     "vuepress-plugin-container": "^1.1.1",
     "vuepress-plugin-nprogress": "^1.0.0",
     "vuepress-plugin-smooth-scroll": "^0.0.3",
     "vuepress-plugin-zooming": "^1.0.0",
-    "vuepress-theme-meteorlxy": "^1.0.0-alpha.31"
+    "vuepress-theme-meteorlxy": "^1.0.0-alpha.38"
   },
   "devDependencies": {
-    "vuepress-plugin-sitemap": "^2.1.1"
+    "vuepress-plugin-sitemap": "^2.1.1",
+    "cross-env": "^5.2.0"
   }
 }

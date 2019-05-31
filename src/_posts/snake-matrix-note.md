@@ -37,7 +37,7 @@ vssue-title: snake-matrix-note
 - `num`：输出的结果
 - `i`：行   `j`：列
 
-```c++
+```cpp
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -111,7 +111,7 @@ int main()
 - `lnu`： 每行数字的个数
 - `i`：行   `j`：列
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 int main()
@@ -185,7 +185,7 @@ int main()
 - `a`：存储蛇形矩阵的数组
 - 请不要问我循环条件是怎么想出来的！！！keso......
 
-```c++
+```cpp
 #include <iostream>
 using namespace std;
 int main()
