@@ -1,15 +1,10 @@
 ---
 title: My Plan for Spring 2019
 tags: 
-    - 编程
+- 编程
 date: 2019/03/24 11:31:00
 vssue-title: my-plan-for-spring-2019
 ---
-
-[GitHub 项目地址](https://github.com/ChungZH/My-Plan)
-
-> 2019 春季 CS 学习计划（也就是 TODO）
-
 
 [GitHub 项目地址](https://github.com/ChungZH/My-Plan)
 
@@ -41,7 +36,7 @@ vssue-title: my-plan-for-spring-2019
 | 数据结构 | 状态   |
 | -------- | ------ |
 | 树       | 学习中 |
-| 图       | 未开始 |
+| 图       | 学习中 |
 
 ## 要做的题目
 
@@ -51,7 +46,7 @@ vssue-title: my-plan-for-spring-2019
 
 <!--<details>
   <summary>题目目录</summary>-->
-  
+
 - ✅ [P5082 成绩](https://www.luogu.org/problemnew/show/P5082) *`模拟`*
 - 🔲 [P2907 [USACO08OPEN] 农场周围的道路Roads Around The Farm](https://www.luogu.org/problemnew/show/P2907)
 - 🔲 [P4702 取石子](https://www.luogu.org/problemnew/show/P4702)
@@ -64,12 +59,11 @@ vssue-title: my-plan-for-spring-2019
 - 🔲 [P1897 电梯里的爱情](https://www.luogu.org/problemnew/show/P1897)
 - 🔲 [P1317 低洼地](https://www.luogu.org/problemnew/show/P1317)
 - 🔲 [P4613 [COCI2017-2018#5] Olivander](https://www.luogu.org/problemnew/show/P4613)
-- 🔲 [P4136 谁能赢呢？](https://www.luogu.org/problemnew/show/P4136)
 - ✅ [P3984 高兴的津津](https://www.luogu.org/problemnew/show/P3984)
 - 🔲 [P2639 [USACO09OCT]Bessie的体重问题Bessie's We…](https://www.luogu.org/problemnew/show/P2639)
 - 🔲 [P1626 象棋比赛](https://www.luogu.org/problemnew/show/P1626)
 - 🔲 [P4057 [Code+#1]晨跑](https://www.luogu.org/problemnew/show/P4057)
-- 🔲 [P1724 东风谷早苗](https://www.luogu.org/problemnew/show/P1724)
+- ✅ [P1724 东风谷早苗](https://www.luogu.org/problemnew/show/P1724) *`周期`*
 - 🔲 [P3009 [USACO11JAN]利润Profits](https://www.luogu.org/problemnew/show/P3009)
 - 🔲 [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
 - ✅ [P2615 神奇的幻方](https://www.luogu.org/problemnew/show/P2615) *`模拟`*
@@ -119,6 +113,15 @@ vssue-title: my-plan-for-spring-2019
 - ✅ [CF545D Queue](https://www.luogu.org/problemnew/show/CF545D) *`贪心`* *`队列`*
 - ✅ [CF78A Haiku](https://www.luogu.org/problemnew/show/CF78A) *`模拟`*
 - ✅ [AT2412 最大の和](https://www.luogu.org/problemnew/show/AT2412) *`前缀和`*
+- ✅ [P2240 数的计数数据加强版](https://www.luogu.org/problemnew/show/P2240) *`递推`*
+- ✅ [UVa11292 Dragon of Loowater](https://www.luogu.org/problemnew/show/UVA11292) *`贪心`*
+- ✅ [UVa11462 Age Sort](https://www.luogu.org/problemnew/show/UVA11462) *`桶排序`* *`快读`*
+- ✅ [UVa572 油田 Oil Deposits](https://www.luogu.org/problemnew/show/UVA572) *`DFS`*
+- ✅ [P4305 [JLOI2011]不重复数字](https://www.luogu.org/problemnew/show/P4305) *`桶排序思想`*
+- ✅ [P1219 八皇后](https://www.luogu.org/problemnew/show/P1219) *`DFS`*
+- ✅ [UVa136 丑数 Ugly Numbers](https://www.luogu.org/problemnew/show/UVA136) *`优先队列`*
+- ✅ [UVa11988 破损的键盘 Broken Keyboard (a.k.a. Beiju Text)](https://www.luogu.org/problemnew/show/UVA11988) *`链表`*
+- ✅ [UVa10815 安迪的第一个字典 Andy's First Dictionary](https://www.luogu.org/problemnew/show/UVA10815) *`<set>`*
 <!--</details>-->
 
 ------
