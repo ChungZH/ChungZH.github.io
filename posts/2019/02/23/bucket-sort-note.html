@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="/script/func.js"></script>
     
-    <link rel="preload" href="/assets/css/0.styles.809c007f.css" as="style"><link rel="preload" href="/assets/js/app.013cdb31.js" as="script"><link rel="preload" href="/assets/js/3.c3076402.js" as="script"><link rel="preload" href="/assets/js/15.930afb7d.js" as="script"><link rel="prefetch" href="/assets/js/1.7e97cf75.js"><link rel="prefetch" href="/assets/js/10.554ee16d.js"><link rel="prefetch" href="/assets/js/11.caa4bec3.js"><link rel="prefetch" href="/assets/js/12.0c3cd7df.js"><link rel="prefetch" href="/assets/js/13.d4b25d8e.js"><link rel="prefetch" href="/assets/js/14.6065ff8d.js"><link rel="prefetch" href="/assets/js/16.823d42bc.js"><link rel="prefetch" href="/assets/js/17.ea412380.js"><link rel="prefetch" href="/assets/js/18.4565ad3b.js"><link rel="prefetch" href="/assets/js/19.cfef53f9.js"><link rel="prefetch" href="/assets/js/20.18d3db69.js"><link rel="prefetch" href="/assets/js/21.fef0de0a.js"><link rel="prefetch" href="/assets/js/22.59ea4d18.js"><link rel="prefetch" href="/assets/js/23.600f639e.js"><link rel="prefetch" href="/assets/js/24.1fe8cd70.js"><link rel="prefetch" href="/assets/js/25.3f32f321.js"><link rel="prefetch" href="/assets/js/26.49906e1b.js"><link rel="prefetch" href="/assets/js/27.f4a0934b.js"><link rel="prefetch" href="/assets/js/28.668326fd.js"><link rel="prefetch" href="/assets/js/29.65a2ad05.js"><link rel="prefetch" href="/assets/js/30.67c27fa4.js"><link rel="prefetch" href="/assets/js/4.18a0b776.js"><link rel="prefetch" href="/assets/js/5.3623ceb9.js"><link rel="prefetch" href="/assets/js/6.c8862c13.js"><link rel="prefetch" href="/assets/js/7.d598ccae.js"><link rel="prefetch" href="/assets/js/8.f6683d6b.js"><link rel="prefetch" href="/assets/js/9.3cb119bc.js">
+    <link rel="preload" href="/assets/css/0.styles.809c007f.css" as="style"><link rel="preload" href="/assets/js/app.2668a3e2.js" as="script"><link rel="preload" href="/assets/js/3.c3076402.js" as="script"><link rel="preload" href="/assets/js/15.930afb7d.js" as="script"><link rel="prefetch" href="/assets/js/1.7e97cf75.js"><link rel="prefetch" href="/assets/js/10.554ee16d.js"><link rel="prefetch" href="/assets/js/11.caa4bec3.js"><link rel="prefetch" href="/assets/js/12.0c3cd7df.js"><link rel="prefetch" href="/assets/js/13.d25a5aac.js"><link rel="prefetch" href="/assets/js/14.6065ff8d.js"><link rel="prefetch" href="/assets/js/16.823d42bc.js"><link rel="prefetch" href="/assets/js/17.ea412380.js"><link rel="prefetch" href="/assets/js/18.4565ad3b.js"><link rel="prefetch" href="/assets/js/19.cfef53f9.js"><link rel="prefetch" href="/assets/js/20.18d3db69.js"><link rel="prefetch" href="/assets/js/21.fef0de0a.js"><link rel="prefetch" href="/assets/js/22.59ea4d18.js"><link rel="prefetch" href="/assets/js/23.600f639e.js"><link rel="prefetch" href="/assets/js/24.1fe8cd70.js"><link rel="prefetch" href="/assets/js/25.3f32f321.js"><link rel="prefetch" href="/assets/js/26.49906e1b.js"><link rel="prefetch" href="/assets/js/27.f4a0934b.js"><link rel="prefetch" href="/assets/js/28.668326fd.js"><link rel="prefetch" href="/assets/js/29.65a2ad05.js"><link rel="prefetch" href="/assets/js/30.67c27fa4.js"><link rel="prefetch" href="/assets/js/4.18a0b776.js"><link rel="prefetch" href="/assets/js/5.3623ceb9.js"><link rel="prefetch" href="/assets/js/6.c8862c13.js"><link rel="prefetch" href="/assets/js/7.d598ccae.js"><link rel="prefetch" href="/assets/js/8.f6683d6b.js"><link rel="prefetch" href="/assets/js/9.3cb119bc.js">
     <link rel="stylesheet" href="/assets/css/0.styles.809c007f.css">
   </head>
   <body>
@@ -29,8 +29,8 @@
       发布时间 : 2019-02-23
     </span> <span class="update-date" data-v-4e23451f>
       最后修改 : 2019-05-28
-    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/02/23/queue-data-structure-note.html" class="post-link" data-v-4e23451f>
-      上一篇 : 队列浅析 - 数据结构笔记
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/02/23/chaos-jike.html" class="post-link" data-v-4e23451f>
+      上一篇 : 杂谈 | Jike
     </a> <a href="/posts/2019/02/23/beautify-your-powershell.html" class="post-link" data-v-4e23451f>
       下一篇 : 美化你的 Powershell
     </a></section></section> <article class="main-div"><div class="post-content content default"><p>这篇文章简介一下 <code>桶排序</code>。</p> <h2 id="桶排序简介"><a href="#桶排序简介" aria-hidden="true" class="header-anchor">#</a> 桶排序简介</h2> <p>桶排序是一个非常快的排序算法，该算法的基本思想由 <code>E.J. Issac</code> 和 <code>R.C. Singleton</code> 提出。</p> <p>桶排序的意思就是：把数据放进桶里面，从而完成排序。</p> <p>举个栗子：用桶排序的方法排序 10 个数： <code>1 0 8 3 2 5 4 9 0 9</code> 。这些数最大的不超过 10 。</p> <p>思路：</p> <ol><li><p>首先，我们新建大小为 11 的“桶”数组。因为从 0 到 10 之间有11个数。并把这个数组的元素初始化为 0。 <code>int a[11] = {0}；</code></p></li> <li><p>下面开始处理每一个数：</p> <p>①. 给第一个数字所在的桶加 1 。第一个数是 1 ，就给“桶”数组中下标为 1 的元素加一，即<code>a[1]++；</code></p> <p>②. 给第二个数字所在的桶加 1 。第二个数是 0 ，就给“桶”数组中下标为 0 的元素加一，即<code>a[0]++；</code></p> <p>③. 给第三个数字所在的桶加 1 。第三个数是 8 ，就给“桶”数组中下标为 8 的元素加一，即<code>a[8]++；</code></p> <p>以此类推......</p></li> <li><p>输出“桶”数组。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
@@ -70,8 +70,8 @@
       发布时间 : 2019-02-23
     </span> <span class="update-date" data-v-4e23451f>
       最后修改 : 2019-05-28
-    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/02/23/queue-data-structure-note.html" class="post-link" data-v-4e23451f>
-      上一篇 : 队列浅析 - 数据结构笔记
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/02/23/chaos-jike.html" class="post-link" data-v-4e23451f>
+      上一篇 : 杂谈 | Jike
     </a> <a href="/posts/2019/02/23/beautify-your-powershell.html" class="post-link" data-v-4e23451f>
       下一篇 : 美化你的 Powershell
     </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-6cd81e6a><div class="info-card main-div" data-v-3da8ff8d data-v-6cd81e6a><div class="info-card-header" data-v-3da8ff8d><img src="/newavatar.jpg" alt="ChungZH" class="info-avatar" data-v-3da8ff8d></div> <div class="info-card-body" data-v-3da8ff8d><section class="info-nickname" data-v-3da8ff8d>
@@ -87,6 +87,6 @@
     </a></div></div></aside></div> <footer class="footer" data-v-1114308c><p class="sns-links" data-v-1114308c><a href="https://github.com/ChungZH" target="_blank" class="sns-link" data-v-1114308c><span title="GitHub: ChungZH" class="sns-icon" data-v-1114308c data-v-1114308c><svg class="icon" style="font-size:25px;" data-v-1114308c data-v-1114308c><title data-v-1114308c data-v-1114308c>GitHub: ChungZH</title><use xlink:href="#icon-github" data-v-1114308c data-v-1114308c></use></svg></span></a></p> <p data-v-1114308c><span data-v-1114308c>Powered by </span> <a href="https://vuepress.vuejs.org" target="_blank" data-v-1114308c>
       Vuepress
     </a></p></footer></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/assets/js/app.013cdb31.js" defer></script><script src="/assets/js/3.c3076402.js" defer></script><script src="/assets/js/15.930afb7d.js" defer></script>
+    <script src="/assets/js/app.2668a3e2.js" defer></script><script src="/assets/js/3.c3076402.js" defer></script><script src="/assets/js/15.930afb7d.js" defer></script>
   </body>
 </html>
