@@ -394,11 +394,5 @@ module.exports = {
       hostname: 'https://chungzh.cn'
     },
     'vuepress-plugin-baidu-autopush': {},
-    'mathjax': { 
-      target: 'svg',
-      presets: [
-        '\\def\\lr#1#2#3{\\left#1#2\\right#3}',
-      ],
-    },
   },
 } 
