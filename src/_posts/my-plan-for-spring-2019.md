@@ -10,6 +10,8 @@ vssue-title: my-plan-for-spring-2019
 
 > 2019 春季 CS 学习计划（也就是 TODO）
 
+<!-- More --> <!-- more -->
+
 如果有没有做完的目标，直接顺延至下一季度。
 
 ## 准备学习的语言

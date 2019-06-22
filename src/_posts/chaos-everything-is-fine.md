@@ -9,7 +9,7 @@ vssue-title: chaos-everything-is-fine
 
 > 过年了，怎么也得写点东西庆祝庆祝吧，顺便也总结一下这一年我干了些什么。
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 ## 代码
 

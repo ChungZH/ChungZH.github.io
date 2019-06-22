@@ -10,6 +10,8 @@ vssue-title: my-plan-for-summer-2019
 
 > 2019 夏季 CS 学习计划（也就是 TODO）
 
+<!-- More --> <!-- more -->
+
 ## 算法
 
 | 算法                | 状态     |

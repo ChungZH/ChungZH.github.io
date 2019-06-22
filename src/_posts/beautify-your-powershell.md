@@ -9,7 +9,7 @@ vssue-title: beautify-your-powershell
 
 Powershell 源代码仓库🔗 [🎉🎉🎉Powershell/Powershell](https://github.com/PowerShell/PowerShell)
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 ## 前言
 

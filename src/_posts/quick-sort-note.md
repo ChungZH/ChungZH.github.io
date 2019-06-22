@@ -10,7 +10,7 @@ vssue-title: Quick Sort Note
 
 这篇文章我们来学习`快速排序（Quick Sort)`。
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 快速排序（Quicksort）是对冒泡排序的一种改进。
 

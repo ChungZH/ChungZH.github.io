@@ -10,7 +10,7 @@ vssue-title: queue-data-structure-note
 
 本文讲解一个基本的数据结构：`队列`。
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 ## 队列的概念
 

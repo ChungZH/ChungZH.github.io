@@ -9,8 +9,8 @@ vssue-title: linklist-data-structure-note
 ---
 
 `单链表` 简单解析。
-<!-- More -->
-------
+
+<!-- More --> <!-- more -->
 
 ## 单链表概念
 

@@ -12,7 +12,7 @@ vssue-title: snake-matrix-note
 
 >  经过九九八十一天的刷题之后，本蒟蒻终于刷到蛇形矩阵了......
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 本文只讲三种蛇形矩阵。
 

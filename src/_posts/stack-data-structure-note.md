@@ -10,7 +10,7 @@ vssue-title: stack-data-structure-note
 
 这篇文章简介一下 `栈`。
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 ## 栈的概念
 

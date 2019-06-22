@@ -10,7 +10,7 @@ vssue-title: Bucket Sort Note
 
 这篇文章简介一下 `桶排序`。
 
-<!-- More -->
+<!-- More --> <!-- more -->
 
 ## 桶排序简介
 

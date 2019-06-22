@@ -14,6 +14,8 @@ vssue-title: create-vuepress-blog-and-use-git-manger-it
 
 本文将主要介绍创建 Vuepress 网站、使用 Git 管理、使用 CI 等方面的内容。
 
+<!-- More --> <!-- more -->
+
 > 提示：我使用的是 Windows 系统，在其他平台上终端命令可能略有不同，请自行变通！
 
 ## 前期准备
