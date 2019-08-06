@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>深度优先搜索浅析 - 算法笔记 | CHUNG ZH</title>
+    <meta name="description" content="ChungZH&#39;s Blog">
+    <link rel="shortcut icon" href="/BlogFavicon16.png">
+  <meta name="keywords" content="ChungZH, 博客">
+  <meta name="author" content="ChungZH">
+    
+    <link rel="preload" href="/assets/css/0.styles.ad70f079.css" as="style"><link rel="preload" href="/assets/js/app.4c47d166.js" as="script"><link rel="preload" href="/assets/js/2.fa6598d2.js" as="script"><link rel="preload" href="/assets/js/10.eaa257f3.js" as="script"><link rel="prefetch" href="/assets/js/11.01865574.js"><link rel="prefetch" href="/assets/js/12.aeefc236.js"><link rel="prefetch" href="/assets/js/13.047e3b85.js"><link rel="prefetch" href="/assets/js/14.7cfd64ad.js"><link rel="prefetch" href="/assets/js/15.c7a0e7e2.js"><link rel="prefetch" href="/assets/js/16.f25e2645.js"><link rel="prefetch" href="/assets/js/17.b5219c3f.js"><link rel="prefetch" href="/assets/js/18.da2a3a33.js"><link rel="prefetch" href="/assets/js/19.83790ba9.js"><link rel="prefetch" href="/assets/js/20.af364025.js"><link rel="prefetch" href="/assets/js/3.9233a816.js"><link rel="prefetch" href="/assets/js/4.9c1ab4f7.js"><link rel="prefetch" href="/assets/js/5.46a183b0.js"><link rel="prefetch" href="/assets/js/6.4d35a80d.js"><link rel="prefetch" href="/assets/js/7.5d6ea3eb.js"><link rel="prefetch" href="/assets/js/8.f6b8a5ae.js"><link rel="prefetch" href="/assets/js/9.997881e8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ad70f079.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
+      CHUNG ZH
+    </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
+      深度优先搜索浅析 - 算法笔记
+    </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
+  5 个月前
+</time></div> <div class="content__default"><p>这篇文章讲解一下 <code>深度优先搜索（DFS）</code> 。</p> <hr> <h2 id="前言"><a href="#前言" aria-hidden="true" class="header-anchor">#</a> 前言</h2> <p>深度优先搜索（Depth first search, DFS）算法是一种搜索算法。</p> <h2 id="深度优先搜索"><a href="#深度优先搜索" aria-hidden="true" class="header-anchor">#</a> 深度优先搜索</h2> <p>首先，我们做一道小学奥数题。</p> <p><strong>Q：用 1、2、3 三个数 能组成多少个三位数？请把组成的三位数写出来。（不能重复使用同一个数）</strong></p> <p>**A：
+​	答：能组成6个三位数，分别是：
+​	123
+​	132
+​	213
+​	231
+​	312
+​	321
+**</p> <p>现在，就让我用深度优先搜索的思想来解决这个小学奥数题吧！（呕吐）</p> <p>简化后的问题是：<strong>我们把每一位数看成一个盒子，把 1、2、3 看成三张卡片。现在把这三张卡片分别放进三个盒子里面，而且每个盒子里只能放一个扑克牌。问有多少种放法？</strong></p> <p>首先在 A 盒子面前，放进了 1 号卡片。然后走到 B 个盒子面前，放进了 2 号卡片。然后走到 C 盒子面前，放进了 3 号卡片。这时，就形成了一种放法：123。</p> <p>卡片都放完了，但是放法可不止这种。怎么办呢？这时我就要收回第三张卡片，往回走到 B 盒子面前。但是，我手里还是只有 3 号卡片，还是只能放 3 号卡片到 C 盒子里。所以，现在我就要收回在 B 盒子里的 2 号卡片，再往回走到A盒子。好了，现在我手里有 2 号卡片和 3 号卡片。现在我们走到B盒子，由于上次在 B 盒子里放了 2 号卡片。这次我要放 3 号卡片进 B 盒子。然后，就把 2 号卡片放进 C 盒子，这样又形成了一种方法：132。</p> <p>好了，这次我们就要一直后退到 A 盒子，把三张卡片都收回，然后往 A 盒子放进 2 号卡片。以此类推下去。</p> <hr> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> book<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">,</span> n<span class="token punctuation">;</span>
+        <span class="token comment">// book数组用来标记这张卡片是否已经不在手中</span>
+
+<span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span> step<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// step 代表现在在哪个盒子面前</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+	<span class="token function">dfs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 开始dfs搜索</span>
+
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span> step<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>step <span class="token operator">==</span> n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// 在 n + 1 个盒子面前（即放完卡片）</span>
+	<span class="token punctuation">{</span>
+		<span class="token comment">// 输出一种放法</span>
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			cout <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> 
+		<span class="token punctuation">}</span>
+		cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+		<span class="token keyword">return</span><span class="token punctuation">;</span>          <span class="token comment">// 返回到上一步</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token comment">// 判断卡片 i 是否还在手上</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>book<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment">//</span>
+		<span class="token punctuation">{</span>
+			a<span class="token punctuation">[</span>step<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>  <span class="token comment">// 将i号卡片放入到第step个盒子中</span>
+			book<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 表示i号卡片已经不在手上，放进盒子里了</span>
+			<span class="token function">dfs</span><span class="token punctuation">(</span>step<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 递归调用</span>
+			book<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">// 将刚刚放进盒子里的卡片拿回来，才能进行下一步搜索</span>
+		<span class="token punctuation">}</span>
+
+		
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输入：</p> <div class="language- extra-class"><pre class="language-text"><code>3
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>123
+132
+213
+231
+312
+321
+</code></pre></div></div></section> <footer class="footer">
+  © 2019
+  <i class="icon-user"></i>
+  ChungZH
+  <br>
+  Powered by
+  <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
+  | Theme
+  <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4c47d166.js" defer></script><script src="/assets/js/2.fa6598d2.js" defer></script><script src="/assets/js/10.eaa257f3.js" defer></script>
+  </body>
+</html>

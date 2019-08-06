@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>单链表浅析 - 数据结构笔记 | CHUNG ZH</title>
+    <meta name="description" content="ChungZH&#39;s Blog">
+    <link rel="shortcut icon" href="/BlogFavicon16.png">
+  <meta name="keywords" content="ChungZH, 博客">
+  <meta name="author" content="ChungZH">
+    
+    <link rel="preload" href="/assets/css/0.styles.ad70f079.css" as="style"><link rel="preload" href="/assets/js/app.4c47d166.js" as="script"><link rel="preload" href="/assets/js/2.fa6598d2.js" as="script"><link rel="preload" href="/assets/js/11.01865574.js" as="script"><link rel="prefetch" href="/assets/js/10.eaa257f3.js"><link rel="prefetch" href="/assets/js/12.aeefc236.js"><link rel="prefetch" href="/assets/js/13.047e3b85.js"><link rel="prefetch" href="/assets/js/14.7cfd64ad.js"><link rel="prefetch" href="/assets/js/15.c7a0e7e2.js"><link rel="prefetch" href="/assets/js/16.f25e2645.js"><link rel="prefetch" href="/assets/js/17.b5219c3f.js"><link rel="prefetch" href="/assets/js/18.da2a3a33.js"><link rel="prefetch" href="/assets/js/19.83790ba9.js"><link rel="prefetch" href="/assets/js/20.af364025.js"><link rel="prefetch" href="/assets/js/3.9233a816.js"><link rel="prefetch" href="/assets/js/4.9c1ab4f7.js"><link rel="prefetch" href="/assets/js/5.46a183b0.js"><link rel="prefetch" href="/assets/js/6.4d35a80d.js"><link rel="prefetch" href="/assets/js/7.5d6ea3eb.js"><link rel="prefetch" href="/assets/js/8.f6b8a5ae.js"><link rel="prefetch" href="/assets/js/9.997881e8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ad70f079.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
+      CHUNG ZH
+    </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
+      单链表浅析 - 数据结构笔记
+    </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
+  5 个月前
+</time></div> <div class="content__default"><p><code>单链表</code> 简单解析。</p> <h2 id="单链表概念"><a href="#单链表概念" aria-hidden="true" class="header-anchor">#</a> 单链表概念</h2> <p>链表是使用 <code>链式存储结构</code> 的一种数据结构。<code>链式存储结构</code> 存储密度比顺序存储结构小，是一种物理存储单元上非连续、非顺序的存储结构。相较于 <code>顺序表</code> ，有 <code>存储的元素个数不受限制</code> 、 <code>插入和删除元素时，不用移动其他元素</code> 等优点。链表有 <code>单链表</code> 、 <code>双向链表</code> 、还有 <code>循环链表</code> 。对于链表中的 <code>数据元素</code> 来说，除了存储其本身的信息之外，还需要存储一个指示其后继（也可以是前继）结点的地址。这两个部分组成一个 <code>结点</code> 。</p> <h2 id="单链表实现"><a href="#单链表实现" aria-hidden="true" class="header-anchor">#</a> 单链表实现</h2> <p>首先，我们来定义一个单链表中的结点。先上一个图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/node.png" alt="Node" title="结点示意图"></p> <p>相应的，代码实现如下：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>      <span class="token comment">// 结点中的数据域</span>
+    Node <span class="token operator">*</span> next<span class="token punctuation">;</span>   <span class="token comment">// 指针域</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p><strong>注意：在单链表中，一个结点中有数据域和指针域，即其本身存储的信息和它的后继的地址</strong></p> <p>先上一个链表的图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/LinkedList.png" alt="LinkedList" title="链表示意图"></p> <p>下面我们开始实现一个单链表，包括删除、插入等基本操作。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>                 <span class="token comment">// 结点中的数据域</span>
+    Node <span class="token operator">*</span> next<span class="token punctuation">;</span>              <span class="token comment">// 指针域</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+Node <span class="token operator">*</span> head <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>       <span class="token comment">// 头结点</span>
+
+<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                  <span class="token comment">// 链表的初始化</span>
+<span class="token keyword">void</span> <span class="token function">Delete</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 删除链表的第 index 个元素</span>
+<span class="token keyword">void</span> <span class="token function">Insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> pos<span class="token punctuation">,</span> <span class="token keyword">int</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 向链表的第 pos 位置插入 data</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>	
+	Node <span class="token operator">*</span> node <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+	<span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token function">Insert</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">// 向链表插入 1 - 10 这10个数</span>
+	<span class="token punctuation">}</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;向链表插入了 1 - 10 这十个数&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token function">Insert</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment">// 向链表的第 5 个位置插入 11</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;向链表的第 5 个位置插入了 11 这个数&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;链表当前情况：&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token keyword">while</span><span class="token punctuation">(</span>node<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> node<span class="token operator">-&gt;</span>data <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token function">Delete</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment">// 删除第 1 个数</span>
+	<span class="token function">Delete</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment">// 删除第 3 个数</span>
+
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;删除了第一个数后，又删除了第三个数。&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+ 
+	node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;链表当前情况：&quot;</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+	<span class="token keyword">while</span><span class="token punctuation">(</span>node<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+		cout <span class="token operator">&lt;&lt;</span> node<span class="token operator">-&gt;</span>data <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span> 
+	head<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">// 直接把头指针的 next 设为空</span>
+	head<span class="token operator">-&gt;</span>data <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>      <span class="token comment">// 这里用头指针的数据域存储链表的长度</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Delete</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	Node <span class="token operator">*</span> node<span class="token punctuation">,</span> <span class="token operator">*</span> currNode<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	currNode <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	currNode <span class="token operator">=</span> head<span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> index <span class="token operator">&amp;&amp;</span> currNode<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>   <span class="token comment">// 找到要删除的结点和它的前一个节点</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> currNode<span class="token punctuation">;</span>
+		currNode <span class="token operator">=</span> currNode<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">==</span> <span class="token constant">NULL</span> <span class="token operator">||</span> currNode <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	
+	node<span class="token operator">-&gt;</span>next <span class="token operator">=</span> currNode<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>      <span class="token comment">// 将要删除的前一个节点</span>
+	<span class="token keyword">delete</span> currNode<span class="token punctuation">;</span>                  <span class="token comment">// 释放空间</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">Insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> pos<span class="token punctuation">,</span> <span class="token keyword">int</span> data<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	Node <span class="token operator">*</span> node<span class="token punctuation">,</span> <span class="token operator">*</span> insertData<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+	insertData <span class="token operator">=</span> <span class="token keyword">new</span> Node<span class="token punctuation">;</span>
+	insertData<span class="token operator">-&gt;</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+	insertData<span class="token operator">-&gt;</span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> head<span class="token operator">-&gt;</span>data <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>         <span class="token comment">// 如果插入的位置是第一个位置并且链表为空</span>
+	<span class="token punctuation">{</span>
+		head<span class="token operator">-&gt;</span>data<span class="token operator">++</span><span class="token punctuation">;</span>
+		head<span class="token operator">-&gt;</span>next <span class="token operator">=</span> insertData<span class="token punctuation">;</span>             
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> head<span class="token operator">-&gt;</span>data <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		insertData<span class="token operator">-&gt;</span>next <span class="token operator">=</span> head<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>       
+		head<span class="token operator">-&gt;</span>next <span class="token operator">=</span> insertData<span class="token punctuation">;</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;</span> pos <span class="token operator">&amp;&amp;</span> node<span class="token operator">-&gt;</span>next <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		node <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+		
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	insertData<span class="token operator">-&gt;</span>next <span class="token operator">=</span> node<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+	node<span class="token operator">-&gt;</span>next <span class="token operator">=</span> insertData<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>向链表插入了 1 - 10 这十个数
+向链表的第 5 个位置插入了 11 这个数
+链表当前情况：
+1 2 3 4 11 5 6 7 8 9 10
+删除了第一个数后，又删除了第三个数。
+链表当前情况：
+2 3 11 5 6 7 8 9 10
+</code></pre></div></div></section> <footer class="footer">
+  © 2019
+  <i class="icon-user"></i>
+  ChungZH
+  <br>
+  Powered by
+  <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
+  | Theme
+  <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4c47d166.js" defer></script><script src="/assets/js/2.fa6598d2.js" defer></script><script src="/assets/js/11.01865574.js" defer></script>
+  </body>
+</html>

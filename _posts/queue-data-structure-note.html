@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>队列浅析 - 数据结构笔记 | CHUNG ZH</title>
+    <meta name="description" content="ChungZH&#39;s Blog">
+    <link rel="shortcut icon" href="/BlogFavicon16.png">
+  <meta name="keywords" content="ChungZH, 博客">
+  <meta name="author" content="ChungZH">
+    
+    <link rel="preload" href="/assets/css/0.styles.ad70f079.css" as="style"><link rel="preload" href="/assets/js/app.4c47d166.js" as="script"><link rel="preload" href="/assets/js/2.fa6598d2.js" as="script"><link rel="preload" href="/assets/js/14.7cfd64ad.js" as="script"><link rel="prefetch" href="/assets/js/10.eaa257f3.js"><link rel="prefetch" href="/assets/js/11.01865574.js"><link rel="prefetch" href="/assets/js/12.aeefc236.js"><link rel="prefetch" href="/assets/js/13.047e3b85.js"><link rel="prefetch" href="/assets/js/15.c7a0e7e2.js"><link rel="prefetch" href="/assets/js/16.f25e2645.js"><link rel="prefetch" href="/assets/js/17.b5219c3f.js"><link rel="prefetch" href="/assets/js/18.da2a3a33.js"><link rel="prefetch" href="/assets/js/19.83790ba9.js"><link rel="prefetch" href="/assets/js/20.af364025.js"><link rel="prefetch" href="/assets/js/3.9233a816.js"><link rel="prefetch" href="/assets/js/4.9c1ab4f7.js"><link rel="prefetch" href="/assets/js/5.46a183b0.js"><link rel="prefetch" href="/assets/js/6.4d35a80d.js"><link rel="prefetch" href="/assets/js/7.5d6ea3eb.js"><link rel="prefetch" href="/assets/js/8.f6b8a5ae.js"><link rel="prefetch" href="/assets/js/9.997881e8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ad70f079.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
+      CHUNG ZH
+    </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
+      队列浅析 - 数据结构笔记
+    </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
+  5 个月前
+</time></div> <div class="content__default"><p>本文讲解一个基本的数据结构：<code>队列</code>。</p> <h2 id="队列的概念"><a href="#队列的概念" aria-hidden="true" class="header-anchor">#</a> 队列的概念</h2> <p>队列是一种特殊的线性结构。它只允许在队列的头部(head)进行删除操作，即“出队”。只能在尾部(tail)进行插入操作，即“入队”。当队列中没有元素时（即 head == tail），称为空队列。在我们的日常生活中，有很多情况都符合队列的特性。如：买票时，每个卖票的窗口就是一个队列。在这个队列中，新来的人总是在队列的最后面，早来的人就在前面，也越早能买到票。我们可以把这种情况称为“先进先出(First In First Out, FIFO)”原则。</p> <h2 id="队列的定义"><a href="#队列的定义" aria-hidden="true" class="header-anchor">#</a> 队列的定义</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">queue</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">[</span><span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// 队列的主体，用来存储数据 </span>
+    <span class="token keyword">int</span> head<span class="token punctuation">;</span>       <span class="token comment">// 队头</span>
+    <span class="token keyword">int</span> tail<span class="token punctuation">;</span>       <span class="token comment">// 队尾</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>上面的代码定义了一个结构体类型，我们可以将它放在 main 函数的外面。</p> <p><strong>注意：struct 结构体的定义末尾有一个分号</strong></p> <h2 id="队列的实现"><a href="#队列的实现" aria-hidden="true" class="header-anchor">#</a> 队列的实现</h2> <p>我们先举一个例子，让大家理解队列。</p> <p>键盘输入十个数，把这些数放进队列里。然后把这个序列从左到右边输出边删除这些数。</p> <p>这里需要用到“入队”和“出队”两个操作。我们先来学习一下这两个操作的逻辑。</p> <p>首先，我们要把 head 和 tail 变量初始化成 0。</p> <p>入队：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 添加 1 到队尾</span>
+data<span class="token punctuation">[</span>tail<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+tail<span class="token operator">++</span><span class="token punctuation">;</span>
+</code></pre></div><p>出队：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// 将队头出队</span>
+head<span class="token operator">++</span><span class="token punctuation">;</span>
+</code></pre></div><p>下面开始实现。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">queue</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">[</span><span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// 队列的主体，用来存储数据 </span>
+    <span class="token keyword">int</span> head<span class="token punctuation">;</span>       <span class="token comment">// 队头</span>
+    <span class="token keyword">int</span> tail<span class="token punctuation">;</span>       <span class="token comment">// 队尾</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	queue q<span class="token punctuation">;</span>
+	q<span class="token punctuation">.</span>head <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span>tail <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>      <span class="token comment">// 初始化为0</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cin <span class="token operator">&gt;&gt;</span> q<span class="token punctuation">.</span>data<span class="token punctuation">[</span>q<span class="token punctuation">.</span>tail<span class="token punctuation">]</span><span class="token punctuation">;</span>   <span class="token comment">// 入队</span>
+		q<span class="token punctuation">.</span>tail<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">while</span> <span class="token punctuation">(</span>q<span class="token punctuation">.</span>head <span class="token operator">&lt;</span> q<span class="token punctuation">.</span>tail<span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cout <span class="token operator">&lt;&lt;</span> q<span class="token punctuation">.</span>data<span class="token punctuation">[</span>q<span class="token punctuation">.</span>head<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>  <span class="token comment">// 出队</span>
+	<span class="token punctuation">}</span>
+	cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>代码很简单。</p> <p>输入：</p> <div class="language- extra-class"><pre class="language-text"><code>1 2 3 4 5 6 7 8 9 10
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>1 2 3 4 5 6 7 8 9 10
+</code></pre></div><p>其实 C++ 的 STL 库中已经有了队列的实现。</p></div></section> <footer class="footer">
+  © 2019
+  <i class="icon-user"></i>
+  ChungZH
+  <br>
+  Powered by
+  <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
+  | Theme
+  <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4c47d166.js" defer></script><script src="/assets/js/2.fa6598d2.js" defer></script><script src="/assets/js/14.7cfd64ad.js" defer></script>
+  </body>
+</html>

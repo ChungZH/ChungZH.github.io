@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ubuntu 更换国内源 | CHUNG ZH</title>
+    <meta name="description" content="ChungZH&#39;s Blog">
+    <link rel="shortcut icon" href="/BlogFavicon16.png">
+  <meta name="keywords" content="ChungZH, 博客">
+  <meta name="author" content="ChungZH">
+    
+    <link rel="preload" href="/assets/css/0.styles.ad70f079.css" as="style"><link rel="preload" href="/assets/js/app.4c47d166.js" as="script"><link rel="preload" href="/assets/js/2.fa6598d2.js" as="script"><link rel="preload" href="/assets/js/8.f6b8a5ae.js" as="script"><link rel="prefetch" href="/assets/js/10.eaa257f3.js"><link rel="prefetch" href="/assets/js/11.01865574.js"><link rel="prefetch" href="/assets/js/12.aeefc236.js"><link rel="prefetch" href="/assets/js/13.047e3b85.js"><link rel="prefetch" href="/assets/js/14.7cfd64ad.js"><link rel="prefetch" href="/assets/js/15.c7a0e7e2.js"><link rel="prefetch" href="/assets/js/16.f25e2645.js"><link rel="prefetch" href="/assets/js/17.b5219c3f.js"><link rel="prefetch" href="/assets/js/18.da2a3a33.js"><link rel="prefetch" href="/assets/js/19.83790ba9.js"><link rel="prefetch" href="/assets/js/20.af364025.js"><link rel="prefetch" href="/assets/js/3.9233a816.js"><link rel="prefetch" href="/assets/js/4.9c1ab4f7.js"><link rel="prefetch" href="/assets/js/5.46a183b0.js"><link rel="prefetch" href="/assets/js/6.4d35a80d.js"><link rel="prefetch" href="/assets/js/7.5d6ea3eb.js"><link rel="prefetch" href="/assets/js/9.997881e8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.ad70f079.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
+      CHUNG ZH
+    </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
+      Ubuntu 更换国内源
+    </h1> <time datetime="5/29/2019" title="5/29/2019" pubdate="pubdate" class="post-date">
+  2 个月前
+</time></div> <div class="content__default"><p>Ubuntu 默认的源实在是太慢了。。。实在没办法忍，只能换国内源了。</p> <p>哦，我的 Ubuntu 版本是 <code>Ubuntu 18.04.2 LTS</code>。</p> <h2 id="备份原来的源设置"><a href="#备份原来的源设置" aria-hidden="true" class="header-anchor">#</a> 备份原来的源设置</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">cp</span> /etc/apt/sources.list /etc/apt/sources_backup.list
+</code></pre></div><p>这样就把原来的源设置备份到 sources_backup.list 文件里了。</p> <h2 id="修改源设置"><a href="#修改源设置" aria-hidden="true" class="header-anchor">#</a> 修改源设置</h2> <p>首先打开 <code>/etc/apt/sources.list</code> 文件。</p> <p>目前 Ubuntu 国内源有很多，下面给出几个比较常用的。</p> <h3 id="阿里源"><a href="#阿里源" aria-hidden="true" class="header-anchor">#</a> 阿里源</h3> <p><a href="https://mirrors.aliyun.com" target="_blank" rel="noopener noreferrer">官网<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>阿里源官方给出的方法和一般的方法略有不同，创建文件 <code>/etc/apt/sources.list.d/aliyun.list</code> 然后编辑内容如下：</p> <div class="language- extra-class"><pre class="language-text"><code>deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre></div><p>然后执行：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+</code></pre></div><p>即可。</p> <h3 id="清华源"><a href="#清华源" aria-hidden="true" class="header-anchor">#</a> 清华源</h3> <p><a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener noreferrer">官网<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>将源设置文件替换为下面内容即可：</p> <div class="language- extra-class"><pre class="language-text"><code># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre></div><p>然后执行：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+</code></pre></div><p>即可。</p> <h3 id="中科大源"><a href="#中科大源" aria-hidden="true" class="header-anchor">#</a> 中科大源</h3> <p><a href="https://mirrors.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener noreferrer">官网<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>将 <code>/etc/apt/sources.list</code> 文件中 Ubuntu 默认的源地址 <code>http://archive.ubuntu.com/</code> 替换为 <code>http://mirrors.ustc.edu.cn</code> 即可。</p> <p>直接使用如下命令：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">sed</span> -i <span class="token string">'s/archive.ubuntu.com/mirrors.ustc.edu.cn/g'</span> /etc/apt/sources.list
+</code></pre></div><blockquote><p><strong>注意</strong>：如果你在安装时选择的语言不是英语，默认的源地址通常不是 <code>http://archive.ubuntu.com/</code> ， 而是 <code>http://&lt;country-code&gt;.archive.ubuntu.com/ubuntu/</code> ，如 <code>http://cn.archive.ubuntu.com/ubuntu/</code> ， 此时只需将上面的命令进行相应的替换即可，即<code>sudo sed -i 's/cn.archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list</code> 。</p></blockquote> <p>然后执行：</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+</code></pre></div><p>即可。</p> <hr> <p>就酱，三个源自己选一个就好啦。</p> <hr> <p>ChungZH</p> <p>2019 - 5 - 28 @ 广东 - 佛山</p> <p>#EOF</p></div></section> <footer class="footer">
+  © 2019
+  <i class="icon-user"></i>
+  ChungZH
+  <br>
+  Powered by
+  <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
+  | Theme
+  <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4c47d166.js" defer></script><script src="/assets/js/2.fa6598d2.js" defer></script><script src="/assets/js/8.f6b8a5ae.js" defer></script>
+  </body>
+</html>
