@@ -1,11 +1,7 @@
 ---
-layout: page
-title: (￣▽￣)／ 朋友们 
+title: 友链
+date: 2007-09-17
 ---
-
-**Hello! 由于我的博客刚刚（＊／ω＼＊ 事实上最少也有半个月了）从 Hexo 迁移到 Vuepress，很多功能还没补上。请耐心等待，我会努力补上的！**
-
-**注意：本站暂时不接受新友链申请~**
 
 [keithxodoy](https://www.edmath.cn/)
 
@@ -21,11 +17,7 @@ title: (￣▽￣)／ 朋友们
 
 [j0ck1e](https://blog.j0ck1e.com)
 
-[小吴博客](https://www.wushile.top)
-
 [Alliot's blog](https://www.iots.vip)
-
-[SpencerWoo](https://spencerwoo.com/)
 
 [StaunchKai](https://staunchkai.com)
 
