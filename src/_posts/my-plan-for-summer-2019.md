@@ -34,9 +34,6 @@ vssue-title: my-plan-for-summer-2019
 
 主要还是 NOIP 普及组 难度的题目。
 
-<details>
-  <summary>题目目录</summary>
-
 - 🔲 [P2907 [USACO08OPEN] 农场周围的道路Roads Around The Farm](https://www.luogu.org/problemnew/show/P2907)
 - 🔲 [P4702 取石子](https://www.luogu.org/problemnew/show/P4702)
 - 🔲 [P2666 Bessie的秘密牧场](https://www.luogu.org/problemnew/show/P2666)
@@ -64,14 +61,30 @@ vssue-title: my-plan-for-summer-2019
 - ✅ [UVA679 小球下落 Dropping Balls](https://www.luogu.org/problemnew/show/UVA679)
 - ✅ [UVA514 铁轨 Rails](https://www.luogu.org/problemnew/show/UVA514)
 - ✅ [P1097 统计数字](https://www.luogu.org/problemnew/show/P1097)
-- ✅ [LC 237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
+- ✅ [LC 237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/) *`链表`*
 - ✅ [CF822A I'm bored with life](https://www.luogu.org/problemnew/show/CF822A)
 - ✅ [P1387 最大正方形](https://www.luogu.org/problemnew/show/P1387)
 - ✅ [P3131 [USACO16JAN]子共七Subsequences Summing to Sevens](https://www.luogu.org/problemnew/show/P3131)
 - ✅ [P3662 [USACO17FEB]Why Did the Cow Cross the Road II S](https://www.luogu.org/problemnew/show/P3662)
 - ✅ [P1165 日志分析](https://www.luogu.org/problemnew/show/P1165)
 - ✅ [P1109 学生分组](https://www.luogu.org/problemnew/show/P1109)
-</details>
+- ✅ [AT1171 choku語](https://www.luogu.org/problem/AT1171)
+- ✅ [P1683 入门](https://www.luogu.org/problem/P1683) *`DFS`*
+- ✅ [P1238 走迷宫](https://www.luogu.org/problem/P1238)
+- ✅ [UVa10976 分数拆分 Fractions Again?!](https://www.luogu.org/problem/UVA10976)  *`枚举`*
+- ✅ [P1331 海战](https://www.luogu.org/problem/P1331) *`DFS`*
+- ✅ [P1747 好奇怪的游戏](https://www.luogu.org/problem/P1747) *`BFS`*
+- ✅ [P2958 [USACO09OCT]木瓜的丛林Papaya Jungle](https://www.luogu.org/problem/P2958) *`DFS`*
+- ✅ [UVA12100 打印队列 Printer Queue](https://www.luogu.org/problem/UVA12100) *`队列`*
+- ✅ [P1141 01迷宫](https://www.luogu.org/problem/P1141) *`DFS`*
+- ✅ [P2870 [USACO07DEC]最佳牛线，黄金Best Cow Line, Gold](https://www.luogu.org/problem/P2870) *`贪心`*
+- ✅ [P1583 魔法照片](https://www.luogu.org/problem/P1583) *`排序`*
+- ✅ [P1603 斯诺登的密码](https://www.luogu.org/problem/P1603) *`排序`*
+- ✅ [P1071 潜伏者](https://www.luogu.org/problem/P1071) *`模拟`*
+- ✅ [UVa524 素数环 Prime Ring Problem](https://www.luogu.org/problem/UVA524) *`枚举`*
+- ✅ [UVa439 骑士的移动 Knight Moves](https://www.luogu.org/problem/UVA524) *`BFS`*
+- ✅ [P2404 自然数的拆分问题](https://www.luogu.org/problem/P2404) *`DFS`*
+- ✅ [AT1350 深さ優先探索](https://www.luogu.org/problem/AT1350) *`DFS`*
 
 ------
 

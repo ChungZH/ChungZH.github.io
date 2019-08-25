@@ -249,5 +249,15 @@ module.exports = {
       hostname: 'https://chungzh.cn'
     },
     'vuepress-plugin-baidu-autopush': {},
+    '@vuepress/google-analytics': {
+      'ga': 'UA-145232074-1',
+    },
+    '@vssue/vuepress-plugin-vssue': {
+      platform: 'github',
+      owner: 'ChungZH',
+      repo: 'ChungZH.github.io',
+      clientId: '70904e6b4944326400f3',
+      clientSecret: '5bbc225640826f6dec55783db52b2205b55eff7a',
+    },
   },
 }
