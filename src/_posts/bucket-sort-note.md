@@ -89,3 +89,5 @@ int main()
 ```
 0 0 1 2 3 4 5 8 9 9
 ```
+
+<Vssue title="Bucket Sort Note" />

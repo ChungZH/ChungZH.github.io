@@ -96,4 +96,6 @@ int main()
 1 2 3 4 5 6 7 8 9 10
 ```
 
-其实 C++ 的 STL 库中已经有了队列的实现。
+其实 C++ 的 STL 库中已经有了队列的实现。。
+
+<Vssue title="queue-data-structure-note" />

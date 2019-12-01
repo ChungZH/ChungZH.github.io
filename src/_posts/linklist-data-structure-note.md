@@ -174,3 +174,5 @@ void Insert(int pos, int data)
 链表当前情况：
 2 3 11 5 6 7 8 9 10
 ```
+
+<Vssue title="linklist-data-structure-note" />

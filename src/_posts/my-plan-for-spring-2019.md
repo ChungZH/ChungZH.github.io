@@ -129,3 +129,5 @@ vssue-title: my-plan-for-spring-2019
 ------
 
 加油！
+
+<Vssue title="my-plan-for-spring-2019" />

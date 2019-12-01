@@ -1,6 +1,6 @@
 ---
 title: 友链
-date: 2007-09-17
+date: 0001-01-01
 ---
 
 [keithxodoy](https://www.edmath.cn/)

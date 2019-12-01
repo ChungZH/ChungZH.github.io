@@ -89,3 +89,5 @@ vssue-title: my-plan-for-summer-2019
 ------
 
 加油！
+
+<Vssue title="my-plan-for-summer-2019" />

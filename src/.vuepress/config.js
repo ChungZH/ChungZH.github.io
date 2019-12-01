@@ -230,8 +230,9 @@ module.exports = {
     '/': { lang: 'zh-CN' },
   },
   head: [
+    ['link', { rel: 'stylesheet', href: 'https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;display=swap&amp;subset=chinese-simplified' }], // https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,900&amp;display=swap&amp;subset=chinese-simplified
     ['link', { rel: 'shortcut icon', href: '/BlogFavicon16.png' }],
-    ['meta', { name: 'keywords', content: 'ChungZH, 博客' }],
+    ['meta', { name: 'keywords', content: 'ChungZH, 博客, C++' }],
     ['meta', { name: 'author', content: 'ChungZH' }],
     //['script', { src: '/script/func.js' }],
   ],
@@ -242,6 +243,7 @@ module.exports = {
       About: '/about/',
       Friends: '/friends/',
       GitHub: 'https://github.com/chungzh',
+      Portfolio: 'https://chungzh.cc'
     }
   },
   plugins: {

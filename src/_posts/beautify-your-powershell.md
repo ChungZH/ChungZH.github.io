@@ -95,3 +95,5 @@ Import-Module posh-git
 就可以每次打开 Powershell 都自动用上 oh-my-posh 了。
 
 Enjoy it ☕~
+
+<Vssue title="beautify-your-powershell" />
