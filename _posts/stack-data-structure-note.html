@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>栈浅析 - 数据结构笔记 | CHUNG ZH</title>
     <meta name="description" content="ChungZH&#39;s Blog">
-    <link rel="shortcut icon" href="/BlogFavicon16.png">
-  <meta name="keywords" content="ChungZH, 博客">
+    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;amp;display=swap&amp;amp;subset=chinese-simplified">
+  <link rel="shortcut icon" href="/BlogFavicon16.png">
+  <meta name="keywords" content="ChungZH, 博客, C++">
   <meta name="author" content="ChungZH">
     
-    <link rel="preload" href="/assets/css/0.styles.c094dc56.css" as="style"><link rel="preload" href="/assets/js/app.7b3f2c1c.js" as="script"><link rel="preload" href="/assets/js/2.de9e0e9a.js" as="script"><link rel="preload" href="/assets/js/18.726d9682.js" as="script"><link rel="prefetch" href="/assets/js/10.70a9e913.js"><link rel="prefetch" href="/assets/js/11.cd7a523a.js"><link rel="prefetch" href="/assets/js/12.63aaa167.js"><link rel="prefetch" href="/assets/js/13.033837c8.js"><link rel="prefetch" href="/assets/js/14.e7eb9fd5.js"><link rel="prefetch" href="/assets/js/15.3e86b2ab.js"><link rel="prefetch" href="/assets/js/16.545ed0f4.js"><link rel="prefetch" href="/assets/js/17.0e4fc872.js"><link rel="prefetch" href="/assets/js/19.0b76c615.js"><link rel="prefetch" href="/assets/js/20.9a155e45.js"><link rel="prefetch" href="/assets/js/21.c09575e8.js"><link rel="prefetch" href="/assets/js/3.be926f67.js"><link rel="prefetch" href="/assets/js/4.ff019101.js"><link rel="prefetch" href="/assets/js/5.51c20fe9.js"><link rel="prefetch" href="/assets/js/6.974a3b79.js"><link rel="prefetch" href="/assets/js/7.2cdd629d.js"><link rel="prefetch" href="/assets/js/8.c80adb98.js"><link rel="prefetch" href="/assets/js/9.dcf082da.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.c094dc56.css">
+    <link rel="preload" href="/assets/css/0.styles.841d2fc9.css" as="style"><link rel="preload" href="/assets/js/app.7a85ecd1.js" as="script"><link rel="preload" href="/assets/js/2.de9e0e9a.js" as="script"><link rel="preload" href="/assets/js/18.e79a12a1.js" as="script"><link rel="prefetch" href="/assets/js/10.209faf62.js"><link rel="prefetch" href="/assets/js/11.2256e9fa.js"><link rel="prefetch" href="/assets/js/12.cbbf9669.js"><link rel="prefetch" href="/assets/js/13.a13b4ee8.js"><link rel="prefetch" href="/assets/js/14.2a459c17.js"><link rel="prefetch" href="/assets/js/15.bfbdab8b.js"><link rel="prefetch" href="/assets/js/16.74379775.js"><link rel="prefetch" href="/assets/js/17.f9bb72c5.js"><link rel="prefetch" href="/assets/js/19.8778e280.js"><link rel="prefetch" href="/assets/js/20.9a155e45.js"><link rel="prefetch" href="/assets/js/21.c09575e8.js"><link rel="prefetch" href="/assets/js/3.be926f67.js"><link rel="prefetch" href="/assets/js/4.ff019101.js"><link rel="prefetch" href="/assets/js/5.c03e2db9.js"><link rel="prefetch" href="/assets/js/6.1bcdb1b8.js"><link rel="prefetch" href="/assets/js/7.3518d894.js"><link rel="prefetch" href="/assets/js/8.96b1a4af.js"><link rel="prefetch" href="/assets/js/9.34c203b3.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.841d2fc9.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
       CHUNG ZH
-    </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
+    </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a><a href="https://chungzh.cc" target="_blank" rel="noopener noreferrer" class="navbar-item">Portfolio</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
       栈浅析 - 数据结构笔记
     </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
-  6 个月前
+  9 个月前
 </time></div> <div class="content__default"><p>这篇文章简介一下 <code>栈</code>。</p> <h2 id="栈的概念"><a href="#栈的概念" aria-hidden="true" class="header-anchor">#</a> 栈的概念</h2> <p>栈（Stack），它是一种运算受限的线性表。其限制是仅允许在表的一端进行插入和删除运算。人们把此端称为栈顶（top），栈顶的第一个元素被称为栈顶元素，相对地，把另一端称为栈底。向一个栈插入新元素又称为进栈或入栈（push），它是把该元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称为出栈或退栈（pop)，它是把栈顶元素删除掉，使其下面的相邻元素成为新的栈顶元素。</p> <p>通过上面的概念，我们可以知道栈是一种 <strong>后进先出（LIFO Last In First Out）</strong> 的数据结构。</p> <h2 id="栈的定义"><a href="#栈的定义" aria-hidden="true" class="header-anchor">#</a> 栈的定义</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">stack</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> data<span class="token punctuation">[</span><span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// 用来存储数据</span>
     <span class="token keyword">int</span> top<span class="token punctuation">;</span>        <span class="token comment">// 栈顶</span>
@@ -48,7 +49,7 @@
 <span class="token punctuation">}</span>
 </code></pre></div><p>很简单。</p> <p>输入：</p> <div class="language- extra-class"><pre class="language-text"><code>1 2 3 4 5 6 7 8 9 10
 </code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>10 9 8 7 6 5 4 3 2 1
-</code></pre></div></div></section> <footer class="footer">
+</code></pre></div><!----></div></section> <footer class="footer">
   © 2019
   <i class="icon-user"></i>
   ChungZH
@@ -57,6 +58,6 @@
   <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
   | Theme
   <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.7b3f2c1c.js" defer></script><script src="/assets/js/2.de9e0e9a.js" defer></script><script src="/assets/js/18.726d9682.js" defer></script>
+    <script src="/assets/js/app.7a85ecd1.js" defer></script><script src="/assets/js/2.de9e0e9a.js" defer></script><script src="/assets/js/18.e79a12a1.js" defer></script>
   </body>
 </html>
