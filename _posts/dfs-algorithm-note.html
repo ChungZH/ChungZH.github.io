@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>深度优先搜索浅析 - 算法笔记 | CHUNG ZH</title>
     <meta name="description" content="ChungZH&#39;s Blog">
-    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;amp;display=swap&amp;amp;subset=chinese-simplified">
+    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&amp;display=swap">
   <link rel="shortcut icon" href="/BlogFavicon16.png">
   <meta name="keywords" content="ChungZH, 博客, C++">
   <meta name="author" content="ChungZH">
     
-    <link rel="preload" href="/assets/css/0.styles.841d2fc9.css" as="style"><link rel="preload" href="/assets/js/app.1bf7b70e.js" as="script"><link rel="preload" href="/assets/js/2.de9e0e9a.js" as="script"><link rel="preload" href="/assets/js/12.8d1c593f.js" as="script"><link rel="prefetch" href="/assets/js/10.abbd5448.js"><link rel="prefetch" href="/assets/js/11.8616e3f7.js"><link rel="prefetch" href="/assets/js/13.f692ab07.js"><link rel="prefetch" href="/assets/js/14.7a8b70da.js"><link rel="prefetch" href="/assets/js/15.ce65febe.js"><link rel="prefetch" href="/assets/js/16.b9eaa6be.js"><link rel="prefetch" href="/assets/js/17.b6862573.js"><link rel="prefetch" href="/assets/js/18.20484ee5.js"><link rel="prefetch" href="/assets/js/19.694a1590.js"><link rel="prefetch" href="/assets/js/20.e1be7bf5.js"><link rel="prefetch" href="/assets/js/21.36d9c354.js"><link rel="prefetch" href="/assets/js/22.031fdfa1.js"><link rel="prefetch" href="/assets/js/3.be926f67.js"><link rel="prefetch" href="/assets/js/4.c3657b74.js"><link rel="prefetch" href="/assets/js/5.daba90be.js"><link rel="prefetch" href="/assets/js/6.07f051cc.js"><link rel="prefetch" href="/assets/js/7.719c30f8.js"><link rel="prefetch" href="/assets/js/8.5951ab5a.js"><link rel="prefetch" href="/assets/js/9.6b0eb784.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.841d2fc9.css">
+    <link rel="preload" href="/assets/css/0.styles.86af48b2.css" as="style"><link rel="preload" href="/assets/js/app.e147d6ce.js" as="script"><link rel="preload" href="/assets/js/3.90ce4a91.js" as="script"><link rel="preload" href="/assets/js/13.0d68cddf.js" as="script"><link rel="prefetch" href="/assets/js/10.b174aa62.js"><link rel="prefetch" href="/assets/js/11.e9f866b1.js"><link rel="prefetch" href="/assets/js/12.a4e3074e.js"><link rel="prefetch" href="/assets/js/14.a10daec2.js"><link rel="prefetch" href="/assets/js/15.d9734686.js"><link rel="prefetch" href="/assets/js/16.17140693.js"><link rel="prefetch" href="/assets/js/17.39e85007.js"><link rel="prefetch" href="/assets/js/18.de992bfa.js"><link rel="prefetch" href="/assets/js/19.69044c3a.js"><link rel="prefetch" href="/assets/js/2.d240cd27.js"><link rel="prefetch" href="/assets/js/20.8f8e2e01.js"><link rel="prefetch" href="/assets/js/21.83bbdbbc.js"><link rel="prefetch" href="/assets/js/22.f61eca38.js"><link rel="prefetch" href="/assets/js/23.0dcec85a.js"><link rel="prefetch" href="/assets/js/4.5a3666f3.js"><link rel="prefetch" href="/assets/js/5.7b578910.js"><link rel="prefetch" href="/assets/js/6.2e035eff.js"><link rel="prefetch" href="/assets/js/7.c4261713.js"><link rel="prefetch" href="/assets/js/8.4ee384cf.js"><link rel="prefetch" href="/assets/js/9.fdce30a1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.86af48b2.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
@@ -19,8 +19,8 @@
     </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a><a href="https://chungzh.cc" target="_blank" rel="noopener noreferrer" class="navbar-item">Portfolio</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
       深度优先搜索浅析 - 算法笔记
     </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
-  9 个月前
-</time></div> <div class="content__default"><p>这篇文章讲解一下 <code>深度优先搜索（DFS）</code> 。</p> <hr> <h2 id="前言"><a href="#前言" aria-hidden="true" class="header-anchor">#</a> 前言</h2> <p>深度优先搜索（Depth first search, DFS）算法是一种搜索算法。</p> <h2 id="深度优先搜索"><a href="#深度优先搜索" aria-hidden="true" class="header-anchor">#</a> 深度优先搜索</h2> <p>首先，我们做一道小学奥数题。</p> <p><strong>Q：用 1、2、3 三个数 能组成多少个三位数？请把组成的三位数写出来。（不能重复使用同一个数）</strong></p> <p>**A：
+  10 个月前
+</time></div> <div class="content__default"><p>这篇文章讲解一下 <code>深度优先搜索（DFS）</code> 。</p> <hr> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>深度优先搜索（Depth first search, DFS）算法是一种搜索算法。</p> <h2 id="深度优先搜索"><a href="#深度优先搜索" class="header-anchor">#</a> 深度优先搜索</h2> <p>首先，我们做一道小学奥数题。</p> <p><strong>Q：用 1、2、3 三个数 能组成多少个三位数？请把组成的三位数写出来。（不能重复使用同一个数）</strong></p> <p>**A：
 ​	答：能组成6个三位数，分别是：
 ​	123
 ​	132
@@ -81,7 +81,7 @@
 312
 321
 </code></pre></div><!----></div></section> <footer class="footer">
-  © 2019
+  © 2020
   <i class="icon-user"></i>
   ChungZH
   <br>
@@ -89,6 +89,6 @@
   <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
   | Theme
   <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.1bf7b70e.js" defer></script><script src="/assets/js/2.de9e0e9a.js" defer></script><script src="/assets/js/12.8d1c593f.js" defer></script>
+    <script src="/assets/js/app.e147d6ce.js" defer></script><script src="/assets/js/3.90ce4a91.js" defer></script><script src="/assets/js/13.0d68cddf.js" defer></script>
   </body>
 </html>

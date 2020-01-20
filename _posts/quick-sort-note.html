@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>快速排序（Quick Sort） - 算法笔记 | CHUNG ZH</title>
     <meta name="description" content="ChungZH&#39;s Blog">
-    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;amp;display=swap&amp;amp;subset=chinese-simplified">
+    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&amp;display=swap">
   <link rel="shortcut icon" href="/BlogFavicon16.png">
   <meta name="keywords" content="ChungZH, 博客, C++">
   <meta name="author" content="ChungZH">
     
-    <link rel="preload" href="/assets/css/0.styles.841d2fc9.css" as="style"><link rel="preload" href="/assets/js/app.1bf7b70e.js" as="script"><link rel="preload" href="/assets/js/2.de9e0e9a.js" as="script"><link rel="preload" href="/assets/js/17.b6862573.js" as="script"><link rel="prefetch" href="/assets/js/10.abbd5448.js"><link rel="prefetch" href="/assets/js/11.8616e3f7.js"><link rel="prefetch" href="/assets/js/12.8d1c593f.js"><link rel="prefetch" href="/assets/js/13.f692ab07.js"><link rel="prefetch" href="/assets/js/14.7a8b70da.js"><link rel="prefetch" href="/assets/js/15.ce65febe.js"><link rel="prefetch" href="/assets/js/16.b9eaa6be.js"><link rel="prefetch" href="/assets/js/18.20484ee5.js"><link rel="prefetch" href="/assets/js/19.694a1590.js"><link rel="prefetch" href="/assets/js/20.e1be7bf5.js"><link rel="prefetch" href="/assets/js/21.36d9c354.js"><link rel="prefetch" href="/assets/js/22.031fdfa1.js"><link rel="prefetch" href="/assets/js/3.be926f67.js"><link rel="prefetch" href="/assets/js/4.c3657b74.js"><link rel="prefetch" href="/assets/js/5.daba90be.js"><link rel="prefetch" href="/assets/js/6.07f051cc.js"><link rel="prefetch" href="/assets/js/7.719c30f8.js"><link rel="prefetch" href="/assets/js/8.5951ab5a.js"><link rel="prefetch" href="/assets/js/9.6b0eb784.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.841d2fc9.css">
+    <link rel="preload" href="/assets/css/0.styles.86af48b2.css" as="style"><link rel="preload" href="/assets/js/app.e147d6ce.js" as="script"><link rel="preload" href="/assets/js/3.90ce4a91.js" as="script"><link rel="preload" href="/assets/js/18.de992bfa.js" as="script"><link rel="prefetch" href="/assets/js/10.b174aa62.js"><link rel="prefetch" href="/assets/js/11.e9f866b1.js"><link rel="prefetch" href="/assets/js/12.a4e3074e.js"><link rel="prefetch" href="/assets/js/13.0d68cddf.js"><link rel="prefetch" href="/assets/js/14.a10daec2.js"><link rel="prefetch" href="/assets/js/15.d9734686.js"><link rel="prefetch" href="/assets/js/16.17140693.js"><link rel="prefetch" href="/assets/js/17.39e85007.js"><link rel="prefetch" href="/assets/js/19.69044c3a.js"><link rel="prefetch" href="/assets/js/2.d240cd27.js"><link rel="prefetch" href="/assets/js/20.8f8e2e01.js"><link rel="prefetch" href="/assets/js/21.83bbdbbc.js"><link rel="prefetch" href="/assets/js/22.f61eca38.js"><link rel="prefetch" href="/assets/js/23.0dcec85a.js"><link rel="prefetch" href="/assets/js/4.5a3666f3.js"><link rel="prefetch" href="/assets/js/5.7b578910.js"><link rel="prefetch" href="/assets/js/6.2e035eff.js"><link rel="prefetch" href="/assets/js/7.c4261713.js"><link rel="prefetch" href="/assets/js/8.4ee384cf.js"><link rel="prefetch" href="/assets/js/9.fdce30a1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.86af48b2.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
@@ -19,7 +19,7 @@
     </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a><a href="https://chungzh.cc" target="_blank" rel="noopener noreferrer" class="navbar-item">Portfolio</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
       快速排序（Quick Sort） - 算法笔记
     </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
-  9 个月前
+  10 个月前
 </time></div> <div class="content__default"><p>这篇文章我们来学习<code>快速排序（Quick Sort)</code>。</p> <p>快速排序（Quicksort）是对冒泡排序的一种改进。</p> <p>快速排序由 <code>C. A. R. Hoare</code> 在 <code>1960</code> 年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p> <p>下面我们用 <code>6 1 2 7 9 3 4 5 10 8</code> 这十个数字来举例说明快速排序的排序过程。</p> <p>首先，我们需要在这个序列中找到一个<code>基准数</code>。为了方便，我们用 <code>6</code> 作为基准数。接下来，我们要将这个序列中所有比 <code>6</code> 小的数全部放在 <code>6</code> 的左边，把比 <code>6</code> 大的数全部放在它的右边。即成为这个序列：<code>3 1 2 5 4 6 9 7 10 8</code>。</p> <p>然后，我们分别从序列的两端开始“探测”。先从<strong>右</strong>往<strong>左</strong>找到一个小于基准数 <code>6</code> 的数，然后再从<strong>左</strong>往<strong>右</strong>找到一个大于基准数的数，然后把他们交换即可。这里我们用变量 <code>i</code> 和 <code>j</code> 表示序列的最左边和最右边。我们可以把它们叫做“哨兵i”和“哨兵j”。开始的时候把哨兵i指向序列的第一个数(i=1)，即指向 <code>6</code>（注意这里是<strong>指向</strong>第一个数，不是i等于第一个数） ，然后把哨兵j指向序列的最后一个数(j=n)，即指向 <code>8</code> ，如下图。</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/10/QuickSort.png" alt="QuickSort"></p> <p>首先，哨兵j开始寻找比基准数小的数。哨兵j一步一步向左移动（j--)，直到找到了一个小于基准数的数字才停下来。哨兵j移动完后，哨兵i就开始向右移动了，直到找到一个比基准数大的数字。最后，哨兵i停在了数字 <code>7</code> 的位置，哨兵j停在了数字 <code>5</code> 的位置。</p> <p>然后交换哨兵i和哨兵j指向的元素的值。交换后，序列变成了这样：<code>6 1 2 5 9 3 4 7 10 8</code>。然后哨兵j继续向左移动（每次都是哨兵j先移动），移动到 <code>4</code>（比基准数要小）的时候就停了下来。哨兵i也开始移动了，移动到 <code>9</code> （比基准数大）的时候，就停了下来。然后再次进行交换，即 <code>4</code> 和 <code>9</code> 进行交换。交换后序列就变成这样：<code>6 1 2 5 4 3 9 7 10 8</code>。</p> <p>好了，继续探测。哨兵j继续向左移动，于是它找到了 <code>3</code> （比基准数小），就停下来了。哨兵i就开始向右移动了。此时，两个哨兵相遇了。两个哨兵都在 <code>3</code> 的位置上，说明探测结束了。把基准数 <code>6</code> 和 <code>3</code> 交换就可以了。</p> <p>交换后的序列如下：<code>3 1 2 5 4 6 9 7 10 8</code>，我们可以发现：在 <code>6</code> 左边的数都小于 <code>6</code> ，在 <code>6</code> 右边的数全都大于 <code>6</code> ，至此，我们就完成了第一轮探测。</p> <p>虽然已经完成了第一轮探测，但是我们可以发现左右两边的数还是凌乱的，并没有按顺序排列。</p> <p>我们先回顾一下刚才排序的过程：哨兵j找到比基准数小的数，哨兵i找到比基准数大的数，然后进行交换。直到i和j碰头，才和基准数交换。</p> <p>接下来，我们只需要重复刚才排序的过程，把 <code>6</code> 左边的序列 <code>3 1 2 5 4</code> 和 <code>6</code> 右边的序列 <code>9 7 10 8</code> 分别进行快速排序，直到不可拆分出新的子序列为止。最后会得出这个序列：<code>1 2 3 4 5 6 7 8 9 10</code> 。下面上代码。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm&gt;</span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -95,7 +95,7 @@
 1 2 3 4 5 6 7 8 9 10
 1 2 3 4 5 6 7 8 9 10
 </code></pre></div><!----></div></section> <footer class="footer">
-  © 2019
+  © 2020
   <i class="icon-user"></i>
   ChungZH
   <br>
@@ -103,6 +103,6 @@
   <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
   | Theme
   <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.1bf7b70e.js" defer></script><script src="/assets/js/2.de9e0e9a.js" defer></script><script src="/assets/js/17.b6862573.js" defer></script>
+    <script src="/assets/js/app.e147d6ce.js" defer></script><script src="/assets/js/3.90ce4a91.js" defer></script><script src="/assets/js/18.de992bfa.js" defer></script>
   </body>
 </html>

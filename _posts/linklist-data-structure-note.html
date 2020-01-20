@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>单链表浅析 - 数据结构笔记 | CHUNG ZH</title>
     <meta name="description" content="ChungZH&#39;s Blog">
-    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;amp;display=swap&amp;amp;subset=chinese-simplified">
+    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&amp;display=swap">
   <link rel="shortcut icon" href="/BlogFavicon16.png">
   <meta name="keywords" content="ChungZH, 博客, C++">
   <meta name="author" content="ChungZH">
     
-    <link rel="preload" href="/assets/css/0.styles.841d2fc9.css" as="style"><link rel="preload" href="/assets/js/app.1bf7b70e.js" as="script"><link rel="preload" href="/assets/js/2.de9e0e9a.js" as="script"><link rel="preload" href="/assets/js/13.f692ab07.js" as="script"><link rel="prefetch" href="/assets/js/10.abbd5448.js"><link rel="prefetch" href="/assets/js/11.8616e3f7.js"><link rel="prefetch" href="/assets/js/12.8d1c593f.js"><link rel="prefetch" href="/assets/js/14.7a8b70da.js"><link rel="prefetch" href="/assets/js/15.ce65febe.js"><link rel="prefetch" href="/assets/js/16.b9eaa6be.js"><link rel="prefetch" href="/assets/js/17.b6862573.js"><link rel="prefetch" href="/assets/js/18.20484ee5.js"><link rel="prefetch" href="/assets/js/19.694a1590.js"><link rel="prefetch" href="/assets/js/20.e1be7bf5.js"><link rel="prefetch" href="/assets/js/21.36d9c354.js"><link rel="prefetch" href="/assets/js/22.031fdfa1.js"><link rel="prefetch" href="/assets/js/3.be926f67.js"><link rel="prefetch" href="/assets/js/4.c3657b74.js"><link rel="prefetch" href="/assets/js/5.daba90be.js"><link rel="prefetch" href="/assets/js/6.07f051cc.js"><link rel="prefetch" href="/assets/js/7.719c30f8.js"><link rel="prefetch" href="/assets/js/8.5951ab5a.js"><link rel="prefetch" href="/assets/js/9.6b0eb784.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.841d2fc9.css">
+    <link rel="preload" href="/assets/css/0.styles.86af48b2.css" as="style"><link rel="preload" href="/assets/js/app.e147d6ce.js" as="script"><link rel="preload" href="/assets/js/3.90ce4a91.js" as="script"><link rel="preload" href="/assets/js/14.a10daec2.js" as="script"><link rel="prefetch" href="/assets/js/10.b174aa62.js"><link rel="prefetch" href="/assets/js/11.e9f866b1.js"><link rel="prefetch" href="/assets/js/12.a4e3074e.js"><link rel="prefetch" href="/assets/js/13.0d68cddf.js"><link rel="prefetch" href="/assets/js/15.d9734686.js"><link rel="prefetch" href="/assets/js/16.17140693.js"><link rel="prefetch" href="/assets/js/17.39e85007.js"><link rel="prefetch" href="/assets/js/18.de992bfa.js"><link rel="prefetch" href="/assets/js/19.69044c3a.js"><link rel="prefetch" href="/assets/js/2.d240cd27.js"><link rel="prefetch" href="/assets/js/20.8f8e2e01.js"><link rel="prefetch" href="/assets/js/21.83bbdbbc.js"><link rel="prefetch" href="/assets/js/22.f61eca38.js"><link rel="prefetch" href="/assets/js/23.0dcec85a.js"><link rel="prefetch" href="/assets/js/4.5a3666f3.js"><link rel="prefetch" href="/assets/js/5.7b578910.js"><link rel="prefetch" href="/assets/js/6.2e035eff.js"><link rel="prefetch" href="/assets/js/7.c4261713.js"><link rel="prefetch" href="/assets/js/8.4ee384cf.js"><link rel="prefetch" href="/assets/js/9.fdce30a1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.86af48b2.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
@@ -19,8 +19,8 @@
     </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a><a href="https://chungzh.cc" target="_blank" rel="noopener noreferrer" class="navbar-item">Portfolio</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
       单链表浅析 - 数据结构笔记
     </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
-  9 个月前
-</time></div> <div class="content__default"><p><code>单链表</code> 简单解析。</p> <h2 id="单链表概念"><a href="#单链表概念" aria-hidden="true" class="header-anchor">#</a> 单链表概念</h2> <p>链表是使用 <code>链式存储结构</code> 的一种数据结构。<code>链式存储结构</code> 存储密度比顺序存储结构小，是一种物理存储单元上非连续、非顺序的存储结构。相较于 <code>顺序表</code> ，有 <code>存储的元素个数不受限制</code> 、 <code>插入和删除元素时，不用移动其他元素</code> 等优点。链表有 <code>单链表</code> 、 <code>双向链表</code> 、还有 <code>循环链表</code> 。对于链表中的 <code>数据元素</code> 来说，除了存储其本身的信息之外，还需要存储一个指示其后继（也可以是前继）结点的地址。这两个部分组成一个 <code>结点</code> 。</p> <h2 id="单链表实现"><a href="#单链表实现" aria-hidden="true" class="header-anchor">#</a> 单链表实现</h2> <p>首先，我们来定义一个单链表中的结点。先上一个图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/node.png" alt="Node" title="结点示意图"></p> <p>相应的，代码实现如下：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+  10 个月前
+</time></div> <div class="content__default"><p><code>单链表</code> 简单解析。</p> <h2 id="单链表概念"><a href="#单链表概念" class="header-anchor">#</a> 单链表概念</h2> <p>链表是使用 <code>链式存储结构</code> 的一种数据结构。<code>链式存储结构</code> 存储密度比顺序存储结构小，是一种物理存储单元上非连续、非顺序的存储结构。相较于 <code>顺序表</code> ，有 <code>存储的元素个数不受限制</code> 、 <code>插入和删除元素时，不用移动其他元素</code> 等优点。链表有 <code>单链表</code> 、 <code>双向链表</code> 、还有 <code>循环链表</code> 。对于链表中的 <code>数据元素</code> 来说，除了存储其本身的信息之外，还需要存储一个指示其后继（也可以是前继）结点的地址。这两个部分组成一个 <code>结点</code> 。</p> <h2 id="单链表实现"><a href="#单链表实现" class="header-anchor">#</a> 单链表实现</h2> <p>首先，我们来定义一个单链表中的结点。先上一个图：</p> <p><img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/node.png" alt="Node" title="结点示意图"></p> <p>相应的，代码实现如下：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> data<span class="token punctuation">;</span>      <span class="token comment">// 结点中的数据域</span>
     Node <span class="token operator">*</span> next<span class="token punctuation">;</span>   <span class="token comment">// 指针域</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -151,7 +151,7 @@ Node <span class="token operator">*</span> head <span class="token operator">=</
 链表当前情况：
 2 3 11 5 6 7 8 9 10
 </code></pre></div><!----></div></section> <footer class="footer">
-  © 2019
+  © 2020
   <i class="icon-user"></i>
   ChungZH
   <br>
@@ -159,6 +159,6 @@ Node <span class="token operator">*</span> head <span class="token operator">=</
   <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
   | Theme
   <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.1bf7b70e.js" defer></script><script src="/assets/js/2.de9e0e9a.js" defer></script><script src="/assets/js/13.f692ab07.js" defer></script>
+    <script src="/assets/js/app.e147d6ce.js" defer></script><script src="/assets/js/3.90ce4a91.js" defer></script><script src="/assets/js/14.a10daec2.js" defer></script>
   </body>
 </html>

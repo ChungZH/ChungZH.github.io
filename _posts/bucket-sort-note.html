@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>桶排序（Bucket Sort） - 算法笔记 | CHUNG ZH</title>
     <meta name="description" content="ChungZH&#39;s Blog">
-    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;amp;display=swap&amp;amp;subset=chinese-simplified">
+    <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&amp;display=swap">
   <link rel="shortcut icon" href="/BlogFavicon16.png">
   <meta name="keywords" content="ChungZH, 博客, C++">
   <meta name="author" content="ChungZH">
     
-    <link rel="preload" href="/assets/css/0.styles.841d2fc9.css" as="style"><link rel="preload" href="/assets/js/app.1bf7b70e.js" as="script"><link rel="preload" href="/assets/js/2.de9e0e9a.js" as="script"><link rel="preload" href="/assets/js/8.5951ab5a.js" as="script"><link rel="prefetch" href="/assets/js/10.abbd5448.js"><link rel="prefetch" href="/assets/js/11.8616e3f7.js"><link rel="prefetch" href="/assets/js/12.8d1c593f.js"><link rel="prefetch" href="/assets/js/13.f692ab07.js"><link rel="prefetch" href="/assets/js/14.7a8b70da.js"><link rel="prefetch" href="/assets/js/15.ce65febe.js"><link rel="prefetch" href="/assets/js/16.b9eaa6be.js"><link rel="prefetch" href="/assets/js/17.b6862573.js"><link rel="prefetch" href="/assets/js/18.20484ee5.js"><link rel="prefetch" href="/assets/js/19.694a1590.js"><link rel="prefetch" href="/assets/js/20.e1be7bf5.js"><link rel="prefetch" href="/assets/js/21.36d9c354.js"><link rel="prefetch" href="/assets/js/22.031fdfa1.js"><link rel="prefetch" href="/assets/js/3.be926f67.js"><link rel="prefetch" href="/assets/js/4.c3657b74.js"><link rel="prefetch" href="/assets/js/5.daba90be.js"><link rel="prefetch" href="/assets/js/6.07f051cc.js"><link rel="prefetch" href="/assets/js/7.719c30f8.js"><link rel="prefetch" href="/assets/js/9.6b0eb784.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.841d2fc9.css">
+    <link rel="preload" href="/assets/css/0.styles.86af48b2.css" as="style"><link rel="preload" href="/assets/js/app.e147d6ce.js" as="script"><link rel="preload" href="/assets/js/3.90ce4a91.js" as="script"><link rel="preload" href="/assets/js/9.fdce30a1.js" as="script"><link rel="prefetch" href="/assets/js/10.b174aa62.js"><link rel="prefetch" href="/assets/js/11.e9f866b1.js"><link rel="prefetch" href="/assets/js/12.a4e3074e.js"><link rel="prefetch" href="/assets/js/13.0d68cddf.js"><link rel="prefetch" href="/assets/js/14.a10daec2.js"><link rel="prefetch" href="/assets/js/15.d9734686.js"><link rel="prefetch" href="/assets/js/16.17140693.js"><link rel="prefetch" href="/assets/js/17.39e85007.js"><link rel="prefetch" href="/assets/js/18.de992bfa.js"><link rel="prefetch" href="/assets/js/19.69044c3a.js"><link rel="prefetch" href="/assets/js/2.d240cd27.js"><link rel="prefetch" href="/assets/js/20.8f8e2e01.js"><link rel="prefetch" href="/assets/js/21.83bbdbbc.js"><link rel="prefetch" href="/assets/js/22.f61eca38.js"><link rel="prefetch" href="/assets/js/23.0dcec85a.js"><link rel="prefetch" href="/assets/js/4.5a3666f3.js"><link rel="prefetch" href="/assets/js/5.7b578910.js"><link rel="prefetch" href="/assets/js/6.2e035eff.js"><link rel="prefetch" href="/assets/js/7.c4261713.js"><link rel="prefetch" href="/assets/js/8.4ee384cf.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.86af48b2.css">
   </head>
   <body>
     <div id="app" data-server-rendered="true"><div class="theme-container vuepress-theme-simple"><header class="header"><a href="/" title="ChungZH's Blog" class="site-name router-link-active">
@@ -19,15 +19,15 @@
     </a> <div style="clear: both"></div> <div class="navbar"><a href="/about/" target="_blank" rel="noopener noreferrer" class="navbar-item">About</a><a href="/friends/" target="_blank" rel="noopener noreferrer" class="navbar-item">Friends</a><a href="https://github.com/chungzh" target="_blank" rel="noopener noreferrer" class="navbar-item">GitHub</a><a href="https://chungzh.cc" target="_blank" rel="noopener noreferrer" class="navbar-item">Portfolio</a></div></header> <section class="post-view"><div class="post-head"><h1 class="post-title">
       桶排序（Bucket Sort） - 算法笔记
     </h1> <time datetime="2/23/2019" title="2/23/2019" pubdate="pubdate" class="post-date">
-  9 个月前
-</time></div> <div class="content__default"><p>这篇文章简介一下 <code>桶排序</code>。</p> <h2 id="桶排序简介"><a href="#桶排序简介" aria-hidden="true" class="header-anchor">#</a> 桶排序简介</h2> <p>桶排序是一个非常快的排序算法，该算法的基本思想由 <code>E.J. Issac</code> 和 <code>R.C. Singleton</code> 提出。</p> <p>桶排序的意思就是：把数据放进桶里面，从而完成排序。</p> <p>举个栗子：用桶排序的方法排序 10 个数： <code>1 0 8 3 2 5 4 9 0 9</code> 。这些数最大的不超过 10 。</p> <p>思路：</p> <ol><li><p>首先，我们新建大小为 11 的“桶”数组。因为从 0 到 10 之间有11个数。并把这个数组的元素初始化为 0。 <code>int a[11] = {0}；</code></p></li> <li><p>下面开始处理每一个数：</p> <p>①. 给第一个数字所在的桶加 1 。第一个数是 1 ，就给“桶”数组中下标为 1 的元素加一，即<code>a[1]++；</code></p> <p>②. 给第二个数字所在的桶加 1 。第二个数是 0 ，就给“桶”数组中下标为 0 的元素加一，即<code>a[0]++；</code></p> <p>③. 给第三个数字所在的桶加 1 。第三个数是 8 ，就给“桶”数组中下标为 8 的元素加一，即<code>a[8]++；</code></p> <p>以此类推......</p></li> <li><p>输出“桶”数组。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+  10 个月前
+</time></div> <div class="content__default"><p>这篇文章简介一下 <code>桶排序</code>。</p> <h2 id="桶排序简介"><a href="#桶排序简介" class="header-anchor">#</a> 桶排序简介</h2> <p>桶排序是一个非常快的排序算法，该算法的基本思想由 <code>E.J. Issac</code> 和 <code>R.C. Singleton</code> 提出。</p> <p>桶排序的意思就是：把数据放进桶里面，从而完成排序。</p> <p>举个栗子：用桶排序的方法排序 10 个数： <code>1 0 8 3 2 5 4 9 0 9</code> 。这些数最大的不超过 10 。</p> <p>思路：</p> <ol><li><p>首先，我们新建大小为 11 的“桶”数组。因为从 0 到 10 之间有11个数。并把这个数组的元素初始化为 0。 <code>int a[11] = {0}；</code></p></li> <li><p>下面开始处理每一个数：</p> <p>①. 给第一个数字所在的桶加 1 。第一个数是 1 ，就给“桶”数组中下标为 1 的元素加一，即<code>a[1]++；</code></p> <p>②. 给第二个数字所在的桶加 1 。第二个数是 0 ，就给“桶”数组中下标为 0 的元素加一，即<code>a[0]++；</code></p> <p>③. 给第三个数字所在的桶加 1 。第三个数是 8 ，就给“桶”数组中下标为 8 的元素加一，即<code>a[8]++；</code></p> <p>以此类推......</p></li> <li><p>输出“桶”数组。</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
 	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token comment">// 桶数组元素里的值是多少就循环多少次，如果为 0 就不输出</span>
 	<span class="token punctuation">{</span>
 		cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div></li></ol> <h2 id="桶排序实现"><a href="#桶排序实现" aria-hidden="true" class="header-anchor">#</a> 桶排序实现</h2> <p>C++ 代码实现：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+</code></pre></div></li></ol> <h2 id="桶排序实现"><a href="#桶排序实现" class="header-anchor">#</a> 桶排序实现</h2> <p>C++ 代码实现：</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -54,7 +54,7 @@
 </code></pre></div><p>输入：</p> <div class="language- extra-class"><pre class="language-text"><code>1 0 8 3 2 5 4 9 0 9
 </code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>0 0 1 2 3 4 5 8 9 9
 </code></pre></div><!----></div></section> <footer class="footer">
-  © 2019
+  © 2020
   <i class="icon-user"></i>
   ChungZH
   <br>
@@ -62,6 +62,6 @@
   <a href="https://vuepress.vuejs.org/" rel="noopener" target="_blank">VuePress</a>
   | Theme
   <a href="https://github.com/viko16/vuepress-theme-simple" rel="noopener" target="_blank">Simple</a></footer></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.1bf7b70e.js" defer></script><script src="/assets/js/2.de9e0e9a.js" defer></script><script src="/assets/js/8.5951ab5a.js" defer></script>
+    <script src="/assets/js/app.e147d6ce.js" defer></script><script src="/assets/js/3.90ce4a91.js" defer></script><script src="/assets/js/9.fdce30a1.js" defer></script>
   </body>
 </html>
