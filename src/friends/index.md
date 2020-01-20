@@ -27,7 +27,7 @@ date: 0001-01-01
 
 [Torther](https://www.torther.club)
 
-[Zidone - 深自缄默 如云漂泊](https://blog.zidone.cn)
+[Zidone - 深自缄默 如云漂泊](https://www.aye.ink)
 
 [最初的墨](https://qifcn.com/)
 

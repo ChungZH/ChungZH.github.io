@@ -230,7 +230,7 @@ module.exports = {
     '/': { lang: 'zh-CN' },
   },
   head: [
-    ['link', { rel: 'stylesheet', href: 'https://fonts.lug.ustc.edu.cn/css?family=Noto+Serif+SC:400,900&amp;display=swap&amp;subset=chinese-simplified' }], // https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,900&amp;display=swap&amp;subset=chinese-simplified
+    ['link', { rel: 'stylesheet', href: 'https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&display=swap' }], // https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap
     ['link', { rel: 'shortcut icon', href: '/BlogFavicon16.png' }],
     ['meta', { name: 'keywords', content: 'ChungZH, 博客, C++' }],
     ['meta', { name: 'author', content: 'ChungZH' }],
