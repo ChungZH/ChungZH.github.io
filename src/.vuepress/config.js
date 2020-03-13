@@ -227,14 +227,36 @@ module.exports = {
   dest: path.resolve(__dirname, '../../dist'),
   evergreen: true,
   locales: {
-    '/': { lang: 'zh-CN' },
+    '/': {
+      lang: 'zh-CN'
+    },
   },
   head: [
-    ['link', { rel: 'stylesheet', href: 'https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&display=swap' }], // https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap
-    ['link', { rel: 'stylesheet', href: 'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css' }],
-    ['link', { rel: 'shortcut icon', href: '/BlogFavicon16.png' }],
-    ['meta', { name: 'keywords', content: 'ChungZH, 博客, C++' }],
-    ['meta', { name: 'author', content: 'ChungZH' }],
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro&display=swap'
+    }], // https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css'
+    }],
+    ['link', {
+      rel: 'shortcut icon',
+      href: '/BlogFavicon16.png'
+    }],
+    ['meta', {
+      name: 'keywords',
+      content: 'ChungZH, 博客, C++'
+    }],
+    ['meta', {
+      name: 'author',
+      content: 'ChungZH'
+    }],
+    ['script', {
+      'data-ad-client': 'ca-pub-4609798364954097',
+      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    }]
+
     //['script', { src: '/script/func.js' }],
   ],
   //theme: 'simple',
