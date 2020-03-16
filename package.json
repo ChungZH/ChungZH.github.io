@@ -5,14 +5,14 @@
   "license": "MIT",
   "version": "5.0.0",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development vuepress dev src --temp ./.temp",
-    "build": "cross-env NODE_ENV=production vuepress build src -d ./dist --temp ./.temp"
+    "dev": "cross-env NODE_ENV=development vuepress dev blog --temp ./.temp",
+    "build": "cross-env NODE_ENV=production vuepress build blog -d ./dist --temp ./.temp"
   },
   "dependencies": {
     "@vssue/api-github-v3": "^1.0.0",
     "@vssue/vuepress-plugin-vssue": "^1.0.2",
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.35",
-    "@vuepress/plugin-blog": "^1.0.0-alpha.35",
+    "@vuepress/plugin-blog": "^1.9.2",
     "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
     "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.35",
     "@vuepress/plugin-nprogress": "^1.0.0-alpha.35",
@@ -20,13 +20,14 @@
     "geopattern": "^1.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "vuepress": "^1.0.0-rc.1",
+    "vuepress": "^1.3.1",
     "vuepress-plugin-container": "^1.1.1",
     "vuepress-plugin-nprogress": "^1.0.0",
     "vuepress-plugin-smooth-scroll": "^0.0.3",
     "vuepress-plugin-zooming": "^1.0.0"
   },
   "devDependencies": {
+    "@vuepress/theme-blog": "^2.2.0",
     "cross-env": "^5.2.0",
     "vuepress-plugin-baidu-autopush": "^1.0.1",
     "vuepress-plugin-sitemap": "^2.1.1",
