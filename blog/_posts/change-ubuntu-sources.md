@@ -4,7 +4,7 @@ date: 2019-05-28 17:04:00
 tags:
 - Ubuntu
 - 系统
-- author: ChungZH
+author: ChungZH
 location: Foshan
 summary: 慢 死 了 --> 快 死 了
 vssue-title: change-ubuntu-sources

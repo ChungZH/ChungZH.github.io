@@ -1,12 +1,12 @@
 ---
 title: 深度优先搜索浅析 - 算法笔记
 tags: 
-    - 编程
-    - C++
-    - 算法
-    - 搜索
-    - 深度优先搜索
-    - DFS
+- 编程
+- C++
+- 算法
+- 搜索
+- 深度优先搜索
+- DFS
 author: ChungZH
 location: Foshan
 summary: 深搜！深搜！深搜！

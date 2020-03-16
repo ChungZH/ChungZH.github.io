@@ -1,9 +1,9 @@
 ---
 title: 桶排序（Bucket Sort） - 算法笔记
 tags: 
-    - 编程
-    - C++
-    - 算法 
+- 编程
+- C++
+- 算法 
 date: 2019/02/23 11:41:00
 author: ChungZH
 location: Foshan

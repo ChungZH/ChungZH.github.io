@@ -12,7 +12,6 @@
     "@vssue/api-github-v3": "^1.0.0",
     "@vssue/vuepress-plugin-vssue": "^1.0.2",
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.35",
-    "@vuepress/plugin-blog": "^1.9.2",
     "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
     "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.35",
     "@vuepress/plugin-nprogress": "^1.0.0-alpha.35",
