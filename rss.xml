@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>ChungZH 的小窝</title>
+        <link>https://chungzh.cn</link>
+        <description>ChungZH&apos;s Blog</description>
+        <lastBuildDate>Wed, 18 Mar 2020 11:15:03 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+        <item>
+            <title><![CDATA[2020 DL 信息学冬令营游记]]></title>
+            <link>https://chungzh.cn/_posts/2020/01/20/_2020dlwintercamp/</link>
+            <guid>https://chungzh.cn/_posts/2020/01/20/_2020dlwintercamp/</guid>
+            <pubDate>Mon, 20 Jan 2020 08:03:00 GMT</pubDate>
+            <description><![CDATA[谨以此文，纪念那逝去的五日快乐时光~]]></description>
+            <enclosure url="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-setmap.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[DLOI 2019 游记]]></title>
+            <link>https://chungzh.cn/_posts/2019/12/22/dloi-2019/</link>
+            <guid>https://chungzh.cn/_posts/2019/12/22/dloi-2019/</guid>
+            <pubDate>Sun, 22 Dec 2019 11:03:00 GMT</pubDate>
+            <description><![CDATA[嘤嘤嘤又被大佬狂虐了]]></description>
+        </item>
+        <item>
+            <title><![CDATA[NHOI 2019 游记]]></title>
+            <link>https://chungzh.cn/_posts/2019/06/02/nhoi-2019/</link>
+            <guid>https://chungzh.cn/_posts/2019/06/02/nhoi-2019/</guid>
+            <pubDate>Sun, 02 Jun 2019 04:07:00 GMT</pubDate>
+            <description><![CDATA[百尺竿头 更进一步！]]></description>
+            <enclosure url="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/OI/NHOI2019/FiQkgUKKgatcS2k3frdWIDIK9l63.jpeg">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[美化你的 Powershell]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/beautify-your-powershell/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/beautify-your-powershell/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:50:00 GMT</pubDate>
+            <description><![CDATA[介绍一下 Powershell 的美化方式。]]></description>
+            <enclosure url="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell1.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[桶排序（Bucket Sort） - 算法笔记]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/bucket-sort-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/bucket-sort-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:41:00 GMT</pubDate>
+            <description><![CDATA[简单的桶排序。]]></description>
+        </item>
+        <item>
+            <title><![CDATA[谁说 C/C++ 没有好的包管理器？这里来一沓！]]></title>
+            <link>https://chungzh.cn/_posts/2019/08/25/c-cpp-package-manager/</link>
+            <guid>https://chungzh.cn/_posts/2019/08/25/c-cpp-package-manager/</guid>
+            <pubDate>Sun, 25 Aug 2019 03:41:00 GMT</pubDate>
+            <description><![CDATA[C++ 万岁~\(≧▽≦)/~！]]></description>
+            <enclosure url="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/conan-systems.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[Ubuntu 更换国内源]]></title>
+            <link>https://chungzh.cn/_posts/2019/05/29/change-ubuntu-sources/</link>
+            <guid>https://chungzh.cn/_posts/2019/05/29/change-ubuntu-sources/</guid>
+            <pubDate>Tue, 28 May 2019 17:04:00 GMT</pubDate>
+            <description><![CDATA[慢 死 了 --> 快 死 了]]></description>
+        </item>
+        <item>
+            <title><![CDATA[深度优先搜索浅析 - 算法笔记]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/dfs-algorithm-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/dfs-algorithm-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:47:00 GMT</pubDate>
+            <description><![CDATA[深搜！深搜！深搜！]]></description>
+        </item>
+        <item>
+            <title><![CDATA[单链表浅析 - 数据结构笔记]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/linklist-data-structure-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/linklist-data-structure-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:46:00 GMT</pubDate>
+            <description><![CDATA[awsl，太难了，是链表！]]></description>
+            <enclosure url="https://chungzh.cn/https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/node.png &quot;结点示意图&quot;">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[队列浅析 - 数据结构笔记]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/queue-data-structure-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/queue-data-structure-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:44:00 GMT</pubDate>
+            <description><![CDATA[awsl，太简单了，是队列！]]></description>
+        </item>
+        <item>
+            <title><![CDATA[快速排序（Quick Sort） - 算法笔记]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/quick-sort-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/quick-sort-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:42:00 GMT</pubDate>
+            <description><![CDATA[快！速！排！序！]]></description>
+            <enclosure url="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/10/QuickSort.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[蛇形矩阵 - 日常刷题]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/snake-matrix-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/snake-matrix-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:48:00 GMT</pubDate>
+            <description><![CDATA[🐍蛇形矩阵]]></description>
+            <enclosure url="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/18/SnakeMatrix1.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[栈浅析 - 数据结构笔记]]></title>
+            <link>https://chungzh.cn/_posts/2019/02/23/stack-data-structure-note/</link>
+            <guid>https://chungzh.cn/_posts/2019/02/23/stack-data-structure-note/</guid>
+            <pubDate>Sat, 23 Feb 2019 03:45:00 GMT</pubDate>
+            <description><![CDATA[awsl，太简单了，是栈！]]></description>
+        </item>
+        <item>
+            <title><![CDATA[解决 Telegram Desktop 字体渲染问题]]></title>
+            <link>https://chungzh.cn/_posts/2020/01/25/telegram-desktop-font/</link>
+            <guid>https://chungzh.cn/_posts/2020/01/25/telegram-desktop-font/</guid>
+            <pubDate>Sat, 25 Jan 2020 13:47:00 GMT</pubDate>
+            <description><![CDATA[丑 爆 了 -> 帅 炸 了]]></description>
+            <enclosure url="https://raw.githubusercontent.com/ChungZH/picgo-upload/master/tg.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[创建 Vuepress 博客并使用 Git 管理]]></title>
+            <link>https://chungzh.cn/_posts/2019/03/02/create-vuepress-blog-and-use-git-manger-it/</link>
+            <guid>https://chungzh.cn/_posts/2019/03/02/create-vuepress-blog-and-use-git-manger-it/</guid>
+            <pubDate>Sat, 02 Mar 2019 04:28:00 GMT</pubDate>
+            <description><![CDATA[又双叒叕搞博客了]]></description>
+            <enclosure url="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[优雅地使用 C++ 制作表格：tabulate]]></title>
+            <link>https://chungzh.cn/_posts/2020/02/21/tabulate/</link>
+            <guid>https://chungzh.cn/_posts/2020/02/21/tabulate/</guid>
+            <pubDate>Fri, 21 Feb 2020 03:45:00 GMT</pubDate>
+            <description><![CDATA[优雅地用 C++ 做表格！]]></description>
+            <enclosure url="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png">
+            </enclosure>
+        </item>
+    </channel>
+</rss>
