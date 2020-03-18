@@ -40,7 +40,7 @@ wow~简直能和使用 `oh-my-zsh` 的终端媲美了！！！
 
 ### 预备
 
-为了获得更完美的体验，我们可以先安装几个 `Powerline` 字体。可以在 [powerline/fonts](https://github.com/powerline/fonts) 中下载。下载过程不赘述。
+为了获得更完美的体验，我们可以先安装几个 `Powerline` 字体。可以在 [powerline/font](https://github.com/powerline/font) 中下载。下载过程不赘述。
 
 下载好 Powerline 字体后，需要把终端的字体改成你刚刚下载的 Powerline 字体。
 

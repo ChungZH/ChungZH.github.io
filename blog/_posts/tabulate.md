@@ -76,10 +76,10 @@ int main()
     hellogithub.add_row({"HelloGitHub"}); 
     hellogithub.add_row({"hellogithub.com"});
     hellogithub[1][0].format()
-        .font_style({FontStyle::underline});
+        .font_style({fonttyle::underline});
     hellogithub.add_row({"github.com/521xueweihan/HelloGitHub"});
     hellogithub[2][0].format()
-        .font_style({FontStyle::underline});
+        .font_style({fonttyle::underline});
     hellogithub.add_row({"xueweihan NB!!!"});
 
     cout << hellogithub << endl;
@@ -270,13 +270,13 @@ int main()
 
     colors[0][0].format()
         .font_color(Color::red)
-        .font_style({FontStyle::bold});
+        .font_style({fonttyle::bold});
     colors[0][1].format()
         .font_color(Color::blue)
-        .font_style({FontStyle::bold});
+        .font_style({fonttyle::bold});
     colors[0][2].format()
         .font_color(Color::green)
-        .font_style({FontStyle::bold});
+        .font_style({fonttyle::bold});
 
     colors[1][0].format()
         .border_left_color(Color::red)
@@ -300,13 +300,13 @@ int main()
 
     colors[2][0].format()
         .font_background_color(Color::red)
-        .font_style({FontStyle::bold});
+        .font_style({fonttyle::bold});
     colors[2][1].format()
         .font_background_color(Color::blue)
-        .font_style({FontStyle::bold});
+        .font_style({fonttyle::bold});
     colors[2][2].format()
         .font_background_color(Color::green)
-        .font_style({FontStyle::bold});
+        .font_style({fonttyle::bold});
 
     cout << colors << endl;
     return 0;
@@ -341,7 +341,7 @@ int main()
   table.format()
       .multi_byte_characters(true)
       // Font styling
-      .font_style({FontStyle::bold, FontStyle::dark})
+      .font_style({fonttyle::bold, fonttyle::dark})
       .font_align(FontAlign::center)
       .font_color(Color::red)
       .font_background_color(Color::yellow)
@@ -397,7 +397,7 @@ int main() {
   // 遍历第一行中的单元格
   for (auto& cell : table[0]) {
     cell.format()
-      .font_style({FontStyle::underline})
+      .font_style({fonttyle::underline})
       .font_align(FontAlign::center);
   }
 
@@ -413,7 +413,7 @@ int main() {
   size_t index = 0;
   for (auto& row : table) {
     row.format()
-      .font_style({FontStyle::bold});
+      .font_style({fonttyle::bold});
 
     // 轮流把整行的背景设为蓝色
     if (index > 0 && index % 2 == 0) {
@@ -473,7 +473,7 @@ using namespace std;
 int main() {
   Table hellogithub;
   hellogithub.add_row({"HelloGitHub"});
-  hellogithub[0][0].format().font_style({FontStyle::bold}); // 加粗样式，在 Markdown 中可以表现出来
+  hellogithub[0][0].format().font_style({fonttyle::bold}); // 加粗样式，在 Markdown 中可以表现出来
   hellogithub.add_row({"GitHub repo: github.com/521xueweihan/HelloGitHub"});
   hellogithub.add_row({"Website: hellogithub.com"});
 

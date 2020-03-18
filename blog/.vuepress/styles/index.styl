@@ -1,9 +1,15 @@
-h1, h2, h3, h4, h5, h6, .vssue, .header-wrapper .title a, .ui-post-title
-    font-family: 'Noto Serif SC', serif
+h1, h2, h3, h4, h5, h6, .vssue, .ui-post-title a, body, .content-wrapper .vuepress-blog-theme-content
+    font-family: 'Exo 2', 'SourceHanSerifCN', 'Noto Serif CJK SC', 'Noto Serif CJK', 'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+
+
+h1, h2, h3, h4, h5, h6, .ui-post-title a,.header-wrapper .title a, .vuepress-blog-theme-content .post-title
+    font-weight: 700
+
+code, kbd, .line-number 
+    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 
 body 
     line-height: 1
-    font-family: serif
     background-color: #f2f2f2
     font-size: 1.1em
 
@@ -12,3 +18,23 @@ blockquote
 
 p
     font-size: 1.1em
+
+@font-face
+    font-family: SourceHanSerifCN
+    src: url('/font/SourceHanSerifCN-Bold.otf')
+    font-weight: 700
+
+@font-face
+    font-family: SourceHanSerifCN
+    src: url('/font/SourceHanSerifCN-Light.otf')
+    font-weight: 300
+
+@font-face
+    font-family: SourceHanSerifCN
+    src: url('/font/SourceHanSerifCN-Regular.otf')
+    font-weight: 400
+    
+@font-face
+    font-family: SourceHanSerifCN
+    src: url('/font/SourceHanSerifCN-SemiBold.otf')
+    font-weight: 600

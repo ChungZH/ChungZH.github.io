@@ -2,6 +2,8 @@
 title: 友链
 ---
 
+[Koufan](https://keith-koufan.github.io/)
+
 [keithxodoy](https://www.edmath.cn/)
 
 [xuan](http://cugxuan.coding.me)

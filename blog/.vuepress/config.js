@@ -13,9 +13,12 @@ module.exports = {
   head: [
     ['link', {
       rel: 'stylesheet',
-      href: 'https://fonts.lug.ustc.edu.cn/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap'
+      href: 'https://fonts.googleapis.com/css?family=Fira+Code&display=swap'
+    }], //https://font.googleapis.com/css?family=Rubik&display=swap
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900&display=swap'
     }],
-
     ['link', {
       rel: 'shortcut icon',
       href: '/BlogFavicon16.png'
@@ -78,26 +81,31 @@ module.exports = {
         link: ""
       }]
     },
-    canonical_base: 'https://chungzh.cn',
-    prevText: '上一页',
-    nextText: '下一页',
-    lengthPerPage: '7',
-    layout: 'Pagination',
-  },
-  plugins: {
-    'sitemap': {
-      hostname: 'https://chungzh.cn'
+    feed: {
+      canonical_base: 'https://chungzh.cn'
     },
-    'vuepress-plugin-baidu-autopush': {},
-    '@vuepress/google-analytics': {
-      'ga': 'UA-145232074-1',
+    sitemap: {
+      hostname: "https://chungzh.cn/"
     },
-    '@vssue/vuepress-plugin-vssue': {
-      platform: 'github',
+
+    globalPagination: {
+      prevText: '👈上一页',
+      nextText: '下一页👉',
+      lengthPerPage: '6',
+      layout: 'Pagination'
+    },
+    comment: {
+      service: 'vssue',
       owner: 'ChungZH',
       repo: 'ChungZH.github.io',
       clientId: '70904e6b4944326400f3',
       clientSecret: '5bbc225640826f6dec55783db52b2205b55eff7a',
     },
+  },
+  plugins: {
+    'vuepress-plugin-baidu-autopush': {},
+    '@vuepress/google-analytics': {
+      'ga': 'UA-145232074-1',
+    }
   },
 }
