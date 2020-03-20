@@ -1,5 +1,4 @@
 const path = require('path');
-
 module.exports = {
   title: 'ChungZH 的小窝',
   description: 'ChungZH\'s Blog',
@@ -91,25 +90,24 @@ module.exports = {
     sitemap: {
       hostname: "https://chungzh.cn/"
     },
-
     globalPagination: {
-      prevText: '👈上一页',
-      nextText: '下一页👉',
+      prevText: '👈Prev',
+      nextText: 'Next👉',
       lengthPerPage: '6',
       layout: 'Pagination'
-    },
-    comment: {
-      service: 'vssue',
-      owner: 'ChungZH',
-      repo: 'ChungZH.github.io',
-      clientId: '70904e6b4944326400f3',
-      clientSecret: '5bbc225640826f6dec55783db52b2205b55eff7a',
     },
   },
   plugins: {
     'vuepress-plugin-baidu-autopush': {},
     '@vuepress/google-analytics': {
       'ga': 'UA-145232074-1',
+    },
+    '@vssue/vuepress-plugin-vssue': {
+      platform: 'github',
+      owner: 'ChungZH',
+      repo: 'ChungZH.github.io',
+      clientId: '70904e6b4944326400f3',
+      clientSecret: '5bbc225640826f6dec55783db52b2205b55eff7a',
     }
   },
 }

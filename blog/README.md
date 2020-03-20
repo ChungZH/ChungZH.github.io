@@ -18,14 +18,8 @@ title: 主页
 
 🐦 Twitter: [chungzh1](https://twitter.com/chungzh1)
 
-✈️ Telegram: [ChungZH](https://t.me/ChungZH)
-
 📫 Mail: chung.zh[AT]qq.com or chungzh07[AT]gmail.com
 
 📍  Foshan, Guangdong, China
-
-> 不相信自己的人，连努力的价值都没有。
-> 
-> *迈特·凯* —— *《火影忍者》*
 
 💪
