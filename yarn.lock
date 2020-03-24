@@ -1024,13 +1024,6 @@
   dependencies:
     lodash.debounce "^4.0.8"
 
-"@vuepress/plugin-back-to-top@^1.0.0-alpha.35":
-  version "1.4.0"
-  resolved "https://registry.npm.taobao.org/@vuepress/plugin-back-to-top/download/@vuepress/plugin-back-to-top-1.4.0.tgz#baca4daf8de469544956bb21903dbeba691d40e4"
-  integrity sha1-uspNr43kaVRJVrshkD2+umkdQOQ=
-  dependencies:
-    lodash.debounce "^4.0.8"
-
 "@vuepress/plugin-blog@^1.9.2":
   version "1.9.2"
   resolved "https://registry.npm.taobao.org/@vuepress/plugin-blog/download/@vuepress/plugin-blog-1.9.2.tgz#d463a218bf54b51a07b87eb703dc1cc9eddeef3c"
@@ -1064,13 +1057,6 @@
   dependencies:
     medium-zoom "^0.4.0"
 
-"@vuepress/plugin-medium-zoom@^1.0.0-alpha.35":
-  version "1.4.0"
-  resolved "https://registry.npm.taobao.org/@vuepress/plugin-medium-zoom/download/@vuepress/plugin-medium-zoom-1.4.0.tgz#42017b3c88f0a08a5070208219ea14371ca7170f"
-  integrity sha1-QgF7PIjwoIpQcCCCGeoUNxynFw8=
-  dependencies:
-    medium-zoom "^1.0.4"
-
 "@vuepress/plugin-nprogress@1.0.0":
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/@vuepress/plugin-nprogress/download/@vuepress/plugin-nprogress-1.0.0.tgz#a7777a54415cb6d6025e188c40180f8ec4e2837e"
@@ -1078,7 +1064,7 @@
   dependencies:
     nprogress "^0.2.0"
 
-"@vuepress/plugin-nprogress@^1.0.0-alpha.35", "@vuepress/plugin-nprogress@^1.4.0":
+"@vuepress/plugin-nprogress@^1.4.0":
   version "1.4.0"
   resolved "https://registry.npm.taobao.org/@vuepress/plugin-nprogress/download/@vuepress/plugin-nprogress-1.4.0.tgz#90bb16ab8d43321e5911dea489986de25adb56d1"
   integrity sha1-kLsWq41DMh5ZEd6kiZht4lrbVtE=
@@ -4962,11 +4948,6 @@ medium-zoom@^0.4.0:
   resolved "https://registry.npm.taobao.org/medium-zoom/download/medium-zoom-0.4.0.tgz#8e13c9b754903c0c903220611af0d3cd373a4222"
   integrity sha1-jhPJt1SQPAyQMiBhGvDTzTc6QiI=
 
-medium-zoom@^1.0.4:
-  version "1.0.5"
-  resolved "https://registry.npm.taobao.org/medium-zoom/download/medium-zoom-1.0.5.tgz#81413dda20ccdd857141ff420cfab788dd32e20e"
-  integrity sha1-gUE92iDM3YVxQf9CDPq3iN0y4g4=
-
 mem@^4.0.0:
   version "4.3.0"
   resolved "https://registry.npm.taobao.org/mem/download/mem-4.3.0.tgz#461af497bc4ae09608cdb2e60eefb69bff744178"
@@ -7818,13 +7799,6 @@ vuepress-plugin-baidu-autopush@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/vuepress-plugin-baidu-autopush/download/vuepress-plugin-baidu-autopush-1.0.1.tgz#e5042170f05a585c4a38f876e01ff4706cd82fbe"
   integrity sha1-5QQhcPBaWFxKOPh24B/0cGzYL74=
-
-vuepress-plugin-container@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.npm.taobao.org/vuepress-plugin-container/download/vuepress-plugin-container-1.1.2.tgz#3bcf10d335a657c7eb9938b1499d6a7c37625456"
-  integrity sha1-O88Q0zWmV8frmTixSZ1qfDdiVFY=
-  dependencies:
-    markdown-it-container "^2.0.0"
 
 vuepress-plugin-container@^2.0.2:
   version "2.1.2"

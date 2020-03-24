@@ -108,6 +108,7 @@ module.exports = {
       repo: 'ChungZH.github.io',
       clientId: '70904e6b4944326400f3',
       clientSecret: '5bbc225640826f6dec55783db52b2205b55eff7a',
-    }
+    },
+
   },
 }
