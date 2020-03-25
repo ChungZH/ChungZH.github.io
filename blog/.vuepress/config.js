@@ -82,6 +82,9 @@ module.exports = {
       }, {
         text: "Made with ❤",
         link: ""
+      }, {
+        text: "CC BY-NC-SA 2.5",
+        link: "https://creativecommons.org/licenses/by-nc-sa/2.5/cn/"
       }]
     },
     feed: {
