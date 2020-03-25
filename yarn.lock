@@ -7842,6 +7842,11 @@ vuepress-plugin-nprogress@^1.0.0:
   dependencies:
     nprogress "^0.2.0"
 
+vuepress-plugin-seo@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npm.taobao.org/vuepress-plugin-seo/download/vuepress-plugin-seo-0.1.2.tgz#132e656274bfaffce72e816fb8450951f3f6cc13"
+  integrity sha1-Ey5lYnS/r/znLoFvuEUJUfP2zBM=
+
 vuepress-plugin-sitemap@^2.1.1, vuepress-plugin-sitemap@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npm.taobao.org/vuepress-plugin-sitemap/download/vuepress-plugin-sitemap-2.3.1.tgz#51298aca77a5de96396fdbd1103e1637dd61ae6a"
