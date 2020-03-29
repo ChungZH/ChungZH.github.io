@@ -1,9 +1,7 @@
 ---
 title: 优雅地使用 C++ 制作表格：tabulate
-tags: 
-    - 编程
-    - C++
-    - 库
+tags:
+  - C++
 date: 2020/02/21 11:45:00
 author: ChungZH
 location: Foshan
@@ -28,7 +26,7 @@ vssue-title: tabulate
 创建一个文件夹（下文用 X 代替），作为你使用 tabulate 的地方。再将 [include](https://github.com/p-ranav/tabulate/tree/master/include) 这个文件夹下载到 X 里。然后在 X 里创建 `main.cpp` 以及一个 `CMakeLists.txt`。
 
 > 注意：需要下载 `include` **整个**文件夹而不是仅仅下载 `tabulate` 文件夹
-> 
+>
 > 你可以点击 [这里](https://github.com/p-ranav/tabulate/archive/master.zip) 下载 tabulate 项目，然后将 `include` 文件夹复制到 X 中。
 
 将下面的代码复制进 `CMakeLists.txt` ：
@@ -73,7 +71,7 @@ int main()
 {
     Table hellogithub; // 创建一个叫做 hellogithub 的 Table 对象
 
-    hellogithub.add_row({"HelloGitHub"}); 
+    hellogithub.add_row({"HelloGitHub"});
     hellogithub.add_row({"hellogithub.com"});
     hellogithub[1][0].format()
         .font_style({fonttyle::underline});
@@ -88,7 +86,7 @@ int main()
 ```
 
 - 如果你使用的是 Linux/MacOS 系统，请在终端进入 X 文件夹并输入以下命令：
-  
+
   ```bash
   mkdir build
   cd build
@@ -98,7 +96,7 @@ int main()
   ```
 
 - 如果你使用的是 Windows 系统和 MinGW，请检查是否安装 `mingw32-make.exe`，并在终端中进入 X 文件夹，输入：
-  
+
   ```powershell
   mkdir build
   cd build
@@ -108,14 +106,14 @@ int main()
   ```
 
 - 如果你使用 Windows 以及 MSVC，在终端中输入：
-  
+
   ```powershell
   mkdir build
   cd build
   cmake ..
   ```
 
-    然后使用 Visual Studio 打开 `build` 文件夹下的 `tabulateDemo.sln` 来运行。
+然后使用 Visual Studio 打开 `build` 文件夹下的 `tabulateDemo.sln` 来运行。
 
 如果没有问题，那么你应该会在终端里看到：
 
@@ -183,7 +181,7 @@ int main()
 {
     Table hellogithub;
 
-    hellogithub.add_row({"HelloGitHub"}); 
+    hellogithub.add_row({"HelloGitHub"});
     hellogithub[0][0].format()
         .font_align(FontAlign::center); // 设置居中对齐
     hellogithub.add_row({"hellogithub.com"});
@@ -225,7 +223,7 @@ tabulate 支持以下八种字体样式：
 - 删除线 `crossed`
 
 > 某些样式可能会因为终端的原因而无法显示。
-> 
+>
 > 如：粗体、深色、斜体、闪烁等样式，请慎用。
 
 要使用这些样式，可以调用 `.format().font_style({...})`。样式也可以叠加使用。
@@ -260,7 +258,7 @@ tabulate 支持 8 种颜色：
 #include "tabulate/table.hpp"
 using namespace tabulate;
 using namespace std;
-int main() 
+int main()
 {
     Table colors;
 
@@ -319,7 +317,7 @@ int main()
 
 你可以对表格的边框和角的文本、颜色或背景颜色进行自定义。
 
-你可以使用 `.corner(..)`、`.corner_color(..)` 和 `corner_background_color(..)` 来对所有的角设置一个共同的样式。你也可以使用 `.border(..)` 、`.border_color(..)` 和 `.border_background_color(..)` 来对所有的边框设置一个共同的样式。
+你可以使用 `.corner(..)`、`.corner_color(..)` 和 `corner_background_color(..)`  来对所有的角设置一个共同的样式。你也可以使用  `.border(..)` 、`.border_color(..)` 和  `.border_background_color(..)`  来对所有的边框设置一个共同的样式。
 
 这是一个单独设定所有边框和角的示例：
 
@@ -327,7 +325,7 @@ int main()
 #include <tabulate/table.hpp>
 using namespace tabulate;
 
-int main() 
+int main()
 {
   Table table;
 
@@ -420,7 +418,7 @@ int main() {
       for (auto& cell : row) {
         cell.format()
           .font_background_color(Color::blue);
-      }      
+      }
     }
     index += 1;
   }
@@ -492,7 +490,7 @@ int main() {
 导出效果如下：
 
 | HelloGitHub                                      |
-|:------------------------------------------------ |
+| :----------------------------------------------- |
 | GitHub repo: github.com/521xueweihan/HelloGitHub |
 | Website: hellogithub.com                         |
 

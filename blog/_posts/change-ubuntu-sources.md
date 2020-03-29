@@ -2,8 +2,8 @@
 title: Ubuntu 更换国内源
 date: 2019-05-28 17:04:00
 tags:
-- Ubuntu
-- 系统
+  - Ubuntu
+  - 系统
 author: ChungZH
 location: Foshan
 summary: 慢 死 了 --> 快 死 了
@@ -112,17 +112,5 @@ sudo apt-get update
 ```
 
 即可。
-
-------
-
-就酱，三个源自己选一个就好啦。
-
-------
-
-ChungZH
-
-2019 - 5 - 28 @ 广东 - 佛山 
-
-#EOF
 
 <Vssue title="change-ubuntu-sources" />
