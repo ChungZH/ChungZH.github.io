@@ -99,4 +99,5 @@ Import-Module posh-git
 
 Enjoy it ☕~
 
+<Donate/>
 <Vssue title="beautify-your-powershell" />

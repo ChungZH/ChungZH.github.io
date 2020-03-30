@@ -238,4 +238,5 @@ int main() {
 
 3. [Microsoft Docs](https://docs.microsoft.com/zh-cn)
 
+<Donate/>
 <Vssue title="cpp-get-time" />

@@ -122,4 +122,5 @@ curl -fsSL https://sh.poac.pm | bash
 ![poac](https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/poac.gif)
 
 
+<Donate/>
 <Vssue title="C/C++ Package Manager" />

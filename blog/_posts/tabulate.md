@@ -504,4 +504,5 @@ int main() {
 
 再见！
 
+<Donate/>
 <Vssue title="tabulate" />

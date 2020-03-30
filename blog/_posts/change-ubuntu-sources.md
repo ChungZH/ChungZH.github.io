@@ -113,4 +113,5 @@ sudo apt-get update
 
 即可。
 
+<Donate/>
 <Vssue title="change-ubuntu-sources" />

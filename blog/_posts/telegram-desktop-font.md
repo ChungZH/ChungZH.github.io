@@ -33,15 +33,6 @@ Telegram Desktop 就是使用 Qt 开发的，这方法也许能行！
 
 想知道 FontMod 的更多骚操作，请见[文档](https://github.com/ysc3839/FontMod/blob/master/README.zh_CN.md)。
 
-------
 
-鼠年大吉！
-
-ChungZH
-
-2020 - 1 - 25 @ 广东 - 佛山
-
-#EOF
-
-
+<Donate/>
 <Vssue title="telegram-desktop-font"/>
