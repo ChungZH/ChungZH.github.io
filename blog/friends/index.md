@@ -11,7 +11,7 @@ title: 友链
 | 欢迎友链                                          | 先友后链                                                         |
 | ------------------------------------------------- | ---------------------------------------------------------------- |
 | [Koufan](https://keith-koufan.github.io/)         | [keithxodoy](https://www.edmath.cn/)                             |
-| [xuan](http://cugxuan.coding.me)                  | [三水非冰](https://www.sanshuifeibing.cn)                        |
+| [泫](https://blog.cugxuan.cn)                     | [三水非冰](https://www.sanshuifeibing.cn)                        |
 | [GogesL](https://lyq.blogd.club)                  | [zzzmh](https://zzzmh.cn)                                        |
 | [Anoyer](https://anoyer.cn/)                      | [j0ck1e](https://blog.j0ck1e.com)                                |
 | [Alliot's blog](https://www.iots.vip)             | [StaunchKai](https://staunchkai.com)                             |
