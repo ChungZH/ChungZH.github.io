@@ -24,7 +24,6 @@ title: 主页
 
 💪
 
-
 :::theorem 关于本站
 
 本站使用 [Vuepress](https://github.com/vuejs/vuepress) 和 [@vuepress/theme-blog](https://github.com/vuepressjs/vuepress-theme-blog/) 主题搭建。如有疑问，请阅读源码： [ChungZH.github.io](https://github.com/ChungZH/ChungZH.github.io)。
@@ -33,7 +32,8 @@ title: 主页
 
 如无特殊说明，本站的内容均使用 [CC BY-NC-SA 2.5](https://creativecommons.org/licenses/by-nc-sa/2.5/cn/) 协议。
 
-:::
+本站还支持了 Dark Mode 哦！使用的是 [`prefers-color-scheme`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) 特性，跟随系统的设置而变化。推荐使用 Chrome 浏览器在 Android 上享受此特性。
 
+:::
 
 <Donate/>
