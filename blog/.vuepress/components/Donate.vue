@@ -1,7 +1,7 @@
 <template>
   <div class="donate" align="center">
     <button class="btn-show-donate" v-on:click="hide = !hide">
-        大哥来打赏 🍺
+        请我喝可乐 🍻
     </button>
     <transition name="fade">
       <div v-show="!hide" class="donate-d">

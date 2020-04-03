@@ -24,12 +24,16 @@ title: 主页
 
 💪
 
----
+
+:::theorem 关于本站
 
 本站使用 [Vuepress](https://github.com/vuejs/vuepress) 和 [@vuepress/theme-blog](https://github.com/vuepressjs/vuepress-theme-blog/) 主题搭建。如有疑问，请阅读源码： [ChungZH.github.io](https://github.com/ChungZH/ChungZH.github.io)。
 
 推荐搭配 [思源宋体 Source Han Serif](https://github.com/adobe-fonts/source-han-serif) 进行食用 😋
 
 如无特殊说明，本站的内容均使用 [CC BY-NC-SA 2.5](https://creativecommons.org/licenses/by-nc-sa/2.5/cn/) 协议。
+
+:::
+
 
 <Donate/>

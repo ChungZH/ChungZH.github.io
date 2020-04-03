@@ -1,14 +1,9 @@
 const path = require("path");
 module.exports = {
   title: "ChungZH 的小窝",
-  description: "ChungZH's Blog",
+  description: "Young, Simple, Naive, Stupid",
   dest: path.resolve(__dirname, "../../dist"),
   evergreen: true,
-  locales: {
-    "/": {
-      lang: "zh-CN"
-    }
-  },
   head: [
     [
       "link",
@@ -52,13 +47,6 @@ module.exports = {
       {
         name: "author",
         content: "ChungZH"
-      }
-    ],
-    [
-      "script",
-      {
-        "data-ad-client": "ca-pub-4609798364954097",
-        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
       }
     ]
 
@@ -168,6 +156,11 @@ module.exports = {
       publishedAt: $page =>
         $page.frontmatter.date && new Date($page.frontmatter.date),
       modifiedAt: $page => $page.lastUpdated && new Date($page.lastUpdated)
+    },
+    container: {
+      type: "theorem",
+      before: info => `<div class="theorem"><p class="title">${info}</p>`,
+      after: "</div>"
     }
   }
 };

@@ -1,25 +1,145 @@
 h1, h2, h3, h4, h5, h6, .vssue, .ui-post-title a, body, .content-wrapper .vuepress-blog-theme-content
-    font-family: 'Exo 2', 'Noto Serif SC','Noto Serif CJK SC', 'Noto Serif CJK', 'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+  font-family 'Exo 2', 'Noto Serif SC','Noto Serif CJK SC', 'Noto Serif CJK', 'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
 
 code, kbd, .line-number 
-    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
+  font-family 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
 
 .ui-post-summary, .ui-post-date, .ui-post-tag, .ui-post-tag a
-    font-weight: 300
+  font-weight 300
 
 strong, h1, h2, h3, h4, h5, h6, .ui-post-title a
-    font-weight: 700
+  font-weight 700
 
 body 
-    line-height: 1
-    background-color: rgb(248, 248, 240)
-    font-size: 1.1em
+  line-height 1
+  font-size 1.1em
 
 blockquote
-    font-size: 1.06em
+  font-size 1.06em
 
 p
-    font-size: 1.1em
+  font-size 1.1em
 
 ::selection 
-  background-color: rgb(229, 229, 229)
+  background-color rgb(229, 229, 229)
+
+.theorem
+  margin 1rem 0
+  padding .1rem 1.5rem
+  border 2px dashed #2dda91
+  border-radius 0.4rem
+  &:hover
+    transition transform .3s,background-color .3s,box-shadow .6s
+    transform translateY(-2px);
+    box-shadow 1px 10px 30px 0 rgba(0,0,0,.2)
+  .title
+    font-weight bold
+    color #2dda91
+
+.custom-block
+  &.tip, &.warning, &.danger
+    padding .1rem 1.5rem
+    border-left-width .5rem
+    border-left-style solid
+    margin 1rem 0
+  &.tip
+    border-color #42b983
+    .custom-block-title
+      color #42b983
+  &.warning
+    border-color darken(#ffe564, 35%)
+    color darken(#ffe564, 70%)
+    .custom-block-title
+      color darken(#ffe564, 50%)
+    a
+      color $textColor
+  &.danger
+    border-color darken(red, 20%)
+    color darken(red, 70%)
+    .custom-block-title
+      color darken(red, 40%)
+    a
+      color $textColor
+  &.details
+    display block
+    position relative
+    border-radius 2px
+    margin 1.6em 0
+    padding 1.6em
+    background-color #eee
+    h4
+      margin-top 0
+    figure, p
+      &:last-child
+        margin-bottom 0
+        padding-bottom 0
+    summary
+      outline none
+      cursor pointer
+  &.right
+    color transparentify($textColor, 0.5)
+    font-size 1rem
+    text-align right
+  &:hover
+    transition transform .3s,background-color .3s,box-shadow .6s
+    transform translateY(-2px);
+    box-shadow 1px 10px 30px 0 rgba(0,0,0,.2)
+
+// DARK MODE!!!
+@media (prefers-color-scheme: dark) 
+  body
+    background-color #38444c 
+    color #f0f2f3 
+
+  tr:nth-child(2n)
+    background-color #5e6d7c !important
+
+  blockquote
+    color #9dafac
+  
+  .content__default code
+    color #93a7ba
+    background-color rgba(27, 31, 35, 0.05)
+
+  h2
+    border-bottom 1px solid rgba(255,255,255,0.3)
+
+  #header
+    background-color #2e3235
+
+  .vssue, .markdown-body
+    color #ffffff !important
+
+  .header-wrapper .title a, .nav-item a, .ui-post-title a
+    color rgb(240, 243, 244) !important
+    &:hover
+      color #1abc9c !important
+
+  .vuepress-toc-item 
+    border-left 1px solid rgba(124, 124, 124, 0.4) !important
+    a
+      color rgb(124, 124, 124) !important
+
+  .vuepress-toc-item.active 
+    border-left 1px solid #1abc9c !important
+    a
+      color #1abc9c !important
+
+  .ui-post-summary, .ui-post-date, .ui-post-tag
+    color rgba(240, 243, 244, 0.54) !important
+
+  .ui-post-author
+    color rgba(240, 243, 244, 0.84) !important 
+
+  .vuepress-blog-theme-content
+    background-color #2e3235 !important
+    color rgb(240, 243, 244) !important
+
+	.post-tag
+		background-color #1f1d1d !important
+
+  .blog-tag
+    color rgb(240, 243, 244) !important
+    border 1px solid rgb(240, 243, 244) !important
+  
+  
