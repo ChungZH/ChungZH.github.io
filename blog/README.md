@@ -4,6 +4,8 @@ title: 主页
 
 ### Hello，我是 ChungZH！
 
+Welcome to my Blog!
+
 我的 portfolio 个人主页在 [https://chungzh.cc](https://chungzh.cc)。
 
 一个只会敲点 C++ 的小学生，预备 OIer。~~也许还算有点脑子~~
@@ -32,7 +34,7 @@ title: 主页
 
 如无特殊说明，本站的内容均使用 [CC BY-NC-SA 2.5](https://creativecommons.org/licenses/by-nc-sa/2.5/cn/) 协议。
 
-本站还支持了 Dark Mode 哦！使用的是 [`prefers-color-scheme`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) 特性，跟随系统的设置而变化。推荐使用 Chrome 浏览器在 Android 上享受此特性。
+本站还支持了 Dark Mode 哦！使用的是 [`prefers-color-scheme`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) 特性，跟随系统的设置而变化。如果是在 Android 系统上，可使用 Chrome 浏览器享受此特性。
 
 :::
 
