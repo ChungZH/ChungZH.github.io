@@ -20,3 +20,4 @@ title: 友链
 | [Yi-yun](https://yi-yun.github.io/)       | [Markjuruo - 静下心来，记录知识。](https://markjuruo.coding.me/)      |
 | [Alpha1022](https://www.alpha1022.me/)    | [HUI BLOG](https://www.aclihui.com)                         |
 | [JunzhouLiu](https://liujunzhou.top/)     | [Vigorous Pro](https://www.wevg.org/)                       |
+| [大尾巴苏卡卡的有底洞](https://blog.skk.moe)        |                                                             |
