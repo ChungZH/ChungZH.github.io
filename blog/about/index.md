@@ -1,5 +1,5 @@
 ---
-title: 主页
+title: 关于
 ---
 
 ### Hello，我是 ChungZH！
@@ -10,19 +10,14 @@ Welcome to my Blog!
 
 一个只会敲点 C++ 的小学生，预备 OIer。~~也许还算有点脑子~~
 
-**我真菜，真的。**
-
-<GetStarted/>
+**是个菜鸡。**
 
 ---
 
-🐙 GitHub: [ChungZH](https://github.com/ChungZH)
-
-🐦 Twitter: [chungzh1](https://twitter.com/chungzh1)
-
-📫 Mail: chung.zh[AT]qq.com or chungzh07[AT]gmail.com
-
-📍 Foshan, Guangdong, China
+- 🐙 GitHub: [ChungZH](https://github.com/ChungZH)
+- 🐦 Twitter: [chungzh1](https://twitter.com/chungzh1)
+- 📫 Mail: chung.zh[AT]qq.com or chungzh07[AT]gmail.com
+- 📍 Foshan, Guangdong, China
 
 💪
 
@@ -34,7 +29,7 @@ Welcome to my Blog!
 
 如无特殊说明，本站的内容均使用 [CC BY-NC-SA 2.5](https://creativecommons.org/licenses/by-nc-sa/2.5/cn/) 协议。
 
-本站还支持了 Dark Mode 哦！使用的是 [`prefers-color-scheme`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) 特性，跟随系统的设置而变化。如果是在 Android 系统上，可使用 Chrome 浏览器享受此特性。
+本站还支持了 Dark Mode 哦！使用的是 [prefers-color-scheme](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) 特性，跟随系统的设置而变化。如果是在 Android 系统上，可使用 Chrome 浏览器享受此特性。
 
 :::
 

@@ -54,19 +54,10 @@ module.exports = {
   ],
   theme: "@vuepress/theme-blog",
   themeConfig: {
-    directories: [
-      {
-        id: "posts",
-        dirname: "_posts",
-        title: "博客",
-        path: "/_posts/",
-        itemPermalink: "/_posts/:year/:month/:day/:slug",
-      },
-    ],
     nav: [
       {
-        text: "博客",
-        link: "/_posts/",
+        text: "关于",
+        link: "/about/",
       },
       {
         text: "友链",
@@ -98,7 +89,7 @@ module.exports = {
       ],
       copyright: [
         {
-          text: "ChungZH © 2019",
+          text: "ChungZH © 2020",
           link: "",
         },
         {
