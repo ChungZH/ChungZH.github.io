@@ -16,7 +16,7 @@ title: 友链
 | [JunzhouLiu](https://liujunzhou.top/)     | [j0ck1e](https://blog.j0ck1e.com)                           |
 | [Alliot's blog](https://www.iots.vip)     | [StaunchKai](https://staunchkai.com)                        |
 | [mmbbao](https://www.mmbbao.com)          | [liu ziting - 写代码的手艺人](http://www.lihail.cn/)               |
-| [Zidone - 深自缄默 如云漂泊](https://www.aye.ink) | [SDEVXD - Code poetry.](http://sdevxd.coding.me/book-blog/) |
+| [Zidone - 深自缄默 如云漂泊](https://www.aye.ink) | [MrWillCom](http://mrwillcom.github.io/) |
 | [Yi-yun](https://yi-yun.github.io/)       | [Markjuruo](https://markjuruo.coding.me/)                   |
 | [Alpha1022](https://www.alpha1022.me/)    | [Vigorous Pro](https://www.wevg.org/)                       |
 | [左手的世界](https://amazingrise.net/)         |                                                             |
