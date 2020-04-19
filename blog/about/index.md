@@ -55,8 +55,7 @@ title: 关于
 - 谨小慎微；
 - 不折腾会死星人；
 - 信奉「好看就是生产力」の真理；
-- 深谙人类的本质（咕咕咕 咕咕）；
-- 没有口才
+- 深谙人类的本质（咕咕咕 咕咕）
 
 ## 找我来玩
 
@@ -72,7 +71,7 @@ title: 关于
 
 本站使用 [Vuepress](https://github.com/vuejs/vuepress) 和 [@vuepress/theme-blog](https://github.com/vuepressjs/vuepress-theme-blog/) 主题搭建。如有疑问，请阅读源码： [ChungZH.github.io](https://github.com/ChungZH/ChungZH.github.io)。
 
-推荐搭配 [思源宋体 Source Han Serif](https://github.com/adobe-fonts/source-han-serif) 进行食用 😋
+推荐搭配 思源宋体 & 思源黑体 进行食用 😋
 
 如无特殊说明，本站的内容均使用 [CC BY-NC-SA 2.5](https://creativecommons.org/licenses/by-nc-sa/2.5/cn/) 协议。
 

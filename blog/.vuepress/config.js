@@ -116,6 +116,8 @@ module.exports = {
     },
   },
   plugins: {
+    "@vuepress/medium-zoom": {},
+    "vuepress-plugin-smooth-scroll": {},
     "vuepress-plugin-baidu-autopush": {},
     "@vuepress/google-analytics": {
       ga: "UA-145232074-1",
