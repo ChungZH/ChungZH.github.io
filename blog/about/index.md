@@ -8,6 +8,8 @@ title: 关于
 
 ## 欢迎光临
 
+<img style="display:block; margin:0 auto;" src="https://s1.ax1x.com/2020/04/19/JuatAg.gif" width="250px"/>
+
 嘿，你好呀 \(@^0^@)/
 
 欢迎来到我的小窝~能来到这个小破站，也是一种缘分吧！
@@ -27,10 +29,11 @@ title: 关于
 - 12 y/o，准初一；
 - Love Emoji；
 - 喜欢的：
-  - 品牌：🐒小米、🍎苹果（买不起）还有 Micro$oft！；
+  - 品牌：🐒 小米、🍎 苹果（买不起）还有 Micro\$oft！；
   - 运动：🏓 和 🏸；
   - 设计风格：Fluent Design 和 Material Design 2；
   - 音乐：摇滚 & 后摇 & 民谣；
+  - 动物：🐖🐱🐕 猪猪和阿猫阿狗；
   - Tab 长度：2 格或 4 格均可；
   - 编程语言：C++（虽然还很不熟悉）；
   - 编辑器：VS Code；
@@ -60,7 +63,7 @@ title: 关于
 - 🐙 GitHub: （[ChungZH](https://github.com/ChungZH)）
 - 🐦 Twitter: （[chungzh1](https://twitter.com/chungzh1)）
 - 🛫 Telegram: （[realChungZH](https://t.me/realChungZH)）
-- 📫 Mail: （`chung.zh[AT]qq.com` or `chungzh07[AT]gmail.com`）
+- 📫 E-Mail: （`chung.zh[AT]qq.com` or `chungzh07[AT]gmail.com`）
 - 🚩 Foshan, Guangdong, China
 
 💪
