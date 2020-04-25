@@ -4,7 +4,7 @@
         <title>ChungZH 的小窝</title>
         <link>https://chungzh.cn</link>
         <description>Young, Simple, Naive, Stupid</description>
-        <lastBuildDate>Sun, 19 Apr 2020 06:42:20 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 25 Apr 2020 04:48:53 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <item>
@@ -85,6 +85,15 @@
             <pubDate>Sat, 23 Feb 2019 03:46:00 GMT</pubDate>
             <description><![CDATA[awsl，太难了，是链表！]]></description>
             <enclosure url="https://chungzh.cn/https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/14/node.png &quot;结点示意图&quot;">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[记一次连不上梯子的经历]]></title>
+            <link>https://chungzh.cn/2020/04/25/note-cannot-fq/</link>
+            <guid>https://chungzh.cn/2020/04/25/note-cannot-fq/</guid>
+            <pubDate>Sat, 25 Apr 2020 04:45:00 GMT</pubDate>
+            <description><![CDATA[所以说，当自己鼓捣不好的时候一定要习惯使用搜索引擎。比如这件事情里我就完全没有搜索过，而是在群里提问。还好群里的大佬平易近人，愿意回答这种白痴问题。要是遇到氛围不一样的社区那可就不一定能有这么好的结果了。]]></description>
+            <enclosure url="https://i.loli.net/2020/04/25/7pwvTEegPjXCKRs.jpg">
             </enclosure>
         </item>
         <item>
