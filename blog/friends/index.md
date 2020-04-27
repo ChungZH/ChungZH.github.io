@@ -24,6 +24,7 @@ title: 友链
 - [Vigorous Pro](https://www.wevg.org/)
 - [左手的世界](https://amazingrise.net/)
 - [PRIN BLOG](https://printempw.github.io/)
+- [Royce](https://royce2003.top/)
 
 ## 收藏夹 ~~单向恋~~
 
