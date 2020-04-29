@@ -4,7 +4,7 @@
         <title>ChungZH 的小窝</title>
         <link>https://chungzh.cn</link>
         <description>Young, Simple, Naive, Stupid</description>
-        <lastBuildDate>Wed, 29 Apr 2020 11:48:04 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 29 Apr 2020 11:59:30 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <item>
@@ -109,6 +109,8 @@
             <guid>https://chungzh.cn/2020/04/25/qt-signal-slot/</guid>
             <pubDate>Sat, 25 Apr 2020 09:45:00 GMT</pubDate>
             <description><![CDATA[Qt 酱真是太可爱太强大啦~(づ￣ 3￣)づ么么]]></description>
+            <enclosure url="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/qt-signal-slot/abstract-connections.png">
+            </enclosure>
         </item>
         <item>
             <title><![CDATA[队列浅析 - 数据结构笔记]]></title>
