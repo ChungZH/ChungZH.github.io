@@ -155,6 +155,14 @@ module.exports = {
       before: (info) => `<div class="theorem"><p class="title">${info}</p>`,
       after: "</div>",
     },
+    container: {
+      type: "right",
+      defaultTitle: "",
+    },
+    container: {
+      type: "tip",
+      defaultTitle: "提示",
+    },
     "img-lazy": {},
   },
 };
