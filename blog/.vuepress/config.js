@@ -108,12 +108,6 @@ module.exports = {
     sitemap: {
       hostname: "https://chungzh.cn/",
     },
-    globalPagination: {
-      prevText: "👈Prev",
-      nextText: "Next👉",
-      lengthPerPage: "6",
-      layout: "Pagination",
-    },
   },
   plugins: {
     "@vuepress/medium-zoom": {},
