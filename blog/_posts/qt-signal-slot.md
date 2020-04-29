@@ -35,11 +35,13 @@ connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
 
 先引用一段来自 Qt 官方文档的文字进一步说明 Signal & Slot 机制
 
-:::theorem Signal & Slot
+
+:::theorem Signal&Slot
+
 Signal & Slot 机制是类型安全的: Signal 的签名必须与接收槽的签名相匹配。（事实上，一个 Slot 的签名可能比它接收到的 Signal 更短，因为它可以忽略额外的参数）由于签名是兼容的，当使用基于函数指针的语法时，编译器可以帮助我们检测类型不匹配。基于字符串的 SIGNAL 和 SLOT 语法将在运行时检测类型不匹配。Signal 和 Slot 是松散耦合的: 发出信号的类既不知道也不关心哪些插槽接收信号。Qt 的 Signal 和 Slot 机制确保了如果您将 Signal 连接到 Slot，Slot 将在正确的时间用 Signal 的参数调用。Signal 和 Slot 可以接受任意类型的任意数量的参数。
 
-> From Qt Documentation
 :::
+
 
 看不懂？没关系，我举一个带有参数的 Signal & Slot 例子。
 
@@ -91,9 +93,8 @@ class TextEditor : public QPlainTextEdit
 ```
 
 > **提醒**：
->
+> 
 > Signal 函数必须是 `void` 类型的。
-
 
 然后，我要在改动文件 title 时发送这个 `changeTitle` Signal。可以这样写：
 
@@ -137,7 +138,6 @@ Qt 酱还是很有趣的！我越来越喜欢她啦~
 ## Reference
 
 1. [Signal & Slots - Qt Documentation](https://doc.qt.io/qt-5/signalsandslots.html)
-
 
 <Donate/>
 <Vssue title="Qt-signal-slot" />
