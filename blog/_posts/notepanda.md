@@ -16,6 +16,8 @@ vssue-title: notepanda
 
 最近开始学习 Qt，然后就挖坑了一个小玩具 Notepanda，顺便看看能不能替代诸如 notepad、gedit 之类的软件。顺便锻炼一下自己。
 
+[GitHub repo](https://github.com/ChungZH/notepanda)
+
 ## Feature
 
 1. 基本的文本编辑操作（没想到吧这也是 feature 了哈哈哈哈哈哈）
