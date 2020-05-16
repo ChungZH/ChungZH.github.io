@@ -4,7 +4,7 @@
         <title>ChungZH 的小窝</title>
         <link>https://chungzh.cn</link>
         <description>Young, Simple, Naive, Stupid</description>
-        <lastBuildDate>Tue, 05 May 2020 05:00:27 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 16 May 2020 03:18:02 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <item>
@@ -104,6 +104,15 @@
             <description><![CDATA[漂亮的记事本，完美替代 win32 notepad！]]></description>
         </item>
         <item>
+            <title><![CDATA[Notepanda 开发小结]]></title>
+            <link>https://chungzh.cn/2020/05/16/notepanda/</link>
+            <guid>https://chungzh.cn/2020/05/16/notepanda/</guid>
+            <pubDate>Sat, 16 May 2020 02:45:00 GMT</pubDate>
+            <description><![CDATA[别看题目这么正经，其实就是一小玩具！揪咪～]]></description>
+            <enclosure url="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc1.png">
+            </enclosure>
+        </item>
+        <item>
             <title><![CDATA[Qt 中的 Signal/Slot]]></title>
             <link>https://chungzh.cn/2020/04/25/qt-signal-slot/</link>
             <guid>https://chungzh.cn/2020/04/25/qt-signal-slot/</guid>
@@ -160,15 +169,6 @@
             <pubDate>Sat, 02 Mar 2019 04:28:00 GMT</pubDate>
             <description><![CDATA[又双叒叕搞博客了]]></description>
             <enclosure url="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png">
-            </enclosure>
-        </item>
-        <item>
-            <title><![CDATA[优雅地使用 C++ 制作表格：tabulate]]></title>
-            <link>https://chungzh.cn/2020/02/21/tabulate/</link>
-            <guid>https://chungzh.cn/2020/02/21/tabulate/</guid>
-            <pubDate>Fri, 21 Feb 2020 03:45:00 GMT</pubDate>
-            <description><![CDATA[优雅地用 C++ 做表格！]]></description>
-            <enclosure url="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png">
             </enclosure>
         </item>
     </channel>
