@@ -36,9 +36,7 @@ connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
 
 
 ::: theorem Signal&Slot
-
 Signal & Slot 机制是类型安全的: Signal 的签名必须与接收槽的签名相匹配。（事实上，一个 Slot 的签名可能比它接收到的 Signal 更短，因为它可以忽略额外的参数）由于签名是兼容的，当使用基于函数指针的语法时，编译器可以帮助我们检测类型不匹配。基于字符串的 SIGNAL 和 SLOT 语法将在运行时检测类型不匹配。Signal 和 Slot 是松散耦合的: 发出信号的类既不知道也不关心哪些插槽接收信号。Qt 的 Signal 和 Slot 机制确保了如果您将 Signal 连接到 Slot，Slot 将在正确的时间用 Signal 的参数调用。Signal 和 Slot 可以接受任意类型的任意数量的参数。
-
 :::
 
 
