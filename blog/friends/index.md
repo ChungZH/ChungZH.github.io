@@ -25,6 +25,7 @@ title: 友链
 - [左手的世界](https://amazingrise.net/)
 - [PRIN BLOG](https://printempw.github.io/)
 - [Artin's Blog](https://lengthmin.me/)
+- [Coelacanthus](https://blog.lhwcrt.top/)
 - [Louis Aeilot's site](https://aeilot.github.io)
 
 ## 收藏夹 ~~单向恋~~
