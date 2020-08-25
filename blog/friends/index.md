@@ -27,6 +27,7 @@ title: 友链
 - [Artin's Blog](https://lengthmin.me/)
 - [Coelacanthus](https://blog.lhwcrt.top/)
 - [Louis Aeilot's site](https://aeilot.github.io)
+- [EpBlog](https://epliar.com)
 
 ## 收藏夹 ~~单向恋~~
 
