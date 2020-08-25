@@ -26,6 +26,8 @@ title: 友链
 - [PRIN BLOG](https://printempw.github.io/)
 - [Artin's Blog](https://lengthmin.me/)
 - [EpLiar](https://epliar.com/)
+- [Coelacanthus](https://blog.lhwcrt.top/)
+- [Louis Aeilot's site](https://aeilot.github.io)
 
 ## 收藏夹 ~~单向恋~~
 
