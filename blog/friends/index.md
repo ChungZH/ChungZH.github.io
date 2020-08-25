@@ -25,6 +25,7 @@ title: 友链
 - [左手的世界](https://amazingrise.net/)
 - [PRIN BLOG](https://printempw.github.io/)
 - [Artin's Blog](https://lengthmin.me/)
+- [EpLiar](https://epliar.com/)
 
 ## 收藏夹 ~~单向恋~~
 
