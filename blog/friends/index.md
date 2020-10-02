@@ -17,7 +17,7 @@ title: 友链
 - [JunzhouLiu](https://liujunzhou.top/) 
 - [j0ck1e](https://blog.j0ck1e.com)
 - [Alliot's blog](https://www.iots.vip)
-- [StaunchKai](https://staunchkai.com)
+- [CareyQ](https://careyq.cool)
 - [Zidone](https://www.aye.ink)
 - [Yi-yun](https://yi-yun.github.io/)
 - [Alpha1022](https://www.alpha1022.me/)
