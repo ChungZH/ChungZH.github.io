@@ -144,19 +144,6 @@ module.exports = {
         $page.frontmatter.date && new Date($page.frontmatter.date),
       modifiedAt: ($page) => $page.lastUpdated && new Date($page.lastUpdated),
     },
-    container: {
-      type: "theorem",
-      before: (info) => `<div class="theorem"><p class="title">${info}</p>`,
-      after: "</div>",
-    },
-    container: {
-      type: "right",
-      defaultTitle: "",
-    },
-    container: {
-      type: "tip",
-      defaultTitle: "提示",
-    },
     "img-lazy": {},
   },
 };

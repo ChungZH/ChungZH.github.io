@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
-    "vuepress": "^1.4.1",
+    "vuepress": "^1.7.1",
     "vuepress-plugin-img-lazy": "^1.0.3",
     "vuepress-plugin-nprogress": "^1.0.0",
     "vuepress-plugin-smooth-scroll": "^0.0.9",
