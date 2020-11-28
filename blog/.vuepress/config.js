@@ -103,10 +103,10 @@ module.exports = {
       ],
     },
     feed: {
-      canonical_base: "https://chungzh.cn",
+      canonical_base: "https://blog.chungzh.cn",
     },
     sitemap: {
-      hostname: "https://chungzh.cn/",
+      hostname: "https://blog.chungzh.cn/",
     },
   },
   plugins: {
