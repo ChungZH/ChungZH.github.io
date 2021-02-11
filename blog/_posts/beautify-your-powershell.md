@@ -3,7 +3,7 @@ title: 美化你的 Powershell
 tags: 
 - Powershell
 - 终端
-date: 2019/02/23 11:50:00
+date: 2019-02-23 11:50:00
 author: ChungZH
 location: Foshan
 summary: 介绍一下 Powershell 的美化方式。

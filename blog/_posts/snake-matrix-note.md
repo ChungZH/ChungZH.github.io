@@ -6,7 +6,7 @@ tags:
 - 蛇形矩阵
 - 刷题
 - 算法
-date: 2019/02/23 11:48:00
+date: 2019-02-23 11:48:00
 author: ChungZH
 location: Foshan
 summary: 🐍蛇形矩阵

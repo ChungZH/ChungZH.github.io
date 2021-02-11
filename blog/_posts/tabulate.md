@@ -2,7 +2,7 @@
 title: 优雅地使用 C++ 制作表格：tabulate
 tags:
   - C++
-date: 2020/02/21 11:45:00
+date: 2020-02-21 11:45:00
 author: ChungZH
 location: Foshan
 summary: 优雅地用 C++ 做表格！

@@ -4,7 +4,7 @@ tags:
     - 编程
     - C++
     - 数据结构
-date: 2019/02/23 11:45:00
+date: 2019-02-23 11:45:00
 author: ChungZH
 location: Foshan
 summary: awsl，太简单了，是栈！

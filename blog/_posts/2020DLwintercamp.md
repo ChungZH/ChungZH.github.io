@@ -3,7 +3,7 @@ title: 2020 DL 信息学冬令营游记
 tags:
 - 游记
 - 信息学
-date: 2020/01/20 16:03:00
+date: 2020-01-20 16:03:00
 author: ChungZH
 location: Foshan
 summary: 谨以此文，纪念那逝去的五日快乐时光~

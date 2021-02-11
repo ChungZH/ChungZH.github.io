@@ -5,7 +5,7 @@ tags:
     - Signal/Slot
     - C++
     - Code
-date: 2020/04/25 17:45:00
+date: 2020-04-25 17:45:00
 author: ChungZH
 location: Foshan
 summary: Qt 酱真是太可爱太强大啦~(づ￣ 3￣)づ么么

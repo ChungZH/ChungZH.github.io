@@ -4,7 +4,7 @@ tags:
     - UWP
     - 文本编辑器
     - Windows10
-date: 2020/04/06 12:45:00
+date: 2020-04-06 12:45:00
 author: ChungZH
 location: Foshan
 summary: 漂亮的记事本，完美替代 win32 notepad！

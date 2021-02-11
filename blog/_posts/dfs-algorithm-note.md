@@ -10,7 +10,7 @@ tags:
 author: ChungZH
 location: Foshan
 summary: 深搜！深搜！深搜！
-date: 2019/02/23 11:47:00
+date: 2019-02-23 11:47:00
 vssue-title: dfs-algorithm-note
 ---
 

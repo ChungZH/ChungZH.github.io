@@ -4,7 +4,7 @@ tags:
 - Vuepress
 - Git
 - Blog
-date: 2019/03/02 12:28:00
+date: 2019-03-02 12:28:00
 author: ChungZH
 location: Foshan
 summary: 又双叒叕搞博客了

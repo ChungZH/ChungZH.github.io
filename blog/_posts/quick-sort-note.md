@@ -4,7 +4,7 @@ tags:
     - 编程
     - C++
     - 算法
-date: 2019/02/23 11:42:00
+date: 2019-02-23 11:42:00
 author: ChungZH
 location: Foshan
 summary: 快！速！排！序！
