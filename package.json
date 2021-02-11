@@ -9,17 +9,17 @@
     "build": "vuepress build blog"
   },
   "dependencies": {
-    "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
-    "vuepress": "^1.7.1",
+    "@vuepress/plugin-google-analytics": "^1.8.0",
+    "vuepress": "^1.8.0",
     "vuepress-plugin-img-lazy": "^1.0.3",
     "vuepress-plugin-nprogress": "^1.0.0",
-    "vuepress-plugin-smooth-scroll": "^0.0.9",
+    "vuepress-plugin-smooth-scroll": "^0.0.10",
     "vuepress-plugin-zooming": "^1.0.0"
   },
   "devDependencies": {
-    "@vssue/api-github-v3": "^1.4.0",
-    "@vssue/vuepress-plugin-vssue": "^1.4.2",
-    "@vuepress/plugin-medium-zoom": "^1.4.1",
+    "@vssue/api-github-v3": "^1.4.7",
+    "@vssue/vuepress-plugin-vssue": "^1.4.7",
+    "@vuepress/plugin-medium-zoom": "^1.8.0",
     "@vuepress/theme-blog": "^2.2.0",
     "vuepress-plugin-baidu-autopush": "^1.0.1",
     "vuepress-plugin-container": "^2.1.3",
