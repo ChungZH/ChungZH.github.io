@@ -16,7 +16,7 @@ install:
 
 script:
   - yarn build
-  - echo "chungzh.cn" > dist/CNAME
+  - echo "blog.chungzh.cn" > dist/CNAME
 
 deploy:
   provider: pages

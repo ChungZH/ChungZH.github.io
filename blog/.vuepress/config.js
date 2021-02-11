@@ -84,7 +84,7 @@ module.exports = {
         },
         {
           type: "twitter",
-          link: "https://twitter.com/chungzh1",
+          link: "https://twitter.com/realChungZH",
         },
       ],
       copyright: [
