@@ -1,0 +1,72 @@
+baseurl: "https://blog.chungzh.cn"
+languageCode: "zh-cn"
+title: "ChungZH's Blog"
+theme: "hugo-tania"
+paginate: 7
+
+# disqusShortname: https-hugo-tania-netlify-app
+
+params:
+  # Emoji will show before the blog title on site navbar.
+  titleEmoji: 🎆
+
+  # Logo will show before the blog title on site navbar.
+  titleLogo: BlogFavicon16.png
+  
+  # Enable float footnotes.
+  # Default to true
+  enableFootnotes: true
+  siteName: "ChungZH's Blog"
+  siteDesc: "Welcome to my blog!"
+  author: "ChungZH"
+
+
+  # Limit how many categories filter show above search input.
+  # Default to 5
+  maxCategoryToShow: 10
+
+  # Show your socail information with icon on index bio with `_index.md` content.
+  socialOptions:
+    dev-to:
+    email: mailto:chungzh07@gmail.com
+    facebook:
+    github: https://github.com/ChungZH
+    instagram:
+    linkedin:
+    medium:
+    stack-overflow:
+    steam:
+    telegram: https://t.me/skyporker_channel
+    twitter: https://twitter.com/realChungZH
+    twitch:
+    whatsapp:
+  
+  # Comments settings
+  comments:
+    enabled: false
+    provider: disqus
+
+menu:
+  header:
+    - name: 文章
+      url: "/articles/"
+    - name: 关于
+      url: "/about/"    
+    - name: 友链
+      url: "/friends/"  
+    - name: 标签
+      url: "/tags/"
+  footer:
+    - name: RSS
+      url: "/index.xml"
+
+markup:
+  highlight:
+    noClasses: false
+    lineNos: true
+  goldmark:
+    renderer:
+      unsafe: true
+
+outputs:
+  home: ["HTML", "RSS", "JSON"]

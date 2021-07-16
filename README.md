@@ -1,6 +1,3 @@
-# ChungZH.github.io
+# My blog
 
-## Features
-
-- Dark Mode (`./blog/.vuepress/styles/index.styl`)
-- Donate (`./blog/.vuepress/components/Donate.vue`)
+Hugo + tania.
