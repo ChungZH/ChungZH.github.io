@@ -1,0 +1,366 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=theme-color content="dark"><title>创建 Vuepress 博客并使用 Git 管理 | ChungZH's Blog</title><meta property="og:site_name" content="ChungZH's Blog"><meta property="og:title" content="创建 Vuepress 博客并使用 Git 管理 | ChungZH's Blog"><meta itemprop=name content="创建 Vuepress 博客并使用 Git 管理 | ChungZH's Blog"><meta name=twitter:title content="创建 Vuepress 博客并使用 Git 管理 | ChungZH's Blog"><meta name=application-name content="创建 Vuepress 博客并使用 Git 管理 | ChungZH's Blog"><meta name=description content="Welcome to my blog!"><meta name=twitter:description content="Welcome to my blog!"><meta itemprop=description content="Welcome to my blog!"><meta property="og:description" content="Welcome to my blog!"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=stylesheet href=/sass/main.min.0c99f055b39fe4b0d1b88fad1a5706a35ef915854180b88a7d2a7a6df9bd2b0a.css></head><script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script><body class=dark><nav class=navbar><div class=container><div class=flex><div><a class=brand href=/><span class=emoji>🎆</span>
+<img src=/BlogFavicon16.png>
+ChungZH's Blog</a></div><div class=flex><a href=/about/>关于</a>
+<a href=/friends/>友链</a>
+<a href=/articles/>文章</a>
+<a href=/tags/>标签</a>
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg></button></div></div></div></nav><main><div class=container><article><header class=article-header><div class=thumb><div><h1>创建 Vuepress 博客并使用 Git 管理</h1><div class=post-meta><div>By ChungZH | <time>March 02, 2019</time>
+| 4 minutes</div><div class=tags><a href=/tags/vuepress/>Vuepress</a>
+<a href=/tags/git/>Git</a>
+<a href=/tags/blog/>Blog</a></div></div></div></div></header></article><div class=article-post><blockquote><p>Vuepress 是 Evan You 编写的一个 Vue 驱动的静态网站生成器，一般用于创建文档网站、博客网站。</p></blockquote><p><a href=https://vuepress.vuejs.org/>Vuepress 官方文档网站</a> · <a href=https://github.com/vuejs/vuepress>Vuepress GitHub 仓库地址</a> · <a href=https://github.com/ulivz/awesome-vuepress>awesome-vuepress 关于 Vuepress 的一些好东西</a></p><p>本文将主要介绍创建 Vuepress 网站、使用 Git 管理、使用 CI 等方面的内容。</p><blockquote><p>提示：我使用的是 Windows 系统，在其他平台上终端命令可能略有不同，请自行变通！</p></blockquote><h2 id=前期准备><a href=#%e5%89%8d%e6%9c%9f%e5%87%86%e5%a4%87 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>前期准备</h2><p>请事先安装好 yarn、Git 等软件。本文不介绍安装这些前期准备的方法，请自行查阅文档，锻炼阅读文档能力。</p><h2 id=下载-vuepress><a href=#%e4%b8%8b%e8%bd%bd-vuepress class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>下载 Vuepress</h2><p>首先我们创建一个文件夹，用于存放 Vuepress。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>mkdir vuepress-blog
+<span class=nb>cd</span> vuepress-blog
+</code></pre></td></tr></table></div></div><p>然后往里面安装 Vuepress：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>yarn add vuepress@next <span class=c1># 安装 Vuepress 1.x 版本</span>
+</code></pre></td></tr></table></div></div><p>再修改一下 <code>package.json</code>，添加以下内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-json data-lang=json><span class=s2>&#34;scripts&#34;</span><span class=err>:</span> <span class=p>{</span>
+    <span class=nt>&#34;blog:dev&#34;</span><span class=p>:</span> <span class=s2>&#34;vuepress dev docs&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;blog:build&#34;</span><span class=p>:</span> <span class=s2>&#34;vuepress build docs&#34;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h2 id=安装主题><a href=#%e5%ae%89%e8%a3%85%e4%b8%bb%e9%a2%98 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>安装主题</h2><p>Vuepress 的主题有很多，可以在 <a href=https://github.com/ulivz/awesome-vuepress>awesome-vuepress 关于 Vuepress 的一些好东西</a> 挑选一个你喜欢的主题，或者直接在 GitHub 搜索也可以。这里我使用 <a href=https://github.com/meteorlxy/vuepress-theme-meteorlxy>vuepress-theme-meteorlxy</a> 作为例子。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>yarn add vuepress-theme-meteorlxy@next
+</code></pre></td></tr></table></div></div><p>ok，现在你已经安装好主题了。</p><h2 id=熟悉-vuepress-目录结构><a href=#%e7%86%9f%e6%82%89-vuepress-%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>熟悉 Vuepress 目录结构</h2><pre><code>.
+├── docs
+│   ├── .vuepress (可选的)
+│   │   ├── components (可选的)
+│   │   ├── theme (可选的)
+│   │   │   └── Layout.vue
+│   │   ├── public (可选的)
+│   │   ├── styles (可选的)
+│   │   │   ├── index.styl
+│   │   │   └── palette.styl
+│   │   ├── config.js (可选的)
+│   │   └── enhanceApp.js (可选的)
+│   │ 
+│   ├── README.md
+│   ├── guide
+│   │   └── README.md
+│   └── config.md
+│ 
+└── package.json
+</code></pre><ul><li><code>docs/.vuepress</code>: 用于存放全局的配置、组件、静态资源等。</li><li><code>docs/.vuepress/components</code>: 该目录中的 Vue 组件将会被自动注册为全局组件。</li><li><code>docs/.vuepress/theme</code>: 用于存放本地主题。</li><li><code>docs/.vuepress/styles</code>: 用于存放样式相关的文件。</li><li><code>docs/.vuepress/styles/index.styl</code>: 将会被自动应用的全局样式文件，会生成在最终的 CSS 文件结尾，具有比默认样式更高的优先级。</li><li><code>docs/.vuepress/styles/palette.styl</code>: 用于重写默认颜色常量，或者设置新的 stylus 颜色常量。</li><li><code>docs/.vuepress/public</code>: 静态资源目录。</li><li><code>docs/.vuepress/config.js</code>: 配置文件的入口文件，也可以是 <code>YML</code> 或 <code>toml</code>。</li></ul><p>大概就是这些，还有一些更高级的配置这里就没写了。相信有兴趣做更高级自定义的话都会自己去看 <a href=https://vuepress.vuejs.org/>Vuepress 官方文档网站</a> 了~</p><h2 id=配置-vuepress><a href=#%e9%85%8d%e7%bd%ae-vuepress class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>配置 Vuepress</h2><p>首先创建 <code>docs</code> 目录、<code>docs/.vuepress</code> 目录：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>mkdir docs
+mkdir docs/.vuepress
+</code></pre></td></tr></table></div></div><p>然后进入 <code>.vuepress</code> 文件夹，创建一个 <code>config.js</code> 配置文件。</p><p>在 <code>config.js</code> 中粘贴以下内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=c1>// .vuepress/config.js
+</span><span class=c1></span>
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
+  <span class=c1>// 网站 Title
+</span><span class=c1></span>  <span class=nx>title</span><span class=o>:</span> <span class=s1>&#39;My Blog&#39;</span><span class=p>,</span>
+
+  <span class=c1>// 网站描述
+</span><span class=c1></span>  <span class=nx>description</span><span class=o>:</span> <span class=s1>&#39;This is my blog&#39;</span><span class=p>,</span>
+
+  <span class=c1>// 网站语言
+</span><span class=c1></span>  <span class=nx>locales</span><span class=o>:</span> <span class=p>{</span>
+    <span class=s1>&#39;/&#39;</span><span class=o>:</span> <span class=p>{</span>
+      <span class=nx>lang</span><span class=o>:</span> <span class=s1>&#39;zh-CN&#39;</span><span class=p>,</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+
+  <span class=c1>// 使用的主题
+</span><span class=c1></span>  <span class=nx>theme</span><span class=o>:</span> <span class=s1>&#39;vuepress-theme-meteorlxy&#39;</span><span class=p>,</span>
+
+  <span class=c1>// 主题配置
+</span><span class=c1></span>  <span class=nx>themeConfig</span><span class=o>:</span> <span class=p>{</span>
+    <span class=c1>// 个人信息（没有或不想设置的，删掉对应字段即可）
+</span><span class=c1></span>    <span class=nx>personalInfo</span><span class=o>:</span> <span class=p>{</span>
+      <span class=c1>// 昵称
+</span><span class=c1></span>      <span class=nx>nickname</span><span class=o>:</span> <span class=s1>&#39;meteorlxy&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 个人简介
+</span><span class=c1></span>      <span class=nx>description</span><span class=o>:</span> <span class=s1>&#39;Happy Coding&lt;br/&gt;Happy Life&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 电子邮箱
+</span><span class=c1></span>      <span class=nx>email</span><span class=o>:</span> <span class=s1>&#39;meteor.lxy@foxmail.com&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 所在地
+</span><span class=c1></span>      <span class=nx>location</span><span class=o>:</span> <span class=s1>&#39;Xi\&#39;an City, China&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 组织
+</span><span class=c1></span>      <span class=nx>organization</span><span class=o>:</span> <span class=s1>&#39;Xi\&#39;an Jiao Tong University&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 头像
+</span><span class=c1></span>      <span class=nx>avatar</span><span class=o>:</span> <span class=s1>&#39;https://www.meteorlxy.cn/assets/img/avatar.jpg&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 社交平台帐号信息
+</span><span class=c1></span>      <span class=nx>sns</span><span class=o>:</span> <span class=p>{</span>
+        <span class=c1>// Github 帐号和链接
+</span><span class=c1></span>        <span class=nx>github</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;meteorlxy&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;https://github.com/meteorlxy&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+
+        <span class=c1>// Facebook 帐号和链接
+</span><span class=c1></span>        <span class=nx>facebook</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;meteorlxy.cn&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;https://www.facebook.com/meteorlxy.cn&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+
+        <span class=c1>// LinkedIn 帐号和链接
+</span><span class=c1></span>        <span class=nx>linkedin</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;meteorlxy&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;http://www.linkedin.com/in/meteorlxy&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+
+        <span class=c1>// Twitter 帐号和链接
+</span><span class=c1></span>        <span class=nx>twitter</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;meteorlxy_cn&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;https://twitter.com/meteorlxy_cn&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+
+        <span class=c1>// 新浪微博 帐号和链接
+</span><span class=c1></span>        <span class=nx>weibo</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;@焦炭君_Meteor&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;https://weibo.com/u/2039655434&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+
+        <span class=c1>// 知乎 帐号和链接
+</span><span class=c1></span>        <span class=nx>zhihu</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;meteorlxy.cn&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;https://www.zhihu.com/people/meteorlxy.cn&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+
+        <span class=c1>// 豆瓣 帐号和链接
+</span><span class=c1></span>        <span class=nx>douban</span><span class=o>:</span> <span class=p>{</span>
+          <span class=nx>account</span><span class=o>:</span> <span class=s1>&#39;159342708&#39;</span><span class=p>,</span>
+          <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;https://www.douban.com/people/159342708&#39;</span><span class=p>,</span>
+        <span class=p>},</span>
+      <span class=p>},</span>
+    <span class=p>},</span>
+
+    <span class=c1>// 上方 header 的背景，可以使用图片，或者随机变化的图案
+</span><span class=c1></span>    <span class=nx>headerBackground</span><span class=o>:</span> <span class=p>{</span>
+      <span class=c1>// 使用图片的 URL，如果设置了图片 URL，则不会生成随机变化的图案，下面的 useGeo 将失效
+</span><span class=c1></span>      <span class=nx>url</span><span class=o>:</span> <span class=s1>&#39;/assets/img/bg.jpg&#39;</span><span class=p>,</span>
+
+      <span class=c1>// 使用随机变化的图案，如果设置为 false，且没有设置图片 URL，将显示为纯色背景
+</span><span class=c1></span>      <span class=nx>useGeo</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+    <span class=p>},</span>
+
+    <span class=c1>// 是否显示文章的最近更新时间
+</span><span class=c1></span>    <span class=nx>lastUpdated</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+
+    <span class=c1>// 顶部导航栏内容
+</span><span class=c1></span>    <span class=nx>nav</span><span class=o>:</span> <span class=p>[</span>
+      <span class=p>{</span> <span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;Home&#39;</span><span class=p>,</span> <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;/&#39;</span><span class=p>,</span> <span class=nx>exact</span><span class=o>:</span> <span class=kc>true</span> <span class=p>},</span>
+      <span class=p>{</span> <span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;Posts&#39;</span><span class=p>,</span> <span class=nx>link</span><span class=o>:</span> <span class=s1>&#39;/posts/&#39;</span><span class=p>,</span> <span class=nx>exact</span><span class=o>:</span> <span class=kc>false</span> <span class=p>},</span>
+    <span class=p>],</span>
+
+    <span class=c1>// 评论配置，参考下方 [页面评论] 章节
+</span><span class=c1></span>    <span class=nx>comments</span><span class=o>:</span> <span class=p>{</span>
+      <span class=nx>owner</span><span class=o>:</span> <span class=s1>&#39;meteorlxy&#39;</span><span class=p>,</span>
+      <span class=nx>repo</span><span class=o>:</span> <span class=s1>&#39;vuepress-theme-meteorlxy&#39;</span><span class=p>,</span>
+      <span class=nx>clientId</span><span class=o>:</span> <span class=s1>&#39;MY_CLIENT_ID&#39;</span><span class=p>,</span>
+      <span class=nx>clientSecret</span><span class=o>:</span> <span class=s1>&#39;MY_CLIENT_SECRET&#39;</span><span class=p>,</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>}</span>
+
+</code></pre></td></tr></table></div></div><blockquote><p>注意：这是 <code>meteorlxy</code> 主题的默认配置，其他主题请查看主题文档。</p></blockquote><p>然后直接按照 <a href=https://vuepress-theme-meteorlxy.meteorlxy.cn/>meteorlxy 主题文档</a>进行配置即可。</p><h2 id=配置-ci-和-git><a href=#%e9%85%8d%e7%bd%ae-ci-%e5%92%8c-git class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>配置 CI 和 Git</h2><blockquote><p>持续集成（英语：Continuous integration，缩写 CI）是一种软件工程流程，是将所有软件工程师对于软件的工作副本持续集成到共享主线（mainline）的一种举措。</p></blockquote><p><strong>👷 这里我们所使用的持续集成平台是 Travis CI.</strong></p><h3 id=开启-ci><a href=#%e5%bc%80%e5%90%af-ci class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>开启 CI</h3><p>首先，在 <a href=https://github.com/new>Create a new repository</a> 里创建一个项目，项目名是 <code>GitHub 用户名.github.io</code>，然后到 <a href=https://travis-ci.org>Travis CI</a> 官网，用 GitHub 账户直接关联登录，并允许 Travis CI 查看自己的公有仓库。</p><p>然后我们到 <a href=https://travis-ci.org/account/repositories>Travis CI 账户页面</a>开启博客仓库的 CI，如图：</p><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png alt=OpenCI></p><h3 id=添加变量><a href=#%e6%b7%bb%e5%8a%a0%e5%8f%98%e9%87%8f class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>添加变量</h3><p>我们要设置三个变量：<code>GIT_NAME</code>、<code>GIT_EMAIL</code>、<code>GITHUB_TOKEN</code>，分别是 <code>git</code> 用户名、<code>git</code> 用户邮箱和 GitHub token。</p><p>其中前两项的值可以在本地查看：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>git config --global user.name <span class=c1># 对应 GIT_NAME</span>
+git config --global user.email <span class=c1># 对应 GIT_EMAIL</span>
+</code></pre></td></tr></table></div></div><p>第三项 GitHub token 要在 GitHub 申请：</p><ul><li>访问 <a href=https://github.com/settings/tokens>GitHub 账户设置 > Tokens</a></li><li>生成新 Token: Generate new token</li><li>填入 Token 描述，并给予 Token 第一项 <code>repo</code> 的全部权限</li><li>将生成的 Token 复制，保存（生成 Token 的页面只有一次机会看见，请保存妥当。）</li></ul><p>在 Travis CI 仓库配置中，将三个变量填入设置（位于 <code>Settings > Environment Variables</code> 处并保存：</p><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci2.png alt></p><p>然后在博客根目录里创建一个 <code>.travis.yml</code>，并粘贴一下内容进去：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nt>language</span><span class=p>:</span><span class=w> </span><span class=l>node_js</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>sudo</span><span class=p>:</span><span class=w> </span><span class=l>required</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>node_js</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;10&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>only</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span>- <span class=l>vuepress</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>before_install</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=l>export TZ=&#39;Asia/Shanghai&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>install</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=l>yarn install</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>script</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=l>yarn blog:build</span><span class=w>
+</span><span class=w>  </span>- <span class=l>echo &#34;chungzh.cn&#34; &gt; docs/.vuepress/dist/CNAME</span><span class=w> </span><span class=c># 这里 &#34;chungzh.cn&#34; 改成你自己的域名，如果没有，删掉这行就行了</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>provider</span><span class=p>:</span><span class=w> </span><span class=l>pages</span><span class=w>
+</span><span class=w>  </span><span class=nt>skip_cleanup</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>$GITHUB_TOKEN</span><span class=w>
+</span><span class=w>  </span><span class=nt>local_dir</span><span class=p>:</span><span class=w> </span><span class=l>docs/.vuepress/dist</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>$GIT_NAME</span><span class=w>
+</span><span class=w>  </span><span class=nt>email</span><span class=p>:</span><span class=w> </span><span class=l>$GIT_EMAIL</span><span class=w>
+</span><span class=w>  </span><span class=nt>keep-history</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=nt>target-branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>  </span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>branch</span><span class=p>:</span><span class=w> </span><span class=l>vuepress</span><span class=w>
+</span></code></pre></td></tr></table></div></div><p>然后我们新建一个 <code>.gititnore</code> 文件，粘贴以下内容：</p><pre><code>.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+docs/.vuepress/dist/
+</code></pre><p>好，现在输入以下命令，创建一个 Git 项目：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-bash data-lang=bash>git init
+git checkout -b vuepress
+git add .
+git commit -m <span class=s2>&#34;:tada: Init repo&#34;</span>
+git remote add origin git@github.com:ChungZH/ChungZH.github.io.git <span class=c1># 这里改成你自己的项目地址</span>
+git push -u origin vuepress
+</code></pre></td></tr></table></div></div><p>push 上去后，CI 应该就会开始了。静待片刻即可。</p><hr><p>ChungZH</p><p>2019 - 3 - 2 / 广东 - 佛山</p><p>#EOF 😘</p><p><vssue title=create-vuepress-blog-and-use-git-manger-it></p></div></div><div class=container><nav class="flex container suggested"><a rel=prev href=/articles/beautify-your-powershell/ title="Previous post (older)"><span>Previous</span>
+美化你的 Powershell</a>
+<a rel=next href=/articles/change-ubuntu-sources/ title="Next post (newer)"><span>Next</span>
+Ubuntu 更换国内源</a></nav></div><div class=container></div></main></main><footer class="footer flex"><section class=container><nav class=footer-links><a href=/index.xml>RSS</a></nav></section><script defer src=/ts/features.39c567b3af1363f8abe74bfd650f3d58cb963716b7ad4b3b53f801d3ca585599.js data-enable-footnotes=true></script></footer></body></html>
