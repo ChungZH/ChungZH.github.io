@@ -1,24 +1,178 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=theme-color content="dark"><title>美化你的 Powershell | ChungZH's Blog</title><meta property="og:site_name" content="ChungZH's Blog"><meta property="og:title" content="美化你的 Powershell | ChungZH's Blog"><meta itemprop=name content="美化你的 Powershell | ChungZH's Blog"><meta name=twitter:title content="美化你的 Powershell | ChungZH's Blog"><meta name=application-name content="美化你的 Powershell | ChungZH's Blog"><meta name=description content="Welcome to my blog!"><meta name=twitter:description content="Welcome to my blog!"><meta itemprop=description content="Welcome to my blog!"><meta property="og:description" content="Welcome to my blog!"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=stylesheet href=/sass/main.min.0c99f055b39fe4b0d1b88fad1a5706a35ef915854180b88a7d2a7a6df9bd2b0a.css></head><script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script><body class=dark><nav class=navbar><div class=container><div class=flex><div><a class=brand href=/><span class=emoji>🎆</span>
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=theme-color content="dark">
+<title>美化你的 Powershell | ChungZH's Blog</title>
+<meta property="og:site_name" content="ChungZH's Blog">
+<meta property="og:title" content="美化你的 Powershell | ChungZH's Blog">
+<meta itemprop=name content="美化你的 Powershell | ChungZH's Blog">
+<meta name=twitter:title content="美化你的 Powershell | ChungZH's Blog">
+<meta name=application-name content="美化你的 Powershell | ChungZH's Blog">
+<meta name=description content="Welcome to my blog!">
+<meta name=twitter:description content="Welcome to my blog!">
+<meta itemprop=description content="Welcome to my blog!">
+<meta property="og:description" content="Welcome to my blog!">
+<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=stylesheet href=/sass/main.min.0c99f055b39fe4b0d1b88fad1a5706a35ef915854180b88a7d2a7a6df9bd2b0a.css>
+</head>
+<script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
+<body class=dark>
+<nav class=navbar>
+<div class=container>
+<div class=flex>
+<div>
+<a class=brand href=/>
+<span class=emoji>
+🎆
+</span>
 <img src=/BlogFavicon16.png>
-ChungZH's Blog</a></div><div class=flex><a href=/about/>关于</a>
+ChungZH's Blog
+</a>
+</div>
+<div class=flex>
+<a href=/about/>关于</a>
 <a href=/friends/>友链</a>
 <a href=/articles/>文章</a>
 <a href=/tags/>标签</a>
-<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg></button></div></div></div></nav><main><div class=container><article><header class=article-header><div class=thumb><div><h1>美化你的 Powershell</h1><div class=post-meta><div>By ChungZH | <time>February 23, 2019</time>
-| 1 minutes</div><div class=tags><a href=/tags/powershell/>Powershell</a>
-<a href=/tags/%E7%BB%88%E7%AB%AF/>终端</a></div></div></div></div></header></article><div class=article-post><p>Powershell 源代码仓库🔗 <a href=https://github.com/PowerShell/PowerShell>🎉🎉🎉Powershell/Powershell</a></p><h2 id=前言><a href=#%e5%89%8d%e8%a8%80 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>前言</h2><p>众所周知，Powershell 是微软开发的新一代的 shell。在微软的大力扶植下，已经成长为了一个成熟的 shell。而大部分人为了解决终端丑的问题，都选择了使用 Linux shell 这条路。而 <code>WSL</code> 的推出更促进了这一点。</p><p>虽然使用 Linux shell 是一个不错的选择，但我们也可以在 Windows 的 shell 上下功夫。</p><p>对了，为什么不是美化 <code>CMD</code> 呢？答案很简单，微软都抛弃的东西，我们还是也抛弃了吧。</p><h2 id=开始><a href=#%e5%bc%80%e5%a7%8b class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>开始</h2><p>默认的 Powershell 是这样的：</p><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell1.png alt="丑陋的 Powershell"></p><p>但我们要把它改成这样：</p><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell2.png alt="帅气的 Powershell"></p><p>wow~简直能和使用 <code>oh-my-zsh</code> 的终端媲美了！！！</p><p>话不多说，咱们开始。</p><p>首先我们了解一个工具 🌟<a href=https://github.com/JanDeDobbeleer/oh-my-posh>oh-my-posh</a>。关于它的介绍可以看<a href=https://web.okjike.com/post-detail/5c1b25c05158130011810bfd/originalPost>我在即刻的推荐文</a>。总之，这个工具就是用来美化 Powershell 的。上图就是用了 oh-my-posh 后的效果。</p><h3 id=预备><a href=#%e9%a2%84%e5%a4%87 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>预备</h3><p>为了获得更完美的体验，我们可以先安装几个 <code>Powerline</code> 字体。可以在 <a href=https://github.com/powerline/font>powerline/font</a> 中下载。下载过程不赘述。</p><p>下载好 Powerline 字体后，需要把终端的字体改成你刚刚下载的 Powerline 字体。</p><p>对了，由于默认的 Powershell 终端改字体比较麻烦，我们可以使用终端模拟器。大家可以使用 <a href=https://github.com/Eugeny/terminus>Eugeny/terminus</a> 这个工具。安装好后在 Settings 页面修改字体就行了。大家可以自己摸索。</p><h3 id=安装><a href=#%e5%ae%89%e8%a3%85 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>安装</h3><p>好了，先来安装一下 <code>oh-my-posh</code>。往 Powershell 狂输以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<div class=container>
+<article>
+<header class=article-header>
+<div class=thumb>
+<div>
+<h1>美化你的 Powershell</h1>
+<div class=post-meta>
+<div>
+By ChungZH | <time>February 23, 2019</time>
+| 1 minutes
+</div>
+<div class=tags>
+<a href=/tags/powershell/>Powershell</a>
+<a href=/tags/%E7%BB%88%E7%AB%AF/>终端</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+</article>
+<div class=article-post>
+<p>Powershell 源代码仓库🔗 <a href=https://github.com/PowerShell/PowerShell>🎉🎉🎉Powershell/Powershell</a></p>
+<h2 id=前言>
+<a href=#%e5%89%8d%e8%a8%80 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+前言
+</h2>
+<p>众所周知，Powershell 是微软开发的新一代的 shell。在微软的大力扶植下，已经成长为了一个成熟的 shell。而大部分人为了解决终端丑的问题，都选择了使用 Linux shell 这条路。而 <code>WSL</code> 的推出更促进了这一点。</p>
+<p>虽然使用 Linux shell 是一个不错的选择，但我们也可以在 Windows 的 shell 上下功夫。</p>
+<p>对了，为什么不是美化 <code>CMD</code> 呢？答案很简单，微软都抛弃的东西，我们还是也抛弃了吧。</p>
+<h2 id=开始>
+<a href=#%e5%bc%80%e5%a7%8b class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+开始
+</h2>
+<p>默认的 Powershell 是这样的：</p>
+<p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell1.png alt="丑陋的 Powershell"></p>
+<p>但我们要把它改成这样：</p>
+<p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell2.png alt="帅气的 Powershell"></p>
+<p>wow~简直能和使用 <code>oh-my-zsh</code> 的终端媲美了！！！</p>
+<p>话不多说，咱们开始。</p>
+<p>首先我们了解一个工具 🌟<a href=https://github.com/JanDeDobbeleer/oh-my-posh>oh-my-posh</a>。关于它的介绍可以看<a href=https://web.okjike.com/post-detail/5c1b25c05158130011810bfd/originalPost>我在即刻的推荐文</a>。总之，这个工具就是用来美化 Powershell 的。上图就是用了 oh-my-posh 后的效果。</p>
+<h3 id=预备>
+<a href=#%e9%a2%84%e5%a4%87 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+预备
+</h3>
+<p>为了获得更完美的体验，我们可以先安装几个 <code>Powerline</code> 字体。可以在 <a href=https://github.com/powerline/font>powerline/font</a> 中下载。下载过程不赘述。</p>
+<p>下载好 Powerline 字体后，需要把终端的字体改成你刚刚下载的 Powerline 字体。</p>
+<p>对了，由于默认的 Powershell 终端改字体比较麻烦，我们可以使用终端模拟器。大家可以使用 <a href=https://github.com/Eugeny/terminus>Eugeny/terminus</a> 这个工具。安装好后在 Settings 页面修改字体就行了。大家可以自己摸索。</p>
+<h3 id=安装>
+<a href=#%e5%ae%89%e8%a3%85 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+安装
+</h3>
+<p>好了，先来安装一下 <code>oh-my-posh</code>。往 Powershell 狂输以下命令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Install-Module</span> <span class=nb>posh-git</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Install-Module</span> <span class=nb>posh-git</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
 <span class=nb>Install-Module</span> <span class=nb>oh-my</span><span class=n>-posh</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
-</code></pre></td></tr></table></div></div><p>这样就安装好了 <code>posh-git</code> 和 <code>oh-my-posh</code> 这两个插件了。</p><h3 id=使用><a href=#%e4%bd%bf%e7%94%a8 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就安装好了 <code>posh-git</code> 和 <code>oh-my-posh</code> 这两个插件了。</p>
+<h3 id=使用>
+<a href=#%e4%bd%bf%e7%94%a8 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
+</a>
+使用
+</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Import-Module</span> <span class=nb>oh-my</span><span class=n>-posh</span>
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Import-Module</span> <span class=nb>oh-my</span><span class=n>-posh</span>
 <span class=nb>Import-Module</span> <span class=nb>posh-git</span>
-</code></pre></td></tr></table></div></div><p>输入如上命令即可。</p><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell3.png alt=成果></p><blockquote><p>upd：oh-my-posh 默认提供了许多主题，大家可以自行切换。方法是：<code>Set-Theme 主题名</code>。主题有<a href=https://github.com/JanDeDobbeleer/oh-my-posh#themes>这些</a>。大家可以自己玩玩。</p></blockquote><p>好了，取得了这样的成果，或许你以为已经成功了。但是——你只要重启一次终端，你就会发现问题了。</p><p><strong>为什么重启之后终端又复原了呢？？？</strong></p><p>这是因为打开的时候必须要输入 <code>Import-Module</code> 那两行命令才能启用插件。</p><p>那么我们可以设置一个脚本，让他每次打开 Powershell 就自动输入那两行命令。</p><p>好了，明确了目标，我们就开始行动吧。</p><p>首先输入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>New-Item</span> <span class=nv>$profile</span>
-</code></pre></td></tr></table></div></div><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell4.png alt=结果></p><p>好了，打开这个文件——相信大家如果仔细看信息就能发现这个文件在哪里了。然后在这个文件中粘贴以下命令：</p><pre><code>Import-Module oh-my-posh
+</code></pre></td></tr></table>
+</div>
+</div><p>输入如上命令即可。</p>
+<p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell3.png alt=成果></p>
+<blockquote>
+<p>upd：oh-my-posh 默认提供了许多主题，大家可以自行切换。方法是：<code>Set-Theme 主题名</code>。主题有<a href=https://github.com/JanDeDobbeleer/oh-my-posh#themes>这些</a>。大家可以自己玩玩。</p>
+</blockquote>
+<p>好了，取得了这样的成果，或许你以为已经成功了。但是——你只要重启一次终端，你就会发现问题了。</p>
+<p><strong>为什么重启之后终端又复原了呢？？？</strong></p>
+<p>这是因为打开的时候必须要输入 <code>Import-Module</code> 那两行命令才能启用插件。</p>
+<p>那么我们可以设置一个脚本，让他每次打开 Powershell 就自动输入那两行命令。</p>
+<p>好了，明确了目标，我们就开始行动吧。</p>
+<p>首先输入：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=nb>New-Item</span> <span class=nv>$profile</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img loading=lazy src=https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell4.png alt=结果></p>
+<p>好了，打开这个文件——相信大家如果仔细看信息就能发现这个文件在哪里了。然后在这个文件中粘贴以下命令：</p>
+<pre><code>Import-Module oh-my-posh
 Import-Module posh-git
-</code></pre><p>就可以每次打开 Powershell 都自动用上 oh-my-posh 了。</p><p>Enjoy it ☕~</p><donate><vssue title=beautify-your-powershell></div></div><div class=container><nav class="flex container suggested"><a rel=prev href=/articles/snake-matrix-note/ title="Previous post (older)"><span>Previous</span>
-蛇形矩阵 - 日常刷题</a>
-<a rel=next href=/articles/create-vuepress-blog-and-use-git-manger-it/ title="Next post (newer)"><span>Next</span>
-创建 Vuepress 博客并使用 Git 管理</a></nav></div><div class=container></div></main></main><footer class="footer flex"><section class=container><nav class=footer-links><a href=/index.xml>RSS</a></nav></section><script defer src=/ts/features.39c567b3af1363f8abe74bfd650f3d58cb963716b7ad4b3b53f801d3ca585599.js data-enable-footnotes=true></script></footer></body></html>
+</code></pre><p>就可以每次打开 Powershell 都自动用上 oh-my-posh 了。</p>
+<p>Enjoy it ☕~</p>
+<donate>
+<vssue title=beautify-your-powershell>
+</div>
+</div>
+<div class=container>
+<nav class="flex container suggested">
+<a rel=next href=/articles/create-vuepress-blog-and-use-git-manger-it/ title="Next post (newer)">
+<span>Next</span>
+创建 Vuepress 博客并使用 Git 管理
+</a>
+</nav>
+</div>
+<div class=container>
+</div>
+</main>
+</main>
+<footer class="footer flex">
+<section class=container>
+<nav class=footer-links>
+<a href=/index.xml>RSS</a>
+</nav>
+</section>
+<script defer src=/ts/features.39c567b3af1363f8abe74bfd650f3d58cb963716b7ad4b3b53f801d3ca585599.js data-enable-footnotes=true></script>
+</footer>
+</body>
+</html>
