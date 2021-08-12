@@ -1,7 +1,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 04 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>线段树学习笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>
 &lt;p>线段树是一种&lt;del>高端&lt;/del>的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。&lt;/p>
 &lt;p>如下图就是一棵线段树。在结点中，你可以存对应区间的最大值，最小值，总和等等。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://github.com/ChungZH/img/blob/main/segtree/segtree-1.png?raw=true" alt="线段树" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://github.com/ChungZH/img/blob/main/segtree/segtree-1.png?raw=true"
+alt="线段树"
+/>&lt;/p>
 &lt;p>对于每一个结点 $i$，它的两个子结点分别是 $2i$ 和 $2i+1$。因此，在开树的数组时，最好要开到 $4N$ 的大小。&lt;/p>
 &lt;blockquote>
 &lt;p>关于 $4N$，详见 &lt;a href="https://oi-wiki.org/ds/seg/">OI-Wiki&lt;/a>。&lt;/p>
@@ -61,7 +64,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 区间查询
 &lt;/h2>
-&lt;p>&lt;img loading="lazy" src="https://github.com/ChungZH/img/blob/main/segtree/segtree-2.png?raw=true" alt="线段树查询" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://github.com/ChungZH/img/blob/main/segtree/segtree-2.png?raw=true"
+alt="线段树查询"
+/>&lt;/p>
 &lt;p>对于一个不&lt;em>恰好&lt;/em>的区间，我们可以不断地把它拆分成两个恰好的区间再进行合并。&lt;/p>
 &lt;p>如图所示，拆分过程如下：&lt;/p>
 &lt;ol>
@@ -410,11 +416,20 @@ Day 1
 &lt;/h2>
 &lt;p>早上六点半就醒了。&lt;/p>
 &lt;p>在酒店吃了顿自助早餐，真香。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/breakfast.jpg" alt="breakfast" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/breakfast.jpg"
+alt="breakfast"
+/>&lt;/p>
 &lt;p>到处都是石实的大佬 %%% 。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/inthehotel.jpg" alt="ssdl" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/inthehotel.jpg"
+alt="ssdl"
+/>&lt;/p>
 &lt;p>然后搭着同校热心家长的车前往广大附中。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/gdfz.jpg" alt="gdfz" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/gdfz.jpg"
+alt="gdfz"
+/>&lt;/p>
 &lt;p>门口还挺热闹的，好像发生了许多事情：&lt;/p>
 &lt;ul>
 &lt;li>黄老师身份证不见了，&lt;del>其实藏在袋子里&lt;/del>&lt;/li>
@@ -852,7 +867,19 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 Screenshots
 &lt;/h2>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc1.png" alt="" />&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc2.png" alt="" />&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc3.png" alt="" />&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc4.png" alt="" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc1.png"
+alt=""
+/>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc2.png"
+alt=""
+/>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc3.png"
+alt=""
+/>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc4.png"
+alt=""
+/>&lt;/p>
 &lt;h2 id="实现">
 &lt;a href="#%e5%ae%9e%e7%8e%b0" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -874,7 +901,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 布局
 &lt;/h3>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda.png" alt="layout" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda.png"
+alt="layout"
+/>&lt;/p>
 &lt;h3 id="编辑控件">
 &lt;a href="#%e7%bc%96%e8%be%91%e6%8e%a7%e4%bb%b6" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -936,7 +966,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;div align="center">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/logo.png" width="300"/>&lt;/div>
 &lt;Donate/>
 &lt;Vssue title="notepanda" /></description></item><item><title>一款纯粹的 UWP 记事本——Notepads</title><link>https://blog.chungzh.cn/articles/notepads/</link><pubDate>Mon, 06 Apr 2020 12:45:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/notepads/</guid><description>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/Notepads.png" alt="notepads" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/Notepads.png"
+alt="notepads"
+/>&lt;/p>
 &lt;blockquote>
 &lt;p>在开始之前的一点闲话：当你看到这款应用的图标时，也许会联想到 Windows Terminal。打开后，甚至会发现连 UI 都有点相似。但事实上，这两款软件完全没有关系。Notepads 是由一位国人独立开发的。&lt;/p>
 &lt;/blockquote>
@@ -980,7 +1013,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 Markdown 预览
 &lt;/h3>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/MDPreview.png" alt="MDPreview" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/MDPreview.png"
+alt="MDPreview"
+/>&lt;/p>
 &lt;p>Notepads 支持 Markdown 实时预览，但这并不意味着你可以用它来做&lt;strong>主力&lt;/strong> MD 编辑器。在这方面它依然是不合格的。&lt;/p>
 &lt;p>Notepads 还支持在预览时替换 Emoji code 为 Emoji 噢:smiley:！&lt;/p>
 &lt;h3 id="文件更改预览">
@@ -993,7 +1029,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 文件更改预览
 &lt;/h3>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/DiffViewer.png" alt="DiffViewer" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/DiffViewer.png"
+alt="DiffViewer"
+/>&lt;/p>
 &lt;p>Notepads 内置了 diff 查看器，可以很方便地对比新旧文件之间的差异。&lt;/p>
 &lt;h3 id="终端中打开-notepads">
 &lt;a href="#%e7%bb%88%e7%ab%af%e4%b8%ad%e6%89%93%e5%bc%80-notepads" class="anchor">
@@ -1005,7 +1044,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 终端中打开 Notepads
 &lt;/h3>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/clinotepads.gif" alt="clinotepads" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/clinotepads.gif"
+alt="clinotepads"
+/>&lt;/p>
 &lt;p>在终端中输入 &lt;code>notepads&lt;/code> 或 &lt;code>notepads foo.bar&lt;/code> 都可以唤出 Notepads。&lt;/p>
 &lt;p>在 &lt;strong>WSL&lt;/strong> 中，你也可以通过 &lt;code>powershell.exe -c notepads &amp;lt;filepath&amp;gt;&lt;/code> 使用 Notepads 打开文件。&lt;/p>
 &lt;h2 id="尾巴">
@@ -1519,9 +1561,15 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 0x00 介绍 tabulate
 &lt;/h2>
 &lt;p>&lt;a href="https://github.com/p-ranav/tabulate">tabulate&lt;/a> 是一个使用 C++ 17 编写的库，它可以制作表格。使用它，把表格对齐、格式化和着色，不在话下！你甚至可以使用 tabulate，将你的表格导出为 Markdown 代码。下图是一个使用 tabulate 制作的表格输出在命令行的样例：&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png" alt="summary" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png"
+alt="summary"
+/>&lt;/p>
 &lt;p>当然，除了表格，你还可以玩出花样。看见下面这个马里奥了吗？这也是用 tabulate 制作的！源码在 &lt;a href="https://github.com/p-ranav/tabulate/blob/master/samples/mario.cpp">这里&lt;/a>。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/mario.png" alt="mario" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/mario.png"
+alt="mario"
+/>&lt;/p>
 &lt;h2 id="0x10-准备">
 &lt;a href="#0x10-%e5%87%86%e5%a4%87" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -1699,7 +1747,10 @@ make
 &lt;/ul>
 &lt;p>然后使用 Visual Studio 打开 &lt;code>build&lt;/code> 文件夹下的 &lt;code>tabulateDemo.sln&lt;/code> 来运行。&lt;/p>
 &lt;p>如果没有问题，那么你应该会在终端里看到：&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x20.png" alt="0x20" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x20.png"
+alt="0x20"
+/>&lt;/p>
 &lt;h2 id="0x30-格式化表格">
 &lt;a href="#0x30-%e6%a0%bc%e5%bc%8f%e5%8c%96%e8%a1%a8%e6%a0%bc" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -1787,7 +1838,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;p>值得注意的是，tabulate 会自动删除每一行内容两边的空白字符。&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x31.png" alt="0x31" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x31.png"
+alt="0x31"
+/>&lt;/p>
 &lt;h3 id="0x32-字体对齐">
 &lt;a href="#0x32-%e5%ad%97%e4%bd%93%e5%af%b9%e9%bd%90" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -1854,7 +1908,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x32.png" alt="0x32" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x32.png"
+alt="0x32"
+/>&lt;/p>
 &lt;h3 id="0x33-字体样式">
 &lt;a href="#0x33-%e5%ad%97%e4%bd%93%e6%a0%b7%e5%bc%8f" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -1897,7 +1954,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;p>如：粗体、深色、斜体、闪烁等样式，请慎用。&lt;/p>
 &lt;/blockquote>
 &lt;p>要使用这些样式，可以调用 &lt;code>.format().font_style({...})&lt;/code>。样式也可以叠加使用。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x33.png" alt="0x33" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x33.png"
+alt="0x33"
+/>&lt;/p>
 &lt;h3 id="0x34-颜色">
 &lt;a href="#0x34-%e9%a2%9c%e8%89%b2" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2044,7 +2104,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x34.png" alt="0x34" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x34.png"
+alt="0x34"
+/>&lt;/p>
 &lt;h3 id="0x35-边框角">
 &lt;a href="#0x35-%e8%be%b9%e6%a1%86%e8%a7%92" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2145,7 +2208,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x35.png" alt="0x35" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x35.png"
+alt="0x35"
+/>&lt;/p>
 &lt;h3 id="0x36-基于范围的迭代">
 &lt;a href="#0x36-%e5%9f%ba%e4%ba%8e%e8%8c%83%e5%9b%b4%e7%9a%84%e8%bf%ad%e4%bb%a3" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2259,7 +2325,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x36.png" alt="0x36" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x36.png"
+alt="0x36"
+/>&lt;/p>
 &lt;h3 id="0x37-嵌套表格">
 &lt;a href="#0x37-%e5%b5%8c%e5%a5%97%e8%a1%a8%e6%a0%bc" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2313,7 +2382,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x37.png" alt="0x37" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x37.png"
+alt="0x37"
+/>&lt;/p>
 &lt;h2 id="0x40-导出">
 &lt;a href="#0x40-%e5%af%bc%e5%87%ba" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2377,7 +2449,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x41.png" alt="0x41" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x41.png"
+alt="0x41"
+/>&lt;/p>
 &lt;p>导出效果如下：&lt;/p>
 &lt;table>
 &lt;thead>
@@ -2629,7 +2704,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 早上
 &lt;/h3>
 &lt;p>STL 专题之 set、map。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-setmap.png" alt="" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-setmap.png"
+alt=""
+/>&lt;/p>
 &lt;p>NO.2 ~&lt;/p>
 &lt;h3 id="下午-1">
 &lt;a href="#%e4%b8%8b%e5%8d%88-1" class="anchor">
@@ -2641,7 +2719,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 下午
 &lt;/h3>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-queue.png" alt="" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-queue.png"
+alt=""
+/>&lt;/p>
 &lt;p>STL 专题之 queue。&lt;/p>
 &lt;p>NO.1！&lt;/p>
 &lt;p>&lt;del>应 rank 4 要求，顺带截了他的图。。&lt;/del>&lt;/p>
@@ -2669,7 +2750,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 Day 4
 &lt;/h2>
 &lt;p>宽搜。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-bfs.png" alt="" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-bfs.png"
+alt=""
+/>&lt;/p>
 &lt;h2 id="day-5">
 &lt;a href="#day-5" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2716,7 +2800,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 总结
 &lt;/h2>
 &lt;p>先放一张朋友看到我结营照片时的点评。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/comment.jpg" alt="" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/comment.jpg"
+alt=""
+/>&lt;/p>
 &lt;p>这几天过得很充实，也很累，学到了很多知识。&lt;/p>
 &lt;p>近几天教育部也发了一个「强基计划」，对我们信息竞赛生影响很大。&lt;/p>
 &lt;p>但，我还是会坚持下去的。&lt;/p>
@@ -2870,7 +2957,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ pip install conan
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/conan-systems.png" alt="conan-systems" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/conan-systems.png"
+alt="conan-systems"
+/>&lt;/p>
 &lt;h2 id="2buckaroo">
 &lt;a href="#2buckaroo" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2910,7 +3000,10 @@ $ buck run :my-app
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>安装方法详见 &lt;a href="https://github.com/LoopPerfect/buckaroo#quick-install">Quick Install&lt;/a>。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/how-buckaroo-works.png" alt="buckaroo" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/how-buckaroo-works.png"
+alt="buckaroo"
+/>&lt;/p>
 &lt;h2 id="3vcpkg">
 &lt;a href="#3vcpkg" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2947,7 +3040,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;p>用于 C/C++ 的跨平台包管理器。支持 Linux、Windows、macOS、iOS、Android、Raspberry Pi 等平台。Hunter 主要用于管理带有 CMake 构建系统的软件包，现有的 CMake 软件包可以很容易地集成到系统中，但是使用带有 &lt;code>ExternalProject_Add&lt;/code> 命令的自定义模板（构建方案）也支持非 CMake 软件包。&lt;/p>
 &lt;p>&lt;strong>注意&lt;/strong>：现在 Hunter 的 To be or not to be 已经成了问题，详见 &lt;a href="https://github.com/ruslo/hunter/issues/1921">Issue #1921&lt;/a>。如果它在 &lt;a href="https://patreon.com/ruslo">https://patreon.com/ruslo&lt;/a> 上没有得到足够的支持，维护者将会在 2019 年 8 月 25 日停止维护该项目。请谨慎使用！&lt;/p>
 &lt;p>开源不易，&lt;del>是人都要恰饭&lt;/del>这个项目从 2013 年到现在，已经非常不易，目前已有 2k stars 了。大家可以给他 sponsor，让他继续走下去！&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/cmake-hunter-environment.png" alt="cmake-hunter-environment" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/cmake-hunter-environment.png"
+alt="cmake-hunter-environment"
+/>&lt;/p>
 &lt;h2 id="5clib">
 &lt;a href="#5clib" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -2989,7 +3085,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/clib.png" alt="clib" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/clib.png"
+alt="clib"
+/>&lt;/p>
 &lt;h2 id="6poac">
 &lt;a href="#6poac" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -3017,7 +3116,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">curl -fsSL https://sh.poac.pm &lt;span class="p">|&lt;/span> bash
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/poac.gif" alt="poac" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/poac.gif"
+alt="poac"
+/>&lt;/p>
 &lt;Donate/>
 &lt;Vssue title="C/C++ Package Manager" /></description></item><item><title>NHOI 2019 游记</title><link>https://blog.chungzh.cn/articles/nhoi-2019/</link><pubDate>Sun, 02 Jun 2019 12:07:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/nhoi-2019/</guid><description>
 &lt;blockquote>
@@ -3049,7 +3151,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 Day 1
 &lt;/h2>
 &lt;p>今天很早就起床了。早上吃了一根香肠和一个荷包蛋，很香。状态也很好。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/OI/NHOI2019/FiQkgUKKgatcS2k3frdWIDIK9l63.jpeg" alt="Breakfast" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/OI/NHOI2019/FiQkgUKKgatcS2k3frdWIDIK9l63.jpeg"
+alt="Breakfast"
+/>&lt;/p>
 &lt;p>进考场之后开始颓废小恐龙。。。&lt;/p>
 &lt;p>&lt;del>对了，监考老师有一个很漂亮的小姐姐。。。&lt;/del>&lt;/p>
 &lt;p>本来还想睡一会儿觉，最后还是忍不住两边赛友的小恐龙的诱惑。。。&lt;/p>
@@ -3470,7 +3575,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/h3>
 &lt;p>首先，在 &lt;a href="https://github.com/new">Create a new repository&lt;/a> 里创建一个项目，项目名是 &lt;code>GitHub 用户名.github.io&lt;/code>，然后到 &lt;a href="https://travis-ci.org">Travis CI&lt;/a> 官网，用 GitHub 账户直接关联登录，并允许 Travis CI 查看自己的公有仓库。&lt;/p>
 &lt;p>然后我们到 &lt;a href="https://travis-ci.org/account/repositories">Travis CI 账户页面&lt;/a>开启博客仓库的 CI，如图：&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png" alt="OpenCI" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png"
+alt="OpenCI"
+/>&lt;/p>
 &lt;h3 id="添加变量">
 &lt;a href="#%e6%b7%bb%e5%8a%a0%e5%8f%98%e9%87%8f" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -3501,7 +3609,10 @@ git config --global user.email &lt;span class="c1"># 对应 GIT_EMAIL&lt;/span>
 &lt;li>将生成的 Token 复制，保存（生成 Token 的页面只有一次机会看见，请保存妥当。）&lt;/li>
 &lt;/ul>
 &lt;p>在 Travis CI 仓库配置中，将三个变量填入设置（位于 &lt;code>Settings &amp;gt; Environment Variables&lt;/code> 处并保存：&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci2.png" alt="" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci2.png"
+alt=""
+/>&lt;/p>
 &lt;p>然后在博客根目录里创建一个 &lt;code>.travis.yml&lt;/code>，并粘贴一下内容进去：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -3629,9 +3740,15 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 开始
 &lt;/h2>
 &lt;p>默认的 Powershell 是这样的：&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell1.png" alt="丑陋的 Powershell" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell1.png"
+alt="丑陋的 Powershell"
+/>&lt;/p>
 &lt;p>但我们要把它改成这样：&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell2.png" alt="帅气的 Powershell" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell2.png"
+alt="帅气的 Powershell"
+/>&lt;/p>
 &lt;p>wow~简直能和使用 &lt;code>oh-my-zsh&lt;/code> 的终端媲美了！！！&lt;/p>
 &lt;p>话不多说，咱们开始。&lt;/p>
 &lt;p>首先我们了解一个工具 🌟&lt;a href="https://github.com/JanDeDobbeleer/oh-my-posh">oh-my-posh&lt;/a>。关于它的介绍可以看&lt;a href="https://web.okjike.com/post-detail/5c1b25c05158130011810bfd/originalPost">我在即刻的推荐文&lt;/a>。总之，这个工具就是用来美化 Powershell 的。上图就是用了 oh-my-posh 后的效果。&lt;/p>
@@ -3691,7 +3808,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>输入如上命令即可。&lt;/p>
-&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell3.png" alt="成果" />&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell3.png"
+alt="成果"
+/>&lt;/p>
 &lt;blockquote>
 &lt;p>upd：oh-my-posh 默认提供了许多主题，大家可以自行切换。方法是：&lt;code>Set-Theme 主题名&lt;/code>。主题有&lt;a href="https://github.com/JanDeDobbeleer/oh-my-posh#themes">这些&lt;/a>。大家可以自己玩玩。&lt;/p>
 &lt;/blockquote>
@@ -3709,7 +3829,10 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="nb">New-Item&lt;/span> &lt;span class="nv">$profile&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;img loading="lazy" src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell4.png" alt="结果" />&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell4.png"
+alt="结果"
+/>&lt;/p>
 &lt;p>好了，打开这个文件——相信大家如果仔细看信息就能发现这个文件在哪里了。然后在这个文件中粘贴以下命令：&lt;/p>
 &lt;pre>&lt;code>Import-Module oh-my-posh
 Import-Module posh-git
