@@ -28,6 +28,7 @@ title: 友链
 - [EpLiar](https://epliar.com/)
 - [Coelacanthus](https://blog.lhwcrt.top/)
 - [Louis Aeilot's site](https://aeilot.github.io)
+- [Sammy's Blog](https://sammmh.com/)
 
 ## 收藏夹 ~~单向恋~~
 
