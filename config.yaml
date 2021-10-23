@@ -3,6 +3,7 @@ languageCode: "zh-cn"
 title: "ChungZH's Blog"
 theme: "hugo-tania"
 paginate: 7
+buildFuture: true
 
 # disqusShortname: https-hugo-tania-netlify-app
 
