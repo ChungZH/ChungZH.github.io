@@ -44,8 +44,23 @@ params:
   
   # Comments settings
   comments:
-    enabled: false
-    provider: disqus
+    enable: true
+    provider: giscus
+    
+    giscus:
+        repo: ChungZH/ChungZH.github.io
+        id: MDEwOlJlcG9zaXRvcnkxNzcxMjMzNjI=
+        category:
+            name: Comments
+            id: DIC_kwDOCo6wIs4B_i5g
+        # default to pathname, do not support specific term or number now
+        # options: url, title, og:title
+        mapping: title
+        # 1 means true, 0 means false
+        # default to 1
+        reactionsEnabled: 1
+        # default to 0
+        emitMetadata: 0
 
 menu:
   header:
