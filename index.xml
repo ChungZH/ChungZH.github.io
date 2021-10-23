@@ -3278,7 +3278,7 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 熟悉 Vuepress 目录结构
 &lt;/h2>
-&lt;pre>&lt;code>.
+&lt;pre tabindex="0">&lt;code>.
 ├── docs
 │ ├── .vuepress (可选的)
 │ │ ├── components (可选的)
@@ -3683,7 +3683,7 @@ alt=""
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>然后我们新建一个 &lt;code>.gititnore&lt;/code> 文件，粘贴以下内容：&lt;/p>
-&lt;pre>&lt;code>.DS_Store
+&lt;pre tabindex="0">&lt;code>.DS_Store
 Thumbs.db
 db.json
 *.log
@@ -3834,7 +3834,7 @@ src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%
 alt="结果"
 />&lt;/p>
 &lt;p>好了，打开这个文件——相信大家如果仔细看信息就能发现这个文件在哪里了。然后在这个文件中粘贴以下命令：&lt;/p>
-&lt;pre>&lt;code>Import-Module oh-my-posh
+&lt;pre tabindex="0">&lt;code>Import-Module oh-my-posh
 Import-Module posh-git
 &lt;/code>&lt;/pre>&lt;p>就可以每次打开 Powershell 都自动用上 oh-my-posh 了。&lt;/p>
 &lt;p>Enjoy it ☕~&lt;/p>
