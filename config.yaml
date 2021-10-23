@@ -44,7 +44,7 @@ params:
   
   # Comments settings
   comments:
-    enable: true
+    enabled: true
     provider: giscus
     giscus:
         repo: ChungZH/ChungZH.github.io
