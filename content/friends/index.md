@@ -27,6 +27,7 @@ title: 友链
 - [Coelacanthus](https://blog.lhwcrt.top/)
 - [Louis Aeilot's blog](https://aeilot.vercel.app/)
 - [Molink](https://mol.ink)
+- [Eritque arcus](https://eritque-arcus.tech/)
 
 ## 收藏夹 ~~单向恋~~
 
