@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on ChungZH's Blog</title><link>https://blog.chungzh.cn/articles/</link><description>Recent content in Articles on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 04 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/articles/index.xml" rel="self" type="application/rss+xml"/><item><title>线段树学习笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>线段树是一种高端的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on ChungZH's Blog</title><link>https://blog.chungzh.cn/articles/</link><description>Recent content in Articles on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 23 Oct 2021 18:35:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/articles/index.xml" rel="self" type="application/rss+xml"/><item><title>CSP-J 2021 游记</title><link>https://blog.chungzh.cn/articles/csp2021/</link><pubDate>Sat, 23 Oct 2021 18:35:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/csp2021/</guid><description>CSP-J1 初赛前有点小紧张。
+赛前勉强做了几套试卷，然后就上考场了。
+刚考完对答案的时候发现 J 组才 72，看洛谷上大家都说今年 J 组简单了 blabla，分数线肯定会升，然而我却觉得好难，那一个星期都害怕极了。。。结果分数出来了才发现洛谷那群人真是扯啊哈哈哈
+S 组才 48 分，没有成功压线。（其实就算去了复赛也拿不了分。。
+CSP-J2 比赛前一晚上八点在学校出发。逃掉了晚自习（尽管是星期五
+去到酒店大概也九点半了，洗完澡，看了会儿凤凰台，然后就睡了。
+第二天早上六点半起床，吃完自助餐（和上一年的变化不大，挺好吃的），七点二十出发。
+然后进考场。
+电脑好像是 Ryzen 3600，8GB 内存。
+八点半开考。
+密码很乱，6ewid\n16384#，监考员一开始还直接忽略最后面那个井号了。。。
+打开题目，发现第一第二题题面好长，有点慌了起来&amp;hellip;
+T2 尤为毒瘤，到了 9:22 才搞完了。。。感觉挺很危险的，好怕翻车。
+10:08，肝完 T3，77 行代码，写完人都瘫了。。感谢第三个样例，一个一个找情况。。。
+（不知道怎么比对两个文件的内容，于是直接打开 Sublime Text 开始用查找来找不同。。。
+赶紧吃了根士力架，然后去上了个厕所。
+10:55，T4 过样例了，打得比 T3 轻松多了，当然也不可能拿满分。。。其实也不知道该怎么做，直接乱搞，做法非常诡异。。看看效果怎样吧，能骗到 50 分就是胜利。
+还有一点，今年 NOI Linux 2 还行。（毕竟上一年给了虚拟机但是系统有密码，根本打不开，笑死）在里面编译了几次代码，虽然也没什么用。运行起来还蛮快的。
+总的来说，这次考得还行。题目有点诡异，没有 dp，没有搜索，个人感觉侧重考基本功。
+等成绩吧。</description></item><item><title>线段树学习笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>线段树是一种高端的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。
 如下图就是一棵线段树。在结点中，你可以存对应区间的最大值，最小值，总和等等。
 对于每一个结点 $i$，它的两个子结点分别是 $2i$ 和 $2i+1$。因此，在开树的数组时，最好要开到 $4N$ 的大小。
 关于 $4N$，详见 OI-Wiki。
