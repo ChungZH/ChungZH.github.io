@@ -20,7 +20,8 @@ T2 尤为毒瘤，到了 9:22 才搞完了。。。感觉挺很危险的，好�
 10:55，T4 过样例了，打得比 T3 轻松多了，当然也不可能拿满分。。。其实也不知道该怎么做，直接乱搞，做法非常诡异。。看看效果怎样吧，能骗到 50 分就是胜利。
 还有一点，今年 NOI Linux 2 还行。（毕竟上一年给了虚拟机但是系统有密码，根本打不开，笑死）在里面编译了几次代码，虽然也没什么用。运行起来还蛮快的。
 总的来说，这次考得还行。题目有点诡异，没有 dp，没有搜索，个人感觉侧重考基本功。
-等成绩吧。</description></item><item><title>线段树学习笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>线段树是一种高端的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。
+等成绩吧。
+UPD 1 (2021/10/23 22:50)：</description></item><item><title>线段树学习笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>线段树是一种高端的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。
 如下图就是一棵线段树。在结点中，你可以存对应区间的最大值，最小值，总和等等。
 对于每一个结点 $i$，它的两个子结点分别是 $2i$ 和 $2i+1$。因此，在开树的数组时，最好要开到 $4N$ 的大小。
 关于 $4N$，详见 OI-Wiki。
