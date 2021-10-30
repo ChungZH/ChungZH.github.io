@@ -28,6 +28,7 @@ title: 友链
 - [Louis Aeilot's blog](https://aeilot.vercel.app/)
 - [Molink](https://mol.ink)
 - [Eritque arcus](https://eritque-arcus.tech/)
+- [Lilnille's Garage](https://lilnille.github.io/)
 
 ## 收藏夹 ~~单向恋~~
 
