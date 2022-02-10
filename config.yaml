@@ -67,6 +67,8 @@ menu:
   footer:
     - name: RSS
       url: "/index.xml"
+    - name: CC BY-NC-SA 2.5
+      url: "https://creativecommons.org/licenses/by-nc-sa/2.5/cn/"
 
 markup:
   highlight:
