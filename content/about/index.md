@@ -8,6 +8,8 @@ title: 关于
 
 今年初二。
 
+ISFJ-T。
+
 ## 关于本站
 
 本站使用 [Hugo](https://gohugo.io/) 搭建。详见： [GitHub: ChungZH.github.io](https://github.com/ChungZH/ChungZH.github.io)。
