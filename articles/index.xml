@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on ChungZH's Blog</title><link>https://blog.chungzh.cn/articles/</link><description>Recent content in Articles on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 31 Dec 2021 21:35:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/articles/index.xml" rel="self" type="application/rss+xml"/><item><title>告别 2021</title><link>https://blog.chungzh.cn/articles/goodbye2021/</link><pubDate>Fri, 31 Dec 2021 21:35:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/goodbye2021/</guid><description>这一年还是收获满满的。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on ChungZH's Blog</title><link>https://blog.chungzh.cn/articles/</link><description>Recent content in Articles on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 09 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/articles/index.xml" rel="self" type="application/rss+xml"/><item><title>Treap 学习笔记</title><link>https://blog.chungzh.cn/articles/treap/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/treap/</guid><description>Treap = Tree + Heap
+二叉搜索树（BST） 在学习 Treap 之前，需要先了解一下二叉搜索树（BST, Binary Search Tree）：
+设 $x$ 是二叉搜索树中的一个结点。如果 $y$ 是 $x$ 左子树中的一个结点，那么 $y.key \lt x.key$。如果 $y$ 是 $x$ 右子树中的一个结点，那么 $y.key \gt x.key$。
+BST 上的基本操作所花费的时间与这棵树的高度成正比。对于一个有 $n$ 个结点的二叉搜索树中，这些操作的最优时间复杂度为 $O(\log n)$，最坏为 $O(n)$。随机构造这样一棵二叉搜索树的期望高度为 $O(\log n)$。然而，当这棵树退化成链时，则同样的操作就要花费 $O(n)$ 的最坏运行时间。
+由于普通 BST 容易退化，对于它的实现就不再赘述。在实践中需要使用如 Treap 这样的平衡二叉搜索树。
+Treap 顾名思义，Treap 是树和堆的结合。它的数据结构既是一个二叉搜索树，又是一个二叉堆。
+在 Treap 的每个结点中，除了 $key$ 值，还要保存一个 $fix$（更常见的是 $priority$）值。这个值是随机值，以它为依据来同时建立最大堆（或最小堆）。因为 $fix$ 值是随机的，所以可以让这棵树更加平衡，高度更接近 $O(\log n)$。它的各种操作期望时间复杂度都是 $O(\log n)$。</description></item><item><title>告别 2021</title><link>https://blog.chungzh.cn/articles/goodbye2021/</link><pubDate>Fri, 31 Dec 2021 21:35:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/goodbye2021/</guid><description>这一年还是收获满满的。
 OI 上半年去了 GDOI 观摩神仙打架，长了见识。
 CSP-J 2021 1=，挺满意的。
 年末镇赛第一，虽然说没什么用但是就是挺开心的 😁
