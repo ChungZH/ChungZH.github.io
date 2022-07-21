@@ -1,94 +1,11 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=theme-color content="dark">
-<title>优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog</title>
-<meta property="og:site_name" content="ChungZH's Blog">
-<meta property="og:title" content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog">
-<meta itemprop=name content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog">
-<meta name=twitter:title content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog">
-<meta name=application-name content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog"><meta name=twitter:card content="summary">
-<meta name=description content="Welcome to my blog!">
-<meta name=twitter:description content="Welcome to my blog!">
-<meta itemprop=description content="Welcome to my blog!">
-<meta property="og:description" content="Welcome to my blog!">
-<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
-<style>:root{--base-font-family:"Noto Serif SC", var(--sys-font-family), var(--zh-font-family)}</style>
-<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
-</head>
-<script>(function(){const a='ThemeColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
-<body class=dark>
-<nav class=navbar>
-<div class=container>
-<div class=flex>
-<div>
-<a class=brand href=/>
-<span class=emoji>
-🎆
-</span>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=theme-color content="dark"><title>优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog</title><meta property="og:site_name" content="ChungZH's Blog"><meta property="og:title" content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog"><meta itemprop=name content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog"><meta name=twitter:title content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog"><meta name=application-name content="优雅地使用 C++ 制作表格：tabulate | ChungZH's Blog"><meta name=twitter:card content="summary"><meta name=description content="Welcome to my blog!"><meta name=twitter:description content="Welcome to my blog!"><meta itemprop=description content="Welcome to my blog!"><meta property="og:description" content="Welcome to my blog!"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css><style>:root{--base-font-family:"Noto Serif SC", var(--sys-font-family), var(--zh-font-family)}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><script>(function(){const e="ThemeColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="ThemeColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.userColorScheme="dark":document.documentElement.dataset.userColorScheme="light"})()</script><body class=dark><nav class=navbar><div class=container><div class=flex><div><a class=brand href=/><span class=emoji>🎆</span>
 <img src=/BlogFavicon16.png>
-ChungZH's Blog
-</a>
-</div>
-<div class=flex>
-<a href=/about/>关于</a>
+ChungZH's Blog</a></div><div class=flex><a href=/about/>关于</a>
 <a href=/friends/>友链</a>
 <a href=/articles/>文章</a>
 <a href=/tags/>标签</a>
-<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
-</button>
-</div>
-</div>
-</div>
-</nav>
-<main>
-<div class=container>
-<article>
-<header class=article-header>
-<div class=thumb>
-<div>
-<h1>优雅地使用 C++ 制作表格：tabulate</h1>
-<div class=post-meta>
-<div>
-By ChungZH | <time>February 21, 2020</time>
-| 6 minutes
-</div>
-<div class=tags>
-<a href=/tags/c++/>C++</a>
-</div>
-</div>
-</div>
-</div>
-</header>
-</article>
-<div class=article-post>
-<h2 id=0x00-介绍-tabulate>
-<a href=#0x00-%e4%bb%8b%e7%bb%8d-tabulate class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x00 介绍 tabulate
-</h2>
-<p><a href=https://github.com/p-ranav/tabulate>tabulate</a> 是一个使用 C++ 17 编写的库，它可以制作表格。使用它，把表格对齐、格式化和着色，不在话下！你甚至可以使用 tabulate，将你的表格导出为 Markdown 代码。下图是一个使用 tabulate 制作的表格输出在命令行的样例：</p>
-<p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png alt=summary></p>
-<p>当然，除了表格，你还可以玩出花样。看见下面这个马里奥了吗？这也是用 tabulate 制作的！源码在 <a href=https://github.com/p-ranav/tabulate/blob/master/samples/mario.cpp>这里</a>。</p>
-<p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/mario.png alt=mario></p>
-<h2 id=0x10-准备>
-<a href=#0x10-%e5%87%86%e5%a4%87 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x10 准备
-</h2>
-<p>首先你需要安装 <a href=https://cmake.org/>CMake</a>。</p>
-<p>创建一个文件夹（下文用 X 代替），作为你使用 tabulate 的地方。再将 <a href=https://github.com/p-ranav/tabulate/tree/master/include>include</a> 这个文件夹下载到 X 里。然后在 X 里创建 <code>main.cpp</code> 以及一个 <code>CMakeLists.txt</code>。</p>
-<blockquote>
-<p>注意：需要下载 <code>include</code> <strong>整个</strong>文件夹而不是仅仅下载 <code>tabulate</code> 文件夹</p>
-<p>你可以点击 <a href=https://github.com/p-ranav/tabulate/archive/master.zip>这里</a> 下载 tabulate 项目，然后将 <code>include</code> 文件夹复制到 X 中。</p>
-</blockquote>
-<p>将下面的代码复制进 <code>CMakeLists.txt</code> ：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg></button></div></div></div></nav><main><div class=container><article><header class=article-header><div class=thumb><div><h1>优雅地使用 C++ 制作表格：tabulate</h1><div class=post-meta><div>By ChungZH | <time>February 21, 2020</time>
+| 6 minutes</div><div class=tags><a href=/tags/c++/>C++</a></div></div></div></div></header></article><div class=article-post><h2 id=0x00-介绍-tabulate><a href=#0x00-%e4%bb%8b%e7%bb%8d-tabulate class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x00 介绍 tabulate</h2><p><a href=https://github.com/p-ranav/tabulate>tabulate</a> 是一个使用 C++ 17 编写的库，它可以制作表格。使用它，把表格对齐、格式化和着色，不在话下！你甚至可以使用 tabulate，将你的表格导出为 Markdown 代码。下图是一个使用 tabulate 制作的表格输出在命令行的样例：</p><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png alt=summary></p><p>当然，除了表格，你还可以玩出花样。看见下面这个马里奥了吗？这也是用 tabulate 制作的！源码在 <a href=https://github.com/p-ranav/tabulate/blob/master/samples/mario.cpp>这里</a>。</p><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/mario.png alt=mario></p><h2 id=0x10-准备><a href=#0x10-%e5%87%86%e5%a4%87 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x10 准备</h2><p>首先你需要安装 <a href=https://cmake.org/>CMake</a>。</p><p>创建一个文件夹（下文用 X 代替），作为你使用 tabulate 的地方。再将 <a href=https://github.com/p-ranav/tabulate/tree/master/include>include</a> 这个文件夹下载到 X 里。然后在 X 里创建 <code>main.cpp</code> 以及一个 <code>CMakeLists.txt</code>。</p><blockquote><p>注意：需要下载 <code>include</code> <strong>整个</strong>文件夹而不是仅仅下载 <code>tabulate</code> 文件夹</p><p>你可以点击 <a href=https://github.com/p-ranav/tabulate/archive/master.zip>这里</a> 下载 tabulate 项目，然后将 <code>include</code> 文件夹复制到 X 中。</p></blockquote><p>将下面的代码复制进 <code>CMakeLists.txt</code> ：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -99,51 +16,28 @@ By ChungZH | <time>February 21, 2020</time>
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cmake data-lang=cmake><span class=nb>cmake_minimum_required</span><span class=p>(</span><span class=s>VERSION</span> <span class=s>3.8</span><span class=p>)</span><span class=err>
-</span><span class=err>
-</span><span class=err></span><span class=c># 这里的 tabulateDemo 可以换为你喜欢的名字
-</span><span class=c></span><span class=nb>project</span><span class=p>(</span><span class=s>tabulateDemo</span><span class=p>)</span><span class=err>
-</span><span class=err>
-</span><span class=err></span><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_CXX_STANDARD</span> <span class=s>17</span><span class=p>)</span><span class=err>
-</span><span class=err></span><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_CXX_STANDARD_REQUIRED</span> <span class=s>True</span><span class=p>)</span><span class=err>
-</span><span class=err>
-</span><span class=err></span><span class=nb>include_directories</span><span class=p>(</span><span class=s>include</span><span class=p>)</span><span class=err>
-</span><span class=err>
-</span><span class=err></span><span class=nb>add_executable</span><span class=p>(</span><span class=s>main</span> <span class=s>main.cpp</span><span class=p>)</span><span class=err>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>最后 X 文件夹的结构应该是这样的：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cmake data-lang=cmake><span class=line><span class=cl><span class=nb>cmake_minimum_required</span><span class=p>(</span><span class=s>VERSION</span> <span class=s>3.8</span><span class=p>)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># 这里的 tabulateDemo 可以换为你喜欢的名字
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=nb>project</span><span class=p>(</span><span class=s>tabulateDemo</span><span class=p>)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_CXX_STANDARD</span> <span class=s>17</span><span class=p>)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nb>set</span><span class=p>(</span><span class=s>CMAKE_CXX_STANDARD_REQUIRED</span> <span class=s>True</span><span class=p>)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nb>include_directories</span><span class=p>(</span><span class=s>include</span><span class=p>)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nb>add_executable</span><span class=p>(</span><span class=s>main</span> <span class=s>main.cpp</span><span class=p>)</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>最后 X 文件夹的结构应该是这样的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>.
-├── CMakeLists.txt
-├── include
-│   └── tabulate
-└── main.cpp
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>请<strong>认真</strong>核对好 X 的结构！</p>
-</blockquote>
-<p>可前往 <a href=https://github.com/ChungZH/tabulatedemo>ChungZH/tabulatedemo</a> 核对文件结构。</p>
-<h2 id=0x20-小试身手>
-<a href=#0x20-%e5%b0%8f%e8%af%95%e8%ba%ab%e6%89%8b class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x20 小试身手
-</h2>
-<p>将下面这段代码复制进 <code>main.cpp</code> 中：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>├── CMakeLists.txt
+</span></span><span class=line><span class=cl>├── include
+</span></span><span class=line><span class=cl>│   └── tabulate
+</span></span><span class=line><span class=cl>└── main.cpp
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>请<strong>认真</strong>核对好 X 的结构！</p></blockquote><p>可前往 <a href=https://github.com/ChungZH/tabulatedemo>ChungZH/tabulatedemo</a> 核对文件结构。</p><h2 id=0x20-小试身手><a href=#0x20-%e5%b0%8f%e8%af%95%e8%ba%ab%e6%89%8b class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x20 小试身手</h2><p>将下面这段代码复制进 <code>main.cpp</code> 中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -162,116 +56,56 @@ By ChungZH | <time>February 21, 2020</time>
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
-<span class=p>{</span>
-    <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span> <span class=c1>// 创建一个叫做 hellogithub 的 Table 对象
-</span><span class=c1></span>
-    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;hellogithub.com&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>underline</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>underline</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;xueweihan NB!!!&#34;</span><span class=p>});</span>
-
-    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>
-<p>如果你使用的是 Linux/MacOS 系统，请在终端进入 X 文件夹并输入以下命令：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span> <span class=c1>// 创建一个叫做 hellogithub 的 Table 对象
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;hellogithub.com&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>underline</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>underline</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;xueweihan NB!!!&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>如果你使用的是 Linux/MacOS 系统，请在终端进入 X 文件夹并输入以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir build
-<span class=nb>cd</span> build
-cmake ..
-make
-./main
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>如果你使用的是 Windows 系统和 MinGW，请检查是否安装 <code>mingw32-make.exe</code>，并在终端中进入 X 文件夹，输入：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir build
+</span></span><span class=line><span class=cl><span class=nb>cd</span> build
+</span></span><span class=line><span class=cl>cmake ..
+</span></span><span class=line><span class=cl>make
+</span></span><span class=line><span class=cl>./main
+</span></span></code></pre></td></tr></table></div></div></li><li><p>如果你使用的是 Windows 系统和 MinGW，请检查是否安装 <code>mingw32-make.exe</code>，并在终端中进入 X 文件夹，输入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=n>mkdir</span> <span class=n>build</span>
-<span class=nb>cd </span><span class=n>build</span>
-<span class=n>cmake</span> <span class=p>..</span>
-<span class=nb>mingw32-make</span>
-<span class=p>./</span><span class=n>main</span><span class=p>.</span><span class=n>exe</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>如果你使用 Windows 以及 MSVC，在终端中输入：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>mkdir</span> <span class=n>build</span>
+</span></span><span class=line><span class=cl><span class=nb>cd </span><span class=n>build</span>
+</span></span><span class=line><span class=cl><span class=n>cmake</span> <span class=p>..</span>
+</span></span><span class=line><span class=cl><span class=nb>mingw32-make</span>
+</span></span><span class=line><span class=cl><span class=p>./</span><span class=n>main</span><span class=p>.</span><span class=n>exe</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>如果你使用 Windows 以及 MSVC，在终端中输入：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=n>mkdir</span> <span class=n>build</span>
-<span class=nb>cd </span><span class=n>build</span>
-<span class=n>cmake</span> <span class=p>..</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<p>然后使用 Visual Studio 打开 <code>build</code> 文件夹下的 <code>tabulateDemo.sln</code> 来运行。</p>
-<p>如果没有问题，那么你应该会在终端里看到：</p>
-<p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x20.png alt=0x20></p>
-<h2 id=0x30-格式化表格>
-<a href=#0x30-%e6%a0%bc%e5%bc%8f%e5%8c%96%e8%a1%a8%e6%a0%bc class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x30 格式化表格
-</h2>
-<blockquote>
-<p>请先认真分析 0x20 小试身手 章节中的代码并尝试着修改一下它！</p>
-</blockquote>
-<h3 id=0x31-word-wrapping>
-<a href=#0x31-word-wrapping class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x31 Word Wrapping
-</h3>
-<p>为了防止表格中的内容过长导致不整齐，你可以指定表格每一列的宽度，tabulate 就会自动帮你换行。语法如下：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>mkdir</span> <span class=n>build</span>
+</span></span><span class=line><span class=cl><span class=nb>cd </span><span class=n>build</span>
+</span></span><span class=line><span class=cl><span class=n>cmake</span> <span class=p>..</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><p>然后使用 Visual Studio 打开 <code>build</code> 文件夹下的 <code>tabulateDemo.sln</code> 来运行。</p><p>如果没有问题，那么你应该会在终端里看到：</p><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x20.png alt=0x20></p><h2 id=0x30-格式化表格><a href=#0x30-%e6%a0%bc%e5%bc%8f%e5%8c%96%e8%a1%a8%e6%a0%bc class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x30 格式化表格</h2><blockquote><p>请先认真分析 0x20 小试身手 章节中的代码并尝试着修改一下它！</p></blockquote><h3 id=0x31-word-wrapping><a href=#0x31-word-wrapping class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x31 Word Wrapping</h3><p>为了防止表格中的内容过长导致不整齐，你可以指定表格每一列的宽度，tabulate 就会自动帮你换行。语法如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=c1>// 将表格第 0 行第 0 列的宽度设为20
-</span><span class=c1></span><span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>20</span><span class=p>);</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>除了自动换行，你也可以在内容中使用 <code>\n</code> 来手动设置换行。</p>
-<p>这是一个 Word Wrapping 的例子：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=c1>// 将表格第 0 行第 0 列的宽度设为20
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>20</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>除了自动换行，你也可以在内容中使用 <code>\n</code> 来手动设置换行。</p><p>这是一个 Word Wrapping 的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -289,51 +123,25 @@ make
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
-<span class=p>{</span>
-    <span class=n>Table</span> <span class=n>table</span><span class=p>;</span>
-
-    <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;This paragraph contains a veryveryveryveryveryverylong word. The long word will break and word wrap to the next line.&#34;</span><span class=p>,</span>
-                    <span class=s>&#34;This paragraph </span><span class=se>\n</span><span class=s>has embedded &#39;</span><span class=se>\\</span><span class=s>n&#39; </span><span class=se>\n</span><span class=s>characters and</span><span class=se>\n</span><span class=s> will break</span><span class=se>\n</span><span class=s> exactly where</span><span class=se>\n</span><span class=s> you want it</span><span class=se>\n</span><span class=s> to</span><span class=se>\n</span><span class=s> break.&#34;</span><span class=p>});</span>
-
-    <span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>20</span><span class=p>);</span> <span class=c1>// 设置第 0 行第 0 列的宽度为 20
-</span><span class=c1></span>    <span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>50</span><span class=p>);</span> <span class=c1>// 设置第 0 行第 1 列的宽度为 50
-</span><span class=c1></span>
-    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>table</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>
-<p>第 0 行第 0 列的文字是不是很长？但是设置了它的宽度后，就不用担心了。tabulate 将会帮你自动换行。如果不设置的话，表格就会变得很不整齐，你也可以尝试一下。</p>
-</li>
-<li>
-<p>第 0 行第 1 列的内容里运用了<code>\n</code> 的换行符，所以即使我们给它设置了 50 的宽度，也会先根据内容里的 <code>\n</code> 换行符来换行。</p>
-</li>
-<li>
-<p>值得注意的是，tabulate 会自动删除每一行内容两边的空白字符。</p>
-</li>
-</ul>
-<p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x31.png alt=0x31></p>
-<h3 id=0x32-字体对齐>
-<a href=#0x32-%e5%ad%97%e4%bd%93%e5%af%b9%e9%bd%90 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x32 字体对齐
-</h3>
-<p>tabulate 支持三种对齐设置：左、中和右。默认情况下，全部内容都会靠左对齐。</p>
-<p>要手动设置对齐方式，可以使用 <code>.format().font_align(方向)</code>。</p>
-<p>举一个例子：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Table</span> <span class=n>table</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;This paragraph contains a veryveryveryveryveryverylong word. The long word will break and word wrap to the next line.&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=s>&#34;This paragraph </span><span class=se>\n</span><span class=s>has embedded &#39;</span><span class=se>\\</span><span class=s>n&#39; </span><span class=se>\n</span><span class=s>characters and</span><span class=se>\n</span><span class=s> will break</span><span class=se>\n</span><span class=s> exactly where</span><span class=se>\n</span><span class=s> you want it</span><span class=se>\n</span><span class=s> to</span><span class=se>\n</span><span class=s> break.&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>20</span><span class=p>);</span> <span class=c1>// 设置第 0 行第 0 列的宽度为 20
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>50</span><span class=p>);</span> <span class=c1>// 设置第 0 行第 1 列的宽度为 50
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>table</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>第 0 行第 0 列的文字是不是很长？但是设置了它的宽度后，就不用担心了。tabulate 将会帮你自动换行。如果不设置的话，表格就会变得很不整齐，你也可以尝试一下。</p></li><li><p>第 0 行第 1 列的内容里运用了<code>\n</code> 的换行符，所以即使我们给它设置了 50 的宽度，也会先根据内容里的 <code>\n</code> 换行符来换行。</p></li><li><p>值得注意的是，tabulate 会自动删除每一行内容两边的空白字符。</p></li></ul><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x31.png alt=0x31></p><h3 id=0x32-字体对齐><a href=#0x32-%e5%ad%97%e4%bd%93%e5%af%b9%e9%bd%90 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x32 字体对齐</h3><p>tabulate 支持三种对齐设置：左、中和右。默认情况下，全部内容都会靠左对齐。</p><p>要手动设置对齐方式，可以使用 <code>.format().font_align(方向)</code>。</p><p>举一个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -357,110 +165,31 @@ make
 </span><span class=lnt>22
 </span><span class=lnt>23
 </span><span class=lnt>24
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
-<span class=p>{</span>
-    <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span>
-
-    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span> <span class=c1>// 设置居中对齐
-</span><span class=c1></span>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;hellogithub.com&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>left</span><span class=p>);</span> <span class=c1>// 设置靠左对齐
-</span><span class=c1></span>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span> <span class=c1>// 设置居中对齐
-</span><span class=c1></span>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;xueweihan NB!!!&#34;</span><span class=p>});</span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>3</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>right</span><span class=p>);</span> <span class=c1>// 设置靠右对齐
-</span><span class=c1></span>
-    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>50</span><span class=p>);</span>
-    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x32.png alt=0x32></p>
-<h3 id=0x33-字体样式>
-<a href=#0x33-%e5%ad%97%e4%bd%93%e6%a0%b7%e5%bc%8f class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x33 字体样式
-</h3>
-<p>tabulate 支持以下八种字体样式：</p>
-<ul>
-<li>
-<p>粗体 <code>bold</code></p>
-</li>
-<li>
-<p>深色 <code>dark</code></p>
-</li>
-<li>
-<p>斜体 <code>italic</code></p>
-</li>
-<li>
-<p>下划线 <code>underline</code></p>
-</li>
-<li>
-<p>闪烁 <code>blink</code> （？）</p>
-</li>
-<li>
-<p>翻转 <code>reverse</code></p>
-</li>
-<li>
-<p>隐藏 <code>concealed</code></p>
-</li>
-<li>
-<p>删除线 <code>crossed</code></p>
-</li>
-</ul>
-<blockquote>
-<p>某些样式可能会因为终端的原因而无法显示。</p>
-<p>如：粗体、深色、斜体、闪烁等样式，请慎用。</p>
-</blockquote>
-<p>要使用这些样式，可以调用 <code>.format().font_style({...})</code>。样式也可以叠加使用。</p>
-<p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x33.png alt=0x33></p>
-<h3 id=0x34-颜色>
-<a href=#0x34-%e9%a2%9c%e8%89%b2 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x34 颜色
-</h3>
-<p>你可以对表格的字体、边框、角以及列分隔符号设置它们的前景或背景颜色。</p>
-<p>tabulate 支持 8 种颜色：</p>
-<ul>
-<li>
-<p>灰色 <code>gray</code></p>
-</li>
-<li>
-<p>红色 <code>red</code></p>
-</li>
-<li>
-<p>绿色 <code>green</code></p>
-</li>
-<li>
-<p>黄色 <code>yellow</code></p>
-</li>
-<li>
-<p>蓝色 <code>blue</code></p>
-</li>
-<li>
-<p>洋红色 <code>magenta</code></p>
-</li>
-<li>
-<p>青色 <code>cyan</code></p>
-</li>
-<li>
-<p>白色 <code>white</code></p>
-</li>
-</ul>
-<p>可以通过 <code>.format().&amp;lt;element&amp;gt;_color(颜色)</code> 的方式定义前景色或通过 <code>.format().&amp;lt;element&amp;gt;_background_color(颜色)</code> 的方式定义背景色。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span> <span class=c1>// 设置居中对齐
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;hellogithub.com&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>left</span><span class=p>);</span> <span class=c1>// 设置靠左对齐
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span> <span class=c1>// 设置居中对齐
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;xueweihan NB!!!&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>3</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>right</span><span class=p>);</span> <span class=c1>// 设置靠右对齐
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>50</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x32.png alt=0x32></p><h3 id=0x33-字体样式><a href=#0x33-%e5%ad%97%e4%bd%93%e6%a0%b7%e5%bc%8f class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x33 字体样式</h3><p>tabulate 支持以下八种字体样式：</p><ul><li><p>粗体 <code>bold</code></p></li><li><p>深色 <code>dark</code></p></li><li><p>斜体 <code>italic</code></p></li><li><p>下划线 <code>underline</code></p></li><li><p>闪烁 <code>blink</code> （？）</p></li><li><p>翻转 <code>reverse</code></p></li><li><p>隐藏 <code>concealed</code></p></li><li><p>删除线 <code>crossed</code></p></li></ul><blockquote><p>某些样式可能会因为终端的原因而无法显示。</p><p>如：粗体、深色、斜体、闪烁等样式，请慎用。</p></blockquote><p>要使用这些样式，可以调用 <code>.format().font_style({...})</code>。样式也可以叠加使用。</p><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x33.png alt=0x33></p><h3 id=0x34-颜色><a href=#0x34-%e9%a2%9c%e8%89%b2 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x34 颜色</h3><p>你可以对表格的字体、边框、角以及列分隔符号设置它们的前景或背景颜色。</p><p>tabulate 支持 8 种颜色：</p><ul><li><p>灰色 <code>gray</code></p></li><li><p>红色 <code>red</code></p></li><li><p>绿色 <code>green</code></p></li><li><p>黄色 <code>yellow</code></p></li><li><p>蓝色 <code>blue</code></p></li><li><p>洋红色 <code>magenta</code></p></li><li><p>青色 <code>cyan</code></p></li><li><p>白色 <code>white</code></p></li></ul><p>可以通过 <code>.format().&amp;lt;element&amp;gt;_color(颜色)</code> 的方式定义前景色或通过 <code>.format().&amp;lt;element&amp;gt;_background_color(颜色)</code> 的方式定义背景色。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -514,76 +243,61 @@ make
 </span><span class=lnt>52
 </span><span class=lnt>53
 </span><span class=lnt>54
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-<span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
-<span class=p>{</span>
-    <span class=n>Table</span> <span class=n>colors</span><span class=p>;</span>
-
-    <span class=n>colors</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Font Color is Red&#34;</span><span class=p>,</span> <span class=s>&#34;Font Color is Blue&#34;</span><span class=p>,</span> <span class=s>&#34;Font Color is Green&#34;</span><span class=p>});</span>
-    <span class=n>colors</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Everything is Red&#34;</span><span class=p>,</span> <span class=s>&#34;Everything is Blue&#34;</span><span class=p>,</span> <span class=s>&#34;Everything is Green&#34;</span><span class=p>});</span>
-    <span class=n>colors</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Font Background is Red&#34;</span><span class=p>,</span> <span class=s>&#34;Font Background is Blue&#34;</span><span class=p>,</span> <span class=s>&#34;Font Background is Green&#34;</span><span class=p>});</span>
-
-    <span class=n>colors</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-    <span class=n>colors</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-    <span class=n>colors</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>2</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-
-    <span class=n>colors</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>border_left_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>);</span>
-
-    <span class=n>colors</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>border_left_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>);</span>
-
-    <span class=n>colors</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>border_left_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>border_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>border_right_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>);</span>
-
-    <span class=n>colors</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-    <span class=n>colors</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-    <span class=n>colors</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>2</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-
-    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>colors</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x34.png alt=0x34></p>
-<h3 id=0x35-边框角>
-<a href=#0x35-%e8%be%b9%e6%a1%86%e8%a7%92 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x35 边框、角
-</h3>
-<p>你可以对表格的边框和角的文本、颜色或背景颜色进行自定义。</p>
-<p>你可以使用 <code>.corner(..)</code>、<code>.corner_color(..)</code> 和 <code>corner_background_color(..)</code>  来对所有的角设置一个共同的样式。你也可以使用  <code>.border(..)</code> 、<code>.border_color(..)</code> 和  <code>.border_background_color(..)</code>  来对所有的边框设置一个共同的样式。</p>
-<p>这是一个单独设定所有边框和角的示例：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Table</span> <span class=n>colors</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Font Color is Red&#34;</span><span class=p>,</span> <span class=s>&#34;Font Color is Blue&#34;</span><span class=p>,</span> <span class=s>&#34;Font Color is Green&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Everything is Red&#34;</span><span class=p>,</span> <span class=s>&#34;Everything is Blue&#34;</span><span class=p>,</span> <span class=s>&#34;Everything is Green&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Font Background is Red&#34;</span><span class=p>,</span> <span class=s>&#34;Font Background is Blue&#34;</span><span class=p>,</span> <span class=s>&#34;Font Background is Green&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>2</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_left_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_left_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_left_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>border_right_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>1</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>colors</span><span class=p>[</span><span class=mi>2</span><span class=p>][</span><span class=mi>2</span><span class=p>].</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>colors</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x34.png alt=0x34></p><h3 id=0x35-边框角><a href=#0x35-%e8%be%b9%e6%a1%86%e8%a7%92 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x35 边框、角</h3><p>你可以对表格的边框和角的文本、颜色或背景颜色进行自定义。</p><p>你可以使用 <code>.corner(..)</code>、<code>.corner_color(..)</code> 和 <code>corner_background_color(..)</code>  来对所有的角设置一个共同的样式。你也可以使用  <code>.border(..)</code> 、<code>.border_color(..)</code> 和  <code>.border_background_color(..)</code>  来对所有的边框设置一个共同的样式。</p><p>这是一个单独设定所有边框和角的示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -625,62 +339,49 @@ make
 </span><span class=lnt>40
 </span><span class=lnt>41
 </span><span class=lnt>42
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;tabulate/table.hpp&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
-<span class=p>{</span>
-  <span class=n>Table</span> <span class=n>table</span><span class=p>;</span>
-
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;ᛏᚺᛁᛊ ᛁᛊ ᚨ ᛊᛏᛟᚱy ᛟᚠᚨ ᛒᛖᚨᚱ ᚨᚾᛞ</span><span class=se>\n</span><span class=s>&#34;</span>
-                 <span class=s>&#34;ᚨ ᚹᛟᛚᚠ, ᚹᚺᛟ ᚹᚨᚾᛞᛖᚱᛖᛞ ᛏᚺᛖ</span><span class=se>\n</span><span class=s>&#34;</span>
-                 <span class=s>&#34;ᚱᛖᚨᛚᛗᛊ ᚾᛁᚾᛖ ᛏᛟ ᚠᚢᛚᚠᛁᛚᛚ ᚨ ᛈᚱᛟᛗᛁᛊᛖ</span><span class=se>\n</span><span class=s>&#34;</span>
-                 <span class=s>&#34;ᛏᛟ ᛟᚾᛖ ᛒᛖᚠᛟᚱᛖ; ᛏᚺᛖy ᚹᚨᛚᚲ ᛏᚺᛖ</span><span class=se>\n</span><span class=s>&#34;</span>
-                 <span class=s>&#34;ᛏᚹᛁᛚᛁᚷᚺᛏ ᛈᚨᛏᚺ, ᛞᛖᛊᛏᛁᚾᛖᛞ ᛏᛟ</span><span class=se>\n</span><span class=s>&#34;</span>
-                 <span class=s>&#34;ᛞᛁᛊcᛟᚹᛖᚱ ᛏᚺᛖ ᛏᚱᚢᛏᚺ</span><span class=se>\n</span><span class=s>ᛏᚺᚨᛏ ᛁᛊ ᛏᛟ cᛟᛗᛖ.&#34;</span><span class=p>});</span>
-
-  <span class=n>table</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
-      <span class=p>.</span><span class=n>multi_byte_characters</span><span class=p>(</span><span class=nb>true</span><span class=p>)</span>
-      <span class=c1>// Font styling
-</span><span class=c1></span>      <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>,</span> <span class=n>fonttyle</span><span class=o>::</span><span class=n>dark</span><span class=p>})</span>
-      <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>yellow</span><span class=p>)</span>
-      <span class=c1>// Corners
-</span><span class=c1></span>      <span class=p>.</span><span class=n>corner_top_left</span><span class=p>(</span><span class=s>&#34;ᛰ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_top_right</span><span class=p>(</span><span class=s>&#34;ᛯ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_bottom_left</span><span class=p>(</span><span class=s>&#34;ᛮ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_bottom_right</span><span class=p>(</span><span class=s>&#34;ᛸ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_top_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>cyan</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_top_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>yellow</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_bottom_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>corner_bottom_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
-      <span class=c1>// Borders
-</span><span class=c1></span>      <span class=p>.</span><span class=n>border_top</span><span class=p>(</span><span class=s>&#34;ᛜ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_bottom</span><span class=p>(</span><span class=s>&#34;ᛜ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_left</span><span class=p>(</span><span class=s>&#34;ᚿ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_right</span><span class=p>(</span><span class=s>&#34;ᛆ&#34;</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>yellow</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_top_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>cyan</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>border_bottom_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>);</span>
-  <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>table</span> <span class=o>&lt;&lt;</span> <span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x35.png alt=0x35></p>
-<h3 id=0x36-基于范围的迭代>
-<a href=#0x36-%e5%9f%ba%e4%ba%8e%e8%8c%83%e5%9b%b4%e7%9a%84%e8%bf%ad%e4%bb%a3 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x36 基于范围的迭代
-</h3>
-<p>一个一个设置表格的样式是不是很麻烦？tabulate 提供了迭代器，支持对表、行和列的迭代，更方便地格式化表格。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;tabulate/table.hpp&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>Table</span> <span class=n>table</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;ᛏᚺᛁᛊ ᛁᛊ ᚨ ᛊᛏᛟᚱy ᛟᚠᚨ ᛒᛖᚨᚱ ᚨᚾᛞ</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=s>&#34;ᚨ ᚹᛟᛚᚠ, ᚹᚺᛟ ᚹᚨᚾᛞᛖᚱᛖᛞ ᛏᚺᛖ</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=s>&#34;ᚱᛖᚨᛚᛗᛊ ᚾᛁᚾᛖ ᛏᛟ ᚠᚢᛚᚠᛁᛚᛚ ᚨ ᛈᚱᛟᛗᛁᛊᛖ</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=s>&#34;ᛏᛟ ᛟᚾᛖ ᛒᛖᚠᛟᚱᛖ; ᛏᚺᛖy ᚹᚨᛚᚲ ᛏᚺᛖ</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=s>&#34;ᛏᚹᛁᛚᛁᚷᚺᛏ ᛈᚨᛏᚺ, ᛞᛖᛊᛏᛁᚾᛖᛞ ᛏᛟ</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                 <span class=s>&#34;ᛞᛁᛊcᛟᚹᛖᚱ ᛏᚺᛖ ᛏᚱᚢᛏᚺ</span><span class=se>\n</span><span class=s>ᛏᚺᚨᛏ ᛁᛊ ᛏᛟ cᛟᛗᛖ.&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>multi_byte_characters</span><span class=p>(</span><span class=nb>true</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// Font styling
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>,</span> <span class=n>fonttyle</span><span class=o>::</span><span class=n>dark</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>yellow</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// Corners
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=p>.</span><span class=n>corner_top_left</span><span class=p>(</span><span class=s>&#34;ᛰ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_top_right</span><span class=p>(</span><span class=s>&#34;ᛯ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_bottom_left</span><span class=p>(</span><span class=s>&#34;ᛮ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_bottom_right</span><span class=p>(</span><span class=s>&#34;ᛸ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_top_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>cyan</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_top_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>yellow</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_bottom_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>corner_bottom_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// Borders
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=p>.</span><span class=n>border_top</span><span class=p>(</span><span class=s>&#34;ᛜ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_bottom</span><span class=p>(</span><span class=s>&#34;ᛜ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_left</span><span class=p>(</span><span class=s>&#34;ᚿ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_right</span><span class=p>(</span><span class=s>&#34;ᛆ&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_left_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>yellow</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_right_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>green</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_top_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>cyan</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>border_bottom_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>red</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>table</span> <span class=o>&lt;&lt;</span> <span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x35.png alt=0x35></p><h3 id=0x36-基于范围的迭代><a href=#0x36-%e5%9f%ba%e4%ba%8e%e8%8c%83%e5%9b%b4%e7%9a%84%e8%bf%ad%e4%bb%a3 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x36 基于范围的迭代</h3><p>一个一个设置表格的样式是不是很麻烦？tabulate 提供了迭代器，支持对表、行和列的迭代，更方便地格式化表格。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -732,72 +433,59 @@ make
 </span><span class=lnt>50
 </span><span class=lnt>51
 </span><span class=lnt>52
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;tabulate/table.hpp&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>Table</span> <span class=n>table</span><span class=p>;</span>
-
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Company&#34;</span><span class=p>,</span> <span class=s>&#34;Contact&#34;</span><span class=p>,</span> <span class=s>&#34;Country&#34;</span><span class=p>});</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Alfreds Futterkiste&#34;</span><span class=p>,</span> <span class=s>&#34;Maria Anders&#34;</span><span class=p>,</span> <span class=s>&#34;Germany&#34;</span><span class=p>});</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Centro comercial Moctezuma&#34;</span><span class=p>,</span> <span class=s>&#34;Francisco Chang&#34;</span><span class=p>,</span> <span class=s>&#34;Mexico&#34;</span><span class=p>});</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Ernst Handel&#34;</span><span class=p>,</span> <span class=s>&#34;Roland Mendel&#34;</span><span class=p>,</span> <span class=s>&#34;Austria&#34;</span><span class=p>});</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Island Trading&#34;</span><span class=p>,</span> <span class=s>&#34;Helen Bennett&#34;</span><span class=p>,</span> <span class=s>&#34;UK&#34;</span><span class=p>});</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Laughing Bacchus Winecellars&#34;</span><span class=p>,</span> <span class=s>&#34;Yoshi Tannamuri&#34;</span><span class=p>,</span> <span class=s>&#34;Canada&#34;</span><span class=p>});</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Magazzini Alimentari Riuniti&#34;</span><span class=p>,</span> <span class=s>&#34;Giovanni Rovelli&#34;</span><span class=p>,</span> <span class=s>&#34;Italy&#34;</span><span class=p>});</span>
-
-  <span class=c1>// 设置每一行的宽度
-</span><span class=c1></span>  <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>0</span><span class=p>).</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>40</span><span class=p>);</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>1</span><span class=p>).</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>30</span><span class=p>);</span>
-  <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>2</span><span class=p>).</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>30</span><span class=p>);</span>
-
-  <span class=c1>// 遍历第一行中的单元格
-</span><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>cell</span> <span class=p>:</span> <span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span> <span class=p>{</span>
-    <span class=n>cell</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
-      <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>underline</span><span class=p>})</span>
-      <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span>
-  <span class=p>}</span>
-
-  <span class=c1>// 遍历第一列中的单元格
-</span><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>cell</span> <span class=p>:</span> <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>0</span><span class=p>))</span> <span class=p>{</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>cell</span><span class=p>.</span><span class=n>get_text</span><span class=p>()</span> <span class=o>!=</span> <span class=s>&#34;Company&#34;</span><span class=p>)</span> <span class=p>{</span>
-      <span class=n>cell</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
-        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>right</span><span class=p>);</span>
-    <span class=p>}</span>
-  <span class=p>}</span>
-
-  <span class=c1>// 遍历表格中的行
-</span><span class=c1></span>  <span class=n>size_t</span> <span class=n>index</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
-  <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>row</span> <span class=p>:</span> <span class=n>table</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>row</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
-      <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
-
-    <span class=c1>// 轮流把整行的背景设为蓝色
-</span><span class=c1></span>    <span class=k>if</span> <span class=p>(</span><span class=n>index</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=n>index</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
-      <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>cell</span> <span class=p>:</span> <span class=n>row</span><span class=p>)</span> <span class=p>{</span>
-        <span class=n>cell</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
-          <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>);</span>
-      <span class=p>}</span>
-    <span class=p>}</span>
-    <span class=n>index</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
-  <span class=p>}</span>
-
-  <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>table</span> <span class=o>&lt;&lt;</span> <span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x36.png alt=0x36></p>
-<h3 id=0x37-嵌套表格>
-<a href=#0x37-%e5%b5%8c%e5%a5%97%e8%a1%a8%e6%a0%bc class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x37 嵌套表格
-</h3>
-<p>在 tabulate 中嵌套表格很容易，因为 <code>Table.add_row(...)</code> 这个函数可以接受 <code>std::string</code> 类型和 <code>tabulate::Table</code>。下面是一个嵌套表格的例子：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;tabulate/table.hpp&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>Table</span> <span class=n>table</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Company&#34;</span><span class=p>,</span> <span class=s>&#34;Contact&#34;</span><span class=p>,</span> <span class=s>&#34;Country&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Alfreds Futterkiste&#34;</span><span class=p>,</span> <span class=s>&#34;Maria Anders&#34;</span><span class=p>,</span> <span class=s>&#34;Germany&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Centro comercial Moctezuma&#34;</span><span class=p>,</span> <span class=s>&#34;Francisco Chang&#34;</span><span class=p>,</span> <span class=s>&#34;Mexico&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Ernst Handel&#34;</span><span class=p>,</span> <span class=s>&#34;Roland Mendel&#34;</span><span class=p>,</span> <span class=s>&#34;Austria&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Island Trading&#34;</span><span class=p>,</span> <span class=s>&#34;Helen Bennett&#34;</span><span class=p>,</span> <span class=s>&#34;UK&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Laughing Bacchus Winecellars&#34;</span><span class=p>,</span> <span class=s>&#34;Yoshi Tannamuri&#34;</span><span class=p>,</span> <span class=s>&#34;Canada&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Magazzini Alimentari Riuniti&#34;</span><span class=p>,</span> <span class=s>&#34;Giovanni Rovelli&#34;</span><span class=p>,</span> <span class=s>&#34;Italy&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 设置每一行的宽度
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>0</span><span class=p>).</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>40</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>1</span><span class=p>).</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>30</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>2</span><span class=p>).</span><span class=n>format</span><span class=p>().</span><span class=n>width</span><span class=p>(</span><span class=mi>30</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 遍历第一行中的单元格
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>cell</span> <span class=p>:</span> <span class=n>table</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>cell</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>underline</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 遍历第一列中的单元格
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>cell</span> <span class=p>:</span> <span class=n>table</span><span class=p>.</span><span class=n>column</span><span class=p>(</span><span class=mi>0</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cell</span><span class=p>.</span><span class=n>get_text</span><span class=p>()</span> <span class=o>!=</span> <span class=s>&#34;Company&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>cell</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>right</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 遍历表格中的行
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>size_t</span> <span class=n>index</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>row</span> <span class=p>:</span> <span class=n>table</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>row</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 轮流把整行的背景设为蓝色
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=p>(</span><span class=n>index</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=n>index</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=p>(</span><span class=k>auto</span><span class=o>&amp;</span> <span class=nl>cell</span> <span class=p>:</span> <span class=n>row</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>cell</span><span class=p>.</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>          <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>index</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>table</span> <span class=o>&lt;&lt;</span> <span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x36.png alt=0x36></p><h3 id=0x37-嵌套表格><a href=#0x37-%e5%b5%8c%e5%a5%97%e8%a1%a8%e6%a0%bc class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x37 嵌套表格</h3><p>在 tabulate 中嵌套表格很容易，因为 <code>Table.add_row(...)</code> 这个函数可以接受 <code>std::string</code> 类型和 <code>tabulate::Table</code>。下面是一个嵌套表格的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -816,44 +504,26 @@ make
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-<span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span>
-  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
-  <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]</span>
-      <span class=p>.</span><span class=n>format</span><span class=p>()</span>
-      <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
-      <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span>
-
-  <span class=n>Table</span> <span class=n>hglink</span><span class=p>;</span>
-  <span class=n>hglink</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;GitHub repo&#34;</span><span class=p>,</span> <span class=s>&#34;Website&#34;</span><span class=p>});</span>
-  <span class=n>hglink</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>,</span> <span class=s>&#34;hellogithub.com&#34;</span><span class=p>});</span>
-
-  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=n>hglink</span><span class=p>});</span> <span class=c1>// 嵌套！
-</span><span class=c1></span>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x37.png alt=0x37></p>
-<h2 id=0x40-导出>
-<a href=#0x40-%e5%af%bc%e5%87%ba class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x40 导出
-</h2>
-<h3 id=0x41-markdown>
-<a href=#0x41-markdown class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x41 Markdown
-</h3>
-<p>可以使用 <code>MarkdownExporter</code> 来将一个表格导出为 GFM 风格的 Markdown。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>format</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_background_color</span><span class=p>(</span><span class=n>Color</span><span class=o>::</span><span class=n>blue</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=n>font_align</span><span class=p>(</span><span class=n>FontAlign</span><span class=o>::</span><span class=n>center</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Table</span> <span class=n>hglink</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>hglink</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;GitHub repo&#34;</span><span class=p>,</span> <span class=s>&#34;Website&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>hglink</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>,</span> <span class=s>&#34;hellogithub.com&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=n>hglink</span><span class=p>});</span> <span class=c1>// 嵌套！
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x37.png alt=0x37></p><h2 id=0x40-导出><a href=#0x40-%e5%af%bc%e5%87%ba class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x40 导出</h2><h3 id=0x41-markdown><a href=#0x41-markdown class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x41 Markdown</h3><p>可以使用 <code>MarkdownExporter</code> 来将一个表格导出为 GFM 风格的 Markdown。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -872,87 +542,27 @@ make
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&#34;tabulate/markdown_exporter.hpp&#34;  // 注意这个头文件</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
-<span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span>
-  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
-  <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span> <span class=c1>// 加粗样式，在 Markdown 中可以表现出来
-</span><span class=c1></span>  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;GitHub repo: github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>});</span>
-  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Website: hellogithub.com&#34;</span><span class=p>});</span>
-
-  <span class=c1>// 导出为 Markdown
-</span><span class=c1></span>  <span class=n>MarkdownExporter</span> <span class=n>exporter</span><span class=p>;</span>
-  <span class=k>auto</span> <span class=n>markdown</span> <span class=o>=</span> <span class=n>exporter</span><span class=p>.</span><span class=n>dump</span><span class=p>(</span><span class=n>hellogithub</span><span class=p>);</span>
-
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;Markdown Source:</span><span class=se>\n\n</span><span class=s>&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>markdown</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x41.png alt=0x41></p>
-<p>导出效果如下：</p>
-<table>
-<thead>
-<tr>
-<th style=text-align:left>HelloGitHub</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style=text-align:left>GitHub repo: github.com/521xueweihan/HelloGitHub</td>
-</tr>
-<tr>
-<td style=text-align:left>Website: hellogithub.com</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>注意</strong>：Markdown 不能指定每一个单元格的对齐样式，只能指定一列的对齐样式，像这样 <code>hg.column(1).format().font_align(FontAlign::center);</code>。</p>
-</blockquote>
-<h2 id=0x50-尾声>
-<a href=#0x50-%e5%b0%be%e5%a3%b0 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-0x50 尾声
-</h2>
-<p>如果想要更详细地了解 tabulate 的用法，请查看官方文档 <a href=https://github.com/p-ranav/tabulate>https://github.com/p-ranav/tabulate</a> 。</p>
-<p>本文是作者的第一次关于此类型文章的尝试，如有不足之处，请指正，谢谢！</p>
-<p>再见！</p>
-<donate>
-<vssue title=tabulate>
-</div>
-</div>
-<div class=container>
-<nav class="flex container suggested">
-<a rel=prev href=/articles/2020dlwintercamp/ title="Previous post (older)">
-<span>Previous</span>
-2020 DL 信息学冬令营游记
-</a>
-<a rel=next href=/articles/cpp-get-time/ title="Next post (newer)">
-<span>Next</span>
-Windows 中 C++ 测量时间的 N 种方法
-</a>
-</nav>
-</div>
-<div class=container>
-<script src=https://giscus.app/client.js data-repo=ChungZH/ChungZH.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkxNzcxMjMzNjI=" data-category=Comments data-category-id=DIC_kwDOCo6wIs4B_i5g data-mapping=title data-reactions-enabled=1 data-emit-metadata=0 data-theme=light crossorigin=anonymous async></script>
-<script>function setGiscusTeheme(b){let a=document.querySelector('.giscus iframe');a&&a.contentWindow.postMessage({giscus:{setConfig:{theme:b}}},'https://giscus.app')}addEventListener('message',a=>{if(a.origin!=='https://giscus.app')return;setGiscusTeheme(document.documentElement.dataset.userColorScheme)}),window.addEventListener('onColorSchemeChange',a=>{setGiscusTeheme(a.detail)})</script>
-</div>
-</main>
-</main>
-<footer class="footer flex">
-<section class=container>
-<nav class=footer-links>
-<a href=https://creativecommons.org/licenses/by-nc-sa/2.5/cn/>CC BY-NC-SA 2.5</a>
-<a href=/index.xml>RSS</a>
-</nav>
-</section>
-<script defer src=/ts/features.a534d05c446023fa2ae2a638f87cc2443ad8e49f6aaeb4d9f24ed61d53766712.js data-enable-footnotes=true></script>
-</footer>
-</body>
-</html>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/markdown_exporter.hpp&#34;  // 注意这个头文件</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;tabulate/table.hpp&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>tabulate</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>Table</span> <span class=n>hellogithub</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>hellogithub</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>].</span><span class=n>format</span><span class=p>().</span><span class=n>font_style</span><span class=p>({</span><span class=n>fonttyle</span><span class=o>::</span><span class=n>bold</span><span class=p>});</span> <span class=c1>// 加粗样式，在 Markdown 中可以表现出来
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;GitHub repo: github.com/521xueweihan/HelloGitHub&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=n>hellogithub</span><span class=p>.</span><span class=n>add_row</span><span class=p>({</span><span class=s>&#34;Website: hellogithub.com&#34;</span><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 导出为 Markdown
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>MarkdownExporter</span> <span class=n>exporter</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>auto</span> <span class=n>markdown</span> <span class=o>=</span> <span class=n>exporter</span><span class=p>.</span><span class=n>dump</span><span class=p>(</span><span class=n>hellogithub</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>hellogithub</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;Markdown Source:</span><span class=se>\n\n</span><span class=s>&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>markdown</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy src=https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x41.png alt=0x41></p><p>导出效果如下：</p><table><thead><tr><th style=text-align:left>HelloGitHub</th></tr></thead><tbody><tr><td style=text-align:left>GitHub repo: github.com/521xueweihan/HelloGitHub</td></tr><tr><td style=text-align:left>Website: hellogithub.com</td></tr></tbody></table><blockquote><p><strong>注意</strong>：Markdown 不能指定每一个单元格的对齐样式，只能指定一列的对齐样式，像这样 <code>hg.column(1).format().font_align(FontAlign::center);</code>。</p></blockquote><h2 id=0x50-尾声><a href=#0x50-%e5%b0%be%e5%a3%b0 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>0x50 尾声</h2><p>如果想要更详细地了解 tabulate 的用法，请查看官方文档 <a href=https://github.com/p-ranav/tabulate>https://github.com/p-ranav/tabulate</a> 。</p><p>本文是作者的第一次关于此类型文章的尝试，如有不足之处，请指正，谢谢！</p><p>再见！</p><donate><vssue title=tabulate></div></div><div class=container><nav class="flex container suggested"><a rel=prev href=/articles/2020dlwintercamp/ title="Previous post (older)"><span>Previous</span>
+2020 DL 信息学冬令营游记</a>
+<a rel=next href=/articles/cpp-get-time/ title="Next post (newer)"><span>Next</span>
+Windows 中 C++ 测量时间的 N 种方法</a></nav></div><div class=container><script src=https://giscus.app/client.js data-repo=ChungZH/ChungZH.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkxNzcxMjMzNjI=" data-category=Comments data-category-id=DIC_kwDOCo6wIs4B_i5g data-mapping=title data-reactions-enabled=1 data-emit-metadata=0 data-theme=light crossorigin=anonymous async></script><script>function setGiscusTeheme(e){let t=document.querySelector(".giscus iframe");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}addEventListener("message",e=>{if(e.origin!=="https://giscus.app")return;setGiscusTeheme(document.documentElement.dataset.userColorScheme)}),window.addEventListener("onColorSchemeChange",e=>{setGiscusTeheme(e.detail)})</script></div></main></main><footer class="footer flex"><section class=container><nav class=footer-links><a href=https://creativecommons.org/licenses/by-nc-sa/2.5/cn/>CC BY-NC-SA 2.5</a>
+<a href=/index.xml>RSS</a></nav></section><script defer src=/ts/features.dd8e5b18a6dda91367e396fd8dc9b9f83a1993065f709a53e056e0f2e9096ea1.js data-enable-footnotes=true></script></footer></body></html>

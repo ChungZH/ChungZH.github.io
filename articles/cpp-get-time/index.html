@@ -1,107 +1,15 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=theme-color content="dark">
-<title>Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog</title>
-<meta property="og:site_name" content="ChungZH's Blog">
-<meta property="og:title" content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog">
-<meta itemprop=name content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog">
-<meta name=twitter:title content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog">
-<meta name=application-name content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog"><meta name=twitter:card content="summary">
-<meta name=description content="Welcome to my blog!">
-<meta name=twitter:description content="Welcome to my blog!">
-<meta itemprop=description content="Welcome to my blog!">
-<meta property="og:description" content="Welcome to my blog!">
-<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
-<style>:root{--base-font-family:"Noto Serif SC", var(--sys-font-family), var(--zh-font-family)}</style>
-<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
-</head>
-<script>(function(){const a='ThemeColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
-<body class=dark>
-<nav class=navbar>
-<div class=container>
-<div class=flex>
-<div>
-<a class=brand href=/>
-<span class=emoji>
-🎆
-</span>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=theme-color content="dark"><title>Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog</title><meta property="og:site_name" content="ChungZH's Blog"><meta property="og:title" content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog"><meta itemprop=name content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog"><meta name=twitter:title content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog"><meta name=application-name content="Windows 中 C++ 测量时间的 N 种方法 | ChungZH's Blog"><meta name=twitter:card content="summary"><meta name=description content="Welcome to my blog!"><meta name=twitter:description content="Welcome to my blog!"><meta itemprop=description content="Welcome to my blog!"><meta property="og:description" content="Welcome to my blog!"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css><style>:root{--base-font-family:"Noto Serif SC", var(--sys-font-family), var(--zh-font-family)}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><script>(function(){const e="ThemeColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="ThemeColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.userColorScheme="dark":document.documentElement.dataset.userColorScheme="light"})()</script><body class=dark><nav class=navbar><div class=container><div class=flex><div><a class=brand href=/><span class=emoji>🎆</span>
 <img src=/BlogFavicon16.png>
-ChungZH's Blog
-</a>
-</div>
-<div class=flex>
-<a href=/about/>关于</a>
+ChungZH's Blog</a></div><div class=flex><a href=/about/>关于</a>
 <a href=/friends/>友链</a>
 <a href=/articles/>文章</a>
 <a href=/tags/>标签</a>
-<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
-</button>
-</div>
-</div>
-</div>
-</nav>
-<main>
-<div class=container>
-<article>
-<header class=article-header>
-<div class=thumb>
-<div>
-<h1>Windows 中 C++ 测量时间的 N 种方法</h1>
-<div class=post-meta>
-<div>
-By ChungZH | <time>March 29, 2020</time>
-| 3 minutes
-</div>
-<div class=tags>
-<a href=/tags/c++/>C++</a>
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg></button></div></div></div></nav><main><div class=container><article><header class=article-header><div class=thumb><div><h1>Windows 中 C++ 测量时间的 N 种方法</h1><div class=post-meta><div>By ChungZH | <time>March 29, 2020</time>
+| 3 minutes</div><div class=tags><a href=/tags/c++/>C++</a>
 <a href=/tags/windows/>Windows</a>
-<a href=/tags/%E6%97%B6%E9%97%B4/>时间</a>
-</div>
-</div>
-</div>
-</div>
-</header>
-</article>
-<div class=article-post>
-<p>在开发中经常需要测量时间，比如性能优化时，比较两种方法的耗时。除此之外，获取当前的时间也可以用于初始化随机数生成器。而 C++ 提供了很种方法来获取时间。</p>
-<h2 id=标准库>
-<a href=#%e6%a0%87%e5%87%86%e5%ba%93 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-标准库
-</h2>
-<h3 id=stdtime>
-<a href=#stdtime class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-std::time
-</h3>
-<h4 id=定义>
-<a href=#%e5%ae%9a%e4%b9%89 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-定义
-</h4>
-<p>这个函数会返回一个距离 UTC 时间 1970 年 1 月 1 日 0:00 的秒数。</p>
-<p>头文件：<code>&lt;ctime></code></p>
-<p>文档：<a href=https://zh.cppreference.com/w/cpp/chrono/c/time>std::time</a></p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=n>std</span><span class=o>::</span><span class=n>time_t</span> <span class=n>time</span><span class=p>(</span> <span class=n>std</span><span class=o>::</span><span class=n>time_t</span><span class=o>*</span> <span class=n>arg</span> <span class=p>);</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=用法>
-<a href=#%e7%94%a8%e6%b3%95 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-用法
-</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+<a href=/tags/%E6%97%B6%E9%97%B4/>时间</a></div></div></div></div></header></article><div class=article-post><p>在开发中经常需要测量时间，比如性能优化时，比较两种方法的耗时。除此之外，获取当前的时间也可以用于初始化随机数生成器。而 C++ 提供了很种方法来获取时间。</p><h2 id=标准库><a href=#%e6%a0%87%e5%87%86%e5%ba%93 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>标准库</h2><h3 id=stdtime><a href=#stdtime class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>std::time</h3><h4 id=定义><a href=#%e5%ae%9a%e4%b9%89 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>定义</h4><p>这个函数会返回一个距离 UTC 时间 1970 年 1 月 1 日 0:00 的秒数。</p><p>头文件：<code>&lt;ctime></code></p><p>文档：<a href=https://zh.cppreference.com/w/cpp/chrono/c/time>std::time</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>std</span><span class=o>::</span><span class=n>time_t</span> <span class=n>time</span><span class=p>(</span> <span class=n>std</span><span class=o>::</span><span class=n>time_t</span><span class=o>*</span> <span class=n>arg</span> <span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=用法><a href=#%e7%94%a8%e6%b3%95 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>用法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -125,66 +33,35 @@ std::time
 </span><span class=lnt>22
 </span><span class=lnt>23
 </span><span class=lnt>24
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=cp>#include</span> <span class=cpf>&lt;ctime&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>time_t</span> <span class=n>res_1</span> <span class=o>=</span> <span class=n>time</span><span class=p>(</span><span class=k>nullptr</span><span class=p>);</span>
-
-  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>  <span class=c1>// do some stuff...
-</span><span class=c1></span>
-  <span class=n>time_t</span> <span class=n>res_2</span> <span class=o>=</span> <span class=n>time</span><span class=p>(</span><span class=k>nullptr</span><span class=p>);</span>
-
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>res_1</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>asctime</span><span class=p>(</span><span class=n>localtime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>res_1</span><span class=p>))</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>res_2</span> <span class=o>-</span> <span class=n>res_1</span> <span class=o>&lt;&lt;</span> <span class=sc>&#39;s&#39;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=cm>/* 输出结果
-</span><span class=cm>1585457981
-</span><span class=cm>Sun Mar 29 12:59:41 2020
-</span><span class=cm>
-</span><span class=cm>1s
-</span><span class=cm>*/</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=stdchronosteady_clocknow>
-<a href=#stdchronosteady_clocknow class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-std::chrono::steady_clock::now
-</h3>
-<h4 id=定义-1>
-<a href=#%e5%ae%9a%e4%b9%89-1 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-定义
-</h4>
-<p>返回表示当前时间的时间点。</p>
-<p>这个时钟是专门用来计算时间的间隔的。C++ 还提供了一个 <code>system_clock</code>，用于获取系统的时间。</p>
-<p>头文件：<code>chrono</code></p>
-<p>文档：<a href=https://zh.cppreference.com/w/cpp/chrono/steady_clock>std::chrono::stadey_clock</a></p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;ctime&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>time_t</span> <span class=n>res_1</span> <span class=o>=</span> <span class=n>time</span><span class=p>(</span><span class=k>nullptr</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>  <span class=c1>// do some stuff...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>time_t</span> <span class=n>res_2</span> <span class=o>=</span> <span class=n>time</span><span class=p>(</span><span class=k>nullptr</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>res_1</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>asctime</span><span class=p>(</span><span class=n>localtime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>res_1</span><span class=p>))</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>res_2</span> <span class=o>-</span> <span class=n>res_1</span> <span class=o>&lt;&lt;</span> <span class=sc>&#39;s&#39;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/* 输出结果
+</span></span></span><span class=line><span class=cl><span class=cm>1585457981
+</span></span></span><span class=line><span class=cl><span class=cm>Sun Mar 29 12:59:41 2020
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>1s
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=stdchronosteady_clocknow><a href=#stdchronosteady_clocknow class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>std::chrono::steady_clock::now</h3><h4 id=定义-1><a href=#%e5%ae%9a%e4%b9%89-1 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>定义</h4><p>返回表示当前时间的时间点。</p><p>这个时钟是专门用来计算时间的间隔的。C++ 还提供了一个 <code>system_clock</code>，用于获取系统的时间。</p><p>头文件：<code>chrono</code></p><p>文档：<a href=https://zh.cppreference.com/w/cpp/chrono/steady_clock>std::chrono::stadey_clock</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=k>static</span> <span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>time_point</span><span class=o>&lt;</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>&gt;</span> <span class=n>now</span><span class=p>()</span> <span class=k>noexcept</span><span class=p>;</span> 
-<span class=c1>// (C++11 起)
-</span></code></pre></td></tr></table>
-</div>
-</div><h4 id=用法-1>
-<a href=#%e7%94%a8%e6%b3%95-1 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-用法
-</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=k>static</span> <span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>time_point</span><span class=o>&lt;</span><span class=n>std</span><span class=o>::</span><span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>&gt;</span> <span class=n>now</span><span class=p>()</span> <span class=k>noexcept</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl><span class=c1>// (C++11 起)
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=用法-1><a href=#%e7%94%a8%e6%b3%95-1 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>用法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -205,64 +82,30 @@ std::chrono::steady_clock::now
 </span><span class=lnt>19
 </span><span class=lnt>20
 </span><span class=lnt>21
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=cp>#include</span> <span class=cpf>&lt;chrono&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>time_point</span> <span class=n>start</span> <span class=o>=</span> <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>now</span><span class=p>();</span>
-
-  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>  <span class=c1>// do some stuff...
-</span><span class=c1></span>
-  <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>time_point</span> <span class=n>end</span> <span class=o>=</span> <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>now</span><span class=p>();</span>
-
-  <span class=n>chrono</span><span class=o>::</span><span class=n>duration</span><span class=o>&lt;</span><span class=kt>double</span><span class=o>&gt;</span> <span class=n>ans</span> <span class=o>=</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span><span class=p>;</span>
-
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>ans</span><span class=p>.</span><span class=n>count</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=sc>&#39;s&#39;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=cm>/* 输出：
-</span><span class=cm>1.01495s
-</span><span class=cm>*/</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=windows>
-<a href=#windows class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-Windows
-</h2>
-<h3 id=gettickcount>
-<a href=#gettickcount class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-GetTickCount
-</h3>
-<h4 id=定义-2>
-<a href=#%e5%ae%9a%e4%b9%89-2 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-定义
-</h4>
-<p>检测自系统启动以来经过的毫秒数，最多为 49.7 天。如果不够用，可以使用 GetTickCount64。</p>
-<p>文档：<a href=https://docs.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount>GetTickCount function</a></p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=n>DWORD</span> <span class=nf>GetTickCount</span><span class=p>();</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=用法-2>
-<a href=#%e7%94%a8%e6%b3%95-2 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-用法
-</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;chrono&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>time_point</span> <span class=n>start</span> <span class=o>=</span> <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>now</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>  <span class=c1>// do some stuff...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>time_point</span> <span class=n>end</span> <span class=o>=</span> <span class=n>chrono</span><span class=o>::</span><span class=n>steady_clock</span><span class=o>::</span><span class=n>now</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>chrono</span><span class=o>::</span><span class=n>duration</span><span class=o>&lt;</span><span class=kt>double</span><span class=o>&gt;</span> <span class=n>ans</span> <span class=o>=</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>ans</span><span class=p>.</span><span class=n>count</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=sc>&#39;s&#39;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/* 输出：
+</span></span></span><span class=line><span class=cl><span class=cm>1.01495s
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=windows><a href=#windows class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Windows</h2><h3 id=gettickcount><a href=#gettickcount class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>GetTickCount</h3><h4 id=定义-2><a href=#%e5%ae%9a%e4%b9%89-2 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>定义</h4><p>检测自系统启动以来经过的毫秒数，最多为 49.7 天。如果不够用，可以使用 GetTickCount64。</p><p>文档：<a href=https://docs.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount>GetTickCount function</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>DWORD</span> <span class=nf>GetTickCount</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=用法-2><a href=#%e7%94%a8%e6%b3%95-2 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>用法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -279,55 +122,26 @@ GetTickCount
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>DWORD</span> <span class=n>start</span> <span class=o>=</span> <span class=n>GetTickCount</span><span class=p>();</span>
-
-  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>  <span class=c1>// do some stuff...
-</span><span class=c1></span>
-  <span class=n>DWORD</span> <span class=n>end</span> <span class=o>=</span> <span class=n>GetTickCount</span><span class=p>();</span>
-
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;ms&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=cm>/*输出：
-</span><span class=cm>1016ms
-</span><span class=cm>*/</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=gettickcount64>
-<a href=#gettickcount64 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-GetTickCount64
-</h3>
-<h4 id=定义-3>
-<a href=#%e5%ae%9a%e4%b9%89-3 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-定义
-</h4>
-<p>检测自系统启动以来经过的毫秒数。</p>
-<p>文档：<a href=https://docs.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount64>GetTickCount64 function</a></p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=n>ULONGLONG</span> <span class=nf>GetTickCount64</span><span class=p>();</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=用法-3>
-<a href=#%e7%94%a8%e6%b3%95-3 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-用法
-</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>DWORD</span> <span class=n>start</span> <span class=o>=</span> <span class=n>GetTickCount</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>  <span class=c1>// do some stuff...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>DWORD</span> <span class=n>end</span> <span class=o>=</span> <span class=n>GetTickCount</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;ms&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/*输出：
+</span></span></span><span class=line><span class=cl><span class=cm>1016ms
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=gettickcount64><a href=#gettickcount64 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>GetTickCount64</h3><h4 id=定义-3><a href=#%e5%ae%9a%e4%b9%89-3 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>定义</h4><p>检测自系统启动以来经过的毫秒数。</p><p>文档：<a href=https://docs.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount64>GetTickCount64 function</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>ULONGLONG</span> <span class=nf>GetTickCount64</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=用法-3><a href=#%e7%94%a8%e6%b3%95-3 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>用法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -345,49 +159,25 @@ GetTickCount64
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;iomanip&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>ULONGLONG</span> <span class=n>start</span> <span class=o>=</span> <span class=n>GetTickCount64</span><span class=p>();</span>
-
-  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span> <span class=c1>// do some stuff...
-</span><span class=c1></span>
-  <span class=n>ULONGLONG</span> <span class=n>end</span> <span class=o>=</span> <span class=n>GetTickCount64</span><span class=p>();</span>
-
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;ms&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=cm>/* 输出：
-</span><span class=cm>1015ms
-</span><span class=cm>*/</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=queryperformancecounter>
-<a href=#queryperformancecounter class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-QueryPerformanceCounter
-</h3>
-<h4 id=定义-4>
-<a href=#%e5%ae%9a%e4%b9%89-4 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-定义
-</h4>
-<p>检测性能计数器的当前值，该值是一个高分辨率（&lt;1us）时间戳，可用于时间间隔测量。</p>
-<p>这个函数是一个「黑科技」，精度非常高，用起来也稍微麻烦一点点。</p>
-<p>文档：<a href=https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter>QueryPerformanceCounter function</a></p>
-<h4 id=用法-4>
-<a href=#%e7%94%a8%e6%b3%95-4 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-用法
-</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iomanip&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>ULONGLONG</span> <span class=n>start</span> <span class=o>=</span> <span class=n>GetTickCount64</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span> <span class=c1>// do some stuff...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>ULONGLONG</span> <span class=n>end</span> <span class=o>=</span> <span class=n>GetTickCount64</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;ms&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/* 输出：
+</span></span></span><span class=line><span class=cl><span class=cm>1015ms
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=queryperformancecounter><a href=#queryperformancecounter class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>QueryPerformanceCounter</h3><h4 id=定义-4><a href=#%e5%ae%9a%e4%b9%89-4 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>定义</h4><p>检测性能计数器的当前值，该值是一个高分辨率（&lt;1us）时间戳，可用于时间间隔测量。</p><p>这个函数是一个「黑科技」，精度非常高，用起来也稍微麻烦一点点。</p><p>文档：<a href=https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter>QueryPerformanceCounter function</a></p><h4 id=用法-4><a href=#%e7%94%a8%e6%b3%95-4 class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>用法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -420,97 +210,41 @@ QueryPerformanceCounter
 </span><span class=lnt>31
 </span><span class=lnt>32
 </span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-  <span class=n>LARGE_INTEGER</span> <span class=n>freq</span><span class=p>;</span>
-  <span class=n>QueryPerformanceFrequency</span><span class=p>(</span><span class=o>&amp;</span><span class=n>freq</span><span class=p>);</span>  <span class=c1>// 获取性能计数器的频率
-</span><span class=c1></span>
-  <span class=n>LARGE_INTEGER</span> <span class=n>start</span><span class=p>;</span>
-  <span class=n>QueryPerformanceCounter</span><span class=p>(</span><span class=o>&amp;</span><span class=n>start</span><span class=p>);</span>
-
-  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span> <span class=c1>// do some stuff...
-</span><span class=c1></span>
-  <span class=n>LARGE_INTEGER</span> <span class=n>end</span><span class=p>;</span>
-  <span class=n>QueryPerformanceCounter</span><span class=p>(</span><span class=o>&amp;</span><span class=n>end</span><span class=p>);</span>
-
-  <span class=kt>double</span> <span class=n>misTime</span> <span class=o>=</span>
-      <span class=p>(</span><span class=n>end</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>-</span> <span class=n>start</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>freq</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>/</span> <span class=mf>1000000.0</span><span class=p>);</span>  <span class=c1>// 微秒
-</span><span class=c1></span>  <span class=kt>double</span> <span class=n>milTime</span> <span class=o>=</span>
-      <span class=p>(</span><span class=n>end</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>-</span> <span class=n>start</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>freq</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>/</span> <span class=mf>1000.0</span><span class=p>);</span>  <span class=c1>// 毫秒
-</span><span class=c1></span>  <span class=kt>double</span> <span class=n>sTime</span> <span class=o>=</span> <span class=p>(</span><span class=n>end</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>-</span> <span class=n>start</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>)</span> <span class=o>/</span> <span class=n>freq</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>;</span>  <span class=c1>// 秒
-</span><span class=c1></span>
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>misTime</span> <span class=o>&lt;&lt;</span> <span class=s>&#34; microseconds&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>milTime</span> <span class=o>&lt;&lt;</span> <span class=s>&#34; milliseconds&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>sTime</span> <span class=o>&lt;&lt;</span> <span class=s>&#34; seconds&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-
-  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=cm>/* 输出：
-</span><span class=cm>1.00367e+06 microseconds
-</span><span class=cm>1003.67 milliseconds
-</span><span class=cm>1 seconds
-</span><span class=cm>*/</span>
-
-
-</code></pre></td></tr></table>
-</div>
-</div><hr>
-<p>至此，本文共介绍了五种测量时间段的方法。</p>
-<p>作者很菜，如发现什么问题，请在评论区中指出。</p>
-<p>谢谢 🙇‍♂️</p>
-<h2 id=reference>
-<a href=#reference class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg>
-</a>
-Reference
-</h2>
-<ol>
-<li>
-<p>Kurt Guntheroth. <em><strong>Optimized C++</strong>: Proven Techniques for Heightened Performance</em></p>
-</li>
-<li>
-<p><a href=https://cppreference.com>CppReference</a></p>
-</li>
-<li>
-<p><a href=https://docs.microsoft.com/zh-cn>Microsoft Docs</a></p>
-</li>
-</ol>
-<donate>
-<vssue title=cpp-get-time>
-</div>
-</div>
-<div class=container>
-<nav class="flex container suggested">
-<a rel=prev href=/articles/tabulate/ title="Previous post (older)">
-<span>Previous</span>
-优雅地使用 C++ 制作表格：tabulate
-</a>
-<a rel=next href=/articles/notepads/ title="Next post (newer)">
-<span>Next</span>
-一款纯粹的 UWP 记事本——Notepads
-</a>
-</nav>
-</div>
-<div class=container>
-<script src=https://giscus.app/client.js data-repo=ChungZH/ChungZH.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkxNzcxMjMzNjI=" data-category=Comments data-category-id=DIC_kwDOCo6wIs4B_i5g data-mapping=title data-reactions-enabled=1 data-emit-metadata=0 data-theme=light crossorigin=anonymous async></script>
-<script>function setGiscusTeheme(b){let a=document.querySelector('.giscus iframe');a&&a.contentWindow.postMessage({giscus:{setConfig:{theme:b}}},'https://giscus.app')}addEventListener('message',a=>{if(a.origin!=='https://giscus.app')return;setGiscusTeheme(document.documentElement.dataset.userColorScheme)}),window.addEventListener('onColorSchemeChange',a=>{setGiscusTeheme(a.detail)})</script>
-</div>
-</main>
-</main>
-<footer class="footer flex">
-<section class=container>
-<nav class=footer-links>
-<a href=https://creativecommons.org/licenses/by-nc-sa/2.5/cn/>CC BY-NC-SA 2.5</a>
-<a href=/index.xml>RSS</a>
-</nav>
-</section>
-<script defer src=/ts/features.a534d05c446023fa2ae2a638f87cc2443ad8e49f6aaeb4d9f24ed61d53766712.js data-enable-footnotes=true></script>
-</footer>
-</body>
-</html>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>LARGE_INTEGER</span> <span class=n>freq</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>QueryPerformanceFrequency</span><span class=p>(</span><span class=o>&amp;</span><span class=n>freq</span><span class=p>);</span>  <span class=c1>// 获取性能计数器的频率
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>LARGE_INTEGER</span> <span class=n>start</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>QueryPerformanceCounter</span><span class=p>(</span><span class=o>&amp;</span><span class=n>start</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Sleep</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span> <span class=c1>// do some stuff...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>LARGE_INTEGER</span> <span class=n>end</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>QueryPerformanceCounter</span><span class=p>(</span><span class=o>&amp;</span><span class=n>end</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kt>double</span> <span class=n>misTime</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=n>end</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>-</span> <span class=n>start</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>freq</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>/</span> <span class=mf>1000000.0</span><span class=p>);</span>  <span class=c1>// 微秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kt>double</span> <span class=n>milTime</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=n>end</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>-</span> <span class=n>start</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>freq</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>/</span> <span class=mf>1000.0</span><span class=p>);</span>  <span class=c1>// 毫秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kt>double</span> <span class=n>sTime</span> <span class=o>=</span> <span class=p>(</span><span class=n>end</span><span class=p>.</span><span class=n>QuadPart</span> <span class=o>-</span> <span class=n>start</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>)</span> <span class=o>/</span> <span class=n>freq</span><span class=p>.</span><span class=n>QuadPart</span><span class=p>;</span>  <span class=c1>// 秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>misTime</span> <span class=o>&lt;&lt;</span> <span class=s>&#34; microseconds&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>milTime</span> <span class=o>&lt;&lt;</span> <span class=s>&#34; milliseconds&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>sTime</span> <span class=o>&lt;&lt;</span> <span class=s>&#34; seconds&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cm>/* 输出：
+</span></span></span><span class=line><span class=cl><span class=cm>1.00367e+06 microseconds
+</span></span></span><span class=line><span class=cl><span class=cm>1003.67 milliseconds
+</span></span></span><span class=line><span class=cl><span class=cm>1 seconds
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></td></tr></table></div></div><hr><p>至此，本文共介绍了五种测量时间段的方法。</p><p>作者很菜，如发现什么问题，请在评论区中指出。</p><p>谢谢 🙇‍♂️</p><h2 id=reference><a href=#reference class=anchor><svg class="icon" aria-hidden="true" focusable="false" height="16" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5.0-3-1.69-3-3.5S2.55 3 4 3h4c1.45.0 3 1.69 3 3.5.0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98.0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98.0-2-1.22-2-2.5.0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45.0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Reference</h2><ol><li><p>Kurt Guntheroth. <em><strong>Optimized C++</strong>: Proven Techniques for Heightened Performance</em></p></li><li><p><a href=https://cppreference.com>CppReference</a></p></li><li><p><a href=https://docs.microsoft.com/zh-cn>Microsoft Docs</a></p></li></ol><donate><vssue title=cpp-get-time></div></div><div class=container><nav class="flex container suggested"><a rel=prev href=/articles/tabulate/ title="Previous post (older)"><span>Previous</span>
+优雅地使用 C++ 制作表格：tabulate</a>
+<a rel=next href=/articles/notepads/ title="Next post (newer)"><span>Next</span>
+一款纯粹的 UWP 记事本——Notepads</a></nav></div><div class=container><script src=https://giscus.app/client.js data-repo=ChungZH/ChungZH.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkxNzcxMjMzNjI=" data-category=Comments data-category-id=DIC_kwDOCo6wIs4B_i5g data-mapping=title data-reactions-enabled=1 data-emit-metadata=0 data-theme=light crossorigin=anonymous async></script><script>function setGiscusTeheme(e){let t=document.querySelector(".giscus iframe");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}addEventListener("message",e=>{if(e.origin!=="https://giscus.app")return;setGiscusTeheme(document.documentElement.dataset.userColorScheme)}),window.addEventListener("onColorSchemeChange",e=>{setGiscusTeheme(e.detail)})</script></div></main></main><footer class="footer flex"><section class=container><nav class=footer-links><a href=https://creativecommons.org/licenses/by-nc-sa/2.5/cn/>CC BY-NC-SA 2.5</a>
+<a href=/index.xml>RSS</a></nav></section><script defer src=/ts/features.dd8e5b18a6dda91367e396fd8dc9b9f83a1993065f709a53e056e0f2e9096ea1.js data-enable-footnotes=true></script></footer></body></html>
