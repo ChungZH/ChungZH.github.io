@@ -281,7 +281,7 @@ NODE *merge(NODE *l, NODE *r) {
 
 #### 插入
 
-将树分裂成两个部分：$A=\{x|x \le key\}$、$B=\{x|x \gt key\}$，先将要插入的值合并入 $A$，最后合并 $A$ 和 $B$。
+将树分裂成两个部分：$A=\lbrace x \mid x \le key \rbrace$、$B= \lbrace x \mid x \gt key \rbrace$，先将要插入的值合并入 $A$，最后合并 $A$ 和 $B$。
 
 ![img](https://upload.wikimedia.org/wikipedia/commons/3/35/Treap_insert.svg)
 
@@ -297,7 +297,7 @@ void insert(int value) {
 
 #### 删除
 
-将树分裂成三个部分：$A=\{x|x \lt key\}$、$B=\{x|x = key\}$、$C=\{x|x \gt key\}$，然后合并 $A$ 和 $C$。
+将树分裂成三个部分：$A= \lbrace x \mid x \lt key \rbrace$、$B= \lbrace x \mid x = key \rbrace$、$C= \lbrace x \mid x \gt key \rbrace$，然后合并 $A$ 和 $C$。
 
 ![img](https://upload.wikimedia.org/wikipedia/commons/6/62/Treap_erase.svg)
 
