@@ -1,4 +1,230 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 09 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>Treap 学习笔记</title><link>https://blog.chungzh.cn/articles/treap/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/treap/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>关于 int 与 long long 的运算速度</title><link>https://blog.chungzh.cn/articles/int-vs-longlong/</link><pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/int-vs-longlong/</guid><description>
+&lt;h2 id="前言">
+&lt;a href="#%e5%89%8d%e8%a8%80" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+前言
+&lt;/h2>
+&lt;p>写一道 CF 题的时候，算法明明是正确的，却一直都 TLE。最后把一个 &lt;code>long long&lt;/code> 类型的数组改成了 &lt;code>int&lt;/code>，竟然就 AC 了。。&lt;/p>
+&lt;p>这不禁引发了我的思考，&lt;code>int&lt;/code> 与 &lt;code>long long&lt;/code> 的运算速度不一样吗？&lt;/p>
+&lt;h2 id="不严谨测试">
+&lt;a href="#%e4%b8%8d%e4%b8%a5%e8%b0%a8%e6%b5%8b%e8%af%95" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+不严谨测试
+&lt;/h2>
+&lt;p>由于本菜鸡并没有什么计算机基础原理的知识，只好做了一个测试。当然，这个测试其实很不严谨，没有很大的参考价值。&lt;del>我也就图一乐，哈哈哈哈哈&lt;/del>&lt;/p>
+&lt;h3 id="测试环境">
+&lt;a href="#%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+测试环境
+&lt;/h3>
+&lt;ul>
+&lt;li>电脑：Lenovo Yoga 14sACH 2021&lt;/li>
+&lt;li>系统：Windows 11 25163.1010&lt;/li>
+&lt;li>CPU：AMD Ryzen 7 5800H with Radeon Graphics (16) @ 3.200GHz&lt;/li>
+&lt;li>RAM：16.0 GB&lt;/li>
+&lt;li>编译器：GCC 11.2.0&lt;/li>
+&lt;/ul>
+&lt;h3 id="代码">
+&lt;a href="#%e4%bb%a3%e7%a0%81" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+代码
+&lt;/h3>
+&lt;p>&lt;del>仅仅是为了图一乐，&lt;/del> 我第一次使用了 &lt;a href="https://github.com/google/benchmark/">Google Benchmark&lt;/a> 这一工具。其实挺好上手的。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;benchmark/benchmark.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">using&lt;/span> &lt;span class="k">namespace&lt;/span> &lt;span class="n">benchmark&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">int_add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">State&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="kt">int&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">_&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    &lt;span class="n">DoNotOptimize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">ll_add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">State&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="kt">long&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">_&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    &lt;span class="n">DoNotOptimize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">int_div&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">State&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="kt">int&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">_&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    &lt;span class="n">DoNotOptimize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">ll_div&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">State&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="kt">long&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">_&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    &lt;span class="n">DoNotOptimize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">int_mod&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">State&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="kt">int&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">_&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    &lt;span class="n">DoNotOptimize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">ll_mod&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">State&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="kt">long&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">rand&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">  &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">_&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">    &lt;span class="n">DoNotOptimize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">int_add&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Threads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Iterations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">1e9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ll_add&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Threads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Iterations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">1e9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">int_div&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Threads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Iterations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">1e9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ll_div&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Threads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Iterations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">1e9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">int_mod&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Threads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Iterations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">1e9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ll_mod&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Threads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">Iterations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">1e9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">BENCHMARK_MAIN&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="结果">
+&lt;a href="#%e7%bb%93%e6%9e%9c" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+结果
+&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="p">---------------------------------------------------------------------&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Benchmark&lt;/span>                                        &lt;span class="n">Time&lt;/span>             &lt;span class="n">CPU&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">---------------------------------------------------------------------&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">int_add&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">iterations&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">1000000000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">8&lt;/span>      &lt;span class="n">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">209&lt;/span> &lt;span class="n">ns&lt;/span>         &lt;span class="n">1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">57&lt;/span> &lt;span class="n">ns&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ll_add&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">iterations&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">1000000000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">8&lt;/span>       &lt;span class="n">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">225&lt;/span> &lt;span class="n">ns&lt;/span>         &lt;span class="n">1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">71&lt;/span> &lt;span class="n">ns&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">int_div&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">iterations&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">1000000000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">8&lt;/span>      &lt;span class="n">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">302&lt;/span> &lt;span class="n">ns&lt;/span>         &lt;span class="n">2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">29&lt;/span> &lt;span class="n">ns&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ll_div&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">iterations&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">1000000000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">8&lt;/span>       &lt;span class="n">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">306&lt;/span> &lt;span class="n">ns&lt;/span>         &lt;span class="n">2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">38&lt;/span> &lt;span class="n">ns&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">int_mod&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">iterations&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">1000000000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">8&lt;/span>     &lt;span class="n">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">345&lt;/span> &lt;span class="n">ns&lt;/span> &lt;span class="n">2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">18&lt;/span> &lt;span class="n">ns&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ll_mod&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">iterations&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">1000000000&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="err">:&lt;/span>&lt;span class="n">8&lt;/span>       &lt;span class="n">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">350&lt;/span> &lt;span class="n">ns&lt;/span> &lt;span class="n">2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">34&lt;/span> &lt;span class="n">ns&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>经过多次测试，&lt;code>long long&lt;/code> 类型的各种运算都比 &lt;code>int&lt;/code> 慢一点。&lt;/p>
+&lt;h2 id="stackoverflow-问答">
+&lt;a href="#stackoverflow-%e9%97%ae%e7%ad%94" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+StackOverflow 问答
+&lt;/h2>
+&lt;p>比较专业的一个解答。详见 &lt;a href="https://stackoverflow.com/questions/39779880/c-int-vs-long-long-in-64-bit-machine">performance - C++ int vs long long in 64 bit machine - Stack Overflow&lt;/a>。&lt;/p>
+&lt;p>这里引用相关问答：&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;em>1) If it is best practice to use long long in x64 for achieving maximum performance even for for 1-4 byte data?&lt;/em>&lt;/p>
+&lt;p>No- and it will probably in fact make your performance worse. For example, if you use 64-bit integers where you could have gotten away with 32-bit integers then you have just doubled the amount of data that must be sent between the processor and memory and the memory is orders of magnitude slower. All of your caches and memory buses will crap out twice as fast.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="结论">
+&lt;a href="#%e7%bb%93%e8%ae%ba" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+结论
+&lt;/h2>
+&lt;p>可以不用 &lt;code>long long&lt;/code> 就尽量不用。最好不要使用 &lt;code>#define int long long&lt;/code> 这种粗暴手段。&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>致谢&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://unum.cloud/post/2022-03-04-gbench/">C++ Benchmarking Tips for Beginners - Unum Blog&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>碎碎念：真的有大半年没写过博客了，上次更新还是寒假呢哈哈哈。一整个学期都好忙啊，接下来就是初三了呢。&lt;/p>
+&lt;/blockquote>
+&lt;p>🙇&lt;/p></description></item><item><title>Treap 学习笔记</title><link>https://blog.chungzh.cn/articles/treap/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/treap/</guid><description>
 &lt;blockquote>
 &lt;p>Treap = Tree + Heap&lt;/p>
 &lt;/blockquote>
