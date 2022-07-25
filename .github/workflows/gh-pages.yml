@@ -22,7 +22,9 @@ jobs:
           extended: true
 
       - name: Install
-        run: npm install
+        run: |
+            npm install postcss-cli
+            npm install
 
       - name: Build
         run: hugo --minify
