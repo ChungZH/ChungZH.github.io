@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>主题 on ChungZH's Blog</title><link>https://blog.chungzh.cn/tags/%E4%B8%BB%E9%A2%98/</link><description>Recent content in 主题 on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/tags/%E4%B8%BB%E9%A2%98/index.xml" rel="self" type="application/rss+xml"/><item><title>第一次做主题：hugo-klay</title><link>https://blog.chungzh.cn/articles/hugo-klay/</link><pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/hugo-klay/</guid><description>上一次折腾博客已经是不知道什么时候的事情了。。
+Hugo 这个框架很不错，不想更换，那就尝试做一个主题吧。
+Hugo-klay 这个名字取自我最喜欢的 NBA 球员 Klay Thompson，不久前他随金州勇士队夺得了 2021-2022 赛季的 NBA 总冠军。
+实话说，我的前端是零基础水平，JS 完全不会写。感谢非常容易上手的 tailwindcss 框架，同时还借（抄）鉴（袭）了很多 hugo-tania、hugo-theme-stack 和 hugo-tailwindcss-starter-theme 的代码。
+就像前面说的那样，这个主题的代码质量比较差，而且主要也是自己使用，所以暂时不会单独为这个主题开一个 repo。如果你想参考，也可以到 ChungZH.github.io 这里寻找源码。有时间 的话，我会整理一下代码，再考虑单独分成一个项目。
+自我感觉还是挺漂亮的，哈哈哈。</description></item></channel></rss>
