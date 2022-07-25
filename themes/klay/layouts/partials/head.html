@@ -1,0 +1,54 @@
+<head>
+    <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{with.Title}}{{.}} | {{end}}{{.Site.Title}}</title>
+
+    <meta property="og:site_name" content="{{.Site.Params.siteName}}" />
+    <meta property="og:title" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}"/>
+    <meta itemprop="name" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
+    <meta name="twitter:title" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
+    <meta name="application-name" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
+
+    {{ with .Site.Params.favicon }}
+        <link rel="shortcut icon" href="{{ . | relURL }}" />
+    {{ end }}
+
+    {{- with $.Params.images -}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ index . 0 | absURL }}"/>
+    {{ else -}}
+    {{- $images := $.Resources.ByType "image" -}}
+    {{- $featured := $images.GetMatch "*feature*" -}}
+    {{- if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+    {{- with $featured -}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ $featured.Permalink }}"/>
+    {{- else -}}
+    {{- with $.Site.Params.images -}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ index . 0 | absURL }}"/>
+    {{ else -}}
+    <meta name="twitter:card" content="summary"/>
+    {{- end -}}
+    {{- end -}}
+    {{- end }}
+
+    <meta name="description" content="{{ if .Description }}{{.Description}}{{ else }}{{.Site.Params.siteDesc}}{{end}}" />
+    <meta name="twitter:description" content="{{ if .Description }}{{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{end}}"/>
+    <meta itemprop="description" content="{{ if .Description }} {{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{end}}"/>
+    <meta property="og:description" content="{{ if .Description }} {{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{ end }}" />
+
+    {{ partial "post-meta.html" . }}
+    
+{{ $options := dict "use" "autoprefixer postcss-color-alpha" }}
+
+{{ $styles := resources.Get "sass/main.scss" | toCSS | postCSS (dict "config" "./assets/sass/postcss.config.js") }}
+{{ if .Site.IsServer }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+{{ else }}
+    {{ $styles := $styles| minify | fingerprint | resources.PostProcess }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
+{{ end }}
+</head>

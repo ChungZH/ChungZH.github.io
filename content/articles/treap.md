@@ -4,6 +4,7 @@ tags:
 - OI
 - 数据结构
 - Treap
+category: data structure
 date: 2022-02-09
 katex: true
 ---

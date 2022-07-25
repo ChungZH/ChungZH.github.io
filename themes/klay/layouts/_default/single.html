@@ -1,0 +1,63 @@
+{{ define "main" }}
+
+<div class="container">
+    <article>
+        <header class="article-header">
+            <div class="thumb">
+            <div>
+                <div class="post-tags">
+                {{ range (.GetTerms "tags") }}
+                <a class="tag" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+                {{ end }}
+                </div>
+                <h1 class="post-title">{{ .Title }}</h1>
+                <div class="post-meta">
+                {{ $author := .Params.author }} {{ if eq $author nil }} {{ $author =
+                .Site.Params.author }} {{ end }} By {{ $author }} {{ if .Date }}
+                <div class="font-bold text-sky-500 dark:text-sky-400">·</div>
+                <time>{{ .Date.Format "January 02, 2006" }}</time>
+                {{ end }}
+                <div class="font-bold text-sky-500 dark:text-sky-400">·</div>
+                {{ .ReadingTime }} minutes
+                </div>
+            </div>
+            </div>
+        </header>
+    </article>
+
+    <aside class="toc">
+        {{ .TableOfContents }}
+    </aside>
+    <div class="article-post">
+        {{ .Content }}
+    </div>
+
+    
+
+    {{ if .Section }}
+    <div class="paginav">
+        {{ with .PrevInSection }}
+        <a rel="prev" href="{{ .RelPermalink }}" title="Previous post (older)">
+            <span>Prev</span>
+            <div class="paginav-title">{{ .Title }}</div>
+            </a>
+        {{ end }}
+            
+        {{ with .NextInSection }}
+        <a class="text-right" rel="next" href="{{ .RelPermalink }}" title="Next post (newer)">
+            <span>Next</span>
+            <div class="paginav-title">{{ .Title }}</div>
+            </a> 
+        {{ end }}
+    </div>
+    {{ end }}
+
+</div>
+
+<div class="container">
+{{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
+    {{ partial "comments/include" . }}
+{{ end }}
+</div>
+
+{{ end }}

@@ -2,3 +2,6 @@ public/
 resources/
 *.lock
 .obsidian/
+.vscode/
+node_modules/
+hugo_stats.json

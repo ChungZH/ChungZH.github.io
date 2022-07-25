@@ -1,0 +1,26 @@
+<header class="sticky top-0 z-40">
+    <div
+    class="w-full backdrop-blur bg-white/80 dark:bg-slate-900/75 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06]">
+    <div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+            <div class="px-20 relative flex flex-wrap justify-between">
+                <div class="relative flex items-center">
+                    <a href="{{ relURL "/" }}">
+                        <div class="flex gap-3 items-center text-xl font-bold text-slate-800 dark:text-slate-200">
+                            {{ with .Site.Params.titleLogo }}
+                                <img class="w-auto h-8" src="{{ . | relURL }}" title="logo"/>
+                            {{ end }}
+                            <span class="hover:text-sky-500 dark:hover:text-sky-400">{{ .Site.Title }}</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="relative flex items-center">
+                    <div class="flex gap-5 items-center leading-6 font-semibold text-slate-700 dark:text-slate-200">
+                        {{ range .Site.Menus.header }}
+                            <a class="hover:text-sky-500 dark:hover:text-sky-400" href="{{ .URL | relURL }}"{{ if eq .URL $.RelPermalink }} aria-current="page"{{ end }}>{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,12 @@
+.prose {
+    a {
+        text-decoration: none;
+        border-bottom: 1px solid #7dd3fc ;
+        text-decoration: none;
+        &:hover {
+            border-bottom: 2px solid #7dd3fc;
+        }
+        @apply font-semibold
+    }
+    @apply text-lg max-w-none leading-relaxed
+}

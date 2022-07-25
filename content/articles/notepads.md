@@ -3,7 +3,7 @@ title: 一款纯粹的 UWP 记事本——Notepads
 tags: 
     - UWP
     - 文本编辑器
-    - Windows10
+    - Windows
 date: 2020-04-06 12:45:00
 author: ChungZH
 location: Foshan

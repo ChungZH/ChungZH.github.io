@@ -4,6 +4,7 @@ tags:
 - C++
 - OI
 date: 2022-07-22
+category: cpp
 author: ChungZH
 ---
 

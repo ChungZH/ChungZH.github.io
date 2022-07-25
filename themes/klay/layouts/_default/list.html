@@ -1,0 +1,22 @@
+{{- define "main" }}
+
+<div class="container prose dark:prose-invert">
+    {{- $pages := union .RegularPages .Sections }}
+    {{- $paginator := .Paginate $pages }}
+    {{- $term := .Data.Term }}
+    <h1 class="post-title">{{ .Title }}<sup>({{ len $pages }})</sup></h1> 
+    <div class="posts">
+        {{- range $index, $page := $paginator.Pages }}
+            <div class="post">
+                <div class="post-row">
+                    <time class="time">{{ .Date.Format "Jan 02" }}</time>
+                    <a href="{{ .RelPermalink }}">
+                        <h3 class="title">{{ .Title }}</h3>
+                    </a>
+                </div>
+            </div>
+        {{- end }}
+    </div>
+</div>
+
+{{- end }}{{- /* end main */ -}}

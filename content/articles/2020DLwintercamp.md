@@ -2,7 +2,7 @@
 title: 2020 DL 信息学冬令营游记
 tags:
 - 游记
-- 信息学
+- OI
 date: 2020-01-20 16:03:00
 author: ChungZH
 location: Foshan

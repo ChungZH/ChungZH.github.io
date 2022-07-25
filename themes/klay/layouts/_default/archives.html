@@ -1,0 +1,36 @@
+{{ define "main" }}
+
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+
+<div class="container prose dark:prose-invert">
+    <h1 class="post-title">{{ .Title }}</h1>
+    <div class="filter-container">
+          {{ $maxCategoryToShow := $.Site.Params.maxCategoryToShow | default 5 }}
+          {{ range .Site.Taxonomies.categories.TaxonomyArray | first $maxCategoryToShow }}
+            <div class="filter-item" data-value="{{ .Page.Title }}" data-type="categories">
+              {{ .Page.Title }}<sup>{{ .Count }}</sup>
+            </div>
+          {{ end }}
+    </div>
+    <section id="articles-list">
+        {{ range $pages.GroupByDate "2006" }}
+        <section>
+            <h2>{{ .Key }}<sup>({{ len .Pages }})</sup></h2>
+            <div class="posts">
+                {{ range .Pages }}
+                <div class="post">
+                    <div class="post-row">
+                        <time class="time">{{ .Date.Format "Jan 02" }}</time>
+                        <a href="{{ .RelPermalink }}">
+                            <h3 class="title">{{ .Title }}</h3>
+                        </a>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+    </section>
+</div>
+
+{{ end }}

@@ -1,0 +1,54 @@
+{{ define "main" }}
+
+<section>
+  <div class="prose prose-slate dark:prose-invert">{{ .Content }}</div>
+</section>
+
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ $pages = .Paginate ($pages) }} {{ $archivesPage := first 1 (where
+.Site.RegularPages "Layout" "eq" "archives") }}
+
+<section class="mt-10">
+  <div class="flex items-center gap-5 ">
+    <p class="latest-art">Latest Articles</p> 
+    <a class="view-more" href="/archives/">View all</a>
+  </div>
+  <div class="pb-5">
+    {{ range $pages.Pages }}
+    <article class="post-entry relative group">
+      <div class="post-entry-bg"></div>
+      <div class="relative">
+        <a href="{{ .RelPermalink }}">
+            <div class="flex gap-2 items-center">
+              <time>{{ .Date.Format "2006/01/02" }}</time>
+              {{ if .Params.category }}
+              <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
+              <span>{{ .Params.category }}</span>
+              {{ end }} 
+              {{ $author := .Params.author }} 
+              {{ if eq $author nil }} 
+                {{ $author = .Site.Params.author }} 
+              {{ end }}
+              <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
+              <span>{{ $author }}</span>
+            </div>
+            <h3 class="entry-title">
+                {{ .Title }}
+            </h3>
+            <div class="entry-content">
+            <p>
+                {{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}
+            </p>
+            </div>
+            <div class="flex items-center text-sm text-sky-500 font-medium">
+                <span class="relative text-sm text-sky-500 font-medium">Read more</span>
+                <svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg>
+            </div>
+        </a>
+        </div>
+    </article>
+    {{ end }}
+  </div>
+</section>
+
+{{ end }}

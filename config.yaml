@@ -1,8 +1,9 @@
 baseurl: "https://blog.chungzh.cn"
 languageCode: "zh-cn"
 title: "ChungZH's Blog"
-theme: "hugo-tania"
-paginate: 7
+#theme: "hugo-tania"
+theme: "klay"
+paginate: 10
 buildFuture: true
 
 # disqusShortname: https-hugo-tania-netlify-app
@@ -13,6 +14,8 @@ params:
 
   # Logo will show before the blog title on site navbar.
   titleLogo: BlogFavicon16.png
+
+  favicon: BlogFavicon16.png
   
   # Enable float footnotes.
   # Default to true
@@ -21,6 +24,13 @@ params:
   siteDesc: "Welcome to my blog!"
   author: "ChungZH"
 
+  colorScheme:
+    # Enable toggle colorScheme
+    # Default to true
+    toggle: true
+    # Default colorScheme
+    # Default to auto
+    default: light
 
   # Limit how many categories filter show above search input.
   # Default to 5
@@ -53,11 +63,13 @@ params:
             name: Comments
             id: DIC_kwDOCo6wIs4B_i5g
         mapping: title
-
+build:
+  writeStats: true
+  
 menu:
   header:
-    - name: 文章
-      url: "/articles/"
+    - name: 存档
+      url: "/archives/"
     - name: 关于
       url: "/about/"    
     - name: 友链
@@ -71,12 +83,23 @@ menu:
       url: "https://creativecommons.org/licenses/by-nc-sa/2.5/cn/"
 
 markup:
-  highlight:
-    noClasses: false
-    lineNos: true
   goldmark:
     renderer:
       unsafe: true
+  highlight:
+      anchorLineNos: false
+      codeFences: true
+      guessSyntax: false
+      hl_Lines: ""
+      hl_inline: false
+      lineAnchors: ""
+      lineNoStart: 1
+      lineNos: true
+      lineNumbersInTable: true
+      noClasses: true
+      noHl: false
+      style: monokailight
+      tabWidth: 4
 
 outputs:
   home: ["HTML", "RSS", "JSON"]
