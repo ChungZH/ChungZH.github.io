@@ -1,32 +1,64 @@
 .post-title {
-    @apply my-5 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-200 md:text-4xl 
+  @apply my-5 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-200 md:text-4xl;
 }
 
 .article-post {
-    @apply mt-12 prose prose-slate dark:prose-invert
+  @apply mt-12 prose prose-slate dark:prose-invert;
 }
 
 .post-meta {
-    @apply flex gap-2
+  @apply flex gap-2;
 }
 
 .post-tags {
-    @apply mb-2 
+  @apply mb-2;
 }
 
 .tag {
-    @apply text-base leading-6 font-semibold text-sky-500 hover:text-sky-600 dark:text-sky-400 hover:border-2 hover:rounded-md hover:border-sky-600
+  @apply text-base leading-6 font-semibold text-sky-500 hover:text-sky-600 dark:text-sky-400 hover:border-2 hover:rounded-md hover:border-sky-600;
 }
 
 .paginav {
-    @apply flex justify-between pt-10 mb-4 text-slate-500 dark:border-slate-200/5
+  @apply flex justify-between pt-10 mb-4 text-slate-500 dark:border-slate-200/5;
 }
 
 .paginav-title {
-    @apply text-xl font-bold text-sky-400
+  @apply text-xl font-bold text-sky-400;
 }
 
 .toc {
-    overflow-wrap: break-word;
-    @apply fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block mt-12 prose prose-slate dark:prose-invert
+  overflow-wrap: break-word;
+  @apply fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block mt-12 prose prose-slate dark:prose-invert;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    @apply flex items-center;
+    .anchor {
+      height: 24px;
+      width: 24px;
+      left: -0.25rem;
+      float: left;
+      line-height: 1;
+      margin-left: -28px;
+      padding-right: 4px;
+
+      @apply fill-emerald-400 border-none;
+      .icon {
+        visibility: hidden;
+      }
+    }
+
+    &:hover {
+      .anchor {
+        @apply border-none;
+        .icon {
+          visibility: visible;
+          &:hover {
+            @apply fill-emerald-800 skew-y-12;
+          }
+        }
+      }
+    }
+  }
 }

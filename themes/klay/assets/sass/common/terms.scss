@@ -1,12 +1,12 @@
 .terms-tags li {
-    display: inline-block;
-    @apply font-semibold m-3
+  display: inline-block;
+  @apply font-semibold m-3;
 }
 
 .terms-tags a {
-    display: block;
-    @apply bg-gray-200 px-3 py-1 rounded-md	duration-100;
-    &:hover {
-        @apply bg-gray-50 skew-y-6		
-    }
+  display: block;
+  @apply bg-gray-200 px-3 py-1 rounded-md	duration-100;
+  &:hover {
+    @apply bg-gray-50 skew-y-6;
+  }
 }

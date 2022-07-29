@@ -1,18 +1,18 @@
 .entry-title {
-    @apply text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-200 pt-4
+  @apply text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-200 pt-4;
 }
 
 .entry-content {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    @apply mb-6 prose max-w-none prose-slate prose-a:relative prose-a:z-10 dark:prose-invert line-clamp-2
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  @apply mb-6 prose max-w-none prose-slate prose-a:relative prose-a:z-10 dark:prose-invert line-clamp-2;
 }
 
 .post-entry {
-    @apply mt-10
+  @apply mt-10;
 }
 
 .post-entry-bg {
-    @apply absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl group-hover:bg-slate-50/70 dark:group-hover:bg-slate-800/50
+  @apply absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl group-hover:bg-slate-50/70 dark:group-hover:bg-slate-800/50;
 }

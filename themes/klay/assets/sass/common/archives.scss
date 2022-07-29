@@ -1,15 +1,15 @@
 .posts {
-    @apply flex flex-col gap-3
+  @apply flex flex-col gap-3;
 }
 
 .post-row {
-    @apply flex items-center gap-4
+  @apply flex items-center gap-4;
 }
 
 .post-row .time {
-    @apply flex-initial w-20
+  @apply flex-initial w-20;
 }
 
 .post-row .title {
-    @apply m-0
+  @apply m-0;
 }
