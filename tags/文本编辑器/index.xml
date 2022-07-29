@@ -7,4 +7,4 @@ Screenshots 实现 这部分大概讲讲思路吧。
 布局 编辑控件 使用了 Qt 提供的 QPlainTextEdit 类，适合纯文本编辑。刚开始还用的是 QTextEdit，想想自己真是傻了，又不是要编辑富文本哈哈哈。
 不过 QPlainTextEdit 似乎有点点慢，我也没能力造轮子，于是就将就着用吧。
 语法高亮 刚开始想实现的时候看见了 Qt 官方的 Syntax Highlighter Example，很棒对吧。但是我可不想花精力去写一堆语言的规则呢！
-然后就找到了 KDE Framework 里的 KSyntaxHighlighting。KDE Framework 是真的烦人，刚开始怎么也 build 不出来。等到了 GitHub Actions 上，整整用了四天时间才搞定，还是在某 Packman 的帮助下才完成的。。。当时看到绿绿的 Actions，我差点没开心得疯掉。。</description></item><item><title>一款纯粹的 UWP 记事本——Notepads</title><link>https://blog.chungzh.cn/articles/notepads/</link><pubDate>Mon, 06 Apr 2020 12:45:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/notepads/</guid><description>漂亮的记事本，完美替代 win32 notepad！</description></item></channel></rss>
+然后就找到了 KDE Framework 里的 KSyntaxHighlighting。KDE Framework 是真的烦人，刚开始怎么也 build 不出来。等到了 GitHub Actions 上，整整用了四天时间才搞定，还是在某 Packman 的帮助下才完成的。。。当时看到绿绿的 Actions，我差点没开心得疯掉。。</description></item></channel></rss>

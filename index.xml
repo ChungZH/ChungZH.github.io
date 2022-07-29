@@ -9,21 +9,53 @@
 &lt;p>&lt;img src="https://raw.githubusercontent.com/ChungZH/img/main/hugo-klay/index.png" alt="index">&lt;/p>
 &lt;p>&lt;img src="https://raw.githubusercontent.com/ChungZH/img/main/hugo-klay/post.png" alt="post">&lt;/p>
 &lt;p>&lt;img src="https://raw.githubusercontent.com/ChungZH/img/main/hugo-klay/archives.png" alt="dark-archives">&lt;/p></description></item><item><title>关于 int 与 long long 的运算速度</title><link>https://blog.chungzh.cn/articles/int-vs-longlong/</link><pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/int-vs-longlong/</guid><description>
-&lt;h2 id="前言">前言&lt;/h2>
-&lt;p>写一道 CF 题的时候，算法明明是正确的，却一直都 TLE。最后把一个 &lt;code>long long&lt;/code> 类型的数组改成了 &lt;code>int&lt;/code>，竟然就 AC 了。。&lt;/p>
+&lt;h2 id="前言">
+&lt;a href="#%e5%89%8d%e8%a8%80" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+前言
+&lt;/h2>&lt;p>写一道 CF 题的时候，算法明明是正确的，却一直都 TLE。最后把一个 &lt;code>long long&lt;/code> 类型的数组改成了 &lt;code>int&lt;/code>，竟然就 AC 了。。&lt;/p>
 &lt;p>这不禁引发了我的思考，&lt;code>int&lt;/code> 与 &lt;code>long long&lt;/code> 的运算速度不一样吗？&lt;/p>
-&lt;h2 id="不严谨测试">不严谨测试&lt;/h2>
-&lt;p>由于本菜鸡并没有什么计算机基础原理的知识，只好做了一个测试。当然，这个测试其实很不严谨，没有很大的参考价值。&lt;del>我也就图一乐，哈哈哈哈哈&lt;/del>&lt;/p>
-&lt;h3 id="测试环境">测试环境&lt;/h3>
-&lt;ul>
+&lt;h2 id="不严谨测试">
+&lt;a href="#%e4%b8%8d%e4%b8%a5%e8%b0%a8%e6%b5%8b%e8%af%95" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+不严谨测试
+&lt;/h2>&lt;p>由于本菜鸡并没有什么计算机基础原理的知识，只好做了一个测试。当然，这个测试其实很不严谨，没有很大的参考价值。&lt;del>我也就图一乐，哈哈哈哈哈&lt;/del>&lt;/p>
+&lt;h3 id="测试环境">
+&lt;a href="#%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+测试环境
+&lt;/h3>&lt;ul>
 &lt;li>电脑：Lenovo Yoga 14sACH 2021&lt;/li>
 &lt;li>系统：Windows 11 25163.1010&lt;/li>
 &lt;li>CPU：AMD Ryzen 7 5800H with Radeon Graphics (16) @ 3.200GHz&lt;/li>
 &lt;li>RAM：16.0 GB&lt;/li>
 &lt;li>编译器：GCC 11.2.0&lt;/li>
 &lt;/ul>
-&lt;h3 id="代码">代码&lt;/h3>
-&lt;p>&lt;del>仅仅是为了图一乐，&lt;/del> 我第一次使用了 &lt;a href="https://github.com/google/benchmark/">Google Benchmark&lt;/a> 这一工具。其实挺好上手的。&lt;/p>
+&lt;h3 id="代码">
+&lt;a href="#%e4%bb%a3%e7%a0%81" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+代码
+&lt;/h3>&lt;p>&lt;del>仅仅是为了图一乐，&lt;/del> 我第一次使用了 &lt;a href="https://github.com/google/benchmark/">Google Benchmark&lt;/a> 这一工具。其实挺好上手的。&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -126,8 +158,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">BENCHMARK_MAIN&lt;/span>&lt;span style="color:#111">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="结果">结果&lt;/h3>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;/div>&lt;h3 id="结果">
+&lt;a href="#%e7%bb%93%e6%9e%9c" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+结果
+&lt;/h3>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 &lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -154,15 +194,31 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>经过多次测试，&lt;code>long long&lt;/code> 类型的各种运算都比 &lt;code>int&lt;/code> 慢一点。&lt;/p>
-&lt;h2 id="stackoverflow-问答">StackOverflow 问答&lt;/h2>
-&lt;p>比较专业的一个解答。详见 &lt;a href="https://stackoverflow.com/questions/39779880/c-int-vs-long-long-in-64-bit-machine">performance - C++ int vs long long in 64 bit machine - Stack Overflow&lt;/a>。&lt;/p>
+&lt;h2 id="stackoverflow-问答">
+&lt;a href="#stackoverflow-%e9%97%ae%e7%ad%94" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+StackOverflow 问答
+&lt;/h2>&lt;p>比较专业的一个解答。详见 &lt;a href="https://stackoverflow.com/questions/39779880/c-int-vs-long-long-in-64-bit-machine">performance - C++ int vs long long in 64 bit machine - Stack Overflow&lt;/a>。&lt;/p>
 &lt;p>这里引用相关问答：&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;em>1) If it is best practice to use long long in x64 for achieving maximum performance even for for 1-4 byte data?&lt;/em>&lt;/p>
 &lt;p>No- and it will probably in fact make your performance worse. For example, if you use 64-bit integers where you could have gotten away with 32-bit integers then you have just doubled the amount of data that must be sent between the processor and memory and the memory is orders of magnitude slower. All of your caches and memory buses will crap out twice as fast.&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="结论">结论&lt;/h2>
-&lt;p>可以不用 &lt;code>long long&lt;/code> 就尽量不用。最好不要使用 &lt;code>#define int long long&lt;/code> 这种粗暴手段。&lt;/p>
+&lt;h2 id="结论">
+&lt;a href="#%e7%bb%93%e8%ae%ba" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+结论
+&lt;/h2>&lt;p>可以不用 &lt;code>long long&lt;/code> 就尽量不用。最好不要使用 &lt;code>#define int long long&lt;/code> 这种粗暴手段。&lt;/p>
 &lt;hr>
 &lt;p>&lt;strong>致谢&lt;/strong>：&lt;/p>
 &lt;ul>
@@ -175,8 +231,16 @@
 &lt;blockquote>
 &lt;p>Treap = Tree + Heap&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="二叉搜索树bst">二叉搜索树（BST）&lt;/h2>
-&lt;p>在学习 Treap 之前，需要先了解一下二叉搜索树（BST, Binary Search Tree）：&lt;/p>
+&lt;h2 id="二叉搜索树bst">
+&lt;a href="#%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91bst" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+二叉搜索树（BST）
+&lt;/h2>&lt;p>在学习 Treap 之前，需要先了解一下二叉搜索树（BST, Binary Search Tree）：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>设 $x$ 是二叉搜索树中的一个结点。如果 $y$ 是 $x$ 左子树中的一个结点，那么 $y.key \lt x.key$。如果 $y$ 是 $x$ 右子树中的一个结点，那么 $y.key \gt x.key$。&lt;/p>
@@ -186,21 +250,61 @@
 &lt;/li>
 &lt;/ul>
 &lt;p>由于普通 BST 容易退化，对于它的实现就不再赘述。在实践中需要使用如 Treap 这样的平衡二叉搜索树。&lt;/p>
-&lt;h2 id="treap">Treap&lt;/h2>
-&lt;p>顾名思义，Treap 是树和堆的结合。它的数据结构既是一个二叉搜索树，又是一个二叉堆。&lt;/p>
+&lt;h2 id="treap">
+&lt;a href="#treap" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Treap
+&lt;/h2>&lt;p>顾名思义，Treap 是树和堆的结合。它的数据结构既是一个二叉搜索树，又是一个二叉堆。&lt;/p>
 &lt;p>在 Treap 的每个结点中，除了 $key$ 值，还要保存一个 $fix$（更常见的是 $priority$）值。这个值是随机值，以它为依据来同时建立最大堆（或最小堆）。因为 $fix$ 值是随机的，所以可以让这棵树更加平衡，高度更接近 $O(\log n)$。它的各种操作期望时间复杂度都是 $O(\log n)$。&lt;/p>
-&lt;h3 id="旋转式-treap">旋转式 Treap&lt;/h3>
-&lt;p>旋转式 Treap 的常数较小。&lt;/p>
-&lt;h4 id="旋转">旋转&lt;/h4>
-&lt;p>左旋/右旋操作不会破坏 BST 的性质，并可以通过它来维护堆，使树平衡。&lt;/p>
+&lt;h3 id="旋转式-treap">
+&lt;a href="#%e6%97%8b%e8%bd%ac%e5%bc%8f-treap" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+旋转式 Treap
+&lt;/h3>&lt;p>旋转式 Treap 的常数较小。&lt;/p>
+&lt;h4 id="旋转">
+&lt;a href="#%e6%97%8b%e8%bd%ac" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+旋转
+&lt;/h4>&lt;p>左旋/右旋操作不会破坏 BST 的性质，并可以通过它来维护堆，使树平衡。&lt;/p>
 &lt;p>&lt;img src="https://raw.githubusercontent.com/ChungZH/img/main/treap/zigzag.jpg" alt="zigzag.jpg">&lt;/p>
 &lt;p>如图，以右旋为例。假设现在左边树 $b$ 的 $fix$ 值大于 $a$ 的 $fix$ 值，然而 $b$ 是 $a$ 的儿子，那么就不符合最大堆的性质，需要进行右旋，变成了右边的树。&lt;/p>
 &lt;p>但是为什么在旋转的过程中没有破坏 BST 的性质呢？设 $c \in C, d \in D, e \in E$。由左树知 $c \lt b \lt d \lt a \lt e$。再由旋转之后树的结构可以得出 $c \lt b \lt d \lt a \lt e$，这两个式子是一样的。所以，这棵树依然是 BST。&lt;/p>
 &lt;p>在插入和删除操作中都要按需进行旋转操作。&lt;/p>
-&lt;h4 id="插入">插入&lt;/h4>
-&lt;p>根据 BST 的性质，找到相应的位置创建新叶子结点就可以了。如果不符合最大堆性质，进行旋转操作。&lt;/p>
-&lt;h4 id="删除">删除&lt;/h4>
-&lt;p>删除一个元素时，可以对被删除的结点分类讨论：&lt;/p>
+&lt;h4 id="插入">
+&lt;a href="#%e6%8f%92%e5%85%a5" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+插入
+&lt;/h4>&lt;p>根据 BST 的性质，找到相应的位置创建新叶子结点就可以了。如果不符合最大堆性质，进行旋转操作。&lt;/p>
+&lt;h4 id="删除">
+&lt;a href="#%e5%88%a0%e9%99%a4" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+删除
+&lt;/h4>&lt;p>删除一个元素时，可以对被删除的结点分类讨论：&lt;/p>
 &lt;ol>
 &lt;li>没有子结点：直接就成空的了&lt;/li>
 &lt;li>只有一个子结点：把被删除结点设成它仅有的儿子即可&lt;/li>
@@ -528,10 +632,26 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="无旋-treap">无旋 Treap&lt;/h3>
-&lt;p>无旋 Treap 的核心操作是分裂、合并。&lt;/p>
-&lt;h4 id="分裂split">分裂（Split）&lt;/h4>
-&lt;p>分裂操作会将原 Treap 一分为二，第一个 Treap 中的结点关键值都小于等于 $key$，第二个中都大于 $key$。使用递归实现。&lt;/p>
+&lt;/div>&lt;h3 id="无旋-treap">
+&lt;a href="#%e6%97%a0%e6%97%8b-treap" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+无旋 Treap
+&lt;/h3>&lt;p>无旋 Treap 的核心操作是分裂、合并。&lt;/p>
+&lt;h4 id="分裂split">
+&lt;a href="#%e5%88%86%e8%a3%82split" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+分裂（Split）
+&lt;/h4>&lt;p>分裂操作会将原 Treap 一分为二，第一个 Treap 中的结点关键值都小于等于 $key$，第二个中都大于 $key$。使用递归实现。&lt;/p>
 &lt;p>若当前关键值大于 $key$，那么&lt;strong>当前结点连同右子树&lt;/strong>都属于第二个 Treap，继续往左子树递归。&lt;/p>
 &lt;p>若当前关键值小于等于 $key$，那&lt;strong>当前结点连同左子树&lt;/strong>都属于第一个 Treap。继续往右子树递归。&lt;/p>
 &lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Treap_split.svg" alt="img">&lt;/p>
@@ -571,8 +691,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="合并merge">合并（Merge）&lt;/h4>
-&lt;p>合并函数接受两棵树，其中第一棵的值都小于第二棵。每一次根据两棵树的根的 $fix$ 值来确定新树的根，然后递归合并子树。&lt;/p>
+&lt;/div>&lt;h4 id="合并merge">
+&lt;a href="#%e5%90%88%e5%b9%b6merge" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+合并（Merge）
+&lt;/h4>&lt;p>合并函数接受两棵树，其中第一棵的值都小于第二棵。每一次根据两棵树的根的 $fix$ 值来确定新树的根，然后递归合并子树。&lt;/p>
 &lt;p>当两棵树任何一个为空时，返回另一个。&lt;/p>
 &lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Treap_merge.svg" alt="img">&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -609,8 +737,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="插入-1">插入&lt;/h4>
-&lt;p>将树分裂成两个部分：$A=\lbrace x \mid x \le key \rbrace$、$B= \lbrace x \mid x \gt key \rbrace$，先将要插入的值合并入 $A$，最后合并 $A$ 和 $B$。&lt;/p>
+&lt;/div>&lt;h4 id="插入-1">
+&lt;a href="#%e6%8f%92%e5%85%a5-1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+插入
+&lt;/h4>&lt;p>将树分裂成两个部分：$A=\lbrace x \mid x \le key \rbrace$、$B= \lbrace x \mid x \gt key \rbrace$，先将要插入的值合并入 $A$，最后合并 $A$ 和 $B$。&lt;/p>
 &lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Treap_insert.svg" alt="img">&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -628,8 +764,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="删除-1">删除&lt;/h4>
-&lt;p>将树分裂成三个部分：$A= \lbrace x \mid x \lt key \rbrace$、$B= \lbrace x \mid x = key \rbrace$、$C= \lbrace x \mid x \gt key \rbrace$，然后合并 $A$ 和 $C$。&lt;/p>
+&lt;/div>&lt;h4 id="删除-1">
+&lt;a href="#%e5%88%a0%e9%99%a4-1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+删除
+&lt;/h4>&lt;p>将树分裂成三个部分：$A= \lbrace x \mid x \lt key \rbrace$、$B= \lbrace x \mid x = key \rbrace$、$C= \lbrace x \mid x \gt key \rbrace$，然后合并 $A$ 和 $C$。&lt;/p>
 &lt;p>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Treap_erase.svg" alt="img">&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -659,17 +803,41 @@
 &lt;li>&lt;a href="https://en.wikipedia.org/wiki/Treap">Treap - Wikipedia&lt;/a> &lt;a href="https://creativecommons.org/licenses/by-sa/3.0/deed.zh">CC BY-SA 3.0&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>告别 2021</title><link>https://blog.chungzh.cn/articles/goodbye2021/</link><pubDate>Fri, 31 Dec 2021 21:35:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/goodbye2021/</guid><description>
 &lt;p>这一年还是收获满满的。&lt;/p>
-&lt;h2 id="oi">OI&lt;/h2>
-&lt;p>上半年去了 GDOI 观摩神仙打架，长了见识。&lt;/p>
+&lt;h2 id="oi">
+&lt;a href="#oi" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+OI
+&lt;/h2>&lt;p>上半年去了 GDOI 观摩神仙打架，长了见识。&lt;/p>
 &lt;p>CSP-J 2021 1=，挺满意的。&lt;/p>
 &lt;p>年末镇赛第一，虽然说没什么用但是就是挺开心的 😁&lt;/p>
 &lt;p>总的来说，进步挺大的。&lt;/p>
-&lt;h2 id="学习">学习&lt;/h2>
-&lt;p>是真正的初中生了。&lt;/p>
+&lt;h2 id="学习">
+&lt;a href="#%e5%ad%a6%e4%b9%a0" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+学习
+&lt;/h2>&lt;p>是真正的初中生了。&lt;/p>
 &lt;p>几次大考，有成功，也有失利。可以说对于学习的心态变成熟了。&lt;/p>
 &lt;p>值得一提的是，十月份的时候换了一个校长，带来了很多新气象，幸福感不断提升。期待他在以后的表现。&lt;/p>
-&lt;h2 id="生活">生活&lt;/h2>
-&lt;p>爱上了 🏓 乒乓球，买了一个五百多的拍子，奢侈了一把，真爽（&lt;/p>
+&lt;h2 id="生活">
+&lt;a href="#%e7%94%9f%e6%b4%bb" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+生活
+&lt;/h2>&lt;p>爱上了 🏓 乒乓球，买了一个五百多的拍子，奢侈了一把，真爽（&lt;/p>
 &lt;p>对运动的热情高涨了很多。&lt;/p>
 &lt;hr>
 &lt;p>总之，希望在新的一年，一切都会更好！&lt;/p></description></item><item><title>CSP-J 2021 游记</title><link>https://blog.chungzh.cn/articles/csp2021/</link><pubDate>Sat, 23 Oct 2021 18:35:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/csp2021/</guid><description>
@@ -678,13 +846,29 @@
 &lt;p>&amp;hellip;&amp;hellip;&lt;/p>
 &lt;p>11. 祝各位选手好运。&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="csp-j1">CSP-J1&lt;/h2>
-&lt;p>初赛前有点小紧张。&lt;/p>
+&lt;h2 id="csp-j1">
+&lt;a href="#csp-j1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+CSP-J1
+&lt;/h2>&lt;p>初赛前有点小紧张。&lt;/p>
 &lt;p>赛前勉强做了几套试卷，然后就上考场了。&lt;/p>
 &lt;p>刚考完对答案的时候发现 J 组才 72，看洛谷上大家都说今年 J 组简单了 blabla，分数线肯定会升，然而我却觉得好难，那一个星期都害怕极了。。。结果分数出来了才发现洛谷那群人真是扯啊哈哈哈&lt;/p>
 &lt;p>S 组才 48 分，没有成功压线。（其实就算去了复赛也拿不了分。。&lt;/p>
-&lt;h2 id="csp-j2">CSP-J2&lt;/h2>
-&lt;p>比赛前一晚上八点在学校出发。逃掉了晚自习（尽管是星期五&lt;/p>
+&lt;h2 id="csp-j2">
+&lt;a href="#csp-j2" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+CSP-J2
+&lt;/h2>&lt;p>比赛前一晚上八点在学校出发。逃掉了晚自习（尽管是星期五&lt;/p>
 &lt;p>去到酒店大概也九点半了，洗完澡，看了会儿凤凰台，然后就睡了。&lt;/p>
 &lt;p>第二天早上六点半起床，吃完自助餐（和上一年的变化不大，挺好吃的），七点二十出发。&lt;/p>
 &lt;p>然后进考场。&lt;/p>
@@ -1166,8 +1350,16 @@
 &lt;blockquote>
 &lt;p>关于 $4N$，详见 &lt;a href="https://oi-wiki.org/ds/seg/">OI-Wiki&lt;/a>。&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="建树">建树&lt;/h2>
-&lt;p>下面是一个求区间和的线段树的建树代码。&lt;/p>
+&lt;h2 id="建树">
+&lt;a href="#%e5%bb%ba%e6%a0%91" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+建树
+&lt;/h2>&lt;p>下面是一个求区间和的线段树的建树代码。&lt;/p>
 &lt;p>通过 DFS 建树，到叶结点，然后一路回溯求出和。&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1202,8 +1394,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>这里求 &lt;code>leftSon&lt;/code>，&lt;code>rightSon&lt;/code>，&lt;code>mid&lt;/code> 的模式在线段树的所有操作中都会用到。&lt;/p>
-&lt;h2 id="区间查询">区间查询&lt;/h2>
-&lt;p>&lt;img src="https://github.com/ChungZH/img/blob/main/segtree/segtree-2.png?raw=true" alt="线段树查询">&lt;/p>
+&lt;h2 id="区间查询">
+&lt;a href="#%e5%8c%ba%e9%97%b4%e6%9f%a5%e8%af%a2" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+区间查询
+&lt;/h2>&lt;p>&lt;img src="https://github.com/ChungZH/img/blob/main/segtree/segtree-2.png?raw=true" alt="线段树查询">&lt;/p>
 &lt;p>对于一个不&lt;em>恰好&lt;/em>的区间，我们可以不断地把它拆分成两个恰好的区间再进行合并。&lt;/p>
 &lt;p>如图所示，拆分过程如下：&lt;/p>
 &lt;ol>
@@ -1241,8 +1441,16 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#111">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="区间修改">区间修改&lt;/h2>
-&lt;p>单点修改并没有什么意思，就不讲了。&lt;/p>
+&lt;/div>&lt;h2 id="区间修改">
+&lt;a href="#%e5%8c%ba%e9%97%b4%e4%bf%ae%e6%94%b9" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+区间修改
+&lt;/h2>&lt;p>单点修改并没有什么意思，就不讲了。&lt;/p>
 &lt;p>区间修改当然不是重复做单点修改，否则使用线段树就很没有必要了。为了避免走到底下去，我们要使用一个&lt;strong>懒惰标记&lt;/strong>（lazy tag）。当一个大区间内所有的小单位都要进行同样的修改操作时，只需要在大区间做一次标记就可以了。到了必须要走下去（即查询更小的区间或修改更小的区间）的时候，再把懒惰标记&lt;strong>下放&lt;/strong>。&lt;/p>
 &lt;p>下面以一个区间增加一个值并进行区间查询为例。&lt;/p>
 &lt;p>首先定义一个结构体，其中 &lt;code>add&lt;/code> 就是记录这个区间需要增加的值。&lt;/p>
@@ -1378,8 +1586,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>通过上面的代码，我们可以看到：懒惰标记就是为了不往下走，尽量在更大的区间做一次操作。必要时才往下下放标记。它不会主动做事，而是到你需要的时候才花时间去做。通过这样节省了很多时间。&lt;/p>
-&lt;h2 id="小结">小结&lt;/h2>
-&lt;p>总的来说，线段树不是一个很难的数据结构，但是很实用。&lt;/p>
+&lt;h2 id="小结">
+&lt;a href="#%e5%b0%8f%e7%bb%93" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+小结
+&lt;/h2>&lt;p>总的来说，线段树不是一个很难的数据结构，但是很实用。&lt;/p>
 &lt;p>感谢 lgj 老师！&lt;/p></description></item><item><title>我所热爱的，就是这所学校</title><link>https://blog.chungzh.cn/articles/ilovesmes/</link><pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/ilovesmes/</guid><description>
 &lt;blockquote>
 &lt;p>*** 你 * 什么时候 * 啊？&lt;/p>
@@ -1483,20 +1699,52 @@
 &lt;blockquote>
 &lt;p>他山之石，可以攻玉。&lt;/p>
 &lt;/blockquote>
-&lt;h1 id="csp-j1">CSP-J1&lt;/h1>
-&lt;p>入学你校几乎两个月都在搞初赛。&lt;/p>
+&lt;h1 id="csp-j1">
+&lt;a href="#csp-j1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+CSP-J1
+&lt;/h1>&lt;p>入学你校几乎两个月都在搞初赛。&lt;/p>
 &lt;p>&lt;del>结果初一还是只有两个人过了&lt;/del>&lt;/p>
 &lt;p>最后是 73.5 分，水过去了。&lt;/p>
 &lt;hr>
-&lt;h1 id="csp-j2">CSP-J2&lt;/h1>
-&lt;h2 id="day-0">Day 0&lt;/h2>
-&lt;p>要去大学城的广大附中，就去住酒店了。&lt;/p>
+&lt;h1 id="csp-j2">
+&lt;a href="#csp-j2" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+CSP-J2
+&lt;/h1>&lt;h2 id="day-0">
+&lt;a href="#day-0" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Day 0
+&lt;/h2>&lt;p>要去大学城的广大附中，就去住酒店了。&lt;/p>
 &lt;p>在 tjl 大佬房间里 &lt;del>玩&lt;/del>，其实是在看凤凰台。&lt;/p>
 &lt;p>依稀记得那晚上拜登和特朗普的比分是 264 : 214，林郑去北京见韩正了。&lt;/p>
 &lt;p>&lt;del>CCTV-7 上面中科院在帮农民种橘子&lt;/del>？&lt;/p>
 &lt;p>十点多就回去昏昏沉沉地睡了，还挺香（&lt;/p>
-&lt;h2 id="day-1">Day 1&lt;/h2>
-&lt;p>早上六点半就醒了。&lt;/p>
+&lt;h2 id="day-1">
+&lt;a href="#day-1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Day 1
+&lt;/h2>&lt;p>早上六点半就醒了。&lt;/p>
 &lt;p>在酒店吃了顿自助早餐，真香。&lt;/p>
 &lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/csp2020/breakfast.jpg" alt="breakfast">&lt;/p>
 &lt;p>到处都是石实的大佬 %%% 。&lt;/p>
@@ -1917,11 +2165,27 @@
 &lt;p>&lt;strong>CSP-J/S 2021 RP++&lt;/strong>&lt;/p>
 &lt;hr>
 &lt;p>UPD: 215 分，2=&lt;/p></description></item><item><title>Notepanda 开发小结</title><link>https://blog.chungzh.cn/articles/notepanda/</link><pubDate>Sat, 16 May 2020 10:45:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/notepanda/</guid><description>
-&lt;h2 id="前言">前言&lt;/h2>
-&lt;p>最近开始学习 Qt，然后就挖坑了一个小玩具 Notepanda，顺便看看能不能替代诸如 notepad、gedit 之类的软件。顺便锻炼一下自己。&lt;/p>
+&lt;h2 id="前言">
+&lt;a href="#%e5%89%8d%e8%a8%80" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+前言
+&lt;/h2>&lt;p>最近开始学习 Qt，然后就挖坑了一个小玩具 Notepanda，顺便看看能不能替代诸如 notepad、gedit 之类的软件。顺便锻炼一下自己。&lt;/p>
 &lt;p>&lt;a href="https://github.com/ChungZH/notepanda">GitHub repo&lt;/a>&lt;/p>
-&lt;h2 id="feature">Feature&lt;/h2>
-&lt;ol>
+&lt;h2 id="feature">
+&lt;a href="#feature" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Feature
+&lt;/h2>&lt;ol>
 &lt;li>基本的文本编辑操作（没想到吧这也是 feature 了哈哈哈哈哈哈）&lt;/li>
 &lt;li>行号显示&lt;/li>
 &lt;li>语法高亮&lt;/li>
@@ -1930,21 +2194,69 @@
 &lt;p>除此之外还实现了自定义字体、字号、Qt 主题和 Status Bar 等一些小功能。&lt;/p>
 &lt;p>以后的目标是实现多标签页，并对 Markdown 做一点优化（比如预览），&lt;del>如果有可能还会加进去一个 terminal&lt;/del>。计划在 &lt;a href="https://github.com/ChungZH/notepanda/projects/">GitHub Projects&lt;/a>。&lt;/p>
 &lt;p>目前还是很弱的一个东西，不过等查找、替换等 feature 实现之后，基本上可以替代 Windows 的 notepad 了。&lt;/p>
-&lt;h2 id="screenshots">Screenshots&lt;/h2>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc1.png" alt="">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc2.png" alt="">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc3.png" alt="">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc4.png" alt="">&lt;/p>
-&lt;h2 id="实现">实现&lt;/h2>
-&lt;p>这部分大概讲讲思路吧。&lt;/p>
-&lt;h3 id="布局">布局&lt;/h3>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda.png" alt="layout">&lt;/p>
-&lt;h3 id="编辑控件">编辑控件&lt;/h3>
-&lt;p>使用了 Qt 提供的 QPlainTextEdit 类，适合纯文本编辑。刚开始还用的是 QTextEdit，想想自己真是傻了，又不是要编辑富文本哈哈哈。&lt;/p>
+&lt;h2 id="screenshots">
+&lt;a href="#screenshots" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Screenshots
+&lt;/h2>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc1.png" alt="">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc2.png" alt="">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc3.png" alt="">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda-sc4.png" alt="">&lt;/p>
+&lt;h2 id="实现">
+&lt;a href="#%e5%ae%9e%e7%8e%b0" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+实现
+&lt;/h2>&lt;p>这部分大概讲讲思路吧。&lt;/p>
+&lt;h3 id="布局">
+&lt;a href="#%e5%b8%83%e5%b1%80" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+布局
+&lt;/h3>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/notepanda.png" alt="layout">&lt;/p>
+&lt;h3 id="编辑控件">
+&lt;a href="#%e7%bc%96%e8%be%91%e6%8e%a7%e4%bb%b6" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+编辑控件
+&lt;/h3>&lt;p>使用了 Qt 提供的 QPlainTextEdit 类，适合纯文本编辑。刚开始还用的是 QTextEdit，想想自己真是傻了，又不是要编辑富文本哈哈哈。&lt;/p>
 &lt;p>不过 QPlainTextEdit 似乎有点点慢，我也没能力造轮子，于是就将就着用吧。&lt;/p>
-&lt;h3 id="语法高亮">语法高亮&lt;/h3>
-&lt;p>刚开始想实现的时候看见了 Qt 官方的 &lt;a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdoc.qt.io%2Fqt-5%2Fqtwidgets-richtext-syntaxhighlighter-example.html">Syntax Highlighter Example&lt;/a>，很棒对吧。但是我可不想花精力去写一堆语言的规则呢！&lt;/p>
+&lt;h3 id="语法高亮">
+&lt;a href="#%e8%af%ad%e6%b3%95%e9%ab%98%e4%ba%ae" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+语法高亮
+&lt;/h3>&lt;p>刚开始想实现的时候看见了 Qt 官方的 &lt;a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdoc.qt.io%2Fqt-5%2Fqtwidgets-richtext-syntaxhighlighter-example.html">Syntax Highlighter Example&lt;/a>，很棒对吧。但是我可不想花精力去写一堆语言的规则呢！&lt;/p>
 &lt;p>然后就找到了 KDE Framework 里的 &lt;a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FKDE%2Fsyntax-highlighting">KSyntaxHighlighting&lt;/a>。KDE Framework 是真的烦人，刚开始怎么也 build 不出来。等到了 GitHub Actions 上，整整用了四天时间才搞定，还是在某 Packman 的帮助下才完成的。。。当时看到绿绿的 Actions，我差点没开心得疯掉。。&lt;/p>
 &lt;p>这个 KSyntaxHighlighting，deepin-editor 和 Qt Creator 都在使用。好在他自己也提供了一些 example，看上去很简单。依赖也很小，只有 Extra CMake Modules，不过看上去和高亮的功能没啥关系，也许是 KF 必备依赖吧。它自带了两百多种语言的高亮规则，省了我很多事情，有 Dark / Light 主题，不服还可以自己写。很满意。&lt;/p>
-&lt;h3 id="ci">CI&lt;/h3>
-&lt;p>我可不想每次更新都自己打一次包，没那个闲心，手上能用的系统也不够 :) 穷孩子怎么买得起 Mac。所以只能用 CI 啦。&lt;/p>
+&lt;h3 id="ci">
+&lt;a href="#ci" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+CI
+&lt;/h3>&lt;p>我可不想每次更新都自己打一次包，没那个闲心，手上能用的系统也不够 :) 穷孩子怎么买得起 Mac。所以只能用 CI 啦。&lt;/p>
 &lt;p>现在 CI 主要帮我解决了：&lt;/p>
 &lt;ol>
 &lt;li>Windows 安装程序&lt;/li>
@@ -1953,50 +2265,51 @@
 &lt;/ol>
 &lt;p>CI 平台当然是选择了 GitHub Actions 啦！现在这个项目所有环节都在 GitHub 上能找到，AUR 除外 :(&lt;/p>
 &lt;p>Notepanda 的 CI 全都是抄 &lt;a href="https://github.com/qv2ray/qv2ray">Qv2ray&lt;/a> 上的，可真是帮了我很多忙。&lt;/p>
-&lt;h2 id="最后">最后&lt;/h2>
-&lt;p>感谢 Qv2ray 的 Super Packman: ymshenyu，感谢死鬼 gcc，感谢鸭鸭，感谢 Qv2ray User Group 里面的每一个人。如果没有他们，我的 Qt 旅程不会这么顺利。&lt;/p>
+&lt;h2 id="最后">
+&lt;a href="#%e6%9c%80%e5%90%8e" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+最后
+&lt;/h2>&lt;p>感谢 Qv2ray 的 Super Packman: ymshenyu，感谢死鬼 gcc，感谢鸭鸭，感谢 Qv2ray User Group 里面的每一个人。如果没有他们，我的 Qt 旅程不会这么顺利。&lt;/p>
 &lt;p>顺便，Qv2ray 是一个很好用的 v2ray 跨平台客户端，欢迎尝试！&lt;/p>
 &lt;p>谢谢阅读 🙇‍♂️&lt;/p>
 &lt;p>最后，放上我画的一只小熊猫：&lt;/p>
 &lt;div align="center">&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/notepanda/logo.png" width="300"/>&lt;/div>
 &lt;Donate/>
-&lt;Vssue title="notepanda" /></description></item><item><title>一款纯粹的 UWP 记事本——Notepads</title><link>https://blog.chungzh.cn/articles/notepads/</link><pubDate>Mon, 06 Apr 2020 12:45:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/notepads/</guid><description>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/Notepads.png" alt="notepads">&lt;/p>
-&lt;blockquote>
-&lt;p>在开始之前的一点闲话：当你看到这款应用的图标时，也许会联想到 Windows Terminal。打开后，甚至会发现连 UI 都有点相似。但事实上，这两款软件完全没有关系。Notepads 是由一位国人独立开发的。&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="介绍">介绍&lt;/h2>
-&lt;p>Notepads 是一款美观且简洁的 UWP 文本编辑器，为代替 Notepad 而生。它没有代码高亮、丰富的插件或是酷炫的主题，因为他只是一款比 Notepad 更强的记事本。它没有 VS Code 或是 Sublime 的强大，就算是和 Notepad++ 比较，在代码编辑方面由于没有语法高亮也稍显逊色，但它依然是一款优秀的记事本，为编辑轻量文本而生的记事本。如果你只是想要快速浏览代码，写写注释，修改配置文件，或是写一段小短文，就应该使用 Notepads，而不是打开庞大的 VS Code，忍受漫长的加载时间。&lt;/p>
-&lt;p>Notepads 使用了 Fluent Design，有亚克力背景，支持浅色和深色模式，很漂亮。即使是信奉「好看就是生产力」的我也爱上了这个软件。&lt;/p>
-&lt;h2 id="特性">特性&lt;/h2>
-&lt;p>Notepads 有许多强大的特性：&lt;/p>
-&lt;ul>
-&lt;li>支持多标签页（此处 cue 微软赶紧开发 Sets！）&lt;/li>
-&lt;li>轻便、快捷&lt;/li>
-&lt;li>多行手写支持&lt;/li>
-&lt;li>设置 Tab 长度、编码、换行符、字体及大小等&lt;/li>
-&lt;/ul>
-&lt;p>下面拿几个比较有用的特性单独讲讲：&lt;/p>
-&lt;h3 id="markdown-预览">Markdown 预览&lt;/h3>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/MDPreview.png" alt="MDPreview">&lt;/p>
-&lt;p>Notepads 支持 Markdown 实时预览，但这并不意味着你可以用它来做&lt;strong>主力&lt;/strong> MD 编辑器。在这方面它依然是不合格的。&lt;/p>
-&lt;p>Notepads 还支持在预览时替换 Emoji code 为 Emoji 噢:smiley:！&lt;/p>
-&lt;h3 id="文件更改预览">文件更改预览&lt;/h3>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/DiffViewer.png" alt="DiffViewer">&lt;/p>
-&lt;p>Notepads 内置了 diff 查看器，可以很方便地对比新旧文件之间的差异。&lt;/p>
-&lt;h3 id="终端中打开-notepads">终端中打开 Notepads&lt;/h3>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/app/notepads/clinotepads.gif" alt="clinotepads">&lt;/p>
-&lt;p>在终端中输入 &lt;code>notepads&lt;/code> 或 &lt;code>notepads foo.bar&lt;/code> 都可以唤出 Notepads。&lt;/p>
-&lt;p>在 &lt;strong>WSL&lt;/strong> 中，你也可以通过 &lt;code>powershell.exe -c notepads &amp;lt;filepath&amp;gt;&lt;/code> 使用 Notepads 打开文件。&lt;/p>
-&lt;h2 id="尾巴">尾巴&lt;/h2>
-&lt;p>Notepads 是一款 C# 开源软件，源码在 &lt;a href="https://github.com/JasonStein/Notepads">GitHub&lt;/a> 。可在 Microsoft Store 查找 &lt;code>Notepads&lt;/code> 即可下载。&lt;/p>
-&lt;Donate/>
-&lt;Vssue title="notepads" /></description></item><item><title>Windows 中 C++ 测量时间的 N 种方法</title><link>https://blog.chungzh.cn/articles/cpp-get-time/</link><pubDate>Sun, 29 Mar 2020 13:13:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/cpp-get-time/</guid><description>
+&lt;Vssue title="notepanda" /></description></item><item><title>Windows 中 C++ 测量时间的 N 种方法</title><link>https://blog.chungzh.cn/articles/cpp-get-time/</link><pubDate>Sun, 29 Mar 2020 13:13:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/cpp-get-time/</guid><description>
 &lt;p>在开发中经常需要测量时间，比如性能优化时，比较两种方法的耗时。除此之外，获取当前的时间也可以用于初始化随机数生成器。而 C++ 提供了很种方法来获取时间。&lt;/p>
-&lt;h2 id="标准库">标准库&lt;/h2>
-&lt;h3 id="stdtime">std::time&lt;/h3>
-&lt;h4 id="定义">定义&lt;/h4>
-&lt;p>这个函数会返回一个距离 UTC 时间 1970 年 1 月 1 日 0:00 的秒数。&lt;/p>
+&lt;h2 id="标准库">
+&lt;a href="#%e6%a0%87%e5%87%86%e5%ba%93" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+标准库
+&lt;/h2>&lt;h3 id="stdtime">
+&lt;a href="#stdtime" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+std::time
+&lt;/h3>&lt;h4 id="定义">
+&lt;a href="#%e5%ae%9a%e4%b9%89" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+定义
+&lt;/h4>&lt;p>这个函数会返回一个距离 UTC 时间 1970 年 1 月 1 日 0:00 的秒数。&lt;/p>
 &lt;p>头文件：&lt;code>&amp;lt;ctime&amp;gt;&lt;/code>&lt;/p>
 &lt;p>文档：&lt;a href="https://zh.cppreference.com/w/cpp/chrono/c/time">std::time&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -2007,8 +2320,16 @@
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">std&lt;/span>&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#111">time_t&lt;/span> &lt;span style="color:#111">time&lt;/span>&lt;span style="color:#111">(&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#111">time_t&lt;/span>&lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">arg&lt;/span> &lt;span style="color:#111">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="用法">用法&lt;/h4>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;/div>&lt;h4 id="用法">
+&lt;a href="#%e7%94%a8%e6%b3%95" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+用法
+&lt;/h4>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 &lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -2062,9 +2383,25 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">*/&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="stdchronosteady_clocknow">std::chrono::steady_clock::now&lt;/h3>
-&lt;h4 id="定义-1">定义&lt;/h4>
-&lt;p>返回表示当前时间的时间点。&lt;/p>
+&lt;/div>&lt;h3 id="stdchronosteady_clocknow">
+&lt;a href="#stdchronosteady_clocknow" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+std::chrono::steady_clock::now
+&lt;/h3>&lt;h4 id="定义-1">
+&lt;a href="#%e5%ae%9a%e4%b9%89-1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+定义
+&lt;/h4>&lt;p>返回表示当前时间的时间点。&lt;/p>
 &lt;p>这个时钟是专门用来计算时间的间隔的。C++ 还提供了一个 &lt;code>system_clock&lt;/code>，用于获取系统的时间。&lt;/p>
 &lt;p>头文件：&lt;code>chrono&lt;/code>&lt;/p>
 &lt;p>文档：&lt;a href="https://zh.cppreference.com/w/cpp/chrono/steady_clock">std::chrono::stadey_clock&lt;/a>&lt;/p>
@@ -2078,8 +2415,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// (C++11 起)
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="用法-1">用法&lt;/h4>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;/div>&lt;h4 id="用法-1">
+&lt;a href="#%e7%94%a8%e6%b3%95-1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+用法
+&lt;/h4>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 &lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -2127,10 +2472,34 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">*/&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="windows">Windows&lt;/h2>
-&lt;h3 id="gettickcount">GetTickCount&lt;/h3>
-&lt;h4 id="定义-2">定义&lt;/h4>
-&lt;p>检测自系统启动以来经过的毫秒数，最多为 49.7 天。如果不够用，可以使用 GetTickCount64。&lt;/p>
+&lt;/div>&lt;h2 id="windows">
+&lt;a href="#windows" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Windows
+&lt;/h2>&lt;h3 id="gettickcount">
+&lt;a href="#gettickcount" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+GetTickCount
+&lt;/h3>&lt;h4 id="定义-2">
+&lt;a href="#%e5%ae%9a%e4%b9%89-2" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+定义
+&lt;/h4>&lt;p>检测自系统启动以来经过的毫秒数，最多为 49.7 天。如果不够用，可以使用 GetTickCount64。&lt;/p>
 &lt;p>文档：&lt;a href="https://docs.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount">GetTickCount function&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -2140,8 +2509,16 @@
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">DWORD&lt;/span> &lt;span style="color:#75af00">GetTickCount&lt;/span>&lt;span style="color:#111">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="用法-2">用法&lt;/h4>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;/div>&lt;h4 id="用法-2">
+&lt;a href="#%e7%94%a8%e6%b3%95-2" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+用法
+&lt;/h4>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 &lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -2181,9 +2558,25 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">*/&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="gettickcount64">GetTickCount64&lt;/h3>
-&lt;h4 id="定义-3">定义&lt;/h4>
-&lt;p>检测自系统启动以来经过的毫秒数。&lt;/p>
+&lt;/div>&lt;h3 id="gettickcount64">
+&lt;a href="#gettickcount64" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+GetTickCount64
+&lt;/h3>&lt;h4 id="定义-3">
+&lt;a href="#%e5%ae%9a%e4%b9%89-3" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+定义
+&lt;/h4>&lt;p>检测自系统启动以来经过的毫秒数。&lt;/p>
 &lt;p>文档：&lt;a href="https://docs.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/nf-sysinfoapi-gettickcount64">GetTickCount64 function&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -2193,8 +2586,16 @@
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">ULONGLONG&lt;/span> &lt;span style="color:#75af00">GetTickCount64&lt;/span>&lt;span style="color:#111">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="用法-3">用法&lt;/h4>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;/div>&lt;h4 id="用法-3">
+&lt;a href="#%e7%94%a8%e6%b3%95-3" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+用法
+&lt;/h4>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 &lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -2236,13 +2637,37 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">*/&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="queryperformancecounter">QueryPerformanceCounter&lt;/h3>
-&lt;h4 id="定义-4">定义&lt;/h4>
-&lt;p>检测性能计数器的当前值，该值是一个高分辨率（&amp;lt;1us）时间戳，可用于时间间隔测量。&lt;/p>
+&lt;/div>&lt;h3 id="queryperformancecounter">
+&lt;a href="#queryperformancecounter" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+QueryPerformanceCounter
+&lt;/h3>&lt;h4 id="定义-4">
+&lt;a href="#%e5%ae%9a%e4%b9%89-4" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+定义
+&lt;/h4>&lt;p>检测性能计数器的当前值，该值是一个高分辨率（&amp;lt;1us）时间戳，可用于时间间隔测量。&lt;/p>
 &lt;p>这个函数是一个「黑科技」，精度非常高，用起来也稍微麻烦一点点。&lt;/p>
 &lt;p>文档：&lt;a href="https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter">QueryPerformanceCounter function&lt;/a>&lt;/p>
-&lt;h4 id="用法-4">用法&lt;/h4>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;h4 id="用法-4">
+&lt;a href="#%e7%94%a8%e6%b3%95-4" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+用法
+&lt;/h4>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 &lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -2318,8 +2743,16 @@
 &lt;p>至此，本文共介绍了五种测量时间段的方法。&lt;/p>
 &lt;p>作者很菜，如发现什么问题，请在评论区中指出。&lt;/p>
 &lt;p>谢谢 🙇‍♂️&lt;/p>
-&lt;h2 id="reference">Reference&lt;/h2>
-&lt;ol>
+&lt;h2 id="reference">
+&lt;a href="#reference" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+Reference
+&lt;/h2>&lt;ol>
 &lt;li>
 &lt;p>Kurt Guntheroth. &lt;em>&lt;strong>Optimized C++&lt;/strong>: Proven Techniques for Heightened Performance&lt;/em>&lt;/p>
 &lt;/li>
@@ -2332,13 +2765,29 @@
 &lt;/ol>
 &lt;Donate/>
 &lt;Vssue title="cpp-get-time" /></description></item><item><title>优雅地使用 C++ 制作表格：tabulate</title><link>https://blog.chungzh.cn/articles/tabulate/</link><pubDate>Fri, 21 Feb 2020 11:45:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/tabulate/</guid><description>
-&lt;h2 id="0x00-介绍-tabulate">0x00 介绍 tabulate&lt;/h2>
-&lt;p>&lt;a href="https://github.com/p-ranav/tabulate">tabulate&lt;/a> 是一个使用 C++ 17 编写的库，它可以制作表格。使用它，把表格对齐、格式化和着色，不在话下！你甚至可以使用 tabulate，将你的表格导出为 Markdown 代码。下图是一个使用 tabulate 制作的表格输出在命令行的样例：&lt;/p>
+&lt;h2 id="0x00-介绍-tabulate">
+&lt;a href="#0x00-%e4%bb%8b%e7%bb%8d-tabulate" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x00 介绍 tabulate
+&lt;/h2>&lt;p>&lt;a href="https://github.com/p-ranav/tabulate">tabulate&lt;/a> 是一个使用 C++ 17 编写的库，它可以制作表格。使用它，把表格对齐、格式化和着色，不在话下！你甚至可以使用 tabulate，将你的表格导出为 Markdown 代码。下图是一个使用 tabulate 制作的表格输出在命令行的样例：&lt;/p>
 &lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/summary.png" alt="summary">&lt;/p>
 &lt;p>当然，除了表格，你还可以玩出花样。看见下面这个马里奥了吗？这也是用 tabulate 制作的！源码在 &lt;a href="https://github.com/p-ranav/tabulate/blob/master/samples/mario.cpp">这里&lt;/a>。&lt;/p>
 &lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/mario.png" alt="mario">&lt;/p>
-&lt;h2 id="0x10-准备">0x10 准备&lt;/h2>
-&lt;p>首先你需要安装 &lt;a href="https://cmake.org/">CMake&lt;/a>。&lt;/p>
+&lt;h2 id="0x10-准备">
+&lt;a href="#0x10-%e5%87%86%e5%a4%87" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x10 准备
+&lt;/h2>&lt;p>首先你需要安装 &lt;a href="https://cmake.org/">CMake&lt;/a>。&lt;/p>
 &lt;p>创建一个文件夹（下文用 X 代替），作为你使用 tabulate 的地方。再将 &lt;a href="https://github.com/p-ranav/tabulate/tree/master/include">include&lt;/a> 这个文件夹下载到 X 里。然后在 X 里创建 &lt;code>main.cpp&lt;/code> 以及一个 &lt;code>CMakeLists.txt&lt;/code>。&lt;/p>
 &lt;blockquote>
 &lt;p>注意：需要下载 &lt;code>include&lt;/code> &lt;strong>整个&lt;/strong>文件夹而不是仅仅下载 &lt;code>tabulate&lt;/code> 文件夹&lt;/p>
@@ -2394,8 +2843,16 @@
 &lt;p>请&lt;strong>认真&lt;/strong>核对好 X 的结构！&lt;/p>
 &lt;/blockquote>
 &lt;p>可前往 &lt;a href="https://github.com/ChungZH/tabulatedemo">ChungZH/tabulatedemo&lt;/a> 核对文件结构。&lt;/p>
-&lt;h2 id="0x20-小试身手">0x20 小试身手&lt;/h2>
-&lt;p>将下面这段代码复制进 &lt;code>main.cpp&lt;/code> 中：&lt;/p>
+&lt;h2 id="0x20-小试身手">
+&lt;a href="#0x20-%e5%b0%8f%e8%af%95%e8%ba%ab%e6%89%8b" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x20 小试身手
+&lt;/h2>&lt;p>将下面这段代码复制进 &lt;code>main.cpp&lt;/code> 中：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -2498,12 +2955,28 @@
 &lt;p>然后使用 Visual Studio 打开 &lt;code>build&lt;/code> 文件夹下的 &lt;code>tabulateDemo.sln&lt;/code> 来运行。&lt;/p>
 &lt;p>如果没有问题，那么你应该会在终端里看到：&lt;/p>
 &lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x20.png" alt="0x20">&lt;/p>
-&lt;h2 id="0x30-格式化表格">0x30 格式化表格&lt;/h2>
-&lt;blockquote>
+&lt;h2 id="0x30-格式化表格">
+&lt;a href="#0x30-%e6%a0%bc%e5%bc%8f%e5%8c%96%e8%a1%a8%e6%a0%bc" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x30 格式化表格
+&lt;/h2>&lt;blockquote>
 &lt;p>请先认真分析 0x20 小试身手 章节中的代码并尝试着修改一下它！&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="0x31-word-wrapping">0x31 Word Wrapping&lt;/h3>
-&lt;p>为了防止表格中的内容过长导致不整齐，你可以指定表格每一列的宽度，tabulate 就会自动帮你换行。语法如下：&lt;/p>
+&lt;h3 id="0x31-word-wrapping">
+&lt;a href="#0x31-word-wrapping" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x31 Word Wrapping
+&lt;/h3>&lt;p>为了防止表格中的内容过长导致不整齐，你可以指定表格每一列的宽度，tabulate 就会自动帮你换行。语法如下：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -2570,8 +3043,16 @@
 &lt;/li>
 &lt;/ul>
 &lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x31.png" alt="0x31">&lt;/p>
-&lt;h3 id="0x32-字体对齐">0x32 字体对齐&lt;/h3>
-&lt;p>tabulate 支持三种对齐设置：左、中和右。默认情况下，全部内容都会靠左对齐。&lt;/p>
+&lt;h3 id="0x32-字体对齐">
+&lt;a href="#0x32-%e5%ad%97%e4%bd%93%e5%af%b9%e9%bd%90" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x32 字体对齐
+&lt;/h3>&lt;p>tabulate 支持三种对齐设置：左、中和右。默认情况下，全部内容都会靠左对齐。&lt;/p>
 &lt;p>要手动设置对齐方式，可以使用 &lt;code>.format().font_align(方向)&lt;/code>。&lt;/p>
 &lt;p>举一个例子：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -2629,8 +3110,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x32.png" alt="0x32">&lt;/p>
-&lt;h3 id="0x33-字体样式">0x33 字体样式&lt;/h3>
-&lt;p>tabulate 支持以下八种字体样式：&lt;/p>
+&lt;h3 id="0x33-字体样式">
+&lt;a href="#0x33-%e5%ad%97%e4%bd%93%e6%a0%b7%e5%bc%8f" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x33 字体样式
+&lt;/h3>&lt;p>tabulate 支持以下八种字体样式：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>粗体 &lt;code>bold&lt;/code>&lt;/p>
@@ -2663,8 +3152,16 @@
 &lt;/blockquote>
 &lt;p>要使用这些样式，可以调用 &lt;code>.format().font_style({...})&lt;/code>。样式也可以叠加使用。&lt;/p>
 &lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x33.png" alt="0x33">&lt;/p>
-&lt;h3 id="0x34-颜色">0x34 颜色&lt;/h3>
-&lt;p>你可以对表格的字体、边框、角以及列分隔符号设置它们的前景或背景颜色。&lt;/p>
+&lt;h3 id="0x34-颜色">
+&lt;a href="#0x34-%e9%a2%9c%e8%89%b2" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x34 颜色
+&lt;/h3>&lt;p>你可以对表格的字体、边框、角以及列分隔符号设置它们的前景或背景颜色。&lt;/p>
 &lt;p>tabulate 支持 8 种颜色：&lt;/p>
 &lt;ul>
 &lt;li>
@@ -2808,8 +3305,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x34.png" alt="0x34">&lt;/p>
-&lt;h3 id="0x35-边框角">0x35 边框、角&lt;/h3>
-&lt;p>你可以对表格的边框和角的文本、颜色或背景颜色进行自定义。&lt;/p>
+&lt;h3 id="0x35-边框角">
+&lt;a href="#0x35-%e8%be%b9%e6%a1%86%e8%a7%92" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x35 边框、角
+&lt;/h3>&lt;p>你可以对表格的边框和角的文本、颜色或背景颜色进行自定义。&lt;/p>
 &lt;p>你可以使用 &lt;code>.corner(..)&lt;/code>、&lt;code>.corner_color(..)&lt;/code> 和 &lt;code>corner_background_color(..)&lt;/code>  来对所有的角设置一个共同的样式。你也可以使用  &lt;code>.border(..)&lt;/code> 、&lt;code>.border_color(..)&lt;/code> 和  &lt;code>.border_background_color(..)&lt;/code>  来对所有的边框设置一个共同的样式。&lt;/p>
 &lt;p>这是一个单独设定所有边框和角的示例：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -2903,8 +3408,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x35.png" alt="0x35">&lt;/p>
-&lt;h3 id="0x36-基于范围的迭代">0x36 基于范围的迭代&lt;/h3>
-&lt;p>一个一个设置表格的样式是不是很麻烦？tabulate 提供了迭代器，支持对表、行和列的迭代，更方便地格式化表格。&lt;/p>
+&lt;h3 id="0x36-基于范围的迭代">
+&lt;a href="#0x36-%e5%9f%ba%e4%ba%8e%e8%8c%83%e5%9b%b4%e7%9a%84%e8%bf%ad%e4%bb%a3" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x36 基于范围的迭代
+&lt;/h3>&lt;p>一个一个设置表格的样式是不是很麻烦？tabulate 提供了迭代器，支持对表、行和列的迭代，更方便地格式化表格。&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -3016,8 +3529,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x36.png" alt="0x36">&lt;/p>
-&lt;h3 id="0x37-嵌套表格">0x37 嵌套表格&lt;/h3>
-&lt;p>在 tabulate 中嵌套表格很容易，因为 &lt;code>Table.add_row(...)&lt;/code> 这个函数可以接受 &lt;code>std::string&lt;/code> 类型和 &lt;code>tabulate::Table&lt;/code>。下面是一个嵌套表格的例子：&lt;/p>
+&lt;h3 id="0x37-嵌套表格">
+&lt;a href="#0x37-%e5%b5%8c%e5%a5%97%e8%a1%a8%e6%a0%bc" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x37 嵌套表格
+&lt;/h3>&lt;p>在 tabulate 中嵌套表格很容易，因为 &lt;code>Table.add_row(...)&lt;/code> 这个函数可以接受 &lt;code>std::string&lt;/code> 类型和 &lt;code>tabulate::Table&lt;/code>。下面是一个嵌套表格的例子：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -3063,9 +3584,25 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/tabulate/0x37.png" alt="0x37">&lt;/p>
-&lt;h2 id="0x40-导出">0x40 导出&lt;/h2>
-&lt;h3 id="0x41-markdown">0x41 Markdown&lt;/h3>
-&lt;p>可以使用 &lt;code>MarkdownExporter&lt;/code> 来将一个表格导出为 GFM 风格的 Markdown。&lt;/p>
+&lt;h2 id="0x40-导出">
+&lt;a href="#0x40-%e5%af%bc%e5%87%ba" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x40 导出
+&lt;/h2>&lt;h3 id="0x41-markdown">
+&lt;a href="#0x41-markdown" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x41 Markdown
+&lt;/h3>&lt;p>可以使用 &lt;code>MarkdownExporter&lt;/code> 来将一个表格导出为 GFM 风格的 Markdown。&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -3130,434 +3667,20 @@
 &lt;blockquote>
 &lt;p>&lt;strong>注意&lt;/strong>：Markdown 不能指定每一个单元格的对齐样式，只能指定一列的对齐样式，像这样 &lt;code>hg.column(1).format().font_align(FontAlign::center);&lt;/code>。&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="0x50-尾声">0x50 尾声&lt;/h2>
-&lt;p>如果想要更详细地了解 tabulate 的用法，请查看官方文档 &lt;a href="https://github.com/p-ranav/tabulate">https://github.com/p-ranav/tabulate&lt;/a> 。&lt;/p>
+&lt;h2 id="0x50-尾声">
+&lt;a href="#0x50-%e5%b0%be%e5%a3%b0" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+0x50 尾声
+&lt;/h2>&lt;p>如果想要更详细地了解 tabulate 的用法，请查看官方文档 &lt;a href="https://github.com/p-ranav/tabulate">https://github.com/p-ranav/tabulate&lt;/a> 。&lt;/p>
 &lt;p>本文是作者的第一次关于此类型文章的尝试，如有不足之处，请指正，谢谢！&lt;/p>
 &lt;p>再见！&lt;/p>
 &lt;Donate/>
-&lt;Vssue title="tabulate" /></description></item><item><title>2020 DL 信息学冬令营游记</title><link>https://blog.chungzh.cn/articles/2020dlwintercamp/</link><pubDate>Mon, 20 Jan 2020 16:03:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/2020dlwintercamp/</guid><description>
-&lt;h2 id="detail">Detail&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>时间：2020/1/16 至 2020/1/20，共计 5 日。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>地点：石门实验学校（太平新校区）&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>老师：czf、lzl&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="day-1">Day 1&lt;/h2>
-&lt;p>新校区还是蛮气派的。&lt;/p>
-&lt;p>竟然搞了一个开幕式，大佬 卢yq 上台讲话，还见到了金培星老师 %%%。&lt;/p>
-&lt;p>然后还拍了一张大合照。&lt;/p>
-&lt;p>不得不说老师还是很厉害的。&lt;/p>
-&lt;h3 id="早上">早上&lt;/h3>
-&lt;p>讲了镇赛的 T5 和 T6，茅塞顿开。&lt;/p>
-&lt;p>&lt;a href="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/2019%E5%B9%B4%E5%A4%A7%E6%B2%A5%E9%95%87%E5%B0%8F%E5%AD%A6%E7%94%B2%E7%BB%84%E4%BF%A1%E6%81%AF%E5%AD%A6%E8%AF%95%E9%A2%98.pdf">PDF link&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// DLOI T5 魔术数组
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;bits/stdc++.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">using&lt;/span> &lt;span style="color:#00a8c8">namespace&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">main&lt;/span>&lt;span style="color:#111">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">];&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">];&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">];&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">n&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">endl&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 前一行与后一行的所有数之间都有公差
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">cha&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cha&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">];&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">cha&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">][&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#d88200">&amp;#39; &amp;#39;&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#d88200">&amp;#39;\n&amp;#39;&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// DLOI T6 三角形个数
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// OnlineJudge: [Mr.Huang OJ] http://111.230.62.117/problem.php?id=1905
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;bits/stdc++.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">using&lt;/span> &lt;span style="color:#00a8c8">namespace&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">main&lt;/span>&lt;span style="color:#111">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">long&lt;/span> &lt;span style="color:#00a8c8">long&lt;/span> &lt;span style="color:#111">cnt&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">long&lt;/span> &lt;span style="color:#00a8c8">long&lt;/span> &lt;span style="color:#111">l&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">l&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">l&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#75715e">// 负数不算
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 排列
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// 只要是正数都可组成三角形
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// 求 从 n 个整数中取出 3 个数，有多少种排列方案
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">long&lt;/span> &lt;span style="color:#00a8c8">long&lt;/span> &lt;span style="color:#111">ans&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">)&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#111">)&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">6&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">ans&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">endl&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>然后去吃了一顿丰盛但不美味的午餐，感觉不值 ￥20。。。&lt;/p>
-&lt;h3 id="下午">下午&lt;/h3>
-&lt;p>STL 专题开始。&lt;/p>
-&lt;p>讲了 vector，基本上都会。&lt;/p>
-&lt;p>清空 vector 还是第一次见，方法：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">vector&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>&lt;span style="color:#111">().&lt;/span>&lt;span style="color:#111">swap&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">v&lt;/span>&lt;span style="color:#111">);&lt;/span> &lt;span style="color:#75715e">//清空v,并释放空间; 惯用法。
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="day-2">Day 2&lt;/h2>
-&lt;p>主要考 &lt;code>set&lt;/code> &lt;code>map&lt;/code> &lt;code>queue&lt;/code> 的应用，思考难度不是非常大。&lt;/p>
-&lt;h3 id="早上-1">早上&lt;/h3>
-&lt;p>STL 专题之 set、map。&lt;/p>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-setmap.png" alt="">&lt;/p>
-&lt;p>NO.2 ~&lt;/p>
-&lt;h3 id="下午-1">下午&lt;/h3>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-queue.png" alt="">&lt;/p>
-&lt;p>STL 专题之 queue。&lt;/p>
-&lt;p>NO.1！&lt;/p>
-&lt;p>&lt;del>应 rank 4 要求，顺带截了他的图。。&lt;/del>&lt;/p>
-&lt;h2 id="day-3">Day 3&lt;/h2>
-&lt;p>二分。&lt;/p>
-&lt;p>战况惨烈，不截图了。。&lt;/p>
-&lt;p>以后还要恶补一下二分。&lt;/p>
-&lt;h2 id="day-4">Day 4&lt;/h2>
-&lt;p>宽搜。&lt;/p>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/ranking-bfs.png" alt="">&lt;/p>
-&lt;h2 id="day-5">Day 5&lt;/h2>
-&lt;h3 id="早上-2">早上&lt;/h3>
-&lt;p>结营考。&lt;/p>
-&lt;p>rank 7。&lt;/p>
-&lt;p>不太理想&lt;/p>
-&lt;h3 id="下午-2">下午&lt;/h3>
-&lt;p>结营。&lt;/p>
-&lt;p>获得优秀营员称号。&lt;/p>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>先放一张朋友看到我结营照片时的点评。&lt;/p>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/oi/2020dlwc/comment.jpg" alt="">&lt;/p>
-&lt;p>这几天过得很充实，也很累，学到了很多知识。&lt;/p>
-&lt;p>近几天教育部也发了一个「强基计划」，对我们信息竞赛生影响很大。&lt;/p>
-&lt;p>但，我还是会坚持下去的。&lt;/p>
-&lt;Vssue title="2020DLwintercamp" /></description></item><item><title>DLOI 2019 游记</title><link>https://blog.chungzh.cn/articles/dloi-2019/</link><pubDate>Sun, 22 Dec 2019 19:03:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/dloi-2019/</guid><description>
-&lt;blockquote>
-&lt;p>嘤嘤嘤又被 dalao 狂虐了&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="赛前情况">赛前情况&lt;/h2>
-&lt;p>自从上一次 NHOI 之后，就荒废了信息学，基本上没有刷题。原因很多，一是六年级的学业繁重，二是家里一度禁止我玩电脑（不能自律）。直到考前一个星期才练了练手，企图抱佛脚。&lt;/p>
-&lt;p>所以我自己对这次比赛都没有什么信心，不要跌出一等奖线、能保住创新班名额就好了。&lt;/p>
-&lt;p>mr.lgj 说过这次比赛会非常难，但是一定不要放弃。（意思就是说可以暴力骗分~&lt;/p>
-&lt;p>就这样，我仓促地去比赛了。&lt;/p>
-&lt;h2 id="比赛">比赛&lt;/h2>
-&lt;p>是 2019/12/17 呢。&lt;/p>
-&lt;h3 id="摸鱼时间">摸鱼时间&lt;/h3>
-&lt;p>熟悉的沥中机房啊~&lt;/p>
-&lt;p>考号是 &lt;strong>XJ007&lt;/strong>，特工？&lt;/p>
-&lt;p>监考老师穿着一件火影衣服呢&lt;del>真帅&lt;/del>&lt;/p>
-&lt;p>想打开 Luogu 看看运势，但是不敢上网。现在想想那天的运势一定很差叭。&lt;/p>
-&lt;h3 id="比赛时间">比赛时间&lt;/h3>
-&lt;h4 id="820-发卷">8:20 发卷&lt;/h4>
-&lt;p>拿到卷子之后浏览了一下，然后开始怀疑人生。mr.lgj 说得没错，这真是一次非常非常&lt;strong>难&lt;/strong>的比赛，比上次区赛还要难很多很多很多。。。&lt;/p>
-&lt;p>开始怀疑走错地方了。。&lt;/p>
-&lt;p>这真的是小学甲组的镇赛吗。。。&lt;/p>
-&lt;p>。。。&lt;/p>
-&lt;h4 id="830-开考">8:30 开考&lt;/h4>
-&lt;p>T1 一眼看上去，凉了。大意是比较两个数的平方大小，20% 的数据这两个数都大于 10^8，竟然要搞高精，天哪完全没学过高精啊。。。于是草草暴力了就去水 T2。&lt;/p>
-&lt;p>T2 是字符串模拟，5 min 搞掉。&lt;/p>
-&lt;p>然后又看了看 T1，才发现&lt;strong>比较两个数的平方的大小&lt;/strong>不就是&lt;strong>比较两个数的大小&lt;/strong>吗？？？根本不用乘啊，我真是菜死了/kk&lt;/p>
-&lt;p>然后 T3 晕乎乎的，是道模拟。一眼看上去就很麻烦，最后打了个自己的看不懂的代码，能水样例就行了吧。&lt;/p>
-&lt;p>于是到了 9:06，开始搞 T4。其实是很简单的一道题，赛后发现自己写得太麻烦了而且还是错的。。。有点可惜。&lt;/p>
-&lt;p>9:58 开始就骗 T5 T6 的部分分了，分别骗了 50 和 70 分。&lt;/p>
-&lt;p>到了最后觉得太累了，脑子转不动了。。我太南了。&lt;/p>
-&lt;h2 id="赛后总结">赛后总结&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>T1：模拟&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>T2：字符串 模拟&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>T3：模拟&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>T4：贪心&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>T5：找规律&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>T6：数学&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>难度：T1&amp;lt;T2&amp;lt;T4&amp;lt;T3&amp;lt;T5&amp;lt;T6。&lt;/p>
-&lt;p>我死了。&lt;/p>
-&lt;p>然后学校里的信息队就停训了，那周的少年宫也是最后一次了。这学期剩下的时间都要搞文化课了。&lt;/p>
-&lt;p>估计三四百分吧，能混个 1= 就行，不要求太高了。&lt;/p>
-&lt;p>总的来说还是有点可惜，特别是 T4。&lt;/p>
-&lt;p>那么，OI 再见，文化课你好！&lt;/p>
-&lt;p>&lt;del>下周大概就出分了，到时候再来更新吧&lt;/del>&lt;/p>
-&lt;p>upd：分数出了，470 分，rank 9。&lt;/p>
-&lt;Vssue title="DLOI-2019" /></description></item><item><title>谁说 C/C++ 没有好的包管理器？这里来一沓！</title><link>https://blog.chungzh.cn/articles/c-cpp-package-manager/</link><pubDate>Sun, 25 Aug 2019 11:41:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/c-cpp-package-manager/</guid><description>
-&lt;p>包管理器可以帮助你更方便地安装依赖关系，并决定所安装的版本，提高你的开发幸福感。许多语言都有自己的包管理器，像 Node.js 的 npm/yarn、Rust 的 Cargo、Python 的 pip 等等。当然，C/C++ 也有它自己的包管理器！&lt;/p>
-&lt;h2 id="1-conancc-package-manager">1. Conan（C/C++ Package Manager）&lt;/h2>
-&lt;ul>
-&lt;li>官网：&lt;a href="https://conan.io/">https://conan.io/&lt;/a>&lt;/li>
-&lt;li>GitHub 项目地址：&lt;a href="https://github.com/conan-io/conan">https://github.com/conan-io/conan&lt;/a>&lt;/li>
-&lt;li>Stars 数：3k&lt;/li>
-&lt;li>文档：&lt;a href="https://docs.conan.io/en/latest/">https://docs.conan.io/en/latest/&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>首先出场的是 Conan（注意，不是柯南！），一个用 Python 编写的 C/C++ 包管理器。它是完全分散的，你可以自己托管服务器中的包。它适用于&lt;strong>所有平台&lt;/strong>，包括 Linux、OS X、Windows、Solaris、FreeBSD、嵌入式和交叉编译、docker、WSL。它可以与任何构建系统集成，为 CMake、MSBuild、Makefiles 等工具提供了经过测试的支持。除此之外，它还获得了奔驰、华为等大公司用户。你还可以在 &lt;a href="https://bintray.com/conan/conan-center">Conan-Center&lt;/a> 寻找或分享你的 C/C++ 包。&lt;/p>
-&lt;p>想要安装 Conan 也很简单：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ pip install conan
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/conan-systems.png" alt="conan-systems">&lt;/p>
-&lt;h2 id="2buckaroo">2.Buckaroo&lt;/h2>
-&lt;ul>
-&lt;li>官网：&lt;a href="https://buckaroo.pm/">https://buckaroo.pm/&lt;/a>&lt;/li>
-&lt;li>GitHub 项目地址：&lt;a href="https://github.com/LoopPerfect/buckaroo">https://github.com/LoopPerfect/buckaroo&lt;/a>&lt;/li>
-&lt;li>Stars 数：600&lt;/li>
-&lt;li>文档：&lt;a href="https://github.com/LoopPerfect/buckaroo/wiki">https://github.com/LoopPerfect/buckaroo/wiki&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>这个 C++ 包管理器是使用 F# 语言开发的。它的独特之处就是直接从 GitHub、BitBucket、GitLab、托管的 Git 和 HTTP 中提取依赖项。同样的，它也是完全分散的，没有中央服务器。Buckaroo 使用 TOML 配置文件。&lt;/p>
-&lt;p>它的工作流大概是这样的：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create your project file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ buckaroo init
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install dependencies&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ buckaroo add github.com/buckaroo-pm/boost-thread@branch&lt;span style="color:#f92672">=&lt;/span>master
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Run your code&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ buck run :my-app
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>安装方法详见 &lt;a href="https://github.com/LoopPerfect/buckaroo#quick-install">Quick Install&lt;/a>。&lt;/p>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/how-buckaroo-works.png" alt="buckaroo">&lt;/p>
-&lt;h2 id="3vcpkg">3.vcpkg&lt;/h2>
-&lt;ul>
-&lt;li>GitHub 项目地址：&lt;a href="https://github.com/microsoft/vcpkg">https://github.com/microsoft/vcpkg&lt;/a>&lt;/li>
-&lt;li>Stars 数：6k&lt;/li>
-&lt;li>文档：&lt;a href="https://vcpkg.readthedocs.io/">https://vcpkg.readthedocs.io/&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>vcpkg 是由微软爸爸开发的支持 Windows、Linux、Mac OS 的 C++ 库管理器，解决了 Windows 下&lt;strong>常用依赖包&lt;/strong>的管理问题！它方便与 Visual Studio 集成，你可以使用 &lt;code>vcpkg search&lt;/code> 搜索可用的包。它也可以从 Bitbucket、GitHub、GitLab 等获取包。&lt;/p>
-&lt;p>安装方法详见 &lt;a href="https://github.com/microsoft/vcpkg#quick-start">Quick Start&lt;/a>。&lt;/p>
-&lt;h2 id="4hunter">4.Hunter&lt;/h2>
-&lt;ul>
-&lt;li>GitHub 项目地址：&lt;a href="https://github.com/ruslo/hunter">https://github.com/ruslo/hunter&lt;/a>&lt;/li>
-&lt;li>Stars 数：2k&lt;/li>
-&lt;li>文档：&lt;a href="https://docs.hunter.sh">https://docs.hunter.sh&lt;/a>&lt;/li>
-&lt;li>包：&lt;a href="https://docs.hunter.sh/en/latest/packages.html">https://docs.hunter.sh/en/latest/packages.html&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>用于 C/C++ 的跨平台包管理器。支持 Linux、Windows、macOS、iOS、Android、Raspberry Pi 等平台。Hunter 主要用于管理带有 CMake 构建系统的软件包，现有的 CMake 软件包可以很容易地集成到系统中，但是使用带有 &lt;code>ExternalProject_Add&lt;/code> 命令的自定义模板（构建方案）也支持非 CMake 软件包。&lt;/p>
-&lt;p>&lt;strong>注意&lt;/strong>：现在 Hunter 的 To be or not to be 已经成了问题，详见 &lt;a href="https://github.com/ruslo/hunter/issues/1921">Issue #1921&lt;/a>。如果它在 &lt;a href="https://patreon.com/ruslo">https://patreon.com/ruslo&lt;/a> 上没有得到足够的支持，维护者将会在 2019 年 8 月 25 日停止维护该项目。请谨慎使用！&lt;/p>
-&lt;p>开源不易，&lt;del>是人都要恰饭&lt;/del>这个项目从 2013 年到现在，已经非常不易，目前已有 2k stars 了。大家可以给他 sponsor，让他继续走下去！&lt;/p>
-&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/cmake-hunter-environment.png" alt="cmake-hunter-environment">&lt;/p>
-&lt;h2 id="5clib">5.clib&lt;/h2>
-&lt;ul>
-&lt;li>GitHub 项目地址：&lt;a href="https://github.com/clibs/clib">https://github.com/clibs/clib&lt;/a>&lt;/li>
-&lt;li>Stars 数：3k&lt;/li>
-&lt;li>文档：&lt;a href="https://github.com/clibs/clib/wiki">https://github.com/clibs/clib/wiki&lt;/a>&lt;/li>
-&lt;li>包：&lt;a href="https://github.com/clibs/clib/wiki/Packages">https://github.com/clibs/clib/wiki/Packages&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>clib 是一个 C 包管理器（非 C++），使用起来较简单。同样的，它也可以直接从 GitHub 上安装库。类似于 Node.js，它也是用 &lt;code>package.json&lt;/code> 管理的。下面是一个例子：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#d88200">&amp;#34;term&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#d88200">&amp;#34;0.0.1&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;repo&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#d88200">&amp;#34;clibs/term&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#d88200">&amp;#34;Terminal ansi escape goodies&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;keywords&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">[&lt;/span>&lt;span style="color:#d88200">&amp;#34;terminal&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;term&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;tty&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;ansi&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;escape&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;colors&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;console&amp;#34;&lt;/span>&lt;span style="color:#111">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;license&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#d88200">&amp;#34;MIT&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;src&amp;#34;&lt;/span>&lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">[&lt;/span>&lt;span style="color:#d88200">&amp;#34;src/term.c&amp;#34;&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#d88200">&amp;#34;src/term.h&amp;#34;&lt;/span>&lt;span style="color:#111">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/clib.png" alt="clib">&lt;/p>
-&lt;h2 id="6poac">6.poac&lt;/h2>
-&lt;ul>
-&lt;li>GitHub 项目地址：&lt;a href="https://github.com/poacpm/poac">https://github.com/poacpm/poac&lt;/a>&lt;/li>
-&lt;li>Stars 数：341&lt;/li>
-&lt;li>官网：&lt;a href="https://poac.pm/">https://poac.pm/&lt;/a>&lt;/li>
-&lt;li>文档：&lt;a href="https://doc.poac.pm/en/">https://doc.poac.pm/en/&lt;/a>&lt;/li>
-&lt;li>包：&lt;a href="https://poac.pm/packages">https://poac.pm/packages&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>别看 poac 现在 stars 数量少，它其实很适合新手使用。poac 具有直观且易于使用的界面（像 npm 和 Cargo一样）。独特的是，你可以在&lt;strong>不了解&lt;/strong> CMake 的情况下使用 poac 开发应用程序和库，专注于学习 C++ 而不会绊倒。作者还计划实现与其他构建系统和包管理器的集成，让你能够无缝切换。&lt;/p>
-&lt;p>安装也是一行命令搞定：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>curl -fsSL https://sh.poac.pm &lt;span style="color:#111">|&lt;/span> bash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://czh-img.oss-cn-shenzhen.aliyuncs.com/blog/code/c-cpp-package-manager/poac.gif" alt="poac">&lt;/p>
-&lt;Donate/>
-&lt;Vssue title="C/C++ Package Manager" /></description></item><item><title>NHOI 2019 游记</title><link>https://blog.chungzh.cn/articles/nhoi-2019/</link><pubDate>Sun, 02 Jun 2019 12:07:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/nhoi-2019/</guid><description>
-&lt;blockquote>
-&lt;p>NHOI：南海区青少年信息学竞赛。&lt;/p>
-&lt;/blockquote>
-&lt;!-- More -->
-&lt;h2 id="day--1">Day -1&lt;/h2>
-&lt;p>日常颓废，用心思考如何提高人品。希望能拿到前 50 名。&lt;/p>
-&lt;p>上次是五十开外，总要有点进步才行啊。&lt;/p>
-&lt;p>不过要去到好的中学，五十名内可能也还不够吧。。&lt;/p>
-&lt;p>不管怎样，努力吧，不想留下遗憾！&lt;/p>
-&lt;h2 id="day-1">Day 1&lt;/h2>
-&lt;p>今天很早就起床了。早上吃了一根香肠和一个荷包蛋，很香。状态也很好。&lt;/p>
-&lt;p>&lt;img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/OI/NHOI2019/FiQkgUKKgatcS2k3frdWIDIK9l63.jpeg" alt="Breakfast">&lt;/p>
-&lt;p>进考场之后开始颓废小恐龙。。。&lt;/p>
-&lt;p>&lt;del>对了，监考老师有一个很漂亮的小姐姐。。。&lt;/del>&lt;/p>
-&lt;p>本来还想睡一会儿觉，最后还是忍不住两边赛友的小恐龙的诱惑。。。&lt;/p>
-&lt;p>然后很惊喜的发现，沥中的电脑竟然都有音响？！&lt;/p>
-&lt;hr>
-&lt;p>&lt;strong>8:23&lt;/strong> Contest Start！&lt;/p>
-&lt;p>T1 是一道简单蛇形矩阵，很快就肝掉了。&lt;/p>
-&lt;p>然后看了看 T2，好像是模拟分数加减法，感觉约分、通分有点麻烦就先跳过去做 T3 了。&lt;/p>
-&lt;p>T3 是啥我也忘了，反正 4 分钟就肝掉了。。&lt;/p>
-&lt;p>继续看 T4，我觉得还是滚远点比较好。继续看 T5，感觉不太可做，就先溜了。&lt;/p>
-&lt;p>回去 T2 打了一个短除法的 gcd（&lt;del>谁让我不会辗转相除法呢&lt;/del>）和 lcm，花了半个小时（&lt;del>其实大多数时间都是在窥屏隔壁玩小恐龙的2333&lt;/del>）就肝掉了。&lt;/p>
-&lt;p>走过去看 T6，&lt;strong>我肝&lt;/strong>！一个贪心肝掉了。（Bessie Cow 好评）&lt;/p>
-&lt;p>继续滚回去 T4，觉得很难。这种题目以前的话，超时超掉一半分也算正常。然后继续苦思冥想。。。&lt;/p>
-&lt;p>然后就想到了桶排序的思想，艰难地打了出来。。&lt;/p>
-&lt;p>长呼一口气，颓颓小恐龙！（我可能是忘记了还有 T5 没做&lt;/p>
-&lt;p>颓着颓着就和隔壁沥北小学的老哥聊上了。&lt;/p>
-&lt;p>最后在 &lt;strong>9:52&lt;/strong> 的时候非常暴力地怒切掉了 T5！做完了！&lt;/p>
-&lt;p>于是开始快乐地玩耍&amp;hellip;&lt;/p>
-&lt;p>发现电脑的 CPU 是 &lt;code>Intel Core i3-6100 CPU @ 3.70GHz&lt;/code>。。海星吧&lt;/p>
-&lt;p>然后右边的老哥又画了一个 &lt;strong>九勾玉轮回眼&lt;/strong> 和 &lt;strong>三勾玉写轮眼&lt;/strong>！&lt;/p>
-&lt;p>哦对，小恐龙还颓到了 &lt;strong>1750&lt;/strong>！&lt;/p>
-&lt;p>比赛结束前十分钟非常紧张，一遍又一遍地检查文件读写有没有错、该开的 long long 有没有开······快疯了。&lt;/p>
-&lt;hr>
-&lt;p>个人感觉难度 T1 &amp;lt; T2 &amp;lt; T3 &amp;lt; T5 &amp;lt; T4 &amp;lt; T6 ，估分 &lt;strong>50 + 50 + 50 + 40 + 40 + 40&lt;/strong> 吧。&lt;/p>
-&lt;hr>
-&lt;p>分数到 Day 2 下午就出了，&lt;strong>50 + 50 + 50 + 50 + 40 + 40 = 280&lt;/strong>，&lt;strong>rank 35&lt;/strong>，五年级 &lt;strong>rk 10&lt;/strong>，非常满意！&lt;/p>
-&lt;p>那么，&lt;strong>NHOI 2019&lt;/strong> 再见，&lt;strong>NHOI 2020&lt;/strong> 你好！&lt;/p>
-&lt;Vssue title="NHOI-2019" /></description></item><item><title>创建 Vuepress 博客并使用 Git 管理</title><link>https://blog.chungzh.cn/articles/create-vuepress-blog-and-use-git-manger-it/</link><pubDate>Sat, 02 Mar 2019 12:28:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/create-vuepress-blog-and-use-git-manger-it/</guid><description>
+&lt;Vssue title="tabulate" /></description></item><item><title>创建 Vuepress 博客并使用 Git 管理</title><link>https://blog.chungzh.cn/articles/create-vuepress-blog-and-use-git-manger-it/</link><pubDate>Sat, 02 Mar 2019 12:28:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/create-vuepress-blog-and-use-git-manger-it/</guid><description>
 &lt;blockquote>
 &lt;p>Vuepress 是 Evan You 编写的一个 Vue 驱动的静态网站生成器，一般用于创建文档网站、博客网站。&lt;/p>
 &lt;/blockquote>
@@ -3567,10 +3690,26 @@
 &lt;blockquote>
 &lt;p>提示：我使用的是 Windows 系统，在其他平台上终端命令可能略有不同，请自行变通！&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="前期准备">前期准备&lt;/h2>
-&lt;p>请事先安装好 yarn、Git 等软件。本文不介绍安装这些前期准备的方法，请自行查阅文档，锻炼阅读文档能力。&lt;/p>
-&lt;h2 id="下载-vuepress">下载 Vuepress&lt;/h2>
-&lt;p>首先我们创建一个文件夹，用于存放 Vuepress。&lt;/p>
+&lt;h2 id="前期准备">
+&lt;a href="#%e5%89%8d%e6%9c%9f%e5%87%86%e5%a4%87" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+前期准备
+&lt;/h2>&lt;p>请事先安装好 yarn、Git 等软件。本文不介绍安装这些前期准备的方法，请自行查阅文档，锻炼阅读文档能力。&lt;/p>
+&lt;h2 id="下载-vuepress">
+&lt;a href="#%e4%b8%8b%e8%bd%bd-vuepress" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+下载 Vuepress
+&lt;/h2>&lt;p>首先我们创建一个文件夹，用于存放 Vuepress。&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -3605,8 +3744,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="安装主题">安装主题&lt;/h2>
-&lt;p>Vuepress 的主题有很多，可以在 &lt;a href="https://github.com/ulivz/awesome-vuepress">awesome-vuepress 关于 Vuepress 的一些好东西&lt;/a> 挑选一个你喜欢的主题，或者直接在 GitHub 搜索也可以。这里我使用 &lt;a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy">vuepress-theme-meteorlxy&lt;/a> 作为例子。&lt;/p>
+&lt;/div>&lt;h2 id="安装主题">
+&lt;a href="#%e5%ae%89%e8%a3%85%e4%b8%bb%e9%a2%98" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+安装主题
+&lt;/h2>&lt;p>Vuepress 的主题有很多，可以在 &lt;a href="https://github.com/ulivz/awesome-vuepress">awesome-vuepress 关于 Vuepress 的一些好东西&lt;/a> 挑选一个你喜欢的主题，或者直接在 GitHub 搜索也可以。这里我使用 &lt;a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy">vuepress-theme-meteorlxy&lt;/a> 作为例子。&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -3616,8 +3763,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>ok，现在你已经安装好主题了。&lt;/p>
-&lt;h2 id="熟悉-vuepress-目录结构">熟悉 Vuepress 目录结构&lt;/h2>
-&lt;pre tabindex="0">&lt;code>.
+&lt;h2 id="熟悉-vuepress-目录结构">
+&lt;a href="#%e7%86%9f%e6%82%89-vuepress-%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+熟悉 Vuepress 目录结构
+&lt;/h2>&lt;pre tabindex="0">&lt;code>.
 ├── docs
 │ ├── .vuepress (可选的)
 │ │ ├── components (可选的)
@@ -3647,8 +3802,16 @@
 &lt;li>&lt;code>docs/.vuepress/config.js&lt;/code>: 配置文件的入口文件，也可以是 &lt;code>YML&lt;/code> 或 &lt;code>toml&lt;/code>。&lt;/li>
 &lt;/ul>
 &lt;p>大概就是这些，还有一些更高级的配置这里就没写了。相信有兴趣做更高级自定义的话都会自己去看 &lt;a href="https://vuepress.vuejs.org/">Vuepress 官方文档网站&lt;/a> 了~&lt;/p>
-&lt;h2 id="配置-vuepress">配置 Vuepress&lt;/h2>
-&lt;p>首先创建 &lt;code>docs&lt;/code> 目录、&lt;code>docs/.vuepress&lt;/code> 目录：&lt;/p>
+&lt;h2 id="配置-vuepress">
+&lt;a href="#%e9%85%8d%e7%bd%ae-vuepress" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+配置 Vuepress
+&lt;/h2>&lt;p>首先创建 &lt;code>docs&lt;/code> 目录、&lt;code>docs/.vuepress&lt;/code> 目录：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
 &lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -3899,17 +4062,41 @@
 &lt;p>注意：这是 &lt;code>meteorlxy&lt;/code> 主题的默认配置，其他主题请查看主题文档。&lt;/p>
 &lt;/blockquote>
 &lt;p>然后直接按照 &lt;a href="https://vuepress-theme-meteorlxy.meteorlxy.cn/">meteorlxy 主题文档&lt;/a>进行配置即可。&lt;/p>
-&lt;h2 id="配置-ci-和-git">配置 CI 和 Git&lt;/h2>
-&lt;blockquote>
+&lt;h2 id="配置-ci-和-git">
+&lt;a href="#%e9%85%8d%e7%bd%ae-ci-%e5%92%8c-git" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+配置 CI 和 Git
+&lt;/h2>&lt;blockquote>
 &lt;p>持续集成（英语：Continuous integration，缩写 CI）是一种软件工程流程，是将所有软件工程师对于软件的工作副本持续集成到共享主线（mainline）的一种举措。&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;strong>👷 这里我们所使用的持续集成平台是 Travis CI.&lt;/strong>&lt;/p>
-&lt;h3 id="开启-ci">开启 CI&lt;/h3>
-&lt;p>首先，在 &lt;a href="https://github.com/new">Create a new repository&lt;/a> 里创建一个项目，项目名是 &lt;code>GitHub 用户名.github.io&lt;/code>，然后到 &lt;a href="https://travis-ci.org">Travis CI&lt;/a> 官网，用 GitHub 账户直接关联登录，并允许 Travis CI 查看自己的公有仓库。&lt;/p>
+&lt;h3 id="开启-ci">
+&lt;a href="#%e5%bc%80%e5%90%af-ci" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+开启 CI
+&lt;/h3>&lt;p>首先，在 &lt;a href="https://github.com/new">Create a new repository&lt;/a> 里创建一个项目，项目名是 &lt;code>GitHub 用户名.github.io&lt;/code>，然后到 &lt;a href="https://travis-ci.org">Travis CI&lt;/a> 官网，用 GitHub 账户直接关联登录，并允许 Travis CI 查看自己的公有仓库。&lt;/p>
 &lt;p>然后我们到 &lt;a href="https://travis-ci.org/account/repositories">Travis CI 账户页面&lt;/a>开启博客仓库的 CI，如图：&lt;/p>
 &lt;p>&lt;img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/CODE/create-vuepress-blog-and-use-git-manger/ci1.png" alt="OpenCI">&lt;/p>
-&lt;h3 id="添加变量">添加变量&lt;/h3>
-&lt;p>我们要设置三个变量：&lt;code>GIT_NAME&lt;/code>、&lt;code>GIT_EMAIL&lt;/code>、&lt;code>GITHUB_TOKEN&lt;/code>，分别是 &lt;code>git&lt;/code> 用户名、&lt;code>git&lt;/code> 用户邮箱和 GitHub token。&lt;/p>
+&lt;h3 id="添加变量">
+&lt;a href="#%e6%b7%bb%e5%8a%a0%e5%8f%98%e9%87%8f" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+添加变量
+&lt;/h3>&lt;p>我们要设置三个变量：&lt;code>GIT_NAME&lt;/code>、&lt;code>GIT_EMAIL&lt;/code>、&lt;code>GITHUB_TOKEN&lt;/code>，分别是 &lt;code>git&lt;/code> 用户名、&lt;code>git&lt;/code> 用户邮箱和 GitHub token。&lt;/p>
 &lt;p>其中前两项的值可以在本地查看：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -4030,73 +4217,4 @@ docs/.vuepress/dist/
 &lt;p>ChungZH&lt;/p>
 &lt;p>2019 - 3 - 2 / 广东 - 佛山&lt;/p>
 &lt;p>#EOF 😘&lt;/p>
-&lt;Vssue title="create-vuepress-blog-and-use-git-manger-it" /></description></item><item><title>美化你的 Powershell</title><link>https://blog.chungzh.cn/articles/beautify-your-powershell/</link><pubDate>Sat, 23 Feb 2019 11:50:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/beautify-your-powershell/</guid><description>
-&lt;p>Powershell 源代码仓库🔗 &lt;a href="https://github.com/PowerShell/PowerShell">🎉🎉🎉Powershell/Powershell&lt;/a>&lt;/p>
-&lt;!-- More --> &lt;!-- more -->
-&lt;h2 id="前言">前言&lt;/h2>
-&lt;p>众所周知，Powershell 是微软开发的新一代的 shell。在微软的大力扶植下，已经成长为了一个成熟的 shell。而大部分人为了解决终端丑的问题，都选择了使用 Linux shell 这条路。而 &lt;code>WSL&lt;/code> 的推出更促进了这一点。&lt;/p>
-&lt;p>虽然使用 Linux shell 是一个不错的选择，但我们也可以在 Windows 的 shell 上下功夫。&lt;/p>
-&lt;p>对了，为什么不是美化 &lt;code>CMD&lt;/code> 呢？答案很简单，微软都抛弃的东西，我们还是也抛弃了吧。&lt;/p>
-&lt;h2 id="开始">开始&lt;/h2>
-&lt;p>默认的 Powershell 是这样的：&lt;/p>
-&lt;p>&lt;img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell1.png" alt="丑陋的 Powershell">&lt;/p>
-&lt;p>但我们要把它改成这样：&lt;/p>
-&lt;p>&lt;img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell2.png" alt="帅气的 Powershell">&lt;/p>
-&lt;p>wow~简直能和使用 &lt;code>oh-my-zsh&lt;/code> 的终端媲美了！！！&lt;/p>
-&lt;p>话不多说，咱们开始。&lt;/p>
-&lt;p>首先我们了解一个工具 🌟&lt;a href="https://github.com/JanDeDobbeleer/oh-my-posh">oh-my-posh&lt;/a>。关于它的介绍可以看&lt;a href="https://web.okjike.com/post-detail/5c1b25c05158130011810bfd/originalPost">我在即刻的推荐文&lt;/a>。总之，这个工具就是用来美化 Powershell 的。上图就是用了 oh-my-posh 后的效果。&lt;/p>
-&lt;h3 id="预备">预备&lt;/h3>
-&lt;p>为了获得更完美的体验，我们可以先安装几个 &lt;code>Powerline&lt;/code> 字体。可以在 &lt;a href="https://github.com/powerline/font">powerline/font&lt;/a> 中下载。下载过程不赘述。&lt;/p>
-&lt;p>下载好 Powerline 字体后，需要把终端的字体改成你刚刚下载的 Powerline 字体。&lt;/p>
-&lt;p>对了，由于默认的 Powershell 终端改字体比较麻烦，我们可以使用终端模拟器。大家可以使用 &lt;a href="https://github.com/Eugeny/terminus">Eugeny/terminus&lt;/a> 这个工具。安装好后在 Settings 页面修改字体就行了。大家可以自己摸索。&lt;/p>
-&lt;h3 id="安装">安装&lt;/h3>
-&lt;p>好了，先来安装一下 &lt;code>oh-my-posh&lt;/code>。往 Powershell 狂输以下命令：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">Install-Module&lt;/span> &lt;span style="color:#111">posh-git&lt;/span> &lt;span style="color:#111">-Scope&lt;/span> &lt;span style="color:#111">CurrentUser&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">Install-Module&lt;/span> &lt;span style="color:#111">oh-my&lt;/span>&lt;span style="color:#111">-posh&lt;/span> &lt;span style="color:#111">-Scope&lt;/span> &lt;span style="color:#111">CurrentUser&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>这样就安装好了 &lt;code>posh-git&lt;/code> 和 &lt;code>oh-my-posh&lt;/code> 这两个插件了。&lt;/p>
-&lt;h3 id="使用">使用&lt;/h3>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">Import-Module&lt;/span> &lt;span style="color:#111">oh-my&lt;/span>&lt;span style="color:#111">-posh&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">Import-Module&lt;/span> &lt;span style="color:#111">posh-git&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>输入如上命令即可。&lt;/p>
-&lt;p>&lt;img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell3.png" alt="成果">&lt;/p>
-&lt;blockquote>
-&lt;p>upd：oh-my-posh 默认提供了许多主题，大家可以自行切换。方法是：&lt;code>Set-Theme 主题名&lt;/code>。主题有&lt;a href="https://github.com/JanDeDobbeleer/oh-my-posh#themes">这些&lt;/a>。大家可以自己玩玩。&lt;/p>
-&lt;/blockquote>
-&lt;p>好了，取得了这样的成果，或许你以为已经成功了。但是——你只要重启一次终端，你就会发现问题了。&lt;/p>
-&lt;p>&lt;strong>为什么重启之后终端又复原了呢？？？&lt;/strong>&lt;/p>
-&lt;p>这是因为打开的时候必须要输入 &lt;code>Import-Module&lt;/code> 那两行命令才能启用插件。&lt;/p>
-&lt;p>那么我们可以设置一个脚本，让他每次打开 Powershell 就自动输入那两行命令。&lt;/p>
-&lt;p>好了，明确了目标，我们就开始行动吧。&lt;/p>
-&lt;p>首先输入：&lt;/p>
-&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">New-Item&lt;/span> &lt;span style="color:#111">$profile&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://chungzhblog-photo.oss-cn-shenzhen.aliyuncs.com/%E5%8D%9A%E5%AE%A2/%E6%9E%81%E5%AE%A2%E6%94%BB%E7%95%A5/20/Powershell4.png" alt="结果">&lt;/p>
-&lt;p>好了，打开这个文件——相信大家如果仔细看信息就能发现这个文件在哪里了。然后在这个文件中粘贴以下命令：&lt;/p>
-&lt;pre tabindex="0">&lt;code>Import-Module oh-my-posh
-Import-Module posh-git
-&lt;/code>&lt;/pre>&lt;p>就可以每次打开 Powershell 都自动用上 oh-my-posh 了。&lt;/p>
-&lt;p>Enjoy it ☕~&lt;/p>
-&lt;Donate/>
-&lt;Vssue title="beautify-your-powershell" /></description></item></channel></rss>
+&lt;Vssue title="create-vuepress-blog-and-use-git-manger-it" /></description></item></channel></rss>
