@@ -76,6 +76,8 @@ menu:
       url: "/friends/"  
     - name: 标签
       url: "/tags/"
+    - name: 分类
+      url: "/categories/"
   footer:
     - name: RSS
       url: "/index.xml"

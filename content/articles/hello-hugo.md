@@ -3,7 +3,7 @@ title: Hello Hugo!
 tags:
 - Blog
 - Hugo
-category: 瞎搞开发
+categories: 瞎搞开发
 date: 2021-07-16
 author: ChungZH
 ---

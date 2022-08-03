@@ -4,7 +4,7 @@ tags:
   - C++
 date: 2020-02-21 11:45:00
 author: ChungZH
-category: 瞎搞开发
+categories: 瞎搞开发
 summary: 优雅地用 C++ 做表格！
 ---
 

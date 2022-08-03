@@ -6,7 +6,7 @@ tags:
     - C++
 date: 2020-05-16 10:45:00
 author: ChungZH
-category: 瞎搞开发
+categories: 瞎搞开发
 ---
 
 ## 前言

@@ -2,9 +2,10 @@
 title: Treap 笔记
 tags:
 - OI
-- 数据结构与算法
+- 算法
+- 数据结构
 - Treap
-category: 学习笔记
+categories: 学习笔记
 date: 2022-02-09
 katex: true
 ---

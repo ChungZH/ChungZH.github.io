@@ -4,7 +4,7 @@ tags:
 - 随笔
 - 学校
 date: 2021-07-17
-category: 生活
+categories: 生活
 author: ChungZH
 ---
 

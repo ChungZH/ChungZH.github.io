@@ -2,10 +2,11 @@
 title: 点分治笔记
 tags:
 - OI
-- 数据结构与算法
+- 算法
+- 数据结构
 - 树的重心
 - 点分治
-category: 学习笔记
+categories: 学习笔记
 date: 2022-08-02
 katex: true
 ---

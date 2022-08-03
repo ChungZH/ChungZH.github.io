@@ -2,9 +2,10 @@
 title: 线段树笔记
 tags:
 - OI
-- 数据结构与算法
+- 算法
+- 数据结构
 - 线段树
-category: 学习笔记
+categories: 学习笔记
 date: 2021-08-04
 author: ChungZH
 katex: true

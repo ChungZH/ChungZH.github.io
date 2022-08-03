@@ -4,14 +4,6 @@
 
 <div class="container prose dark:prose-invert">
     <h1 class="post-title">{{ .Title }}</h1>
-    <div class="filter-container">
-          {{ $maxCategoryToShow := $.Site.Params.maxCategoryToShow | default 5 }}
-          {{ range .Site.Taxonomies.categories.TaxonomyArray | first $maxCategoryToShow }}
-            <div class="filter-item" data-value="{{ .Page.Title }}" data-type="categories">
-              {{ .Page.Title }}<sup>{{ .Count }}</sup>
-            </div>
-          {{ end }}
-    </div>
     <section id="articles-list">
         {{ range $pages.GroupByDate "2006" }}
         <section>
