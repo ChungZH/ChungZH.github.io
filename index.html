@@ -1,10 +1,9 @@
 <!doctype html><html lang=zh-cn><head><meta name=generator content="Hugo 0.101.0"><meta charset=utf-8><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>ChungZH's Blog</title><meta property="og:site_name" content="ChungZH's Blog"><meta property="og:title" content="ChungZH's Blog"><meta itemprop=name content="ChungZH's Blog"><meta name=twitter:title content="ChungZH's Blog"><meta name=application-name content="ChungZH's Blog"><link rel="shortcut icon" href=/BlogFavicon16.png><meta name=twitter:card content="summary"><meta name=description content="Welcome to my blog!"><meta name=twitter:description content="Welcome to my blog!"><meta itemprop=description content="Welcome to my blog!"><meta property="og:description" content="Welcome to my blog!"><link rel=stylesheet href="https://blog.chungzh.cn/sass/main.min.7282f6bbf341e3d53b04c9caa46bee016e558c91f2f9e48deaa3383817abd770.css" integrity="sha256-coL2u/NB49U7BMnKpGvuAW5VjJHy+eSN6qM4OBer13A="></head><body class="bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400"><header class="sticky top-0 z-40"><div class="w-full backdrop-blur bg-white/80 dark:bg-slate-900/75 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06]"><div class="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0"><div class="px-20 relative flex flex-wrap justify-between"><div class="relative flex items-center"><a href=/><div class="flex gap-3 items-center text-xl font-bold text-slate-800 dark:text-slate-200"><img class="w-auto h-8" src=/BlogFavicon16.png title=logo>
 <span class="hover:text-sky-500 dark:hover:text-sky-400">ChungZH's Blog</span></div></a></div><div class="relative flex items-center"><div class="flex gap-5 items-center leading-6 font-semibold text-slate-700 dark:text-slate-200"><a class="hover:text-sky-500 dark:hover:text-sky-400" href=/about/>关于</a>
+<a class="hover:text-sky-500 dark:hover:text-sky-400" href=/categories/>分类</a>
 <a class="hover:text-sky-500 dark:hover:text-sky-400" href=/friends/>友链</a>
 <a class="hover:text-sky-500 dark:hover:text-sky-400" href=/archives/>存档</a>
 <a class="hover:text-sky-500 dark:hover:text-sky-400" href=/tags/>标签</a></div></div></div></div></div></header><div class="max-w-3xl mx-auto pb-28"><main class="max-w-[52rem] mx-auto py-10"><section><div class="prose prose-slate dark:prose-invert"><p>🧨 <strong>Welcome to my blog!</strong></p><p>如无特殊说明，本站内容使用 <a href=https://creativecommons.org/licenses/by-nc-sa/2.5/cn/>CC BY-NC-SA 2.5</a></p></div></section><section class=mt-10><div class="flex items-center gap-5"><p class=latest-art>Latest Articles</p><a class=view-more href=/archives/>View all</a></div><div class=pb-5><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/centroid-decomposition/><div class="flex gap-2 items-center"><time>2022/08/02</time>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>学习笔记</span>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>点分治笔记</h3><div class=entry-content><p>点分治，外国人称之为 Centroid decomposition，重心分解。
 何为树的重心 学习重心分解之前，自然要先了解重心。
@@ -21,8 +20,6 @@
 寻找树的重心 根据重心的定义，先以 $1$ 为根进行 DFS。在递归中计算子树大小 $siz[u]$，并求出最大的子树的大小 $maxs[u]$，比较出重心 $centroid$。
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 void getCentroid(int u, int fa, int s) { siz[u] = 1; maxs[u] = 0; for (int i = head[u]; i !...</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/hugo-klay/><div class="flex gap-2 items-center"><time>2022/07/25</time>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>瞎搞开发</span>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>第一次做主题：hugo-klay</h3><div class=entry-content><p>上一次折腾博客已经是不知道什么时候的事情了。。
 Hugo 这个框架很不错，不想更换，那就尝试做一个主题吧。
 Hugo-klay 这个名字取自我最喜欢的 NBA 球员 Klay Thompson，不久前他随金州勇士队夺得了 2021-2022 赛季的 NBA 总冠军。
@@ -30,15 +27,11 @@ Hugo-klay 这个名字取自我最喜欢的 NBA 球员 Klay Thompson，不久前
 就像前面说的那样，这个主题的代码质量比较差，而且主要也是自己使用，所以暂时不会单独为这个主题开一个 repo。如果你想参考，也可以到 ChungZH.github.io 这里寻找源码。有时间 的话，我会整理一下代码，再考虑单独分成一个项目。
 自我感觉还是挺漂亮的，哈哈哈。</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/int-vs-longlong/><div class="flex gap-2 items-center"><time>2022/07/22</time>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>学习笔记</span>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>关于 int 与 long long 的运算速度</h3><div class=entry-content><p>前言 写一道 CF 题的时候，算法明明是正确的，却一直都 TLE。最后把一个 long long 类型的数组改成了 int，竟然就 AC 了。。
 这不禁引发了我的思考，int 与 long long 的运算速度不一样吗？
 不严谨测试 由于本菜鸡并没有什么计算机基础原理的知识，只好做了一个测试。当然，这个测试其实很不严谨，没有很大的参考价值。我也就图一乐，哈哈哈哈哈
 测试环境 电脑：Lenovo Yoga 14sACH 2021 系统：Windows 11 25163.1010 CPU：AMD Ryzen 7 5800H with Radeon Graphics (16) @ 3.200GHz RAM：16.0 GB 编译器：GCC 11.2.0 代码 仅仅是为了图一乐， 我第一次使用了 Google Benchmark 这一工具。其实挺好上手的。
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 #include &lt;benchmark/benchmark....</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/treap/><div class="flex gap-2 items-center"><time>2022/02/09</time>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>学习笔记</span>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>Treap 笔记</h3><div class=entry-content><p>Treap = Tree + Heap
 二叉搜索树（BST） 在学习 Treap 之前，需要先了解一下二叉搜索树（BST, Binary Search Tree）：
@@ -49,8 +42,6 @@ Treap 顾名思义，Treap 是树和堆的结合。它的数据结构既是一�
 在 Treap 的每个结点中，除了 $key$ 值，还要保存一个 $fix$（更常见的是 $priority$）值。这个值是随机值，以它为依据来同时建立最大堆（或最小堆）。因为 $fix$ 值是随机的，所以可以让这棵树更加平衡，高度更接近 $O(\log n)$。它的各种操作期望时间复杂度都是 $O(\log n)$。
 旋转式 Treap 旋转式 Treap 的常数较小。
 旋转 左旋/右旋操作不会破坏 BST 的性质，并可以通过它来维护堆，使树平衡。...</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/goodbye2021/><div class="flex gap-2 items-center"><time>2021/12/31</time>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>生活</span>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>告别 2021</h3><div class=entry-content><p>这一年还是收获满满的。
 OI 上半年去了 GDOI 观摩神仙打架，长了见识。
@@ -63,8 +54,6 @@ CSP-J 2021 1=，挺满意的。
 生活 爱上了 🏓 乒乓球，买了一个五百多的拍子，奢侈了一把，真爽（
 对运动的热情高涨了很多。
 总之，希望在新的一年，一切都会更好！</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/csp2021/><div class="flex gap-2 items-center"><time>2021/10/23</time>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>游记</span>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>CSP-J 2021 游记</h3><div class=entry-content><p>CSP-J/S 认证注意事项：
 ……
@@ -93,8 +82,6 @@ UPD 1 (2021/10/23 22:50)：
 广东源代码出了。
 candy: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;bits/stdc++....</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/segment-tree/><div class="flex gap-2 items-center"><time>2021/08/04</time>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>学习笔记</span>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>线段树笔记</h3><div class=entry-content><p>线段树是一种高端的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/…，适用于大规模的区间统计。
 如下图就是一棵线段树。在结点中，你可以存对应区间的最大值，最小值，总和等等。
 对于每一个结点 $i$，它的两个子结点分别是 $2i$ 和 $2i+1$。因此，在开树的数组时，最好要开到 $4N$ 的大小。
@@ -102,8 +89,6 @@ candy: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;bits/stdc++....</p
 建树 下面是一个求区间和的线段树的建树代码。
 通过 DFS 建树，到叶结点，然后一路回溯求出和。
 1 2 3 4 5 6 7 8 9 10 11 12 13 void build_tree(int cur, int left, int right) { // cur 为当前树的根，[left, right] 是当前树对应的区间 if (left == right) { // 到叶子节点了，区间长度为 1，总和就是它本身 tree[cur] = a[left]; return ; } int leftSon = cur*2, rightSon = leftSon+1; int mid = (left+right)/2; build_tree(leftSon, left, mid); build_tree(rightSon, mid+1, right); tree[cur] = tree[leftSon]+tree[rightSon]; // 求和 } 这里求 leftSon，rightSon，mid 的模式在线段树的所有操作中都会用到。...</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/ilovesmes/><div class="flex gap-2 items-center"><time>2021/07/17</time>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>生活</span>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>我所热爱的，就是这所学校</h3><div class=entry-content><p>*** 你 * 什么时候 * 啊？
 好不容易才从期末的阴霾中摆脱，欢乐地进入了暑假。
@@ -128,14 +113,10 @@ candy: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;bits/stdc++....</p
 *** 你 * 什么时候 * 啊？
 不管怎样，我还是很尊重带我们的各科老师。不可否认的是，你们都很有责任心，一直陪着我们加班。感谢你们！</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/hello-hugo/><div class="flex gap-2 items-center"><time>2021/07/16</time>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>瞎搞开发</span>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>Hello Hugo!</h3><div class=entry-content><p>暑假来了，顺便把博客更新一下。
 从以前的 Vuepress 变成了 Hugo，速度真的快了很多，不愧是 “The world’s fastest”。用的主题是 Tania，很简洁、漂亮。Hugo 非常易用，不到半天就完整迁移过来了。我可以很肯定地说这一次博客迁移是有史以来最快的一次。
 CI 用的是 GitHub Actions:
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 name: github pages on: push: branches: - hugo # Set a branch to deploy pull_request: jobs: deploy: runs-on: ubuntu-20.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for ....</p></div><div class="flex items-center text-sm text-sky-500 font-medium"><span class="relative text-sm text-sky-500 font-medium">Read more</span><svg class="relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0 3 3 0 6"/></svg></div></a></div></article><article class="post-entry relative group"><div class=post-entry-bg></div><div class=relative><a href=/articles/csp-j-2020/><div class="flex gap-2 items-center"><time>2020/11/14</time>
-<span class="font-bold text-sky-500 dark:text-sky-400">·</span>
-<span>游记</span>
 <span class="font-bold text-sky-500 dark:text-sky-400">·</span>
 <span>ChungZH</span></div><h3 class=entry-title>CSP-J 2020 游记</h3><div class=entry-content><p>他山之石，可以攻玉。
 CSP-J1 入学你校几乎两个月都在搞初赛。

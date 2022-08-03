@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数据结构 on ChungZH's Blog</title><link>https://blog.chungzh.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link><description>Recent content in 数据结构 on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml"/><item><title>点分治笔记</title><link>https://blog.chungzh.cn/articles/centroid-decomposition/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/centroid-decomposition/</guid><description>点分治，外国人称之为 Centroid decomposition，重心分解。
+何为树的重心 学习重心分解之前，自然要先了解重心。
+下面统一用 $n$ 表示树上结点的个数。
+在一棵树中，如果删除一个顶点后得到的最大子树的顶点数最少，那么这个点就是树的重心（Centroid）。
+重心的性质：
+删除重心后得到的所有子树，其顶点数必然不超过 $n/2$。
+证明：选取任意顶点作为起点，每次都沿着边向最大子树的方向移动，最终一定会到达某个顶点，将其删除后得到的所有子树的顶点数都不超过 $n/2$。如果这样的点存在的话，那么也就可以证明删除重心后得到的所有子树的顶点数都不超过 $n/2$。
+记当前顶点为 $v$，如果顶点 $v$ 已经满足上述条件则停止。否则，与顶点 $v$ 邻接的某个子树的顶点数必然大于 $n/2$。假设顶点 $v$ 与该子树中的顶点 $w$ 邻接，那么我们就把顶点 $w$ 作为新的顶点 $v$。不断重复这一步骤，必然会在有限步停止。这是因为对于移动中所用的边 $(v, w)$，必有 $v$ 侧的子树的顶点数小于 $n/2$，$w$ 侧的子树的顶点数大于 $n/2$，所以不可能再从 $w$ 移动到 $v$。因而该操作永远不会回到已经经过的顶点，而顶点数又是有限的，所以算法必然在有限步终止。
+树中所有顶点到某个顶点的距离和中，到重心的距离和是最小的；如果有两个重心，那么到它们的距离和一样。
+把两棵树通过一条边相连得到一棵新的树，那么新的树的重心在连接原来两棵树的重心的路径上。
+在一棵树上添加或删除一个叶子，那么它的重心最多只移动一条边的距离。
+更多证明请见：树的重心的性质及其证明 - suxxsfe - 博客园 (cnblogs.com)
+寻找树的重心 根据重心的定义，先以 $1$ 为根进行 DFS。在递归中计算子树大小 $siz[u]$，并求出最大的子树的大小 $maxs[u]$，比较出重心 $centroid$。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 void getCentroid(int u, int fa, int s) { siz[u] = 1; maxs[u] = 0; for (int i = head[u]; i !</description></item><item><title>Treap 笔记</title><link>https://blog.chungzh.cn/articles/treap/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/treap/</guid><description>Treap = Tree + Heap
+二叉搜索树（BST） 在学习 Treap 之前，需要先了解一下二叉搜索树（BST, Binary Search Tree）：
+设 $x$ 是二叉搜索树中的一个结点。如果 $y$ 是 $x$ 左子树中的一个结点，那么 $y.key \lt x.key$。如果 $y$ 是 $x$ 右子树中的一个结点，那么 $y.key \gt x.key$。
+BST 上的基本操作所花费的时间与这棵树的高度成正比。对于一个有 $n$ 个结点的二叉搜索树中，这些操作的最优时间复杂度为 $O(\log n)$，最坏为 $O(n)$。随机构造这样一棵二叉搜索树的期望高度为 $O(\log n)$。然而，当这棵树退化成链时，则同样的操作就要花费 $O(n)$ 的最坏运行时间。
+由于普通 BST 容易退化，对于它的实现就不再赘述。在实践中需要使用如 Treap 这样的平衡二叉搜索树。
+Treap 顾名思义，Treap 是树和堆的结合。它的数据结构既是一个二叉搜索树，又是一个二叉堆。
+在 Treap 的每个结点中，除了 $key$ 值，还要保存一个 $fix$（更常见的是 $priority$）值。这个值是随机值，以它为依据来同时建立最大堆（或最小堆）。因为 $fix$ 值是随机的，所以可以让这棵树更加平衡，高度更接近 $O(\log n)$。它的各种操作期望时间复杂度都是 $O(\log n)$。
+旋转式 Treap 旋转式 Treap 的常数较小。
+旋转 左旋/右旋操作不会破坏 BST 的性质，并可以通过它来维护堆，使树平衡。</description></item><item><title>线段树笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>线段树是一种高端的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。
+如下图就是一棵线段树。在结点中，你可以存对应区间的最大值，最小值，总和等等。
+对于每一个结点 $i$，它的两个子结点分别是 $2i$ 和 $2i+1$。因此，在开树的数组时，最好要开到 $4N$ 的大小。
+关于 $4N$，详见 OI-Wiki。
+建树 下面是一个求区间和的线段树的建树代码。
+通过 DFS 建树，到叶结点，然后一路回溯求出和。
+1 2 3 4 5 6 7 8 9 10 11 12 13 void build_tree(int cur, int left, int right) { // cur 为当前树的根，[left, right] 是当前树对应的区间 if (left == right) { // 到叶子节点了，区间长度为 1，总和就是它本身 tree[cur] = a[left]; return ; } int leftSon = cur*2, rightSon = leftSon+1; int mid = (left+right)/2; build_tree(leftSon, left, mid); build_tree(rightSon, mid+1, right); tree[cur] = tree[leftSon]+tree[rightSon]; // 求和 } 这里求 leftSon，rightSon，mid 的模式在线段树的所有操作中都会用到。</description></item></channel></rss>
