@@ -6,7 +6,7 @@ tags:
 - Windows
 - 时间
 author: ChungZH
-location: Foshan
+category: 瞎搞开发
 summary: 测量可测量之物，将不可测量之物变为可测量。——伽利略
 vssue-title: cpp-get-time
 ---

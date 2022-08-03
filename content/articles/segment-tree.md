@@ -4,7 +4,7 @@ tags:
 - OI
 - 数据结构与算法
 - 线段树
-category: OI
+category: 学习笔记
 date: 2021-08-04
 author: ChungZH
 katex: true

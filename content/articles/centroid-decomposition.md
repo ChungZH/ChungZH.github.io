@@ -5,7 +5,7 @@ tags:
 - 数据结构与算法
 - 树的重心
 - 点分治
-category: OI
+category: 学习笔记
 date: 2022-08-02
 katex: true
 ---

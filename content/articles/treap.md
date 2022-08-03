@@ -4,7 +4,7 @@ tags:
 - OI
 - 数据结构与算法
 - Treap
-category: OI
+category: 学习笔记
 date: 2022-02-09
 katex: true
 ---

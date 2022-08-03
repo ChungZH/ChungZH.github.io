@@ -4,9 +4,8 @@ tags:
   - C++
 date: 2020-02-21 11:45:00
 author: ChungZH
-location: Foshan
+category: 瞎搞开发
 summary: 优雅地用 C++ 做表格！
-vssue-title: tabulate
 ---
 
 ## 0x00 介绍 tabulate
