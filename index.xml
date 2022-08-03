@@ -1,4 +1,431 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>第一次做主题：hugo-klay</title><link>https://blog.chungzh.cn/articles/hugo-klay/</link><pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/hugo-klay/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>点分治笔记</title><link>https://blog.chungzh.cn/articles/centroid-decomposition/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/centroid-decomposition/</guid><description>
+&lt;p>点分治，外国人称之为 Centroid decomposition，重心分解。&lt;/p>
+&lt;h2 id="何为树的重心">
+&lt;a href="#%e4%bd%95%e4%b8%ba%e6%a0%91%e7%9a%84%e9%87%8d%e5%bf%83" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+何为树的重心
+&lt;/h2>&lt;p>学习重心分解之前，自然要先了解重心。&lt;/p>
+&lt;p>下面统一用 $n$ 表示树上结点的个数。&lt;/p>
+&lt;p>在一棵树中，如果删除一个顶点后得到的最大子树的顶点数最少，那么这个点就是&lt;strong>树的重心&lt;/strong>（Centroid）。&lt;/p>
+&lt;p>重心的性质：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>删除重心后得到的所有子树，其顶点数必然不超过 $n/2$。&lt;/p>
+&lt;p>证明：选取任意顶点作为起点，每次都沿着边向最大子树的方向移动，最终一定会到达某个顶点，将其删除后得到的所有子树的顶点数都不超过 $n/2$。如果这样的点存在的话，那么也就可以证明删除重心后得到的所有子树的顶点数都不超过 $n/2$。&lt;/p>
+&lt;p>记当前顶点为 $v$，如果顶点 $v$ 已经满足上述条件则停止。否则，与顶点 $v$ 邻接的某个子树的顶点数必然大于 $n/2$。假设顶点 $v$ 与该子树中的顶点 $w$ 邻接，那么我们就把顶点 $w$ 作为新的顶点 $v$。不断重复这一步骤，必然会在有限步停止。这是因为对于移动中所用的边 $(v, w)$，必有 $v$ 侧的子树的顶点数小于 $n/2$，$w$ 侧的子树的顶点数大于 $n/2$，所以不可能再从 $w$ 移动到 $v$。因而该操作永远不会回到已经经过的顶点，而顶点数又是有限的，所以算法必然在有限步终止。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>树中所有顶点到某个顶点的距离和中，到重心的距离和是最小的；如果有两个重心，那么到它们的距离和一样。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>把两棵树通过一条边相连得到一棵新的树，那么新的树的重心在连接原来两棵树的重心的路径上。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>在一棵树上添加或删除一个叶子，那么它的重心最多只移动一条边的距离。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>更多证明请见：&lt;a href="https://www.cnblogs.com/suxxsfe/p/13543253.html">树的重心的性质及其证明 - suxxsfe - 博客园 (cnblogs.com)&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="寻找树的重心">
+&lt;a href="#%e5%af%bb%e6%89%be%e6%a0%91%e7%9a%84%e9%87%8d%e5%bf%83" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+寻找树的重心
+&lt;/h2>&lt;p>根据重心的定义，先以 $1$ 为根进行 DFS。在递归中计算子树大小 $siz[u]$，并求出最大的子树的大小 $maxs[u]$，比较出重心 $centroid$。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">void&lt;/span> &lt;span style="color:#75af00">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">fa&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">head&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">];&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">nxt&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>    &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">to&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#111">fa&lt;/span>&lt;span style="color:#111">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>      &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>    &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">to&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>    &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">to&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>    &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">max&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">to&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// “向上” 的部分也是该结点的子树
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>  &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">max&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">s&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">centroid&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">main&lt;/span>&lt;span style="color:#111">()&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#111">centroid&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>  &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>提交：&lt;a href="https://cses.fi/problemset/task/2079">CSES - Finding a Centroid&lt;/a>&lt;/p>
+&lt;h2 id="点分治">
+&lt;a href="#%e7%82%b9%e5%88%86%e6%b2%bb" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+点分治
+&lt;/h2>&lt;p>我们可以用点分治解决关于统计树上路径的问题。&lt;/p>
+&lt;h3 id="例一">
+&lt;a href="#%e4%be%8b%e4%b8%80" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+例一
+&lt;/h3>&lt;blockquote>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3806">Luogu P3806【模板】点分治 1&lt;/a>：给定一棵有 $n$ 个点的带边权树，$m$ 次询问，每次询问给出 $k$，询问树上距离为 $k$ 的点对是否存在。&lt;/p>
+&lt;p>$n\le 10000,m\le 100,k\le 10000000$&lt;/p>
+&lt;/blockquote>
+&lt;p>暴力的做法至少需要 $O(n^{2})$，显然会超时，所以考虑分治。&lt;/p>
+&lt;p>如何分割呢？如果随意选择顶点的话，递归的深度可能退化成 $O(n)$。若我们每次选择子树的&lt;strong>重心&lt;/strong>作为新的根结点，可以让递归的层数最少。因为每次树的大小至少减半，所以递归的深度是 $O(log n)$。&lt;/p>
+&lt;p>设当前的根结点是 $rt$。&lt;/p>
+&lt;p>对于每一条路径 $(u, v)$，必然满足以下三种情况之一：&lt;/p>
+&lt;ol>
+&lt;li>顶点 $u, v$ 在 $rt$ 的同一子树内。&lt;/li>
+&lt;li>顶点 $u, v$ 分别在 $rt$ 的不同子树内。&lt;/li>
+&lt;li>顶点 $u, v$ 其中一个是 $rt$。&lt;/li>
+&lt;/ol>
+&lt;p>对于第 (1) 种情况，可以递归后转化成另外的情况。对于第 (2) 种情况，从顶点 $u$ 到顶点 $v$ 的路径必然经过根结点 $rt$，只要求出每个顶点到 $rt$ 的距离，就可以统计出答案。对于第 (3) 种情况，可以添加一个到 $rt$ 距离为 $0$ 的顶点，就转化为了第 (2) 种情况。&lt;/p>
+&lt;p>需要注意的是，在第 (1) 种情况中统计的同一子树的顶点对，要避免在第 (2) 种情况中被重复统计。通过&lt;strong>容斥&lt;/strong>和类似于&lt;strong>树上背包&lt;/strong>的方法可以去重。&lt;/p>
+&lt;p>最后的时间复杂度是 $O(nlog^{2}n)$。&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/record/82315924">RECORD&lt;/a>。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">m&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">p&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">bool&lt;/span> &lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXN&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXW&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">ans&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXM&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">ask&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXM&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">vector&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#111">pair&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXN&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXN&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXN&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">MAXN&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">void&lt;/span> &lt;span style="color:#75af00">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">fa&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">auto&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#111">fa&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#111">max&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#f92672">::&lt;/span>&lt;span style="color:#111">max&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">s&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">maxs&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">!&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">centroid&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 获取子树中所有点到重心的距离
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">void&lt;/span> &lt;span style="color:#75af00">getDis&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">fa&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">d&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">p&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">d&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">auto&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#111">fa&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getDis&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">d&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">second&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">void&lt;/span> &lt;span style="color:#75af00">calc&lt;/span>&lt;span style="color:#111">()&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">L&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">p&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 类似于树上背包
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">auto&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getDis&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">second&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 一棵一棵子树合并，不会重复统计
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">p&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">m&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#111">ask&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">ans&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">|=&lt;/span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">ask&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">p&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">L&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">p&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 还原 cnt 数组
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">p&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cnt&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#75715e">// 不能用 memset
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">void&lt;/span> &lt;span style="color:#75af00">solve&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">centroid&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">);&lt;/span> &lt;span style="color:#75715e">// 再求一次 siz，防止后面找重心时出错
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">true&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">calc&lt;/span>&lt;span style="color:#111">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">auto&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">solve&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">main&lt;/span>&lt;span style="color:#111">()&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">solve&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">m&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">ans&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#d88200">&amp;#34;AYE&lt;/span>&lt;span style="color:#8045ff">\n&lt;/span>&lt;span style="color:#d88200">&amp;#34;&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">else&lt;/span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#d88200">&amp;#34;NAY&lt;/span>&lt;span style="color:#8045ff">\n&lt;/span>&lt;span style="color:#d88200">&amp;#34;&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>需要注意的细节&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>分治的时候求出新的重心之后，也要&lt;strong>再次&lt;/strong>求子树 $siz$。&lt;/p>
+&lt;p>详见：&lt;a href="https://liu-cheng-ao.blog.uoj.ac/blog/2969">一种基于错误的寻找重心方法的点分治的复杂度分析 - 博客 - liu_cheng_ao的博客 (uoj.ac)&lt;/a>&lt;/p>
+&lt;p>账号 &lt;code>920848348&lt;/code> 评论：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/ChungZH/img/main/centroid-decomposition/graph.png" alt="graph">&lt;/p>
+&lt;blockquote>
+&lt;p>对于大部分点分治的代码中，不能直接 &lt;code>size = siz[v]&lt;/code>，否则会导致后面的重心求错（可以用下面的样例试一下，然后输出重心节点看一下，你会发现从 $6$-&amp;gt;$3$ 这一大块的重心应该是 $2$，而代码输出是 $1$。原因在于：&lt;/p>
+&lt;p>由于一开始从 点 $1$ 开始找整棵树的重心，此时的 $siz[u]$ 表示的仅仅是以 1 为根结点的树中，$u$ 的子树大小。那么现在重心 $root$ 找到了，那么从这整棵树的重心 $root$ 开始深搜时，若有边 $root$-&amp;gt;$v$ ，而此时的 $siz[v]$ 的值并不是以 $v$ 为根的子树的大小（这个子树当然不包括父亲 $root$ 那一块）。具体为什么，这里给一组样例，大家可以在图中画一下。
+此样例的对应题目为 &lt;a href="https://www.luogu.com.cn/problem/P3806">Luogu P3806【模板】点分治 1&lt;/a>。&lt;/p>
+&lt;p>然后我们一步一步来：&lt;/p>
+&lt;p>先从 $1$ 开始 dfs ，统计 $siz$ 数组，此时很清晰的知道 $siz[3] = 7$ ，因为是以 $1$ 为根深搜的。很明显，一开始这整棵树的重心是 6 号节点，那么接下来，我们可以发现：&lt;/p>
+&lt;p>当从点 $6$ 开始 dfs 时，有 $6$-&amp;gt;$3$ 这条边，那么按理来说，$size = siz[3]$，此时 $size$ 表示的是以 $3$ 为根的子树的大小，可看图上明明是 $5$ 啊（在点 $3$ 的左边，不包含点 $6$ 那边）。可是此时的 $siz[3]$ 为 $7$，而并非是 $5$ 。这是由于选定的深搜节点不同，统计的不同而导致的。$siz[3]$ 的正确值理应来自于从 点 $6$ 开始深搜的值。
+故我们可以得出结论，用 &lt;code>getroot(1,0)&lt;/code> 找到整棵树的重心之后，再来一次 &lt;code>getroot(root, 0)&lt;/code>，来确定以重心为根结点时的 $siz$ 数组。这下就可以直接 &lt;code>size = siz[v]&lt;/code> 了。&lt;/p>
+&lt;/blockquote>
+&lt;pre tabindex="0">&lt;code>11 1
+6 7 1
+6 8 1
+7 9 1
+7 10 1
+8 11 1
+1 2 1
+1 3 1
+2 4 1
+2 5 1
+3 6 1
+2
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>不要用 &lt;code>memset&lt;/code> 粗暴还原，会浪费很多时间。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="例二">
+&lt;a href="#%e4%be%8b%e4%ba%8c" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+例二
+&lt;/h3>&lt;blockquote>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P4178">Luogu P4178 Tree&lt;/a>：给定一棵有 $n$ 个点的带权树，给出 $k$，询问树上距离小于等于 $k$ 的点对数量。&lt;/p>
+&lt;p>$n\le 40000,k\le 20000,w_i\le 1000$&lt;/p>
+&lt;/blockquote>
+&lt;p>这题方法比较多。下面的代码用 &lt;strong>容斥&lt;/strong> 进行去重和 &lt;strong>双指针&lt;/strong> （除此之外还可以用&lt;strong>二分&lt;/strong>）统计答案。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">calc&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">w&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">clear&lt;/span>&lt;span style="color:#111">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getDis&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">w&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">sort&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">begin&lt;/span>&lt;span style="color:#111">(),&lt;/span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">end&lt;/span>&lt;span style="color:#111">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">sum&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">L&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">R&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">()&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#75715e">// 双指针
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#00a8c8">while&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">L&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#111">R&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#111">dis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">R&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">k&lt;/span>&lt;span style="color:#111">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">sum&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#111">R&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">R&lt;/span>&lt;span style="color:#f92672">--&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">sum&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">void&lt;/span> &lt;span style="color:#75af00">solve&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">centroid&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">u&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">getCentroid&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">size&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">true&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">ans&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#111">calc&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">auto&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">ans&lt;/span> &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#111">calc&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">second&lt;/span>&lt;span style="color:#111">);&lt;/span> &lt;span style="color:#75715e">// 容斥。去除错误的答案。
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">auto&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#111">:&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">centroid&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">if&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">vis&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#00a8c8">continue&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">solve&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">siz&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">.&lt;/span>&lt;span style="color:#111">first&lt;/span>&lt;span style="color:#111">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="例三">
+&lt;a href="#%e4%be%8b%e4%b8%89" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+例三
+&lt;/h3>&lt;p>暂且咕咕咕。🕊&lt;/p>
+&lt;h2 id="习题">
+&lt;a href="#%e4%b9%a0%e9%a2%98" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+习题
+&lt;/h2>&lt;ul>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P4149">Luogu P4149 [IOI2011]Race&lt;/a>&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P3714">Luogu P3714 [BJOI2017]树的难题&lt;/a>&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> &lt;a href="https://www.luogu.com.cn/problem/P2634">Luogu P2634 [国家集训队]聪聪可可&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="参考资料">
+&lt;a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+参考资料
+&lt;/h2>&lt;ul>
+&lt;li>《挑战程序设计竞赛》&lt;/li>
+&lt;li>&lt;a href="https://oi-wiki.org/">OI Wiki&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>🙇‍&lt;/p></description></item><item><title>第一次做主题：hugo-klay</title><link>https://blog.chungzh.cn/articles/hugo-klay/</link><pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/hugo-klay/</guid><description>
 &lt;p>上一次折腾博客已经是不知道什么时候的事情了。。&lt;/p>
 &lt;p>Hugo 这个框架很不错，不想更换，那就尝试做一个主题吧。&lt;/p>
 &lt;p>Hugo-klay 这个名字取自我最喜欢的 NBA 球员 Klay Thompson，不久前他随金州勇士队夺得了 2021-2022 赛季的 NBA 总冠军。&lt;/p>
@@ -227,7 +654,7 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;blockquote>
 &lt;p>碎碎念：真的有大半年没写过博客了，上次更新还是寒假呢哈哈哈。一整个学期都好忙啊，接下来就是初三了呢。&lt;/p>
 &lt;/blockquote>
-&lt;p>🙇&lt;/p></description></item><item><title>Treap 学习笔记</title><link>https://blog.chungzh.cn/articles/treap/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/treap/</guid><description>
+&lt;p>🙇&lt;/p></description></item><item><title>Treap 笔记</title><link>https://blog.chungzh.cn/articles/treap/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/treap/</guid><description>
 &lt;blockquote>
 &lt;p>Treap = Tree + Heap&lt;/p>
 &lt;/blockquote>
@@ -1342,7 +1769,7 @@ CSP-J2
 &lt;p>目前看上去 1= 稳了。&lt;/p>
 &lt;hr>
 &lt;p>UPD 2 (2021/10/30 22:38)：&lt;/p>
-&lt;p>CCF 官方：100 + 52 + 100 + 70 = 322&lt;/p></description></item><item><title>线段树学习笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>
+&lt;p>CCF 官方：100 + 52 + 100 + 70 = 322&lt;/p></description></item><item><title>线段树笔记</title><link>https://blog.chungzh.cn/articles/segment-tree/</link><pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/segment-tree/</guid><description>
 &lt;p>线段树是一种&lt;del>高端&lt;/del>的数据结构，可以用来在区间上进行信息统计。它能够在 $O(logN)$ 的时间复杂度内实现单点/区间修改、区间找最大值/最小值/总和/&amp;hellip;，适用于大规模的区间统计。&lt;/p>
 &lt;p>如下图就是一棵线段树。在结点中，你可以存对应区间的最大值，最小值，总和等等。&lt;/p>
 &lt;p>&lt;img src="https://github.com/ChungZH/img/blob/main/segtree/segtree-1.png?raw=true" alt="线段树">&lt;/p>
