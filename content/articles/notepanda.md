@@ -4,7 +4,6 @@ tags:
     - 文本编辑器
     - Qt
     - C++
-    - 编程
 date: 2020-05-16 10:45:00
 author: ChungZH
 location: Foshan

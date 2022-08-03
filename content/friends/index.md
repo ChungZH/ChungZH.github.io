@@ -29,7 +29,3 @@ title: 友链
 - [Molink](https://mol.ink)
 - [Eritque arcus](https://eritque-arcus.tech/)
 - [Moody's](https://mooody.me)
-
-## 收藏夹 ~~单向恋~~
-
-- [Spencer Woo](https://spencerwoo.com) 

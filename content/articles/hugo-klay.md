@@ -3,8 +3,9 @@ title: 第一次做主题：hugo-klay
 tags:
 - Hugo
 - 主题
+- blog
 - tailwind
-category: front end
+category: dev
 date: 2022-07-25
 ---
 
