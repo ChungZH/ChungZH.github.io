@@ -29,3 +29,14 @@ title: 友链
 - [Molink](https://mol.ink)
 - [Eritque arcus](https://eritque-arcus.tech/)
 - [Moody's](https://mooody.me)
+
+**收藏夹**：
+
+%%%%%%
+
+- [matrix67](http://www.matrix67.com/blog/) 很多有趣的数学题
+- [Menci's OI blog](https://oi.men.ci/)
+- [M_sea](https://m-sea-blog.com/)
+- [xht37](https://www.xht37.com/)
+- [wjyyy](http://www.wjyyy.top/)
+- [Siyuan](https://blog.orzsiyuan.com/)
