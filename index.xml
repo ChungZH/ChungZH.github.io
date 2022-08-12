@@ -2023,34 +2023,7 @@ d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.
 &lt;/a>
 小结
 &lt;/h2>&lt;p>总的来说，线段树不是一个很难的数据结构，但是很实用。&lt;/p>
-&lt;p>感谢 lgj 老师！&lt;/p></description></item><item><title>我所热爱的，就是这所学校</title><link>https://blog.chungzh.cn/articles/ilovesmes/</link><pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/ilovesmes/</guid><description>
-&lt;blockquote>
-&lt;p>*** 你 * 什么时候 * 啊？&lt;/p>
-&lt;/blockquote>
-&lt;p>好不容易才从期末的阴霾中摆脱，欢乐地进入了暑假。&lt;/p>
-&lt;p>十五天的补习？不慌。十天的信息学夏令营？没事，确实对我有帮助。&lt;/p>
-&lt;p>&amp;hellip;&amp;hellip;&lt;/p>
-&lt;p>于是还是开始了美好的暑假生活。&lt;/p>
-&lt;p>不过就在今天，老师突然在群里发了一则消息：&lt;/p>
-&lt;blockquote>
-&lt;p>优秀的各位家长：&lt;/p>
-&lt;p>*** 班初定 7 月 22 日至 7 月 30 日在学校组织“夏令营”活动，请大家提前做好安排，有问题可以私信我。&lt;/p>
-&lt;/blockquote>
-&lt;p>我当场傻掉。&lt;/p>
-&lt;p>双引号加得真的好啊！&lt;/p>
-&lt;p>还有这个语气，并不是在征求意见嘛！&lt;/p>
-&lt;p>&lt;strong>妙啊！&lt;/strong>&lt;/p>
-&lt;p>不就是成绩不如其他民办学校了吗？&lt;/p>
-&lt;p>这&lt;strong>只是一天两天&lt;/strong>的事情吗？难道是我们&lt;strong>这一届&lt;/strong>太垃圾了吗？但是，&lt;strong>以前&lt;/strong>就很&lt;strong>厉害&lt;/strong>了吗？那么请问，为什么我们学校不敢宣传今年中考的成绩呢？&lt;/p>
-&lt;p>我承认我们这一届摇号进来的占多数，比以前差了点。但我还是想请问一下敬爱的领导和老师们，你们有想过&lt;strong>自己&lt;/strong>的问题吗？&lt;/p>
-&lt;p>为什么我们比其他学校花的时间都要多，成绩却还是不如人呢？是我们学生还不够努力吗？&lt;/p>
-&lt;p>我想不是。&lt;/p>
-&lt;p>从入学到现在，已经过了一年了。现在再回望入学前对这所学校的&lt;strong>憧憬&lt;/strong>、&lt;strong>期待&lt;/strong>，我觉得很不可思议。&lt;/p>
-&lt;p>现在，我校口碑已经大不如前了。如果敬爱的领导和老师们不及时悬崖勒马的话，&lt;strong>你们就赚不了钱了&lt;/strong>！&lt;/p>
-&lt;p>最后，我还是想重复开头的那句话。&lt;/p>
-&lt;p>&lt;strong>*** 你 * 什么时候 * 啊？&lt;/strong>&lt;/p>
-&lt;hr>
-&lt;p>不管怎样，我还是很尊重带我们的各科老师。不可否认的是，你们都很有责任心，一直陪着我们加班。感谢你们！&lt;/p></description></item><item><title>Hello Hugo!</title><link>https://blog.chungzh.cn/articles/hello-hugo/</link><pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/hello-hugo/</guid><description>
+&lt;p>感谢 lgj 老师！&lt;/p></description></item><item><title>Hello Hugo!</title><link>https://blog.chungzh.cn/articles/hello-hugo/</link><pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate><author>ChungZH</author><guid>https://blog.chungzh.cn/articles/hello-hugo/</guid><description>
 &lt;p>暑假来了，顺便把博客更新一下。&lt;/p>
 &lt;p>从以前的 Vuepress 变成了 Hugo，速度真的快了很多，不愧是 &amp;ldquo;The world’s fastest&amp;rdquo;。用的主题是 &lt;a href="https://github.com/WingLim/hugo-tania">Tania&lt;/a>，很简洁、漂亮。Hugo 非常易用，不到半天就完整迁移过来了。我可以很肯定地说这一次博客迁移是有史以来最快的一次。&lt;/p>
 &lt;p>CI 用的是 GitHub Actions:&lt;/p>
