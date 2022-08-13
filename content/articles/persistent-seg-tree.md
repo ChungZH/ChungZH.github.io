@@ -95,3 +95,15 @@ int main()
     return 0;
 }
 ```
+
+## 权值线段树
+
+## 可持久化权值线段树（主席树）
+
+> 主席树名称来源于其发明人黄嘉泰的姓名的首字母缩写 HJT。
+
+## 参考资料
+
+- [算法学习笔记(49): 线段树的拓展 - Pecco](https://zhuanlan.zhihu.com/p/246255556)
+- [算法学习笔记(50): 可持久化线段树 - Pecco](https://zhuanlan.zhihu.com/p/250565583)
+- [数据结构 线段树--权值线段树 详解 - HeartFireY](https://blog.csdn.net/yanweiqi1754989931/article/details/117380913)
