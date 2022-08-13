@@ -1,4 +1,343 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>点分治笔记</title><link>https://blog.chungzh.cn/articles/centroid-decomposition/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/centroid-decomposition/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChungZH's Blog</title><link>https://blog.chungzh.cn/</link><description>Recent content on ChungZH's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 13 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.chungzh.cn/index.xml" rel="self" type="application/rss+xml"/><item><title>斜率优化 DP 笔记</title><link>https://blog.chungzh.cn/articles/slope-opt-dp/</link><pubDate>Sat, 13 Aug 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/slope-opt-dp/</guid><description>
+&lt;h2 id="例题-hnoi2008玩具装箱">
+&lt;a href="#%e4%be%8b%e9%a2%98-hnoi2008%e7%8e%a9%e5%85%b7%e8%a3%85%e7%ae%b1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+例题 [HNOI2008]玩具装箱
+&lt;/h2>&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3195">Luogu&lt;/a> &lt;a href="https://loj.ac/p/10188">LOJ&lt;/a>&lt;/p>
+&lt;h3 id="题目描述">
+&lt;a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+题目描述
+&lt;/h3>&lt;p>P 教授要去看奥运，但是他舍不下他的玩具，于是他决定把所有的玩具运到北京。他使用自己的压缩器进行压缩，其可以将任意物品变成一堆，再放到一种特殊的一维容器中。&lt;/p>
+&lt;p>P 教授有编号为 $1 \cdots n$ 的 $n$ 件玩具，第 $i$ 件玩具经过压缩后的一维长度为 $C_i$。&lt;/p>
+&lt;p>为了方便整理，P 教授要求：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>在一个一维容器中的玩具编号是连续的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>同时如果一个一维容器中有多个玩具，那么两件玩具之间要加入一个单位长度的填充物。形式地说，如果将第 $i$ 件玩具到第 $j$ 个玩具放到一个容器中，那么容器的长度将为 $x=j-i+\sum\limits_{k=i}^{j}C_k$。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>制作容器的费用与容器的长度有关，根据教授研究，如果容器长度为 $x$，其制作费用为 $(x-L)^2$。其中 $L$ 是一个常量。P 教授不关心容器的数目，他可以制作出任意长度的容器，甚至超过 $L$。但他希望所有容器的总费用最小。&lt;/p>
+&lt;p>$1 \leq n \leq 5 \times 10^4$，$1 \leq L \leq 10^7$，$1 \leq C_i \leq 10^7$。&lt;/p>
+&lt;h3 id="朴素-dp-做法">
+&lt;a href="#%e6%9c%b4%e7%b4%a0-dp-%e5%81%9a%e6%b3%95" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+朴素 DP 做法
+&lt;/h3>&lt;p>令状态 $f(i)$ 表示把前 $i$ 个玩具装箱的最小费用，$s(i)$ 为 $c_i$ 的前缀和。&lt;/p>
+&lt;p>假如将玩具 $j$ 到 $i$ 装在同一箱子，容易列出状态转移方程 $f(i) = \min_{1\le j\le i}{f(j-1)+(i-j+s(i)-s(j-1)-L)^2}$。&lt;/p>
+&lt;p>直接算的话时间复杂度是 $O(n^2)$，超时。&lt;/p>
+&lt;h3 id="优化">
+&lt;a href="#%e4%bc%98%e5%8c%96" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+优化
+&lt;/h3>&lt;p>在计算过程中，$i, s(i), L$ 这些项是已知的，而含有 $j$ 的项如 $f(j-1), j, s(j-1)$ 都是未知的。展开平方式，进行参数分离，定义 $g(i) = i+s(i)-L$，$x(j) = j+s(j-1)$。可选决策 $j$ 的费用记为 $f(i)_j$，则有&lt;/p>
+&lt;p>$$
+f(i)_j = f(j-1)+(g(i)-x(j))^2 = f(j-1) + g(i)^2 - 2 \times g(i) \times x(j) + x(j)^2
+$$&lt;/p>
+&lt;p>式子中 $f(j-1), g(i)^2, x(j)^2$ 这三项中 $i$ 与 $j$ 这两个参数完全分离，但 $2 \times g(i) \times x(j)$ 却没有分离，不像普通单调队列优化的题目那样 「$j_2 &amp;gt; j_1, f(i)&lt;em>{j&lt;/em>{2}} &amp;lt; f(i)&lt;em>{j&lt;/em>{1}}$，$j_1$ 就可以删除」这么明显的单调性，需要深入分析。&lt;/p>
+&lt;p>&lt;strong>研究 $j_2 &amp;gt; j_1$ 时 $f(i)&lt;em>{j&lt;/em>{2}} &amp;lt; f(i)&lt;em>{j&lt;/em>{1}}$ 即「决策 $j_2$ 优于 决策 $j_1$」的前提条件&lt;/strong>：&lt;/p>
+&lt;p>$$
+f(j_2-1) + g(i)^2 - 2 \times g(i) \times x(j_2) + x(j_2)^2 &amp;lt; f(j_1-1) + g(i)^2 - 2 \times g(i) \times x(j_1) + x(j_1)^2
+\
+(f(j_2-1) + x(j_2)^2) - (f(j_1-1) + x(j_1)^2) &amp;lt; 2 \times g(i) \times (x(j_2) - x(j_1))
+$$&lt;/p>
+&lt;p>再令 $y(i) = f(i-1)+x(i)^2$，因 $x(i) = i+s(i-1)$ 是单调递增的，所以 $x(j_2)-x(j_1) &amp;gt; 0$，所以有&lt;/p>
+&lt;p>$$
+\frac{y(j_2) - y(j_1)}{x(j_2)-x(j_1)} &amp;lt; 2 \times g(i)
+$$&lt;/p>
+&lt;p>上面式子像 $j_1, j_2$ 两个点形成的斜率，于是用 &lt;strong>斜率优化&lt;/strong>。&lt;/p>
+&lt;p>&lt;strong>斜率优化&lt;/strong>：计算 $f(i)$ 时，可选决策 $j_2 &amp;gt; j_1$，如果 $j_2$ 比 $j_1$ 优，令 $T(j_1, j_2) = \frac{y(j_2)-y(j_1)}{x(j_2)-x(j_1)}$，则必须满足 $T(j_1, j_2) &amp;lt; 2 \times g(i)$。&lt;/p>
+&lt;p>该题 $x(i), g(i)$ 都是单调上升的。下面有两个重要结论：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>计算 $f(i)$ 时，所有可选决策是 $1, \cdots, i$，可以删除其中的冗余决策，使得队列中从小到大依次存储有价值的可选决策 $j_1, j_2, \cdots, j_k$，使得这些相邻决策之间的斜率都要大于 $2 \times g(i)$。即： $T(j_1, j_2) &amp;gt; 2 \times g(i), T(j_2, j_3) &amp;gt; 2 \times g(i), \cdots, T(j_{k-1}, j_k) &amp;gt; 2 \times g(i)$。最优决策是队首元素 $j_1$。&lt;/p>
+&lt;p>证明：如果队列中相邻两个决策 $x, y$ 之间的斜率 $T(x, y) &amp;lt; 2 \times g(i)$，由于 $g(i)$ 是单调增的，则对于后面的 $i_1(i_1 &amp;gt; i)$，计算 $f(i_1)$ 时，有：$T(x, y) &amp;lt; 2 \times g(i) &amp;lt; 2 \times g(i_1)$，所以 $y$ 永远比 $x$ 优，$x$ 可以删除。所以 $T(j_1, j_2) &amp;gt; 2 \times g(i), T(j_2, j_3) &amp;gt; 2 \times g(i), \cdots, T(j_{k-1}, j_k) &amp;gt; 2 \times g(i)$。则对于 $f(i)$ 来说，$j_1$ 比 $j_2$ 优，$j_2$ 比 $j_3$ 优，&amp;hellip;，$j_{k-1}$ 比 $j_k$ 优，所以&lt;strong>队首 $j_1$ 是最优的&lt;/strong>。并且在 $f(i+1)$ 时可以在之前维护的队列基础上加入新的决策 $i+1$，再继续维护。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>可以维护相邻决策之间的斜率单调增。&lt;/p>
+&lt;p>证明：设队列中三个相邻决策 $j_1, j_2, j_3$，假设出现相邻斜率单调递减的情况，即 $T(j_1, j_2) &amp;gt; T(j_2, j_3)$，分析 $j_2$ 有没有可能在计算 $f$ 的过程中成为最优决策。&lt;/p>
+&lt;p>$$
+j_2 比 j_1 优 \Rightarrow T(j_1, j_2) &amp;lt; 2 \times g(i)
+\
+j_2 比 j_3 优 \Rightarrow T(j_2, j_3) &amp;gt; 2 \times g(i)
+\
+T(j_1, j_2) &amp;lt; 2 \times g(i) &amp;lt; T(j_2, j_3)
+$$&lt;/p>
+&lt;p>矛盾。所以 $j_2$ 不可能成为最优决策，可以删除。得证。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>综上：&lt;/p>
+&lt;ol>
+&lt;li>应该维护队列中相邻决策满足：$2 \times g(i) &amp;lt; T(j_1, j_2) &amp;lt; T(j_2, j_3) &amp;lt; \cdots &amp;lt; T(j_{k-1}, j_k)$。&lt;/li>
+&lt;li>最优决策取队首元素。&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>程序实现&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>删尾&lt;/strong>：要插入新的可选决策 $i$，每次选队列最后两个决策 $j_{k-1}, j_k$，如果 $T(j_{k-1}, j_k) &amp;gt; T(j_k, i)$，则删除队尾元素 $j_k$。循环做下去，直到队列中的元素个数小于 $2$ 或者 $T(j_{k-1}, j_k)&amp;lt;T(j_k, i)$；&lt;/li>
+&lt;li>&lt;strong>插入&lt;/strong>：把新的可选决策 $i$ 加入队尾；&lt;/li>
+&lt;li>&lt;strong>删头&lt;/strong>：取队首两个决策 $j_1, j_2$，如果 $T(j_1, j_2) &amp;lt; 2 \times g(i)$，则删除队首元素 $j_1$。如此循环下去，直到队列中元素个数小于 $2$ 或者 $T(j_1, j_2) &amp;gt; 2 \times g(i)$；&lt;/li>
+&lt;li>&lt;strong>取头&lt;/strong>：最优决策在队首。&lt;/li>
+&lt;/ol>
+&lt;p>时间复杂度是 $O(n)$。&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/record/83528457">RECORD&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;bits/stdc++.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">using&lt;/span> &lt;span style="color:#00a8c8">namespace&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#define LL long long
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">50050&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">50050&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">head&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">50050&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#75af00">x&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">];&lt;/span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#75af00">y&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#111">x&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">)&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#111">x&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">);&lt;/span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#75af00">g&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">double&lt;/span> &lt;span style="color:#75af00">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">double&lt;/span>&lt;span style="color:#111">)(&lt;/span>&lt;span style="color:#111">y&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">y&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">))&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">x&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">x&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#75af00">cost&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">abs&lt;/span>&lt;span style="color:#111">((&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">)&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">main&lt;/span>&lt;span style="color:#111">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">n&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">L&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">head&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">tail&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">while&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">head&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#111">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#111">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">))&lt;/span> &lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#f92672">--&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">while&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">head&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">tail&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#111">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">head&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">head&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">))&lt;/span> &lt;span style="color:#111">head&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">head&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#111">cost&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">head&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">endl&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="例题-apio2010-特别行动队">
+&lt;a href="#%e4%be%8b%e9%a2%98-apio2010-%e7%89%b9%e5%88%ab%e8%a1%8c%e5%8a%a8%e9%98%9f" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+例题 [APIO2010] 特别行动队
+&lt;/h2>&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3628">Luogu&lt;/a> &lt;a href="https://loj.ac/p/10190">LOJ&lt;/a>&lt;/p>
+&lt;h3 id="题目描述-1">
+&lt;a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0-1" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+题目描述
+&lt;/h3>&lt;p>你有一支由 $n$ 名预备役士兵组成的部队，士兵从 $1$ 到 $n$ 编号，你要将他们拆分成若干特别行动队调入战场。出于默契的考虑，同一支特别行动队中队员的编号&lt;strong>应该连续&lt;/strong>，即为形如 $(i, i + 1, \cdots i + k)$的序列。所有的队员都应该属于且仅属于一支特别行动队。&lt;/p>
+&lt;p>编号为 $i$ 的士兵的初始战斗力为 $x_i$ ，一支特别行动队的初始战斗力 $X$ 为队内士兵初始战斗力之和，即 $X = x_i + x_{i+1} + \cdots + x_{i+k}$。&lt;/p>
+&lt;p>通过长期的观察，你总结出对于一支初始战斗力为 $X$ 的特别行动队，其修正战斗力 $X&amp;rsquo;= aX^2+bX+c$，其中 $a,~b,~c$ 是已知的系数（$a &amp;lt; 0$）。 作为部队统帅，现在你要为这支部队进行编队，使得所有特别行动队的修正战斗力之和最大。试求出这个最大和。&lt;/p>
+&lt;p>$1 \leq n \leq 10^6$，$-5 \leq a \leq -1$，$-10^7 \leq b \leq 10^7$，$-10^7 \leq c \leq 10^7$，$1 \leq x_i \leq 100$。&lt;/p>
+&lt;h3 id="分析">
+&lt;a href="#%e5%88%86%e6%9e%90" class="anchor">
+&lt;svg class="icon" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 16 16">
+&lt;path fill-rule="evenodd"
+d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+&lt;/path>
+&lt;/svg>
+&lt;/a>
+分析
+&lt;/h3>&lt;p>令 $f(i)$ 表示把前 $i$ 个士兵编队的最大修正战斗力之和，$s(i)$ 表示 $x_i$ 的前缀和。&lt;/p>
+&lt;p>假如将士兵 $j$ 到 $i$ 编在同一队，得出状态转移方程 $f(i) = \max_{1\le j\le i}{f(j-1) + a\times (s(i)-s(j-1))^2 + b\times (s(i)-s(j-1)) + c}$。&lt;/p>
+&lt;p>展开后得出&lt;/p>
+&lt;p>$$
+f(i) = \max_{1\le j\le i}{f(j-1) + a \times s(i)^2 + a \times s(j-1)^2 - 2a \times s(i) \times s(j-1) + b \times s(i) - b \times s(j-1) + c }
+\
+f(i) = \max_{1\le j\le i}{f(j-1) + a \times (s(i)^2 + s(j-1)^2) - 2a \times s(i) \times s(j-1) + b \times (s(i) - s(j-1)) + c }
+$$&lt;/p>
+&lt;p>&lt;strong>研究 $j_2 &amp;gt; j_1$ 时 $f(i)&lt;em>{j&lt;/em>{2}} &amp;gt; f(i)&lt;em>{j&lt;/em>{1}}$ 即「决策 $j_2$ 优于 决策 $j_1$」的前提条件&lt;/strong>：&lt;/p>
+&lt;p>$$
+f(j_2-1) + a \times (s(i)^2 + s(j_2-1)^2) - 2a \times s(i) \times s(j_2-1) + b \times (s(i) - s(j_2-1)) + c &amp;gt; f(j_1-1) + a \times (s(i)^2 + s(j_1-1)^2) - 2a \times s(i) \times s(j_1-1) + b \times (s(i) - s(j_1-1)) + c
+\
+f(j_2-1) - f(j_1-1) + a \times (s(i_2-1)^2 - s(j_1-1)^2) - b \times (s(j_2-1) - s(j_1-1)) &amp;gt; 2a \times s(i) \times (s(j_2-1) - s(j_1-1))
+\
+\frac{f(j_2-1) - f(j_1-1) + a \times (s(i_2-1)^2 - s(j_1-1)^2) - b \times (s(j_2-1) - s(j_1-1))}{s(j_2-1) - s(j_1-1)} &amp;gt; 2a \times s(i)
+$$&lt;/p>
+&lt;p>令 $g(i) = f(i-1) + a \times s(i-1)^2 - b \times s(i-1)$，则有&lt;/p>
+&lt;p>$$
+\frac{g(j_2)-g(j_1)}{s(j_2-1) - s(j_1-1)} &amp;gt; 2a \times s(i)
+$$&lt;/p>
+&lt;p>上面式子就是 $(s(j_1-1), g(j_1)), (s(j_2-1), g(j_2))$ 两个点形成的斜率。&lt;/p>
+&lt;p>小结：计算 $f(i)$ 时，可选决策 $j_2 &amp;gt; j_1$，令 $T(j_1, j_2)=\frac{g(j_2)-g(j_1)}{s(j_2-1) - s(j_1-1)}$，如果 $j_2$ 比 $j_1$ 优，必须满足 $T(j_1, j_2) &amp;gt; 2a \times s(i)$。&lt;/p>
+&lt;p>该题 $s(i)$ 单调增，可以得出两个结论：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>计算 $f(i)$ 时，可以删除冗余决策，使得队列中从小到大依次存储有价值的可选决策 $j_1, j_2, \cdots, j_k$，使得这些相邻决策之间的斜率都要小于 $2a \times s(i)$。即： $T(j_1, j_2) &amp;lt; 2a \times s(i), T(j_2, j_3) &amp;lt; 2a \times s(i), \cdots, T(j_{k-1}, j_k) &amp;lt; 2a \times s(i)$。最优决策是队首元素 $j_1$。&lt;/p>
+&lt;p>证明：对于队列中两个相邻决策 $x, y$，如果 $T(x, y) &amp;gt; 2a \times s(i)$，由于 $s(i)$ 单调增，且题目中规定 $a &amp;lt; 0$，所以 $2a \times s(i)$ 单调下降，所以对于 $i_1 &amp;gt; i$ 有 $T(x, y) &amp;gt; 2a \times s(i) &amp;gt; 2a \times s(i_1)$，$y$ 永远比 $x$ 优，所以 $x$ 可以删除。所以 $T(j_1, j_2) &amp;lt; 2a \times s(i), T(j_2, j_3) &amp;lt; 2a \times s(i), \cdots, T(j_{k-1}, j_k) &amp;lt; 2a \times s(i)$，$j_1$ 比 $j_2$ 优，$j_2$ 比 $j_3$ 优，&amp;hellip;，$j_k-1$ 比 $j_k$ 优。所以队首元素 $j_1$ 是最优的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>可以维护相邻决策之间的斜率单调减。&lt;/p>
+&lt;p>证明：设队列中三个相邻决策 $j_1, j_2, j_3$，假设出现单调增即 $T(j_1, j_2) &amp;lt; T(j_2, j_3)$，分析 $j_2$ 有没有可能成为最优决策。&lt;/p>
+&lt;p>$$
+j_2 比 j_1 优 \Rightarrow T(j_1, j_2) &amp;gt; 2a \times s(i)
+\
+j_2 比 j_3 优 \Rightarrow T(j_2, j_3) &amp;lt; 2a \times s(i)
+\
+T(j_2, j_3) &amp;lt; 2a \times s(i) &amp;lt; T(j_1, j_2)
+$$&lt;/p>
+&lt;p>矛盾。$j_2$ 不可能成为最优决策，可以删除。得证。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>综上：&lt;/p>
+&lt;ol>
+&lt;li>应该维护队列中相邻决策满足：$T(j_1, j_2) &amp;gt; T(j_2, j_3) &amp;gt; \cdots &amp;gt; T(j_{k-1}, j_k) &amp;gt; 2a \times s(i)$。&lt;/li>
+&lt;li>最优决策取队首元素。&lt;/li>
+&lt;/ol>
+&lt;p>&lt;a href="https://www.luogu.com.cn/record/83587373">RECORD&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+&lt;/span>&lt;span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;bits/stdc++.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">using&lt;/span> &lt;span style="color:#00a8c8">namespace&lt;/span> &lt;span style="color:#111">std&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#define LL long long
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#111">a&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">b&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">c&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">st&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">en&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">1000006&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">1000006&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#ae81ff">1000006&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#75af00">g&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#111">a&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">b&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">double&lt;/span> &lt;span style="color:#75af00">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">g&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">))&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">1.0&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">1.0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">LL&lt;/span> &lt;span style="color:#75af00">cost&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">j&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#111">a&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#111">b&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">j&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#111">c&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#75af00">main&lt;/span>&lt;span style="color:#111">()&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">n&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">a&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">b&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">c&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cin&lt;/span> &lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">st&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">en&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">for&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#00a8c8">int&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">;&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">)&lt;/span> &lt;span style="color:#111">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">while&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">st&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">en&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#111">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">en&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">en&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">en&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">en&lt;/span>&lt;span style="color:#f92672">--&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">en&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">while&lt;/span> &lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">st&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#111">en&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#111">T&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">st&lt;/span>&lt;span style="color:#111">],&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">st&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">])&lt;/span> &lt;span style="color:#f92672">&amp;gt;=&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">a&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#111">s&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">st&lt;/span>&lt;span style="color:#f92672">++&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">st&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#111">cost&lt;/span>&lt;span style="color:#111">(&lt;/span>&lt;span style="color:#111">i&lt;/span>&lt;span style="color:#111">,&lt;/span> &lt;span style="color:#111">Q&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">st&lt;/span>&lt;span style="color:#111">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#111">cout&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">dp&lt;/span>&lt;span style="color:#111">[&lt;/span>&lt;span style="color:#111">n&lt;/span>&lt;span style="color:#111">]&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> &lt;span style="color:#111">endl&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00a8c8">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#111">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#111">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>实现时要注意&lt;/strong>：在计算斜率的函数 &lt;code>double T()&lt;/code> 中，一定要用 &lt;code>(double)&lt;/code> 或者 &lt;code>*1.0&lt;/code>，将 &lt;code>long long&lt;/code> 变成 &lt;code>double&lt;/code> 类型之后再计算！！！！！&lt;/p>
+&lt;p>&lt;strong>实现时要注意&lt;/strong>：在计算斜率的函数 &lt;code>double T()&lt;/code> 中，一定要用 &lt;code>(double)&lt;/code> 或者 &lt;code>*1.0&lt;/code>，将 &lt;code>long long&lt;/code> 变成 &lt;code>double&lt;/code> 类型之后再计算！！！！！&lt;/p>
+&lt;p>&lt;strong>实现时要注意&lt;/strong>：在计算斜率的函数 &lt;code>double T()&lt;/code> 中，一定要用 &lt;code>(double)&lt;/code> 或者 &lt;code>*1.0&lt;/code>，将 &lt;code>long long&lt;/code> 变成 &lt;code>double&lt;/code> 类型之后再计算！！！！！&lt;/p>
+&lt;hr>
+&lt;p>致谢：&lt;/p>
+&lt;ul>
+&lt;li>lgj&lt;/li>
+&lt;/ul>
+&lt;p>🙇‍&lt;/p></description></item><item><title>点分治笔记</title><link>https://blog.chungzh.cn/articles/centroid-decomposition/</link><pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate><guid>https://blog.chungzh.cn/articles/centroid-decomposition/</guid><description>
 &lt;p>点分治，外国人称之为 Centroid decomposition，重心分解。&lt;/p>
 &lt;h2 id="何为树的重心">
 &lt;a href="#%e4%bd%95%e4%b8%ba%e6%a0%91%e7%9a%84%e9%87%8d%e5%bf%83" class="anchor">
