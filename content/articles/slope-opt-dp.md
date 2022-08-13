@@ -9,6 +9,7 @@ tags:
 - DP 优化
 - 斜率优化
 categories: 学习笔记
+katex: true
 date: 2022-08-13
 ---
 
