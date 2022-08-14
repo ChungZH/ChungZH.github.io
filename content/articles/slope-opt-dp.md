@@ -10,7 +10,7 @@ tags:
 - 斜率优化
 categories: 学习笔记
 katex: true
-date: 2022-08-13
+date: 2022-08-13 21:59
 ---
 
 ## 例题 [HNOI2008]玩具装箱
