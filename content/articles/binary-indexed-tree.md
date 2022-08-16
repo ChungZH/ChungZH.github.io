@@ -25,6 +25,10 @@ draft: true
 > 
 > *来源于参考资料 1
 
+## 实现
+
+$\operatorname{lowbit}$ 如何计算呢？我们有这样一条公式：$\operatorname{lowbit}(x)=(x)\&(-x)$。在计算机中，有符号数采用补码表示。在补码表示下，$x$ 的相反数 `-x = ~x + 1`，也就是按位非再加一。例如 $x$ 的最后一个 $1$ 的位置附近是 $\cdots 01000\cdots$，按位非之后是 $\cdots 10111\cdots$，加一再变成 $\cdots 11000\cdots$；而前面每一位都与原来相反。这时我们再把它和 $x$ 按位与，得到的结果为 $01000\cdots$ 即 $\operatorname{lowbit}(x)$。
+
 ## 参考资料
 
 1. [树状数组的原理是什么？ - SleepyBag 的回答 - 知乎](https://www.zhihu.com/question/54404092/answer/785844116)
