@@ -50,6 +50,7 @@ void update(int cur, int l, int r, int x, int y, int c) {
   int mid = (l + r) / 2;
   if (x <= mid) update(cur << 1, l, mid, x, y, c);
   if (y > mid) update(cur << 1 | 1, mid + 1, r, x, y, c);
+  up(cur);
 }
 ```
 
