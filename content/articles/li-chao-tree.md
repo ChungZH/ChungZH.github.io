@@ -214,6 +214,10 @@ int main() {
 }
 ```
 
+## 习题
+
+- [Luogu-P4254 [JSOI2008]Blue Mary 开公司](https://www.luogu.com.cn/problem/P4254) 本题给出的是直线，比例题更简单
+
 ## 参考资料
 
 - [李超线段树 - OI Wiki](https://oi-wiki.org/ds/li-chao-tree/) [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
