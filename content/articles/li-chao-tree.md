@@ -54,6 +54,156 @@ void update(int cur, int l, int r, int x, int y, int c) {
 }
 ```
 
-## 李超线段树之维护直线
+## 李超线段树
 
-## 李超线段树之维护线段
+**例题**：[Luogu-4097 [HEOI2013]Segment](https://www.luogu.com.cn/problem/P4097)
+要求在平面直角坐标系下维护两个操作（强制在线）：
+    
+1. 在平面上加入一条线段。记第 $i$ 条被插入的线段的标号为 $i$，该线段的两个端点分别为 $(x_0,y_0)$，$(x_1,y_1)$。
+2. 给定一个数 $k$，询问与直线 $x = k$ 相交的线段中，交点纵坐标最大的线段的编号（若有多条线段与查询直线的交点纵坐标都是最大的，则输出编号最小的线段）。特别地，若不存在线段与给定直线相交，输出 $0$。
+    
+操作总数 $1 \leq n \leq 10^5$，$1 \leq k, x_0, x_1 \leq 39989$，$1 \leq y_0, y_1 \leq 10^9$。
+
+------
+
+
+------
+
+[RECORD](https://www.luogu.com.cn/record/84062455)
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1000005;
+const int MOD1 = 39989;
+const int MOD2 = 1000000000;
+const double EPS = 1e-12;
+struct line {
+  double k, b;
+  int l, r;
+  int id;
+} tree[N << 2];
+int n;
+double calc(line a, int x) {  // 计算纵坐标
+  return x * a.k + a.b;
+}
+int cross(line a, line b) {  // 求两条线段交点横坐标
+  // a.k*x +a.b = b.k*x+b.b
+  return floor((a.b - b.b) / (b.k - a.k));
+}
+/* 坑！！！
+注意 cmp 的写法，以下是错误的：
+int cmp(double a, double b) {
+  if (a-b > EPS) return 1;
+  if (a-b < EPS) return -1;
+  return 0;
+}
+*/
+int cmp(double a, double b) {
+  if (a - b > EPS) return 1;
+  if (b - a > EPS) return -1;
+  return 0;
+}
+void build(int rt, int l, int r) {
+  tree[rt] = {0, 0, 1, 40000, 0};
+  if (l == r) return;
+  int m = (l + r) >> 1;
+  build(rt << 1, l, m);
+  build(rt << 1 | 1, m + 1, r);
+}
+void modify(int root, int l, int r, line k) {
+  if (l >= k.l && r <= k.r) {
+    // 1. 新线段完全覆盖了之前记录的线段
+    if (cmp(calc(k, l), calc(tree[root], l)) == 1 &&
+        cmp(calc(k, r), calc(tree[root], r)) == 1) {
+      tree[root] = k;
+      // 2. 两个线段在区间内有交点
+    } else if (l <= cross(tree[root], k) && cross(tree[root], k) <= r) {
+      int m = (l + r) >> 1;
+      // 与中点交点更高的线段作为 [l, r] 当前优势线段
+      if (cmp(calc(tree[root], m), calc(k, m)) == -1) { swap(tree[root], k); }
+      
+      /* 这是判断往左还是往右递归的错误方法：两条线段的交点横坐标大于 m 还是小于 m
+      Hack：假如两条线段交点横坐标等于 m 怎么办？？？
+      if (cmp(m, cross(tree[root], k)) == 1)
+        modify(root << 1, l, m, k);
+      else
+        modify(root << 1 | 1, m + 1, r, k);
+      */
+      // 正确方法：判断两条线段与 x=l, x=r 的交点，找到 k 线段较高的一端进行递归
+      if (cmp(calc(k, l), calc(tree[root], l)) == 1)
+        modify(root << 1, l, m, k);
+      else
+        modify(root << 1 | 1, m + 1, r, k);
+    }
+  } else {
+    int m = (l + r) >> 1;
+    if (k.l <= m) modify(root << 1, l, m, k);
+    if (k.r > m) modify(root << 1 | 1, m + 1, r, k);
+  }
+}
+pair<double, int> pmax(pair<double, int> x,
+                       pair<double, int> y) { // 注意题目要求下标尽量小
+  if (cmp(x.first, y.first) == -1)
+    return y;
+  else if (cmp(x.first, y.first) == 1)
+    return x;
+  else
+    return x.second < y.second ? x : y;
+}
+
+pair<double, int> query(int root, int l, int r, int x) {
+  if (l == r) 
+    return {calc(tree[root], x), tree[root].id};
+  
+  int m = (l + r) >> 1;
+  pair<double, int> ans = {calc(tree[root], x), tree[root].id};
+  if (x <= m)
+    ans = pmax(ans, query(root << 1, l, m, x));
+  else
+    ans = pmax(ans, query(root << 1 | 1, m + 1, r, x));
+  return ans;
+}
+int main() {
+  ios::sync_with_stdio(false);
+  cin >> n;
+  build(1, 1, 40000);
+  int lastans = 0;
+  int segi = 0;
+  while (n--) {
+    int op;
+    cin >> op;
+    if (op == 0) {
+      int k;
+      cin >> k;
+      k = (k + lastans - 1 + MOD1) % MOD1 + 1;
+      lastans = query(1, 1, 40000, k).second;
+      cout << lastans << endl;
+    } else {
+      int a, b, x, y;
+      cin >> a >> b >> x >> y;
+      a = (a + lastans - 1 + MOD1) % MOD1 + 1;
+      b = (b + lastans - 1 + MOD2) % MOD2 + 1;
+      x = (x + lastans - 1 + MOD1) % MOD1 + 1;
+      y = (y + lastans - 1 + MOD2) % MOD2 + 1;
+      if (a > x) {
+        swap(a, x);
+        swap(b, y);
+      }
+      line t;
+      if (a == x) {
+        t.k = 0;
+        t.b = max(b, y);
+      } else {
+        t.k = (double)(y - b) / (x - a);
+        t.b = b - t.k * a;
+      }
+      t.l = a;
+      t.r = x;
+      t.id = ++segi;
+      modify(1, 1, 40000, t);
+    }
+  }
+  return 0;
+}
+```
