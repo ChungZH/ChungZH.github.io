@@ -66,6 +66,12 @@ void update(int cur, int l, int r, int x, int y, int c) {
 
 ------
 
+将问题转化成以下的操作：
+
+- 加入一个一次函数，定义域为 $[l,r]$；
+- 给定 $k$，求定义域包含 $k$ 的所有一次函数中，在 $x=k$ 处取值最大的那个，如果有多个函数取值相同，选编号最小的。
+
+**注意**：当线段垂直于 $y$ 轴时，如果按照一般的式子计算，会出现除以零的情况。假设线段两端点分别为 $(x,y_0)$ 和 $(x,y_1)$，$y_0<y_1$，则插入定义域为 $[x,x]$ 的一次函数 $f(x)=0\cdot x+y_1$。
 
 ------
 
@@ -191,7 +197,7 @@ int main() {
         swap(b, y);
       }
       line t;
-      if (a == x) {
+      if (a == x) { // 垂直于 y 的函数的特殊处理
         t.k = 0;
         t.b = max(b, y);
       } else {
@@ -207,3 +213,7 @@ int main() {
   return 0;
 }
 ```
+
+## 参考资料
+
+- [李超线段树 - OI Wiki](https://oi-wiki.org/ds/li-chao-tree/) [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
