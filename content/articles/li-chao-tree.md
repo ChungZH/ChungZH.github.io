@@ -34,13 +34,22 @@ draft: true
 
 ```cpp
 int query(int p, int l, int r, int x, int y) {
-    if (l >= x && r <= y)
-        return tree[p].sum + tree[p].tag * (r-l+1);
-    int mid = (l + r) / 2;
-    int ans = tree[p].tag * (min(r, y) - max(l, x) + 1);
-    if (x <= mid) ans += query(p<<1, l, mid, x, y);
-    if (y > mid) ans += query(p<<1|1, mid+1, r, x, y);
-    return ans;
+  if (l >= x && r <= y) return tree[p].sum + tree[p].tag * (r - l + 1);
+  int mid = (l + r) / 2;
+  int ans = tree[p].tag * (min(r, y) - max(l, x) + 1);
+  if (x <= mid) ans += query(p << 1, l, mid, x, y);
+  if (y > mid) ans += query(p << 1 | 1, mid + 1, r, x, y);
+  return ans;
+}
+void update(int cur, int l, int r, int x, int y, int c) {
+  if (l >= x && r <= y) {
+    tree[cur].tag += c;
+    return;
+  }
+  tree[cur].sum += (min(r, y) - max(l, x) + 1) * c;
+  int mid = (l + r) / 2;
+  if (x <= mid) update(cur << 1, l, mid, x, y, c);
+  if (y > mid) update(cur << 1 | 1, mid + 1, r, x, y, c);
 }
 ```
 
