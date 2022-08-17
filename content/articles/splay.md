@@ -67,3 +67,4 @@ Splay 操作的目标就是将当前结点旋转至根结点。我们发现，�
 
 - [Splay - OI Wiki](https://oi-wiki.org//ds/splay/) [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 - [Lecture 6 - Splay Trees | MIT OpenCourseWare](https://ocw.mit.edu/courses/6-854j-advanced-algorithms-fall-2008/resources/lec6/)
+- [「算法笔记」Splay - 维护序列 - Siyuan 的博客](https://blog.orzsiyuan.com/archives/Splay-2/) [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
