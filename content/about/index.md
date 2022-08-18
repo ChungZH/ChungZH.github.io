@@ -4,6 +4,8 @@ title: 关于
 
 ## 我
 
+Zirnc (a.k.a ChungZH)
+
 就是个菜鸡。
 
 今年初三。
