@@ -36,12 +36,7 @@ Segment Tree Beats 的一个重要应用就是处理区间最值操作，例如 
 
 使用势能分析法可以得到复杂度是 $O(m\log n)$。
 
-------
-
-下面讲讲代码实现。
-
-
-
+实现时，需要留心 `pushdown` 和 `pushup` 函数，步骤较多。用 `pushtag` 函数给当前结点加上 tag。
 
 [RECORD](https://vjudge.net/solution/37834417)
 
@@ -54,7 +49,7 @@ int maxx[MAXN << 2], se[MAXN << 2], cnt[MAXN << 2], tag[MAXN << 2];
 LL sum[MAXN << 2];
 int n, m;
 int a[MAXN];
-void pushup(int u) {
+void pushup(int u) { // 维护 u 的信息
   sum[u] = sum[u << 1] + sum[u << 1 | 1];
   if (maxx[u << 1] > maxx[u << 1 | 1]) {
     maxx[u] = maxx[u << 1];
@@ -70,12 +65,12 @@ void pushup(int u) {
     cnt[u] = cnt[u << 1] + cnt[u << 1 | 1];
   }
 }
-void pushtag(int u, int x) {
+void pushtag(int u, int x) {  // 给当前点加 tag
   if (maxx[u] <= x) return;
-  sum[u] -= (1ll * maxx[u] - x) * cnt[u];
-  maxx[u] = tag[u] = x;
+  sum[u] -= (1ll * maxx[u] - x) * cnt[u]; // 更新 sum
+  maxx[u] = tag[u] = x; // 更新 maxx、tag
 }
-void pushdown(int u) {
+void pushdown(int u) { // 下放 tag
   if (tag[u] == -1) return;
   pushtag(u << 1, tag[u]);
   pushtag(u << 1 | 1, tag[u]);
@@ -86,7 +81,7 @@ void build(int u, int l, int r) {
   if (l == r) {
     maxx[u] = sum[u] = a[l];
     cnt[u] = 1;
-    se[u] = -1;
+    se[u] = -1; // 次大值初始化为 -1
     return;
   }
   int mid = (l + r) >> 1;
@@ -96,7 +91,7 @@ void build(int u, int l, int r) {
 }
 void modify(int u, int l, int r, int x, int y, int t) {
   if (maxx[u] <= t) return;
-  if (l >= x && r <= y && se[u] < t) {
+  if (l >= x && r <= y && se[u] < t) { // 该区间的最大值都变为 t
     pushtag(u, t);
     return;
   }
