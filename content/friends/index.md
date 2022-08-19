@@ -40,3 +40,4 @@ title: 友链
 - [xht37](https://www.xht37.com/)
 - [wjyyy](http://www.wjyyy.top/)
 - [Siyuan](https://blog.orzsiyuan.com/)
+- [Flash Hu](https://www.cnblogs.com/flashhu/)

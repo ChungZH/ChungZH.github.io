@@ -213,6 +213,8 @@ int main() {
 
 这题方法比较多。下面的代码用 **容斥** 进行去重和 **双指针** （除此之外还可以用**二分**）统计答案。
 
+[RECORD](https://www.luogu.com.cn/record/82350911)。
+
 ```cpp
 int calc(int u, int w) {
   dis.clear();
@@ -249,11 +251,73 @@ void solve(int u, int size) {
 
 暂且咕咕咕。🕊
 
+> [Luogu P4149 [IOI2011]Race](https://www.luogu.com.cn/problem/P4149)：给定一棵有 $n$ 个点的带权树，给出 $k$，求一条简单路径。权值和等于 $k$，且边的数量最小。
+> 
+> $n\le 200000,k,w_i\le 1000000$
+
+开个桶数组记录最小边数即可。
+
+[RECORD](https://www.luogu.com.cn/record/82407305)。
+
+```cpp
+// 桶数组，minn[i] 表示权值和为 i 的路径的最小边数
+int minn[MAXK];
+
+// d 表示权值和，b 表示边数
+void getDis(int u, int fa, int d, int b) {
+  if (d > k) return;
+  dis.emplace_back(d, b);
+  for (auto i : g[u]) {
+    if (i.first == fa || vis[i.first]) continue;
+    getDis(i.first, u, d + i.second, b + 1);
+  }
+}
+void calc(int u) {
+  minn[0] = 0;
+  tdis.clear();
+  for (auto i : g[u]) {
+    if (vis[i.first]) continue;
+    dis.clear();
+    getDis(i.first, u, i.second, 1);
+    for (auto j : dis) {
+      if (minn[k - j.first] != -1) {  // 可以拼凑成权值和为 k 的路径
+        if (ans == -1)
+          ans = minn[k - j.first] + j.second;
+        else
+          ans = std::min(ans, minn[k - j.first] + j.second);
+      }
+    }
+    // 更新桶数组
+    for (auto j : dis) {
+      tdis.push_back(j);
+      if (minn[j.first] == -1)
+        minn[j.first] = j.second;
+      else
+        minn[j.first] = std::min(minn[j.first], j.second);
+    }
+  }
+  // 还原 minn 数组
+  for (auto i : tdis) {
+    minn[i.first] = -1;
+  }
+}
+void solve(int u, int size) {
+  centroid = 0;
+  getCentroid(u, -1, size);
+  getCentroid(centroid, -1, size);
+  vis[centroid] = true;
+  calc(centroid);
+  for (auto i : g[centroid]) {
+    if (vis[i.first]) continue;
+    solve(i.first, siz[i.first]);
+  }
+}
+```
+
 ## 习题
 
-- [ ] [Luogu P4149 [IOI2011]Race](https://www.luogu.com.cn/problem/P4149)
+- [x] [Luogu P2634 [国家集训队]聪聪可可](https://www.luogu.com.cn/problem/P2634)
 - [ ] [Luogu P3714 [BJOI2017]树的难题](https://www.luogu.com.cn/problem/P3714)
-- [ ] [Luogu P2634 [国家集训队]聪聪可可](https://www.luogu.com.cn/problem/P2634)
 
 ## 参考资料
 
