@@ -19,7 +19,7 @@ draft: true
 
 ## 原理
 
-![bit](https://cdn.luogu.com.cn/upload/image_hosting/skpbz5i1.png)
+![bit](https://raw.githubusercontent.com/ChungZH/img/main/binary-indexed-tree/bit.png)
 
 我们用 $C_i$ 来表示 $A$ 数组的一段区间，定义 $x$ 的二进制表示中，最低位的 $1$ 的位置为 $\operatorname{lowbit}(x)$，那么用 $C_i$ 代表 $A$ 数组的下标区间 $[i-\operatorname{lowbit}(i)+1, i]$。举个例子，$4_{(10)} = 100_{(2)}$，$100_{(2)}-\operatorname{lowbit}(100_{(2)})+1_{(2)}=1_{(2)}=1_{(10)}$，那么 $C_4$ 代表的区间就是 $[1, 4]$。通过这样的设计，树状数组将结点数压缩到与数组长度相同，不像线段树一样需要 $2n$ 个结点。
 
