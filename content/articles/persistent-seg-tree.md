@@ -27,7 +27,7 @@ draft: true
 
 比如下面这张图的例子，我们依次修改 1, 2, 8 三个结点，途中创建了必要的结点。而在图中没有显示的空结点并没有被创建，视为 0，这样就节省了空间。
 
-![dynamic](https://cdn.luogu.com.cn/upload/image_hosting/qn9gtw1o.png)
+![dynamic](https://raw.githubusercontent.com/ChungZH/img/main/persistent-seg-tree/dynamic.png)
 
 那么对于区间修改时，会有 `pushdown()` 操作，可能会修改一个不存在的结点。这时有两个解决方案：
 
