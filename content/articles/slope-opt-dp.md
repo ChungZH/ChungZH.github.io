@@ -54,9 +54,11 @@ $$
 **研究 $j_2 > j_1$ 时 $f(i)_{j_{2}} < f(i)_{j_{1}}$ 即「决策 $j_2$ 优于 决策 $j_1$」的前提条件**：
 
 $$
-f(j_2-1) + g(i)^2 - 2 \times g(i) \times x(j_2) + x(j_2)^2 < f(j_1-1) + g(i)^2 - 2 \times g(i) \times x(j_1) + x(j_1)^2
-\\
-(f(j_2-1) + x(j_2)^2) - (f(j_1-1) + x(j_1)^2) < 2 \times g(i) \times (x(j_2) - x(j_1))
+\begin{aligned}
+f(j_2-1) + g(i)^2 - 2 \times g(i) \times x(j_2) + x(j_2)^2 & < f(j_1-1) + g(i)^2 - 2 \times g(i) \times x(j_1) + x(j_1)^2
+\\\\
+(f(j_2-1) + x(j_2)^2) - (f(j_1-1) + x(j_1)^2) & < 2 \times g(i) \times (x(j_2) - x(j_1))
+\end{aligned}
 $$
 
 再令 $y(i) = f(i-1)+x(i)^2$，因 $x(i) = i+s(i-1)$ 是单调递增的，所以 $x(j_2)-x(j_1) > 0$，所以有
@@ -81,9 +83,9 @@ $$
 
     $$
     j_2 比 j_1 优 \Rightarrow T(j_1, j_2) < 2 \times g(i)
-    \\
+    \\\\
     j_2 比 j_3 优 \Rightarrow T(j_2, j_3) > 2 \times g(i)
-    \\
+    \\\\
     T(j_1, j_2) < 2 \times g(i) < T(j_2, j_3)
     $$
 
@@ -165,18 +167,20 @@ $1 \leq n \leq 10^6$，$-5 \leq a \leq -1$，$-10^7 \leq b \leq 10^7$，$-10^7 \
 
 $$
 f(i) = \max_{1\le j\le i}\{f(j-1) + a \times s(i)^2 + a \times s(j-1)^2 - 2a \times s(i) \times s(j-1) + b \times s(i) - b \times s(j-1) + c \}
-\\
+\\\\
 f(i) = \max_{1\le j\le i}\{f(j-1) + a \times (s(i)^2 + s(j-1)^2) - 2a \times s(i) \times s(j-1) + b \times (s(i) - s(j-1)) + c \}
 $$
 
 **研究 $j_2 > j_1$ 时 $f(i)_{j_{2}} > f(i)_{j_{1}}$ 即「决策 $j_2$ 优于 决策 $j_1$」的前提条件**：
 
 $$
-f(j_2-1) + a \times (s(i)^2 + s(j_2-1)^2) - 2a \times s(i) \times s(j_2-1) + b \times (s(i) - s(j_2-1)) + c > f(j_1-1) + a \times (s(i)^2 + s(j_1-1)^2) - 2a \times s(i) \times s(j_1-1) + b \times (s(i) - s(j_1-1)) + c
-\\
-f(j_2-1) - f(j_1-1) + a \times (s(i_2-1)^2 - s(j_1-1)^2) - b \times (s(j_2-1) - s(j_1-1)) > 2a \times s(i) \times (s(j_2-1) - s(j_1-1))
-\\
-\frac{f(j_2-1) - f(j_1-1) + a \times (s(i_2-1)^2 - s(j_1-1)^2) - b \times (s(j_2-1) - s(j_1-1))}{s(j_2-1) - s(j_1-1)} > 2a \times s(i)
+\begin{aligned}
+f(j_2-1) + a \times (s(i)^2 + s(j_2-1)^2) - 2a \times s(i) \times s(j_2-1) + b \times (s(i) - s(j_2-1)) + c & > f(j_1-1) + a \times (s(i)^2 + s(j_1-1)^2) - 2a \times s(i) \times s(j_1-1) + b \times (s(i) - s(j_1-1)) + c
+\\\\
+f(j_2-1) - f(j_1-1) + a \times (s(i_2-1)^2 - s(j_1-1)^2) - b \times (s(j_2-1) - s(j_1-1)) & > 2a \times s(i) \times (s(j_2-1) - s(j_1-1))
+\\\\
+\frac{f(j_2-1) - f(j_1-1) + a \times (s(i_2-1)^2 - s(j_1-1)^2) - b \times (s(j_2-1) - s(j_1-1))}{s(j_2-1) - s(j_1-1)} & > 2a \times s(i)
+\end{aligned}
 $$
 
 令 $g(i) = f(i-1) + a \times s(i-1)^2 - b \times s(i-1)$，则有
@@ -201,9 +205,9 @@ $$
 
     $$
     j_2 比 j_1 优 \Rightarrow T(j_1, j_2) > 2a \times s(i)
-    \\
+    \\\\
     j_2 比 j_3 优 \Rightarrow T(j_2, j_3) < 2a \times s(i)
-    \\
+    \\\\
     T(j_2, j_3) < 2a \times s(i) < T(j_1, j_2)
     $$
 
