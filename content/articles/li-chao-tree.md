@@ -9,7 +9,6 @@ tags:
 categories: 学习笔记
 date: 2022-08-16
 katex: true
-draft: true
 ---
 
 ## 线段树之标记永久化
@@ -73,12 +72,39 @@ void update(int cur, int l, int r, int x, int y, int c) {
 
 **注意**：当线段垂直于 $y$ 轴时，如果按照一般的式子计算，会出现除以零的情况。假设线段两端点分别为 $(x,y_0)$ 和 $(x,y_1)$，$y_0<y_1$，则插入定义域为 $[x,x]$ 的一次函数 $f(x)=0\cdot x+y_1$。
 
+首先，我们建立一棵线段树，每个结点代表一段 x 轴上的区间，结点的懒标记表示一条线段，记为 $g$。
+
+现在我们要插入线段 $f$。一直找到被 $f$ 完全覆盖的区间，进行分类讨论。
+
+// TODO: 新实现
+
+![cross l](https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-l.png)
+
+![cross r](https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-r.png)
+
+如图，按新线段 $f$ 取值是否大于原标记 $g$，我们可以把当前区间分为两个子区间。其中 **肯定有一个子区间被左区间或右区间完全包含**，也就是说，在两条线段中，肯定有一条线段，只可能成为左区间的答案，或者只可能成为右区间的答案。我们用这条线段递归更新对应子树，用另一条线段作为懒标记更新整个区间，这就保证了递归下传的复杂度。当一条线段只可能成为左或右区间的答案时，才会被下传，所以不用担心漏掉某些线段。
+
+具体来说，设当前区间的中点为 $mid$，我们拿新线段 $f$ 与原最优线段 $g$ 与 $x=mid$ 的交点的值作比较。
+
+如果新线段 $f$ 更优，**则将 $f$ 和 $g$ 交换**。那么现在考虑在中点处 $f$ 不如 $g$ 优的情况：
+
+1. 若在左端点处 $f$ 更优，那么 $f$ 和 $g$ 必然在左半区间中产生了交点，$f$ 只有在左区间才可能优于 $g$，递归到左儿子中进行下传；
+2. 若在右端点处 $f$ 更优，那么 $f$ 和 $g$ 必然在右半区间中产生了交点，$f$ 只有在右区间才可能优于 $g$，递归到右儿子中进行下传；
+3. 若在左右端点处 $g$ 都更优，那么 $f$ 不可能成为答案，不需要继续下传。
+
+最后将 $g$ 作为当前区间的懒标记。
+
+查询时，用到**标记永久化**。我们只需要找到所有覆盖了 $k$ 的区间，每次考虑这个标记对答案有怎样的贡献即可。
+
+**复杂度分析**：查询的时间复杂度显然为 $O(\log n)$，而插入过程中，我们需要将原线段拆分到 $O(\log n)$ 个区间中，对于每个区间，我们又需要花费 $O(\log n)$ 的时间递归下传，从而插入过程的时间复杂度为 $O(\log^2 n)$。
+
 ------
 
-[RECORD](https://www.luogu.com.cn/record/84062455)
+[RECORD](https://www.luogu.com.cn/record/84494892)
 
 ```cpp
 #include <bits/stdc++.h>
+
 using namespace std;
 const int N = 1000005;
 const int MOD1 = 39989;
@@ -93,18 +119,7 @@ int n;
 double calc(line a, int x) {  // 计算纵坐标
   return x * a.k + a.b;
 }
-int cross(line a, line b) {  // 求两条线段交点横坐标
-  // a.k*x +a.b = b.k*x+b.b
-  return floor((a.b - b.b) / (b.k - a.k));
-}
-/* 坑！！！
-注意 cmp 的写法，以下是错误的：
-int cmp(double a, double b) {
-  if (a-b > EPS) return 1;
-  if (a-b < EPS) return -1;
-  return 0;
-}
-*/
+// 注意 cmp 写法。不要写成 a-b < EPS。
 int cmp(double a, double b) {
   if (a - b > EPS) return 1;
   if (b - a > EPS) return -1;
@@ -119,29 +134,17 @@ void build(int rt, int l, int r) {
 }
 void modify(int root, int l, int r, line k) {
   if (l >= k.l && r <= k.r) {
-    // 1. 新线段完全覆盖了之前记录的线段
-    if (cmp(calc(k, l), calc(tree[root], l)) == 1 &&
-        cmp(calc(k, r), calc(tree[root], r)) == 1) {
-      tree[root] = k;
-      // 2. 两个线段在区间内有交点
-    } else if (l <= cross(tree[root], k) && cross(tree[root], k) <= r) {
-      int m = (l + r) >> 1;
-      // 与中点交点更高的线段作为 [l, r] 当前优势线段
-      if (cmp(calc(tree[root], m), calc(k, m)) == -1) { swap(tree[root], k); }
-      
-      /* 这是判断往左还是往右递归的错误方法：两条线段的交点横坐标大于 m 还是小于 m
-      Hack：假如两条线段交点横坐标等于 m 怎么办？？？
-      if (cmp(m, cross(tree[root], k)) == 1)
-        modify(root << 1, l, m, k);
-      else
-        modify(root << 1 | 1, m + 1, r, k);
-      */
-      // 正确方法：判断两条线段与 x=l, x=r 的交点，找到 k 线段较高的一端进行递归
-      if (cmp(calc(k, l), calc(tree[root], l)) == 1)
-        modify(root << 1, l, m, k);
-      else
-        modify(root << 1 | 1, m + 1, r, k);
-    }
+    // g: tree[root]; f: k.
+    int m = (l + r) >> 1;
+    if (cmp(calc(tree[root], m), calc(k, m)) == -1) swap(tree[root], k);
+
+    int cl = cmp(calc(k, l), calc(tree[root], l)),
+        cr = cmp(calc(k, r), calc(tree[root], r));
+    // 3. 若在左右端点处 g 都更优，那么 f 不可能成为答案，不需要继续下传。
+    if (cl == -1 && cr == -1) return;
+    // 1. & 2. 注意题目要求下标尽量小，下标小的线段即使不更优，如果值相等，也可以下传。
+    if (cl == 1 || (cl == 0 && k.id < tree[root].id)) modify(root << 1, l, m, k);
+    if (cr == 1 || (cr == 0 && k.id < tree[root].id)) modify(root << 1 | 1, m + 1, r, k);
   } else {
     int m = (l + r) >> 1;
     if (k.l <= m) modify(root << 1, l, m, k);
@@ -149,7 +152,7 @@ void modify(int root, int l, int r, line k) {
   }
 }
 pair<double, int> pmax(pair<double, int> x,
-                       pair<double, int> y) { // 注意题目要求下标尽量小
+                       pair<double, int> y) {  // 注意题目要求下标尽量小
   if (cmp(x.first, y.first) == -1)
     return y;
   else if (cmp(x.first, y.first) == 1)
@@ -159,9 +162,8 @@ pair<double, int> pmax(pair<double, int> x,
 }
 
 pair<double, int> query(int root, int l, int r, int x) {
-  if (l == r) 
-    return {calc(tree[root], x), tree[root].id};
-  
+  if (l == r) return {calc(tree[root], x), tree[root].id};
+
   int m = (l + r) >> 1;
   pair<double, int> ans = {calc(tree[root], x), tree[root].id};
   if (x <= m)
@@ -197,7 +199,7 @@ int main() {
         swap(b, y);
       }
       line t;
-      if (a == x) { // 垂直于 y 的函数的特殊处理
+      if (a == x) {  // 垂直于 y 的函数的特殊处理
         t.k = 0;
         t.b = max(b, y);
       } else {
