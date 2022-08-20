@@ -3,6 +3,9 @@
 }
 
 .article-post {
+  code {
+    font-size: 0.9rem
+  }
   @apply mt-12 prose dark:prose-invert;
 }
 
@@ -30,7 +33,6 @@
   overflow-wrap: break-word;
   @apply fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block mt-12 prose dark:prose-invert;
 }
-
 @for $i from 1 through 6 {
   h#{$i} {
     @apply flex items-center;
