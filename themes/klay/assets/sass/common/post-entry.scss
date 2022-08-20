@@ -6,7 +6,7 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  @apply mb-6 prose max-w-none prose-slate prose-a:relative prose-a:z-10 dark:prose-invert line-clamp-2;
+  @apply mb-6 prose max-w-none prose-a:relative prose-a:z-10 dark:prose-invert line-clamp-2;
 }
 
 .post-entry {

@@ -3,7 +3,7 @@
 }
 
 .article-post {
-  @apply mt-12 prose prose-slate dark:prose-invert;
+  @apply mt-12 prose dark:prose-invert;
 }
 
 .post-meta {
@@ -28,7 +28,7 @@
 
 .toc {
   overflow-wrap: break-word;
-  @apply fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block mt-12 prose prose-slate dark:prose-invert;
+  @apply fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto hidden xl:block mt-12 prose dark:prose-invert;
 }
 
 @for $i from 1 through 6 {

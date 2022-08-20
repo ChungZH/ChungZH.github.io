@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <section>
-  <div class="prose prose-slate dark:prose-invert">{{ .Content }}</div>
+  <div class="prose dark:prose-invert">{{ .Content }}</div>
 </section>
 
 {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
