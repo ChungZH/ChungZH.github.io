@@ -3,6 +3,9 @@
 }
 
 .article-post {
+  pre {
+    @apply max-w-[44rem] mx-auto
+  }
   code {
     font-size: 0.9rem
   }
