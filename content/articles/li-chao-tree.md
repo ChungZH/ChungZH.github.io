@@ -76,8 +76,6 @@ void update(int cur, int l, int r, int x, int y, int c) {
 
 现在我们要插入线段 $f$。一直找到被 $f$ 完全覆盖的区间，进行分类讨论。
 
-// TODO: 新实现
-
 ![cross l](https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-l.png)
 
 ![cross r](https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-r.png)
