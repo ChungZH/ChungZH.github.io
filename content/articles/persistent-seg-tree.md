@@ -10,7 +10,6 @@ tags:
 - 权值线段树
 categories: 学习笔记
 date: 2022-08-14
-author: ChungZH
 katex: true
 ---
 

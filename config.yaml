@@ -1,6 +1,6 @@
 baseurl: "https://blog.chungzh.cn"
 languageCode: "zh-cn"
-title: "ChungZH's Blog"
+title: "Zirnc's Blog"
 #theme: "hugo-tania"
 theme: "klay"
 paginate: 10
@@ -20,9 +20,9 @@ params:
   # Enable float footnotes.
   # Default to true
   enableFootnotes: true
-  siteName: "ChungZH's Blog"
+  siteName: "Zirnc's Blog"
   siteDesc: "Welcome to my blog!"
-  author: "ChungZH"
+  author: "Zirnc"
 
   colorScheme:
     # Enable toggle colorScheme

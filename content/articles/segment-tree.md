@@ -7,7 +7,6 @@ tags:
 - 线段树
 categories: 学习笔记
 date: 2021-08-04
-author: ChungZH
 katex: true
 ---
 

@@ -2,7 +2,6 @@
 title: 告别 2021
 tags:
 - 总结
-author: ChungZH
 categories: 生活
 date: 2021-12-31 21:35:00
 ---
