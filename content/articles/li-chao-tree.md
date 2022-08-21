@@ -72,25 +72,36 @@ void update(int cur, int l, int r, int x, int y, int c) {
 
 **注意**：当线段垂直于 $y$ 轴时，如果按照一般的式子计算，会出现除以零的情况。假设线段两端点分别为 $(x,y_0)$ 和 $(x,y_1)$，$y_0<y_1$，则插入定义域为 $[x,x]$ 的一次函数 $f(x)=0\cdot x+y_1$。
 
-首先，我们建立一棵线段树，每个结点代表一段 x 轴上的区间，结点的懒标记表示一条线段，记为 $g$。
+首先，我们建立一棵线段树，每个结点代表一段 $x$ 轴上的区间，结点的懒标记表示一条线段，记为 $g$。
 
 现在我们要插入线段 $f$。一直找到被 $f$ 完全覆盖的区间，进行分类讨论。
 
+<center>
+
+<img style="display:inline" src="https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-l.png" width="400px" alt="cross-l"> <img style="display:inline" src="https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-r.png" width="360px" alt="cross-r">
+
+</center>
+
+<!--
 ![cross l](https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-l.png)
 
 ![cross r](https://raw.githubusercontent.com/ChungZH/img/main/li-chao-tree/cross-r.png)
+-->
 
 如图，按新线段 $f$ 取值是否大于原标记 $g$，我们可以把当前区间分为两个子区间。其中 **肯定有一个子区间被左区间或右区间完全包含**，也就是说，在两条线段中，肯定有一条线段，只可能成为左区间的答案，或者只可能成为右区间的答案。我们用这条线段递归更新对应子树，用另一条线段作为懒标记更新整个区间，这就保证了递归下传的复杂度。当一条线段只可能成为左或右区间的答案时，才会被下传，所以不用担心漏掉某些线段。
 
 具体来说，设当前区间的中点为 $mid$，我们拿新线段 $f$ 与原最优线段 $g$ 与 $x=mid$ 的交点的值作比较。
 
-如果新线段 $f$ 更优，**则将 $f$ 和 $g$ 交换**。那么现在考虑在中点处 $f$ 不如 $g$ 优的情况：
+1. 如果新线段 $f$ 更优，**则将 $f$ 和 $g$ 交换**。转化成了第 2 种情况。
+2. 对于中点处 $f$ 不如 $g$ 优的情况：
+    - 若在左端点处 $f$ 更优，那么 $f$ 和 $g$ 必然在左半区间中产生了交点，$f$ 只有在左区间才可能优于 $g$，递归到左儿子中进行下传；
+    - 若在右端点处 $f$ 更优，那么 $f$ 和 $g$ 必然在右半区间中产生了交点，$f$ 只有在右区间才可能优于 $g$，递归到右儿子中进行下传；
+    - 若在左、右端点处 $g$ 都更优，那么 $f$ 不可能成为答案，不需要继续下传。
 
-1. 若在左端点处 $f$ 更优，那么 $f$ 和 $g$ 必然在左半区间中产生了交点，$f$ 只有在左区间才可能优于 $g$，递归到左儿子中进行下传；
-2. 若在右端点处 $f$ 更优，那么 $f$ 和 $g$ 必然在右半区间中产生了交点，$f$ 只有在右区间才可能优于 $g$，递归到右儿子中进行下传；
-3. 若在左右端点处 $g$ 都更优，那么 $f$ 不可能成为答案，不需要继续下传。
+除了这两种情况之外，还有一种情况是 $f$ 和 $g$ 刚好交于中点，在程序实现时可以归入 $f$ 不如 $g$ 优的情况，结果会往 $f$ 更优的一个端点进行递归下传。
 
 最后将 $g$ 作为当前区间的懒标记。
+
 
 查询时，用到**标记永久化**。我们只需要找到所有覆盖了 $k$ 的区间，每次考虑这个标记对答案有怎样的贡献即可。
 
@@ -130,8 +141,8 @@ void build(int rt, int l, int r) {
   build(rt << 1, l, m);
   build(rt << 1 | 1, m + 1, r);
 }
-void modify(int root, int l, int r, line k) {
-  if (l >= k.l && r <= k.r) {
+void modify(int root, int l, int r, line k) { 
+  if (l >= k.l && r <= k.r) { // 对线段完全覆盖到的区间进行修改
     // g: tree[root]; f: k.
     int m = (l + r) >> 1;
     if (cmp(calc(tree[root], m), calc(k, m)) == -1) swap(tree[root], k);
@@ -164,6 +175,7 @@ pair<double, int> query(int root, int l, int r, int x) {
 
   int m = (l + r) >> 1;
   pair<double, int> ans = {calc(tree[root], x), tree[root].id};
+  // 注意标记永久化，取 max 比较
   if (x <= m)
     ans = pmax(ans, query(root << 1, l, m, x));
   else
