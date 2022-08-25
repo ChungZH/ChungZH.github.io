@@ -37,29 +37,29 @@ katex: true
 **代码实现**：
 
 ```cpp
-int n, cnt, root, tree[N];  // cnt 表示当前结点个数
-int a[N], ls[N], rs[N];
-void upd(int& rt, int l, int r, int val, int f) { // 注意这里传入一个引用，可以修改 ls 或 rs 数组
-  if (!rt) rt = ++cnt;  // 当结点为空时，创建一个新的
-  if (l == r) {         // 修改叶子
-    tree[rt] += f;
+int n, cnt, root;  // cnt 表示当前结点个数
+int sum[N*2], ls[N*2], rs[N*2];
+void upd(int& rt, int l, int r, int p, int f) { // 注意这里传入一个引用，可以修改 ls 或 rs 数组
+  if (!rt) rt = ++cnt;  // 当结点为空时，创建一个新的结点
+  if (l == r) {
+    sum[rt] += f;
     return;
   }  
   int m = (l + r) >> 1;
-  if (val <= m)
-    upd(ls[rt], l, m, val, f);
+  if (p <= m)
+    upd(ls[rt], l, m, p, f);
   else
-    upd(rs[rt], m + 1, r, val, f);
-  tree[rt] = tree[ls[rt]] + tree[rs[rt]];  // 记得 pushup 维护信息
+    upd(rs[rt], m + 1, r, p, f);
+  sum[rt] = sum[ls[rt]] + sum[rs[rt]];  // pushup
 }
 int query(int rt, int l, int r, int L, int R) {
   if (!rt) return 0;  // 如果结点为空，返回 0
-  if (l >= L && r <= R) return tree[rt];
+  if (l >= L && r <= R) return sum[rt];
   int m = (l + r) >> 1, ans = 0;
   if (L <= m)
-    ans = query(ls[rt], l, m, L, R);
-  else
-    ans = query(rs[rt], m + 1, r, L, R);
+    ans += query(ls[rt], l, m, L, R);
+  if (R > m)
+    ans += query(rs[rt], m + 1, r, L, R);
   return ans;
 }
 ```
