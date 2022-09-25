@@ -101,6 +101,7 @@ bool toposort() {
 
 - [UVA10305 给任务排序 Ordering Tasks](https://www.luogu.com.cn/problem/UVA10305) 例题
 - [CF1385E Directing Edges](https://www.luogu.com.cn/problem/CF1385E)
+- [Luogu-P1137 旅行计划](https://www.luogu.com.cn/problem/P1137) 拓扑排序+DP
 
 ## 参考资料
 
