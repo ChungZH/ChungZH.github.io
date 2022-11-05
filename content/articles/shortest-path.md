@@ -231,6 +231,17 @@ void dijkstra() {
 
 比如 Floyd 就要记录 `pre[i][j] = k`，Bellman-Ford 和 Dijkstra 一般记录 `pre[v] = u`。
 
+------
+
+UPDATE after CSP-S 2022：对于我这种不会变通的 sha b*，必须得做个笔记：
+
+对于一些特殊的图，也可以用 BFS 求最短路：
+
+- 在一个无权图上求从起点到其他所有点的最短路径。进一步地，用这个方法也可以 $O(nm)$ 求**全源最短路径**。[[CSP-S 2022] 假期计划](https://www.luogu.com.cn/problem/P8817) 就用到了这一个方法，但我却使用了 Floyd ！！！从一开始就葬送了这道题！！！
+- 在一个边权为 0/1 的图上求最短路（0-1 BFS，双端队列 BFS）例题：[「BalticOI 2011 Day1」打开灯泡 Switch the Lamp On](https://loj.ac/p/2632)
+
+------
+
 ## 参考资料
 
 - [OI Wiki](https://oi-wiki.org/) [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
