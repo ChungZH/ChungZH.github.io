@@ -1,5 +1,5 @@
 ---
-title: [ARC101B] Median of Medians - 中位数
+title: ARC101B Median of Medians - 中位数
 tags:
 - OI
 - 算法
