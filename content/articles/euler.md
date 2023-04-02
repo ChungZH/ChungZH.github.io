@@ -17,7 +17,6 @@ katex: true
 
 欧拉函数 $\varphi(n)$ 表示小于等于 $n$，且与 $n$ 互质的正整数的个数。
 
-
 > 如何求 $\varphi(n)$？
 >
 > 比如 $varphi(12)$ 把 $12$ 质因数分解，$12=2^2*3$，其实就是得到了 $2$ 和 $3$ 两个互异的质因子。
@@ -57,14 +56,15 @@ katex: true
         
     $$
     \begin{aligned}
-                \varphi(n) &= \prod_{i=1}^{s} \varphi(p_i^{k_i}) \\
-                &= \prod_{i=1}^{s} (p_i-1)\times {p_i}^{k_i-1}\\
-                &=\prod_{i=1}^{s} {p_i}^{k_i} \times(1 - \frac{1}{p_i})\\
-                &=n~ \prod_{i=1}^{s} (1- \frac{1}{p_i})
-                &\square
+    \varphi(n) &= \prod_{i=1}^{s} \varphi(p_i^{k_i}) \\\\
+    &= \prod_{i=1}^{s} (p_i-1)\times {p_i}^{k_i-1} \\\\
+    &=\prod_{i=1}^{s} {p_i}^{k_i} \times(1 - \frac{1}{p_i}) \\\\
+    &=n~ \prod_{i=1}^{s} (1- \frac{1}{p_i})
+    &\square
     \end{aligned}
     $$
-- $\varphi(a*b)=\varphi(a)*\varphi(b)*\frac{d}{\varphi(d)}$，其中 $d = \gcd(a, b)$
+
+- $\varphi(a*b) = \varphi(a) * \varphi(b) * \frac{d}{\varphi(d)}$ ，其中 $d = \gcd(a, b)$
 
 ## 求一个数的欧拉函数值
 
@@ -88,20 +88,20 @@ int euler_phi(int n) {
 对 $n' \mod p_1$ 分类讨论。
 
 1. $n' \mod p_1 = 0$，那么 $n'$ 包含了 $n$ 的所有质因子。
-  $$
+$$
   \begin{aligned}
-  \varphi(n) &= n \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}} \\
-             &= p_1 \times n' \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}} \\
-             &= p_1 \times \varphi(n')
+  \varphi(n) &= n \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}} \\\\
+  &= p_1 \times n' \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}} \\\\
+  &= p_1 \times \varphi(n')
   \end{aligned}
-  $$
+$$
 2. $n' \mod p_1 \ne 0$，此时 $n'$ 与 $p_1$ 互质，根据欧拉函数的性质，我们有：
-  $$
+$$
   \begin{aligned}
-  \varphi(n) &= \varphi(p_1) \times \varphi(n') \\
+  \varphi(n) &= \varphi(p_1) \times \varphi(n') \\\\
              &= (p_1-1) \times \varphi(n')
   \end{aligned}
-  $$
+$$
 
 ```cpp
 void sieve() {
