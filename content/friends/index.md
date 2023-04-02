@@ -41,3 +41,6 @@ title: 友链
 - [wjyyy](http://www.wjyyy.top/)
 - [Siyuan](https://blog.orzsiyuan.com/)
 - [Flash Hu](https://www.cnblogs.com/flashhu/)
+- [Hastieyua](https://www.cnblogs.com/hyfhaha)
+- [cjyyb](https://www.cnblogs.com/cjyyb/)
+- [alex-wei](https://www.cnblogs.com/alex-wei)
