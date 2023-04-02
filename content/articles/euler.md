@@ -5,6 +5,7 @@ tags:
 - 算法
 - 数学
 - 欧拉函数
+- 积性函数
 - 线性筛
 - 数论
 categories: 学习笔记
@@ -29,14 +30,13 @@ katex: true
 >
 > 但是是 $6$ 和 $12$ 重复减了。所以还要把既是 $2$ 的倍数又是 $3$ 的倍数的数加回来。所以这样写：$12 - 12/2 - 12/3 + 12/(2*3)$。运用了容斥原理。
 
-### 性质
+## 性质
 
 - 欧拉函数是积性函数。
 
     积性是什么意思呢？如果有 $\gcd(a, b) = 1$，那么 $\varphi(a \times b) = \varphi(a) \times \varphi(b)$。
 
     特别地，当 $n$ 是奇数时 $\varphi(2n) = \varphi(n)$。
-
 - $n = \sum_{d \mid n}{\varphi(d)}$。
 
     证明：
@@ -45,7 +45,6 @@ katex: true
     根据上面的证明，我们发现，$f(x) = \varphi(\dfrac{n}{x})$，从而 $n = \sum_{d \mid n}\varphi(\dfrac{n}{d})$。注意到约数 $d$ 和 $\dfrac{n}{d}$ 具有对称性，所以上式化为 $n = \sum_{d \mid n}\varphi(d)$。
 
 - 若 $n = p^k$，其中 $p$ 是质数，那么 $\varphi(n) = p^k - p^{k - 1}$。（根据定义可知）
-
 - 由唯一分解定理，设 $n = \prod_{i=1}^{s}p_i^{k_i}$，其中 $p_i$ 是质数，有 $\varphi(n) = n \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}}$。
 
     证明：
@@ -63,12 +62,11 @@ katex: true
                 &=\prod_{i=1}^{s} {p_i}^{k_i} \times(1 - \frac{1}{p_i})\\
                 &=n~ \prod_{i=1}^{s} (1- \frac{1}{p_i})
                 &\square
-            \end{aligned}
+    \end{aligned}
     $$
+- $\varphi(a*b)=\varphi(a)*\varphi(b)*\frac{d}{\varphi(d)}$，其中 $d = \gcd(a, b)$
 
-## 实现
-
-求一个数的欧拉函数值：
+## 求一个数的欧拉函数值
 
 ```cpp
 int euler_phi(int n) {
@@ -83,7 +81,27 @@ int euler_phi(int n) {
 }
 ```
 
-线性筛求欧拉函数：
+## 线性筛求欧拉函数
+
+在线性筛中，每一个合数都被最小的质因子筛掉。设 $p_1$ 是 $n$ 的最小质因子，$n' = \frac{n}{p_1}$，那么 $n$ 通过 $n' \times p_1$ 筛掉。
+
+对 $n' \mod p_1$ 分类讨论。
+
+1. $n' \mod p_1 = 0$，那么 $n'$ 包含了 $n$ 的所有质因子。
+  $$
+  \begin{aligned}
+  \varphi(n) &= n \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}} \\
+             &= p_1 \times n' \times \prod_{i = 1}^s{\dfrac{p_i - 1}{p_i}} \\
+             &= p_1 \times \varphi(n')
+  \end{aligned}
+  $$
+2. $n' \mod p_1 \ne 0$，此时 $n'$ 与 $p_1$ 互质，根据欧拉函数的性质，我们有：
+  $$
+  \begin{aligned}
+  \varphi(n) &= \varphi(p_1) \times \varphi(n') \\
+             &= (p_1-1) \times \varphi(n')
+  \end{aligned}
+  $$
 
 ```cpp
 void sieve() {
