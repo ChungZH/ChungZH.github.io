@@ -39,7 +39,7 @@ title: 友链
 - [M_sea](https://m-sea-blog.com/)
 - [xht37](https://www.xht37.com/)
 - [wjyyy](http://www.wjyyy.top/)
-- [Siyuan](https://blog.orzsiyuan.com/)
+- [Siyuan](https://blog.siyuanw.cn/)
 - [Flash Hu](https://www.cnblogs.com/flashhu/)
 - [Hastieyua](https://www.cnblogs.com/hyfhaha)
 - [cjyyb](https://www.cnblogs.com/cjyyb/)
