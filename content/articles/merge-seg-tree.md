@@ -78,10 +78,10 @@ int merge(int root1, int root2, int l, int r) {
     return root1;
   }
   int m = (l + r) >> 1;
-  lc[u] = merge(lc[u], lc[v], l, m);
-  rc[u] = merge(rc[u], rc[v], m + 1, r);
-  up(u);
-  return u;
+  lc[root1] = merge(lc[root1], lc[root2], l, m);
+  rc[root1] = merge(rc[root1], rc[root2], m + 1, r);
+  up(root1);
+  return root1;
 }
 ```
 
