@@ -71,13 +71,17 @@ void up(int root) {
   maxx[root] = max(maxx[lc[root]], maxx[rc[root]]);
   sum[root] = sum[lc[root]] + sum[rc[root]];
 }
-int mergeSegTrees(int root1, int root2) {
+int merge(int root1, int root2, int l, int r) {
   if (!root1 || !root2) return root1 ^ root2;
-  lc[root1] = mergeSegTrees(lc[root1], lc[root2]);
-  rc[root1] = mergeSegTrees(rc[root1], rc[root2]);
-  // 维护信息
-  up(root1);
-  return root1;
+  if (l == r) {  // 处理叶子节点
+    tree[root1] += tree[root2];
+    return root1;
+  }
+  int m = (l + r) >> 1;
+  lc[u] = merge(lc[u], lc[v], l, m);
+  rc[u] = merge(rc[u], rc[v], m + 1, r);
+  up(u);
+  return u;
 }
 ```
 

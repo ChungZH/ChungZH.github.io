@@ -200,7 +200,7 @@ int main() {
   build(root, 1, n);
   for (int i = 1; i <= n; i++) cin >> a[i];
   sort(a + 1, a + n + 1); // 离散化+去重
-  n = unique(a + 1, a + 1 + n) - a - 1; 
+  n = unique(a + 1, a + 1 + n) - a - 1; // 记得 -1
   if (k > n) {
     cout << "NO RESULT\n";
     return 0;
@@ -210,6 +210,8 @@ int main() {
   return 0;
 }
 ```
+
+**注意**：离散化时用 `unique()` 最后面一定要 `-1`！！！
 
 ## 可持久化权值线段树（主席树）
 
