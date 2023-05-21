@@ -7,6 +7,7 @@ tags:
 - 整除
 - 同余
 - 欧几里得算法
+- 逆元
 - 数论
 categories: 学习笔记
 date: 2023-05-05
@@ -341,9 +342,9 @@ int main()
 
 **定理 10**：设 $m$ 是正整数，模 $m$ 的同余满足下面的性质:
 
-1. 自反性。若 $a$ 是整数，则 $a\equiv a(mod m)$。
-2. 对称性。若 $a$ 和 $b$ 是整数，且 $a\equiv b(mod m)$，则 $b\equiv a(mod m)$。
-3. 传递性。若 $a,b,c$ 是整数，且 $a\equiv b(mod m)$ 和 $b\equiv c(mod m)$，则 $a\equiv c(mod m)$。
+1. 自反性。若 $a$ 是整数，则 $a\equiv a(mod\ m)$。
+2. 对称性。若 $a$ 和 $b$ 是整数，且 $a\equiv b(mod\ m)$，则 $b\equiv a(mod\ m)$。
+3. 传递性。若 $a,b,c$ 是整数，且 $a\equiv b(mod\ m)$ 和 $b\equiv c(mod\ m)$，则 $a\equiv c(mod\ m)$。
 
   **证明**：
 

@@ -13,11 +13,15 @@ katex: true
 date: 2022-08-13 21:59:00 -0800
 ---
 
-## 例题 [HNOI2008]玩具装箱
+## X(j) 和斜率均单调的斜率优化
+
+这是第一次学斜率优化学会的。
+
+### 例题 [HNOI2008]玩具装箱
 
 [Luogu](https://www.luogu.com.cn/problem/P3195) [LOJ](https://loj.ac/p/10188)
 
-### 题目描述
+**题目描述**：
 
 P 教授要去看奥运，但是他舍不下他的玩具，于是他决定把所有的玩具运到北京。他使用自己的压缩器进行压缩，其可以将任意物品变成一堆，再放到一种特殊的一维容器中。
 
@@ -33,7 +37,7 @@ P 教授有编号为 $1 \cdots n$ 的 $n$ 件玩具，第 $i$ 件玩具经过压
 
 $1 \leq n \leq 5 \times 10^4$，$1 \leq L \leq 10^7$，$1 \leq C_i \leq 10^7$。
 
-### 朴素 DP 做法
+#### 朴素 DP 做法
 
 令状态 $f(i)$ 表示把前 $i$ 个玩具装箱的最小费用，$s(i)$ 为 $c_i$ 的前缀和。
 
@@ -41,7 +45,7 @@ $1 \leq n \leq 5 \times 10^4$，$1 \leq L \leq 10^7$，$1 \leq C_i \leq 10^7$。
 
 直接算的话时间复杂度是 $O(n^2)$，超时。
 
-### 优化
+#### 优化
 
 在计算过程中，$i, s(i), L$ 这些项是已知的，而含有 $j$ 的项如 $f(j-1), j, s(j-1)$ 都是未知的。展开平方式，进行参数分离，定义 $g(i) = i+s(i)-L$，$x(j) = j+s(j-1)$。可选决策 $j$ 的费用记为 $f(i)_j$，则有 
 
@@ -143,11 +147,11 @@ int main()
 }
 ```
 
-## 例题 [APIO2010] 特别行动队
+### 例题 [APIO2010] 特别行动队
 
 [Luogu](https://www.luogu.com.cn/problem/P3628) [LOJ](https://loj.ac/p/10190)
 
-### 题目描述
+**题目描述**：
 
 你有一支由 $n$ 名预备役士兵组成的部队，士兵从 $1$ 到 $n$ 编号，你要将他们拆分成若干特别行动队调入战场。出于默契的考虑，同一支特别行动队中队员的编号**应该连续**，即为形如 $(i, i + 1, \cdots i + k)$的序列。所有的队员都应该属于且仅属于一支特别行动队。
 
@@ -157,7 +161,7 @@ int main()
 
 $1 \leq n \leq 10^6$，$-5 \leq a \leq -1$，$-10^7 \leq b \leq 10^7$，$-10^7 \leq c \leq 10^7$，$1 \leq x_i \leq 100$。
 
-### 分析
+#### 分析
 
 令 $f(i)$ 表示把前 $i$ 个士兵编队的最大修正战斗力之和，$s(i)$ 表示 $x_i$ 的前缀和。
 
@@ -258,16 +262,143 @@ int main() {
 }
 ```
 
-**实现时要注意**：在计算斜率的函数 `double T()` 中，一定要用 `(double)` 或者 `*1.0`，将 `long long` 变成 `double` 类型之后再计算！！！！！
+## 更复杂的斜率优化
 
-**实现时要注意**：在计算斜率的函数 `double T()` 中，一定要用 `(double)` 或者 `*1.0`，将 `long long` 变成 `double` 类型之后再计算！！！！！
+第二次学习斜率优化。
 
-**实现时要注意**：在计算斜率的函数 `double T()` 中，一定要用 `(double)` 或者 `*1.0`，将 `long long` 变成 `double` 类型之后再计算！！！！！
+### 决策点横坐标 X(j) 不单调
+
+决策点横坐标不单调，维护凸包就不能用单调队列了，因为插入点时可能会插到凸包点集中间的某个位置，而队列不支持这种操作，需要用到平衡树维护或者用 CDQ 分治保证单调性。这里有计算几何基础的话会更易理解，因为上面维护图形时的删点操作与水平序 Graham 扫描法求凸包是类似的，而扫描法的前提为：点集呈水平序，即点从左至右依次排列（体现为 $X(j)$ 单调不减）。（[source](https://www.cnblogs.com/Xing-Ling/p/11210179.html)）
+
+### 待决策点斜率不单调
+
+如果斜率 $k0[i]$ 不存在单调性该怎么办？（假设此时 $X(j)$ 仍然单调）
+
+我们仍可以用队列维护凸包点集，但不知道每一次会在什么地方取得最优决策点，所以必须要保留整个凸包以确保决策有完整的选择空间，也就是说不能弹走队首，同时查找答案也不能直接取队首，只能使用二分。
 
 ------
 
-致谢：
+[Luogu-P5785 [SDOI2012]任务安排](https://www.luogu.com.cn/problem/P5785)
 
-- lgj
+列出状态转移方程：$f_i = f_j + s*(cs_n-cs_j)+ts_i*(cs_i-cs_j)$
+
+变换一下得到：$f_j=(s+ts_i)*cs_j+f_i-cs_i*ts_i-s*cs_n$
+
+令 $y=f_j, k=(s+ts_i), x=cs_j, b=f_i-cs_i*ts_i-s*cs_n$，就可以得到一次函数解析式。
+
+转化的方法是把外循环时不能直接得出的（与 $j$ 有关）放在 $x,y$，可以依靠外指针 $i$ 得到的放在 $k,b$。
+
+我们把 $j$ 称作一个决策点，每次选择一个最优决策点来更新 $f_i$ 的值。
+
+对于一个决策点所对应的直线，都可以求得截距 $b$，又因为 $b=f_i-cs_i*ts_i-s*cs_n$ 中 $cs_i*ts_i-s*cs_n$ 是固定的，因此 $b$ 越小，$f_i$ 越小。为了让 $f_i$ 尽量小，我们就要求出最小的 $b$。
+
+然后分析单调性。待决策点的横坐标 $x=cs_j$ 是单调递增的。但是由于 $t_i$ 可能为负，斜率 $k=(s+ts_i)$ 不单调。我们依然可以用单调队列（事实上是一个单调栈）维护凸包点集，上凸点依然一定不会成为最优决策点，需维护下凸包。但与前面不一样的地方是**不知道当前最优决策点**在哪里，所以必须保留整个凸包，不能弹出队首。查找答案时不能直接取队首，要二分查找这样的点：它与左右决策点连线的斜率 $k_1 \lt k \lt k_2$。
+
+```cpp
+LL s, t[N], f[N], c[N], cs[N], ts[N];
+LL K(int i) { return s+ts[i]; }
+LL X(int i) { return cs[i]; }
+LL Y(int i) { return f[i]; }
+int search(int L, int R, LL S) {
+  int ret = 0;
+  while (L<=R) {
+    int M = (L+R)>>1;
+    if (Y(Q[M+1])-Y(Q[M]) > S*(X(Q[M+1])-X(Q[M])))
+      ret = M, R = M-1;
+    else L = M+1;
+  }
+  return ret;
+}
+int main()
+{
+  cin >> n >> s;
+  for (int i = 1; i <= n; i++) {
+    cin >> t[i] >> c[i];
+    ts[i] = ts[i-1]+t[i], cs[i] = cs[i-1]+c[i]; 
+  }
+  st = 1, ed = 0;
+  Q[++ed] = 0;
+  for (int i = 1; i <= n; i++) {
+    int j = Q[search(st, ed, K(i))];
+    f[i] = Y(j)+s*(cs[n]-cs[j])+ts[i]*(cs[i]-cs[j]);
+    while (st < ed && (Y(Q[ed])-Y(Q[ed-1]))*(X(i)-X(Q[ed])) // 不求斜率而是用乘积的形式比较大小，避免除法产生的精度问题
+          >= (Y(i)-Y(Q[ed]))*(X(Q[ed])-X(Q[ed-1]))) ed--;
+    Q[++ed] = i;
+  }
+  cout << f[n] << endl;
+  return 0;
+} 
+```
+
+### X(j) 与斜率均不单调
+
+[Luogu-P4655 [CEOI2017] Building Bridges](https://www.luogu.com.cn/problem/P4655)
+
+列出状态转移方程 $f_i=f_j+h_i^2+h_j^2-2h_ih_j+w_{i-1}-w_j$。
+
+这道题如果用斜率优化做，就要写 CDQ 了，感觉很麻烦。于是换一种思路，把方程变成这样的形式：$f_i = h_i^2+w_{i-1}-2h_jh_i+h_j^2+f_j-w_j$。令 $k=-2h_j, x=h_i, b=h_j^2+f_j-w_j$，就得到 $f_i = h_i^2+w_{i-1}+kx+b$。为了让 $f_i$ 最小，而方程前半部分又是固定的，问题就转化成求 $x=h_i$ 时 $y=kx+b$ 的最小值。可以用李超线段树优化，时间复杂度为 $O(n \log n)$。
+
+```cpp
+const int N = 100005, M = 1000006;
+int n, t[4*M];
+LL h[N], w[N], f[N];
+struct line { LL k, b; } a[N];
+LL calc(int id, LL x) { return a[id].k*x+a[id].b; }
+void upd(int u, int l, int r, int p) {
+  if (l == r) {
+    if (calc(p, l) < calc(t[u], l)) t[u] = p;
+    return;
+  }
+  int mid = (l+r)>>1;
+  if (calc(p, mid) < calc(t[u], mid)) swap(t[u], p);
+  if (calc(p, l) < calc(t[u], l)) upd(u<<1, l, mid, p);
+  else if (calc(p, r) < calc(t[u], r)) upd(u<<1|1, mid+1, r, p);
+}
+LL qry(int u, int l, int r, LL p) {
+  if (l == r) return calc(t[u], p);
+  int mid = (l+r)>>1;
+  LL ans = calc(t[u], p);
+  if (p <= mid) ans = min(ans, qry(u<<1, l, mid, p));
+  else ans = min(ans, qry(u<<1|1, mid+1, r, p));
+  return ans;
+}
+int main()
+{
+  cin >> n;
+  for (int i = 1; i <= n; i++)
+    cin >> h[i];
+  a[0].b = 1e18;  // 因为线段树数组所有元素的初值为 0，要给 a[0].b 赋极大值避免影响
+  for (int i = 1; i <= n; i++) {
+    cin >> w[i];
+    w[i] = w[i-1]+w[i];
+  }
+  a[1].k = -2*h[1];
+  a[1].b = h[1]*h[1]+f[1]-w[1];
+  upd(1, 0, M, 1);
+  for (int i = 2; i <= n; i++) {
+    f[i] = h[i]*h[i]+w[i-1]+qry(1, 0, M, h[i]);
+    a[i].k = -2*h[i];
+    a[i].b = h[i]*h[i]+f[i]-w[i];
+    upd(1, 0, M, i);
+  }
+  cout << f[n] << endl;
+  return 0;
+} 
+```
+
+CDQ 的过程：首先将当前区间按照 $id$ 的大小分成左右两个子区间，两个区间内分别按照斜率排序。然后先递归处理左边，结束后**左边的 $X(j)$ 是递增的**，此时右边还没处理，所以**右边的斜率是递增的**，然后就转化成最基础的斜率优化了。把左边的点拿出来维护凸包（用单调队列），依次更新右边的点的答案，再递归处理右边，最后将整个区间按照 $X(j)$ 从小到大排序即可。
+
+## 坑点
+
+- 在计算斜率的函数 `double T()` 中，一定要用 `(double)` 或者 `*1.0`，将 `long long` 变成 `double` 类型之后再计算！！！！！
+- 用 `>=`，`<=`
+- `Q[st]` 老是写成 `st`。
+- 队列初始化大多都要塞入一个点 `P(0)`，比如 玩具装箱 toy，需要塞入 `P(S[0],dp[0]+(S[0]+L)2)` 即 `P(0,0)`，其代表的决策点为 `j=0`。手写队列的初始化是 `st=1,ed=0`，由于塞了初始点导致 `ed` 加 1，所以在一些题解中可以看到 `h=t=1` 甚至是 `h=t=0`，`h=t=2` 之类的写法，其实是因为省去了塞初始点的代码。它们都是等价的。
+- 当 $X(j)$ 非严格递增时，在求斜率时可能会出现 $X(j1)=X(j2)$ 的情况，此时最好是写成这样的形式：`return Y(j)>=Y(i)?inf:-inf`，而不要直接返回 `inf` 或者 `−inf`，在某些题中情况较复杂，如果不小心画错了图，返回了一个错误的极值就完了，而且这种错误只用简单数据还很难查出来。
+
+## 参考资料
+
+- [【学习笔记】动态规划—斜率优化DP（超详细） - 辰星凌的博客](https://www.cnblogs.com/Xing-Ling/p/11210179.html) 强烈推荐！！！
+- [DP的各种优化（动态规划，决策单调性，斜率优化，带权二分，单调栈，单调队列） - FlashHu](https://www.cnblogs.com/flashhu/p/9480669.html)
 
 🙇‍

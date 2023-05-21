@@ -317,7 +317,7 @@ void solve(int u, int size) {
 ## 习题
 
 - [x] [Luogu P2634 [国家集训队]聪聪可可](https://www.luogu.com.cn/problem/P2634)
-- [ ] [Luogu P3714 [BJOI2017]树的难题](https://www.luogu.com.cn/problem/P3714)
+- [x] [Luogu P3714 [BJOI2017]树的难题](https://www.luogu.com.cn/problem/P3714)
 
 ## 参考资料
 
