@@ -44,3 +44,4 @@ title: 友链
 - [Hastieyua](https://www.cnblogs.com/hyfhaha)
 - [cjyyb](https://www.cnblogs.com/cjyyb/)
 - [alex-wei](https://www.cnblogs.com/alex-wei)
+- [胡小兔](https://www.cnblogs.com/RabbitHu/)
